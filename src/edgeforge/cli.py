@@ -169,3 +169,15 @@ def baselines_inplay() -> None:
     from edgeforge.evaluation.baselines_inplay import run_inplay_baseline
 
     typer.echo(str(run_inplay_baseline()))
+
+
+team_app = typer.Typer(help="Phase 3 team model and Pillar A.", no_args_is_help=True)
+app.add_typer(team_app, name="team-model")
+
+
+@team_app.command("run")
+def team_model_run() -> None:
+    """Tune and evaluate the Dixon-Coles team model; calibration and cold-start studies."""
+    from edgeforge.evaluation.team_model import run_team_model
+
+    typer.echo(str(run_team_model()))
