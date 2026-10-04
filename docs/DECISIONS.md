@@ -107,3 +107,24 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
 - **Decision:** If behind, cut in this order: (1) Cloud Run deployment, fall back to documented local Docker; (2) dismissals in the in-play state; (3) SGA under pre-lineup uncertainty (keep single-leg props); (4) cold-start model fixes (keep the diagnosis only); (5) post-hoc calibration experiments beyond Platt/isotonic.
 - **Never cut:** leakage tests, baselines, Pillar A on real odds, Pillar C lineup-shock measurement, in-play calibration, evidence-pack integrity.
 - **Status:** Locked (lead)
+
+### D-019 Season range and leagues (football-data side verified; final range conditional)
+- **Decision (proposed):** Leagues E0, D1, SP1, I1, F1. Seasons 2019/20 to 2025/26 (35 league-seasons, 35 CSV requests, about 35 seconds at 1 request/second, already cached). Pillar A comparisons that need opening and closing on all of 1X2, O/U 2.5 and AH use 2019/20 to 2024/25 (30 league-seasons). 2025/26 is included but flagged: Pinnacle columns stop after 2026-01-08 in the E0 file (`data_audit_footballdata.json`, `pinnacle_1x2_last_date`) and are absent in 2026/27; market `Avg*`/`Max*` closing columns stay complete.
+- **Why:** Evidence in `docs/DATA.md` section 2. Pinnacle 1X2 open and close exist from 2012/13 (E0), but Pinnacle O/U 2.5 and AH open and close exist only from 2019/20, and before that O/U and AH are Betbrain aggregates with no closing version. Coverage for 2019/20 to 2024/25 is near-complete in all five leagues.
+- **Conditional on Understat/player data:** the range may only shrink, never grow, once the player-data source is settled (D-021). A walk-forward design needs enough seasons for tuning plus a held-out final season; that count cannot be set until player-data coverage is known.
+- **Caveat that must travel with every Pillar A result:** the non-"C" odds are a pre-closing snapshot with no capture timestamp in the payload. They are not verified as market-open or as T-48h (DATA.md section 2).
+- **Rejected:** Using 2012/13 to 2018/19 for Pillar A beyond 1X2 (no Pinnacle O/U or AH there); excluding 2025/26 entirely (Avg/Max closing is complete and it is the most recent season).
+- **Status:** Proposed (implementing engineer, 2026-10-04); to be confirmed or revised by the lead after D-021.
+
+### D-020 Red-card minute data route (D-017): undetermined
+- **Decision:** No route can be chosen yet. Facts established: football-data has red-card **counts** per team-match (`HR`, `AR`, E0 from 2000/01), and no minutes, so it can only cross-check a timeline built elsewhere. Whether Understat exposes card flags or a recoverable dismissal minute is **not verified** because no Understat payload has been retrieved (D-021).
+- **Why:** D-017 requires this to be verified on real data. The only payload source that could settle it was blocked by `robots.txt` before any data request was made.
+- **Next step:** once D-021 is resolved, fetch one Understat match-level payload and answer the D-017 questions from it. D-017's fallback order is unchanged (derive from player minutes and card flags; StatsBomb Open Data; drop dismissals from the state and document it).
+- **Status:** Open (blocked by D-021)
+
+### D-021 Understat access: robots.txt disallows all crawling; owner decision required
+- **Decision:** No request to any Understat page or endpoint other than `/robots.txt` has been made. `https://understat.com/robots.txt` returned HTTP 200 with `User-agent: *` / `Disallow: /`.
+- **Options for the owner:** (1) explicitly accept local, non-commercial, throttled caching despite `Disallow: /` (supersedes the D-003 constraint wording and carries terms-of-service risk), (2) ask Understat for permission, (3) select another player-level source, which requires a separate payload-verified evaluation. No alternative's fields or coverage have been checked.
+- **Related note, football-data.co.uk:** its `robots.txt` allows `*` but separately disallows named AI crawlers, including `Anthropic-AI`, `Claude-Web` and `ClaudeBot`. The project downloader uses its own user agent and is a user-run script caching CSVs locally, so it falls under `*`, and 62 CSVs were fetched on that basis. The owner may veto this reading, in which case the football-data cache must be deleted and an alternative odds source chosen.
+- **Rejected:** Proceeding with a spoofed user agent or a third-party scraper (would be working around the block silently).
+- **Status:** Open (owner decision needed)
