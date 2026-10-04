@@ -1,0 +1,2446 @@
+{
+ "provenance": {
+  "git_sha": "1095de4e68a10e96176c0877838933c9c7305795",
+  "data_version": "d4172f0fb0213f64",
+  "command": "edgeforge data audit-statsbomb",
+  "config_hash": "39f96c7271994bec",
+  "created_at": "2026-10-04T08:36:17Z",
+  "seed": 20261004
+ },
+ "scope": [
+  {
+   "competition": "La Liga",
+   "competition_id": 11,
+   "season": "2015/2016",
+   "season_id": 27,
+   "n_matches": 380,
+   "match_status": {
+    "available": 380
+   },
+   "first_date": "2015-08-21",
+   "last_date": "2016-05-15",
+   "n_with_match_week": 380,
+   "n_with_kick_off": 380,
+   "n_home_with_managers": 377
+  },
+  {
+   "competition": "Ligue 1",
+   "competition_id": 7,
+   "season": "2015/2016",
+   "season_id": 27,
+   "n_matches": 377,
+   "match_status": {
+    "available": 377
+   },
+   "first_date": "2015-08-07",
+   "last_date": "2016-05-14",
+   "n_with_match_week": 377,
+   "n_with_kick_off": 377,
+   "n_home_with_managers": 351
+  },
+  {
+   "competition": "Premier League",
+   "competition_id": 2,
+   "season": "2015/2016",
+   "season_id": 27,
+   "n_matches": 380,
+   "match_status": {
+    "available": 380
+   },
+   "first_date": "2015-08-08",
+   "last_date": "2016-05-17",
+   "n_with_match_week": 380,
+   "n_with_kick_off": 380,
+   "n_home_with_managers": 380
+  },
+  {
+   "competition": "Serie A",
+   "competition_id": 12,
+   "season": "2015/2016",
+   "season_id": 27,
+   "n_matches": 380,
+   "match_status": {
+    "available": 380
+   },
+   "first_date": "2015-08-22",
+   "last_date": "2016-05-15",
+   "n_with_match_week": 380,
+   "n_with_kick_off": 380,
+   "n_home_with_managers": 379
+  }
+ ],
+ "total_scope_matches": 1517,
+ "excluded_checked": [
+  {
+   "competition": "1. Bundesliga",
+   "season": "2015/2016",
+   "n_matches": 34
+  }
+ ],
+ "team_names_2015_16": [
+  {
+   "league": "La Liga",
+   "football_data_code": "SP1",
+   "n_football_data_matches": 380,
+   "n_statsbomb_matches": 380,
+   "n_football_data_teams": 20,
+   "n_statsbomb_teams": 20,
+   "n_names_identical": 9,
+   "football_data_only_names": [
+    "Ath Bilbao",
+    "Ath Madrid",
+    "Betis",
+    "Celta",
+    "Espanol",
+    "La Coruna",
+    "Levante",
+    "Malaga",
+    "Sociedad",
+    "Sp Gijon",
+    "Vallecano"
+   ],
+   "statsbomb_only_names": [
+    "Athletic Club",
+    "Atlético Madrid",
+    "Celta Vigo",
+    "Espanyol",
+    "Levante UD",
+    "Málaga",
+    "RC Deportivo La Coruña",
+    "Rayo Vallecano",
+    "Real Betis",
+    "Real Sociedad",
+    "Sporting Gijón"
+   ],
+   "join_date_score_unique": 321,
+   "join_date_score_ambiguous": 59,
+   "join_date_score_no_candidate": 0,
+   "names_with_one_mapping": 20,
+   "names_with_conflicting_mapping": [],
+   "football_data_names_unmapped": []
+  },
+  {
+   "league": "Ligue 1",
+   "football_data_code": "F1",
+   "n_football_data_matches": 380,
+   "n_statsbomb_matches": 377,
+   "n_football_data_teams": 20,
+   "n_statsbomb_teams": 20,
+   "n_names_identical": 12,
+   "football_data_only_names": [
+    "Ajaccio GFCO",
+    "Caen",
+    "Marseille",
+    "Monaco",
+    "Nice",
+    "Paris SG",
+    "Reims",
+    "St Etienne"
+   ],
+   "statsbomb_only_names": [
+    "AS Monaco",
+    "Gazélec Ajaccio",
+    "OGC Nice",
+    "Olympique de Marseille",
+    "Paris Saint-Germain",
+    "Saint-Étienne",
+    "Stade Malherbe Caen",
+    "Stade de Reims"
+   ],
+   "join_date_score_unique": 310,
+   "join_date_score_ambiguous": 67,
+   "join_date_score_no_candidate": 3,
+   "names_with_one_mapping": 20,
+   "names_with_conflicting_mapping": [],
+   "football_data_names_unmapped": []
+  },
+  {
+   "league": "Premier League",
+   "football_data_code": "E0",
+   "n_football_data_matches": 380,
+   "n_statsbomb_matches": 380,
+   "n_football_data_teams": 20,
+   "n_statsbomb_teams": 20,
+   "n_names_identical": 9,
+   "football_data_only_names": [
+    "Bournemouth",
+    "Leicester",
+    "Man City",
+    "Man United",
+    "Newcastle",
+    "Norwich",
+    "Stoke",
+    "Swansea",
+    "Tottenham",
+    "West Brom",
+    "West Ham"
+   ],
+   "statsbomb_only_names": [
+    "AFC Bournemouth",
+    "Leicester City",
+    "Manchester City",
+    "Manchester United",
+    "Newcastle United",
+    "Norwich City",
+    "Stoke City",
+    "Swansea City",
+    "Tottenham Hotspur",
+    "West Bromwich Albion",
+    "West Ham United"
+   ],
+   "join_date_score_unique": 298,
+   "join_date_score_ambiguous": 82,
+   "join_date_score_no_candidate": 0,
+   "names_with_one_mapping": 20,
+   "names_with_conflicting_mapping": [],
+   "football_data_names_unmapped": []
+  },
+  {
+   "league": "Serie A",
+   "football_data_code": "I1",
+   "n_football_data_matches": 380,
+   "n_statsbomb_matches": 380,
+   "n_football_data_teams": 20,
+   "n_statsbomb_teams": 20,
+   "n_names_identical": 16,
+   "football_data_only_names": [
+    "Inter",
+    "Milan",
+    "Roma",
+    "Verona"
+   ],
+   "statsbomb_only_names": [
+    "AC Milan",
+    "AS Roma",
+    "Hellas Verona",
+    "Inter Milan"
+   ],
+   "join_date_score_unique": 291,
+   "join_date_score_ambiguous": 89,
+   "join_date_score_no_candidate": 0,
+   "names_with_one_mapping": 20,
+   "names_with_conflicting_mapping": [],
+   "football_data_names_unmapped": []
+  }
+ ],
+ "n_competition_seasons_in_catalogue": 80,
+ "sample_matches": [
+  {
+   "match_id": 3754097,
+   "match_date": "2015-08-08",
+   "home": "Manchester United",
+   "away": "Tottenham Hotspur",
+   "final_score": [
+    1,
+    0
+   ],
+   "goals_from_events": {
+    "Manchester United": 1,
+    "Tottenham Hotspur": 0
+   },
+   "n_events": 3780,
+   "period_end_clock_seconds": {
+    "1": 2767,
+    "2": 5662
+   },
+   "max_minute_by_period": {
+    "1": 46,
+    "2": 94
+   },
+   "event_type_counts": {
+    "Starting XI": 2,
+    "Half Start": 4,
+    "Pass": 1084,
+    "Ball Receipt*": 1000,
+    "Carry": 850,
+    "Pressure": 373,
+    "Miscontrol": 15,
+    "Ball Recovery": 102,
+    "Duel": 74,
+    "Dispossessed": 37,
+    "Dribbled Past": 14,
+    "Dribble": 25,
+    "Block": 31,
+    "Shot": 18,
+    "Goal Keeper": 22,
+    "Clearance": 44,
+    "Foul Committed": 26,
+    "Foul Won": 26,
+    "Interception": 15,
+    "Own Goal For": 1,
+    "Own Goal Against": 1,
+    "Half End": 4,
+    "Substitution": 6,
+    "Injury Stoppage": 1,
+    "Shield": 3,
+    "50/50": 2
+   },
+   "event_keys": [
+    "50_50",
+    "ball_receipt",
+    "ball_recovery",
+    "block",
+    "carry",
+    "clearance",
+    "counterpress",
+    "dribble",
+    "duel",
+    "duration",
+    "foul_committed",
+    "foul_won",
+    "goalkeeper",
+    "id",
+    "index",
+    "interception",
+    "location",
+    "minute",
+    "miscontrol",
+    "off_camera",
+    "out",
+    "pass",
+    "period",
+    "play_pattern",
+    "player",
+    "position",
+    "possession",
+    "possession_team",
+    "related_events",
+    "second",
+    "shot",
+    "substitution",
+    "tactics",
+    "team",
+    "timestamp",
+    "type",
+    "under_pressure"
+   ],
+   "shot_keys": [
+    "body_part",
+    "deflected",
+    "end_location",
+    "first_time",
+    "freeze_frame",
+    "key_pass_id",
+    "one_on_one",
+    "outcome",
+    "statsbomb_xg",
+    "technique",
+    "type"
+   ],
+   "shot_outcomes": {
+    "Off T": 5,
+    "Blocked": 6,
+    "Saved": 6,
+    "Wayward": 1
+   },
+   "shot_types": {
+    "Open Play": 16,
+    "Free Kick": 2
+   },
+   "shots_with_xg": 18,
+   "n_shots": 18,
+   "goal_shots": [],
+   "own_goal_events": [
+    {
+     "type": "Own Goal For",
+     "team": "Manchester United",
+     "player": null,
+     "period": 1,
+     "minute": 21,
+     "second": 36
+    },
+    {
+     "type": "Own Goal Against",
+     "team": "Tottenham Hotspur",
+     "player": "Kyle Walker",
+     "period": 1,
+     "minute": 21,
+     "second": 36
+    }
+   ],
+   "card_events": [
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Tottenham Hotspur",
+     "player": "Jan Vertonghen",
+     "period": 1,
+     "minute": 26,
+     "second": 32
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Manchester United",
+     "player": "Bastian Schweinsteiger",
+     "period": 2,
+     "minute": 68,
+     "second": 23
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Tottenham Hotspur",
+     "player": "Eric Dier",
+     "period": 2,
+     "minute": 75,
+     "second": 7
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Manchester United",
+     "player": "Juan Manuel Mata García",
+     "period": 2,
+     "minute": 89,
+     "second": 44
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Tottenham Hotspur",
+     "player": "Bamidele Alli",
+     "period": 2,
+     "minute": 90,
+     "second": 24
+    }
+   ],
+   "substitutions": [
+    {
+     "team": "Tottenham Hotspur",
+     "off": "Nabil Bentaleb",
+     "on": "Ryan Mason",
+     "period": 2,
+     "minute": 52,
+     "second": 45,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Manchester United",
+     "off": "Michael Carrick",
+     "on": "Bastian Schweinsteiger",
+     "period": 2,
+     "minute": 59,
+     "second": 44,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Manchester United",
+     "off": "Memphis Depay",
+     "on": "Ander Herrera Agüera",
+     "period": 2,
+     "minute": 67,
+     "second": 54,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Tottenham Hotspur",
+     "off": "Mousa Sidi Yaya Dembélé",
+     "on": "Erik Lamela",
+     "period": 2,
+     "minute": 67,
+     "second": 58,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Tottenham Hotspur",
+     "off": "Eric Dier",
+     "on": "Bamidele Alli",
+     "period": 2,
+     "minute": 76,
+     "second": 34,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Manchester United",
+     "off": "Matteo Darmian",
+     "on": "Luis Antonio Valencia Mosquera",
+     "period": 2,
+     "minute": 80,
+     "second": 2,
+     "reason": "Tactical"
+    }
+   ],
+   "player_off_on_events": [],
+   "lineup_player_keys": [
+    "cards",
+    "country",
+    "jersey_number",
+    "player_id",
+    "player_name",
+    "player_nickname",
+    "positions"
+   ],
+   "lineup_position_keys": [
+    "end_reason",
+    "from",
+    "from_period",
+    "position",
+    "position_id",
+    "start_reason",
+    "to",
+    "to_period"
+   ],
+   "lineup_card_keys": [
+    "card_type",
+    "period",
+    "reason",
+    "time"
+   ],
+   "lineup_sizes": {
+    "Manchester United": 18,
+    "Tottenham Hotspur": 18
+   },
+   "n_starters": 22,
+   "n_unused_bench": 8,
+   "dismissals": [],
+   "tactical_lineup_sizes": [
+    {
+     "team": "Manchester United",
+     "type": "Starting XI",
+     "period": 1,
+     "clock": "0:00",
+     "n_players": 11
+    },
+    {
+     "team": "Tottenham Hotspur",
+     "type": "Starting XI",
+     "period": 1,
+     "clock": "0:00",
+     "n_players": 11
+    }
+   ]
+  },
+  {
+   "match_id": 3754138,
+   "match_date": "2015-08-08",
+   "home": "Norwich City",
+   "away": "Crystal Palace",
+   "final_score": [
+    1,
+    3
+   ],
+   "goals_from_events": {
+    "Norwich City": 1,
+    "Crystal Palace": 3
+   },
+   "n_events": 3049,
+   "period_end_clock_seconds": {
+    "1": 2817,
+    "2": 5685
+   },
+   "max_minute_by_period": {
+    "1": 46,
+    "2": 94
+   },
+   "event_type_counts": {
+    "Starting XI": 2,
+    "Half Start": 4,
+    "Pass": 856,
+    "Ball Receipt*": 712,
+    "Carry": 686,
+    "Pressure": 277,
+    "Clearance": 36,
+    "Dribble": 37,
+    "Duel": 78,
+    "Ball Recovery": 100,
+    "Dribbled Past": 25,
+    "Dispossessed": 28,
+    "Interception": 9,
+    "Shot": 28,
+    "Goal Keeper": 30,
+    "Miscontrol": 19,
+    "Block": 30,
+    "Foul Committed": 36,
+    "Foul Won": 35,
+    "Offside": 1,
+    "Injury Stoppage": 5,
+    "Half End": 4,
+    "Substitution": 6,
+    "Shield": 1,
+    "Player Off": 1,
+    "Player On": 1,
+    "50/50": 2
+   },
+   "event_keys": [
+    "50_50",
+    "ball_receipt",
+    "ball_recovery",
+    "block",
+    "carry",
+    "clearance",
+    "counterpress",
+    "dribble",
+    "duel",
+    "duration",
+    "foul_committed",
+    "foul_won",
+    "goalkeeper",
+    "id",
+    "index",
+    "interception",
+    "location",
+    "minute",
+    "miscontrol",
+    "off_camera",
+    "out",
+    "pass",
+    "period",
+    "play_pattern",
+    "player",
+    "position",
+    "possession",
+    "possession_team",
+    "related_events",
+    "second",
+    "shot",
+    "substitution",
+    "tactics",
+    "team",
+    "timestamp",
+    "type",
+    "under_pressure"
+   ],
+   "shot_keys": [
+    "aerial_won",
+    "body_part",
+    "end_location",
+    "first_time",
+    "freeze_frame",
+    "key_pass_id",
+    "one_on_one",
+    "outcome",
+    "statsbomb_xg",
+    "technique",
+    "type"
+   ],
+   "shot_outcomes": {
+    "Off T": 9,
+    "Blocked": 6,
+    "Saved": 8,
+    "Goal": 4,
+    "Wayward": 1
+   },
+   "shot_types": {
+    "Open Play": 27,
+    "Free Kick": 1
+   },
+   "shots_with_xg": 28,
+   "n_shots": 28,
+   "goal_shots": [
+    {
+     "team": "Crystal Palace",
+     "player": "Wilfried Zaha",
+     "period": 1,
+     "minute": 37,
+     "second": 58,
+     "xg": 0.11633975,
+     "type": "Open Play"
+    },
+    {
+     "team": "Crystal Palace",
+     "player": "Damien Delaney",
+     "period": 2,
+     "minute": 48,
+     "second": 57,
+     "xg": 0.27339634,
+     "type": "Open Play"
+    },
+    {
+     "team": "Norwich City",
+     "player": "Nathan Redmond",
+     "period": 2,
+     "minute": 68,
+     "second": 8,
+     "xg": 0.023647962,
+     "type": "Open Play"
+    },
+    {
+     "team": "Crystal Palace",
+     "player": "Yohan Cabaye",
+     "period": 2,
+     "minute": 93,
+     "second": 37,
+     "xg": 0.5150758,
+     "type": "Open Play"
+    }
+   ],
+   "own_goal_events": [],
+   "card_events": [
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Norwich City",
+     "player": "Alexander Banor Tettey",
+     "period": 1,
+     "minute": 22,
+     "second": 24
+    }
+   ],
+   "substitutions": [
+    {
+     "team": "Norwich City",
+     "off": "Lewis Grabban",
+     "on": "Cameron Jerome",
+     "period": 2,
+     "minute": 53,
+     "second": 7,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Norwich City",
+     "off": "Alexander Banor Tettey",
+     "on": "Nathan Redmond",
+     "period": 2,
+     "minute": 53,
+     "second": 9,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Crystal Palace",
+     "off": "Wilfried Zaha",
+     "on": "Yannick Bolasie Yala",
+     "period": 2,
+     "minute": 71,
+     "second": 30,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Crystal Palace",
+     "off": "Jordon Mutch",
+     "on": "Mile Jedinak",
+     "period": 2,
+     "minute": 72,
+     "second": 0,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Norwich City",
+     "off": "Graham Dorrans",
+     "on": "Gary Hooper",
+     "period": 2,
+     "minute": 79,
+     "second": 20,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Crystal Palace",
+     "off": "Glenn Murray",
+     "on": "Connor Wickham",
+     "period": 2,
+     "minute": 81,
+     "second": 49,
+     "reason": "Tactical"
+    }
+   ],
+   "player_off_on_events": [
+    {
+     "type": "Player Off",
+     "player": "Damien Delaney",
+     "period": 2,
+     "clock": "64:02"
+    },
+    {
+     "type": "Player On",
+     "player": "Damien Delaney",
+     "period": 2,
+     "clock": "64:20"
+    }
+   ],
+   "lineup_player_keys": [
+    "cards",
+    "country",
+    "jersey_number",
+    "player_id",
+    "player_name",
+    "player_nickname",
+    "positions"
+   ],
+   "lineup_position_keys": [
+    "end_reason",
+    "from",
+    "from_period",
+    "position",
+    "position_id",
+    "start_reason",
+    "to",
+    "to_period"
+   ],
+   "lineup_card_keys": [
+    "card_type",
+    "period",
+    "reason",
+    "time"
+   ],
+   "lineup_sizes": {
+    "Crystal Palace": 18,
+    "Norwich City": 18
+   },
+   "n_starters": 22,
+   "n_unused_bench": 8,
+   "dismissals": [],
+   "tactical_lineup_sizes": [
+    {
+     "team": "Norwich City",
+     "type": "Starting XI",
+     "period": 1,
+     "clock": "0:00",
+     "n_players": 11
+    },
+    {
+     "team": "Crystal Palace",
+     "type": "Starting XI",
+     "period": 1,
+     "clock": "0:00",
+     "n_players": 11
+    }
+   ]
+  },
+  {
+   "match_id": 3754217,
+   "match_date": "2015-09-19",
+   "home": "Chelsea",
+   "away": "Arsenal",
+   "final_score": [
+    2,
+    0
+   ],
+   "goals_from_events": {
+    "Chelsea": 2,
+    "Arsenal": 0
+   },
+   "n_events": 3732,
+   "period_end_clock_seconds": {
+    "1": 2918,
+    "2": 5738
+   },
+   "max_minute_by_period": {
+    "1": 48,
+    "2": 95
+   },
+   "event_type_counts": {
+    "Starting XI": 2,
+    "Half Start": 4,
+    "Pass": 1046,
+    "Ball Receipt*": 963,
+    "Carry": 814,
+    "Pressure": 320,
+    "Block": 41,
+    "Ball Recovery": 106,
+    "Dribbled Past": 33,
+    "Dribble": 52,
+    "Foul Committed": 32,
+    "Foul Won": 29,
+    "Miscontrol": 27,
+    "Duel": 78,
+    "Shot": 33,
+    "Goal Keeper": 34,
+    "Clearance": 42,
+    "Shield": 3,
+    "Interception": 20,
+    "Dispossessed": 26,
+    "Injury Stoppage": 4,
+    "Player Off": 1,
+    "Player On": 1,
+    "Bad Behaviour": 3,
+    "Referee Ball-Drop": 2,
+    "Tactical Shift": 3,
+    "Half End": 4,
+    "Substitution": 6,
+    "Error": 1,
+    "Own Goal For": 1,
+    "Own Goal Against": 1
+   },
+   "event_keys": [
+    "bad_behaviour",
+    "ball_receipt",
+    "ball_recovery",
+    "block",
+    "carry",
+    "clearance",
+    "counterpress",
+    "dribble",
+    "duel",
+    "duration",
+    "foul_committed",
+    "foul_won",
+    "goalkeeper",
+    "id",
+    "index",
+    "injury_stoppage",
+    "interception",
+    "location",
+    "minute",
+    "miscontrol",
+    "off_camera",
+    "out",
+    "pass",
+    "period",
+    "play_pattern",
+    "player",
+    "position",
+    "possession",
+    "possession_team",
+    "related_events",
+    "second",
+    "shot",
+    "substitution",
+    "tactics",
+    "team",
+    "timestamp",
+    "type",
+    "under_pressure"
+   ],
+   "shot_keys": [
+    "aerial_won",
+    "body_part",
+    "end_location",
+    "first_time",
+    "freeze_frame",
+    "key_pass_id",
+    "one_on_one",
+    "outcome",
+    "statsbomb_xg",
+    "technique",
+    "type"
+   ],
+   "shot_outcomes": {
+    "Blocked": 13,
+    "Saved": 7,
+    "Off T": 9,
+    "Wayward": 3,
+    "Goal": 1
+   },
+   "shot_types": {
+    "Open Play": 31,
+    "Free Kick": 2
+   },
+   "shots_with_xg": 33,
+   "n_shots": 33,
+   "goal_shots": [
+    {
+     "team": "Chelsea",
+     "player": "Kurt Happy Zouma",
+     "period": 2,
+     "minute": 52,
+     "second": 11,
+     "xg": 0.19744614,
+     "type": "Open Play"
+    }
+   ],
+   "own_goal_events": [
+    {
+     "type": "Own Goal For",
+     "team": "Chelsea",
+     "player": null,
+     "period": 2,
+     "minute": 90,
+     "second": 5
+    },
+    {
+     "type": "Own Goal Against",
+     "team": "Arsenal",
+     "player": "Calum Chambers",
+     "period": 2,
+     "minute": 90,
+     "second": 5
+    }
+   ],
+   "card_events": [
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Arsenal",
+     "player": "Santiago Cazorla González",
+     "period": 1,
+     "minute": 30,
+     "second": 50
+    },
+    {
+     "source_event": "Bad Behaviour",
+     "card": "Yellow Card",
+     "team": "Arsenal",
+     "player": "Gabriel Armando de Abreu",
+     "period": 1,
+     "minute": 44,
+     "second": 54
+    },
+    {
+     "source_event": "Bad Behaviour",
+     "card": "Yellow Card",
+     "team": "Chelsea",
+     "player": "Diego da Silva Costa",
+     "period": 1,
+     "minute": 44,
+     "second": 54
+    },
+    {
+     "source_event": "Bad Behaviour",
+     "card": "Red Card",
+     "team": "Arsenal",
+     "player": "Gabriel Armando de Abreu",
+     "period": 1,
+     "minute": 45,
+     "second": 44
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Chelsea",
+     "player": "Branislav Ivanović",
+     "period": 2,
+     "minute": 48,
+     "second": 9
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Chelsea",
+     "player": "Oscar dos Santos Emboaba Júnior",
+     "period": 2,
+     "minute": 62,
+     "second": 53
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Arsenal",
+     "player": "Calum Chambers",
+     "period": 2,
+     "minute": 70,
+     "second": 54
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Second Yellow",
+     "team": "Arsenal",
+     "player": "Santiago Cazorla González",
+     "period": 2,
+     "minute": 78,
+     "second": 23
+    }
+   ],
+   "substitutions": [
+    {
+     "team": "Arsenal",
+     "off": "Francis Joseph Coquelin",
+     "on": "Calum Chambers",
+     "period": 2,
+     "minute": 45,
+     "second": 0,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Chelsea",
+     "off": "Oscar dos Santos Emboaba Júnior",
+     "on": "Ramires Santos do Nascimento",
+     "period": 2,
+     "minute": 68,
+     "second": 38,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Arsenal",
+     "off": "Alexis Alejandro Sánchez Sánchez",
+     "on": "Alex Oxlade-Chamberlain",
+     "period": 2,
+     "minute": 74,
+     "second": 32,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Arsenal",
+     "off": "Mesut Özil",
+     "on": "Olivier Giroud",
+     "period": 2,
+     "minute": 74,
+     "second": 33,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Chelsea",
+     "off": "Diego da Silva Costa",
+     "on": "Loïc Rémy",
+     "period": 2,
+     "minute": 81,
+     "second": 31,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Chelsea",
+     "off": "Francesc Fàbregas i Soler",
+     "on": "John Michael Nchekwube Obinna",
+     "period": 2,
+     "minute": 91,
+     "second": 5,
+     "reason": "Tactical"
+    }
+   ],
+   "player_off_on_events": [
+    {
+     "type": "Player Off",
+     "player": "Francis Joseph Coquelin",
+     "period": 1,
+     "clock": "21:41"
+    },
+    {
+     "type": "Player On",
+     "player": "Francis Joseph Coquelin",
+     "period": 1,
+     "clock": "22:04"
+    }
+   ],
+   "lineup_player_keys": [
+    "cards",
+    "country",
+    "jersey_number",
+    "player_id",
+    "player_name",
+    "player_nickname",
+    "positions"
+   ],
+   "lineup_position_keys": [
+    "end_reason",
+    "from",
+    "from_period",
+    "position",
+    "position_id",
+    "start_reason",
+    "to",
+    "to_period"
+   ],
+   "lineup_card_keys": [
+    "card_type",
+    "period",
+    "reason",
+    "time"
+   ],
+   "lineup_sizes": {
+    "Chelsea": 18,
+    "Arsenal": 18
+   },
+   "n_starters": 22,
+   "n_unused_bench": 8,
+   "dismissals": [
+    {
+     "team": "Arsenal",
+     "player": "Gabriel Armando de Abreu",
+     "card_type": "Red Card",
+     "card_clock": "45:44",
+     "card_period": 1,
+     "position_last_to": null,
+     "position_last_end_reason": "Final Whistle",
+     "positions_closed_at_card": false,
+     "last_event_type": "Bad Behaviour",
+     "last_event_clock": "45:44",
+     "last_event_period": 1,
+     "minutes_from_positions": 99.26666666666667
+    },
+    {
+     "team": "Arsenal",
+     "player": "Santiago Cazorla González",
+     "card_type": "Second Yellow",
+     "card_clock": "78:23",
+     "card_period": 2,
+     "position_last_to": "78:23",
+     "position_last_end_reason": "Foul Committed (Second Yellow)",
+     "positions_closed_at_card": true,
+     "last_event_type": "Foul Committed",
+     "last_event_clock": "78:23",
+     "last_event_period": 2,
+     "minutes_from_positions": 82.01666666666667
+    }
+   ],
+   "tactical_lineup_sizes": [
+    {
+     "team": "Chelsea",
+     "type": "Starting XI",
+     "period": 1,
+     "clock": "0:00",
+     "n_players": 11
+    },
+    {
+     "team": "Arsenal",
+     "type": "Starting XI",
+     "period": 1,
+     "clock": "0:00",
+     "n_players": 11
+    },
+    {
+     "team": "Arsenal",
+     "type": "Tactical Shift",
+     "period": 1,
+     "clock": "47:40",
+     "n_players": 11
+    },
+    {
+     "team": "Arsenal",
+     "type": "Tactical Shift",
+     "period": 2,
+     "clock": "45:12",
+     "n_players": 11
+    },
+    {
+     "team": "Arsenal",
+     "type": "Tactical Shift",
+     "period": 2,
+     "clock": "75:12",
+     "n_players": 11
+    }
+   ]
+  },
+  {
+   "match_id": 3754237,
+   "match_date": "2015-08-08",
+   "home": "Leicester City",
+   "away": "Sunderland",
+   "final_score": [
+    4,
+    2
+   ],
+   "goals_from_events": {
+    "Leicester City": 4,
+    "Sunderland": 2
+   },
+   "n_events": 3036,
+   "period_end_clock_seconds": {
+    "1": 2866,
+    "2": 5704
+   },
+   "max_minute_by_period": {
+    "1": 47,
+    "2": 95
+   },
+   "event_type_counts": {
+    "Starting XI": 2,
+    "Half Start": 4,
+    "Pass": 893,
+    "Ball Receipt*": 743,
+    "Carry": 658,
+    "Miscontrol": 25,
+    "Ball Recovery": 85,
+    "Pressure": 248,
+    "Block": 31,
+    "Foul Committed": 30,
+    "Foul Won": 28,
+    "Duel": 95,
+    "Dribble": 33,
+    "Dribbled Past": 19,
+    "Clearance": 30,
+    "Shot": 28,
+    "Goal Keeper": 32,
+    "Interception": 12,
+    "Dispossessed": 28,
+    "Substitution": 5,
+    "Half End": 4,
+    "Error": 1,
+    "Injury Stoppage": 1,
+    "Bad Behaviour": 1
+   },
+   "event_keys": [
+    "bad_behaviour",
+    "ball_receipt",
+    "ball_recovery",
+    "block",
+    "carry",
+    "clearance",
+    "counterpress",
+    "dribble",
+    "duel",
+    "duration",
+    "foul_committed",
+    "foul_won",
+    "goalkeeper",
+    "id",
+    "index",
+    "interception",
+    "location",
+    "minute",
+    "miscontrol",
+    "off_camera",
+    "out",
+    "pass",
+    "period",
+    "play_pattern",
+    "player",
+    "position",
+    "possession",
+    "possession_team",
+    "related_events",
+    "second",
+    "shot",
+    "substitution",
+    "tactics",
+    "team",
+    "timestamp",
+    "type",
+    "under_pressure"
+   ],
+   "shot_keys": [
+    "aerial_won",
+    "body_part",
+    "end_location",
+    "first_time",
+    "freeze_frame",
+    "key_pass_id",
+    "one_on_one",
+    "outcome",
+    "statsbomb_xg",
+    "technique",
+    "type"
+   ],
+   "shot_outcomes": {
+    "Blocked": 6,
+    "Saved": 7,
+    "Goal": 6,
+    "Off T": 8,
+    "Post": 1
+   },
+   "shot_types": {
+    "Open Play": 27,
+    "Penalty": 1
+   },
+   "shots_with_xg": 28,
+   "n_shots": 28,
+   "goal_shots": [
+    {
+     "team": "Leicester City",
+     "player": "Jamie Vardy",
+     "period": 1,
+     "minute": 10,
+     "second": 17,
+     "xg": 0.012146741,
+     "type": "Open Play"
+    },
+    {
+     "team": "Leicester City",
+     "player": "Riyad Mahrez",
+     "period": 1,
+     "minute": 17,
+     "second": 42,
+     "xg": 0.16436046,
+     "type": "Open Play"
+    },
+    {
+     "team": "Leicester City",
+     "player": "Riyad Mahrez",
+     "period": 1,
+     "minute": 24,
+     "second": 29,
+     "xg": 0.7835,
+     "type": "Penalty"
+    },
+    {
+     "team": "Sunderland",
+     "player": "Jermain Defoe",
+     "period": 2,
+     "minute": 59,
+     "second": 57,
+     "xg": 0.3625413,
+     "type": "Open Play"
+    },
+    {
+     "team": "Leicester City",
+     "player": "Marc Albrighton",
+     "period": 2,
+     "minute": 65,
+     "second": 25,
+     "xg": 0.05817597,
+     "type": "Open Play"
+    },
+    {
+     "team": "Sunderland",
+     "player": "Steven Fletcher",
+     "period": 2,
+     "minute": 70,
+     "second": 18,
+     "xg": 0.397341,
+     "type": "Open Play"
+    }
+   ],
+   "own_goal_events": [],
+   "card_events": [
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Sunderland",
+     "player": "Jack Rodwell",
+     "period": 1,
+     "minute": 15,
+     "second": 49
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Sunderland",
+     "player": "Billy Jones",
+     "period": 1,
+     "minute": 41,
+     "second": 13
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Leicester City",
+     "player": "Jamie Vardy",
+     "period": 2,
+     "minute": 48,
+     "second": 7
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Sunderland",
+     "player": "Younes Kaboul",
+     "period": 2,
+     "minute": 72,
+     "second": 47
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Sunderland",
+     "player": "Sebastián Coates Nión",
+     "period": 2,
+     "minute": 84,
+     "second": 15
+    },
+    {
+     "source_event": "Bad Behaviour",
+     "card": "Yellow Card",
+     "team": "Leicester City",
+     "player": "Jeffrey Schlupp",
+     "period": 2,
+     "minute": 90,
+     "second": 34
+    }
+   ],
+   "substitutions": [
+    {
+     "team": "Sunderland",
+     "off": "Lee Cattermole",
+     "on": "Steven Fletcher",
+     "period": 1,
+     "minute": 29,
+     "second": 18,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Sunderland",
+     "off": "Billy Jones",
+     "on": "Adam Matthews",
+     "period": 2,
+     "minute": 53,
+     "second": 11,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Leicester City",
+     "off": "Ritchie De Laet",
+     "on": "Yohan Benalouane",
+     "period": 2,
+     "minute": 74,
+     "second": 33,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Leicester City",
+     "off": "Riyad Mahrez",
+     "on": "Christian Fuchs",
+     "period": 2,
+     "minute": 76,
+     "second": 34,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Leicester City",
+     "off": "Jamie Vardy",
+     "on": "N''Golo Kanté",
+     "period": 2,
+     "minute": 81,
+     "second": 20,
+     "reason": "Tactical"
+    }
+   ],
+   "player_off_on_events": [],
+   "lineup_player_keys": [
+    "cards",
+    "country",
+    "jersey_number",
+    "player_id",
+    "player_name",
+    "player_nickname",
+    "positions"
+   ],
+   "lineup_position_keys": [
+    "end_reason",
+    "from",
+    "from_period",
+    "position",
+    "position_id",
+    "start_reason",
+    "to",
+    "to_period"
+   ],
+   "lineup_card_keys": [
+    "card_type",
+    "period",
+    "reason",
+    "time"
+   ],
+   "lineup_sizes": {
+    "Leicester City": 18,
+    "Sunderland": 18
+   },
+   "n_starters": 22,
+   "n_unused_bench": 9,
+   "dismissals": [],
+   "tactical_lineup_sizes": [
+    {
+     "team": "Leicester City",
+     "type": "Starting XI",
+     "period": 1,
+     "clock": "0:00",
+     "n_players": 11
+    },
+    {
+     "team": "Sunderland",
+     "type": "Starting XI",
+     "period": 1,
+     "clock": "0:00",
+     "n_players": 11
+    }
+   ]
+  },
+  {
+   "match_id": 3754300,
+   "match_date": "2015-08-08",
+   "home": "Everton",
+   "away": "Watford",
+   "final_score": [
+    2,
+    2
+   ],
+   "goals_from_events": {
+    "Everton": 2,
+    "Watford": 2
+   },
+   "n_events": 3564,
+   "period_end_clock_seconds": {
+    "1": 2822,
+    "2": 5699
+   },
+   "max_minute_by_period": {
+    "1": 47,
+    "2": 94
+   },
+   "event_type_counts": {
+    "Starting XI": 2,
+    "Half Start": 4,
+    "Pass": 995,
+    "Ball Receipt*": 965,
+    "Carry": 736,
+    "Clearance": 67,
+    "Pressure": 308,
+    "Block": 27,
+    "Ball Recovery": 120,
+    "Dispossessed": 31,
+    "Duel": 99,
+    "Foul Committed": 22,
+    "Foul Won": 21,
+    "Dribbled Past": 26,
+    "Dribble": 37,
+    "Interception": 16,
+    "Shield": 3,
+    "Miscontrol": 20,
+    "Shot": 22,
+    "Goal Keeper": 27,
+    "Half End": 4,
+    "Substitution": 6,
+    "Tactical Shift": 2,
+    "Bad Behaviour": 1,
+    "Injury Stoppage": 2,
+    "Error": 1
+   },
+   "event_keys": [
+    "bad_behaviour",
+    "ball_receipt",
+    "ball_recovery",
+    "block",
+    "carry",
+    "clearance",
+    "counterpress",
+    "dribble",
+    "duel",
+    "duration",
+    "foul_committed",
+    "foul_won",
+    "goalkeeper",
+    "id",
+    "index",
+    "interception",
+    "location",
+    "minute",
+    "miscontrol",
+    "off_camera",
+    "out",
+    "pass",
+    "period",
+    "play_pattern",
+    "player",
+    "position",
+    "possession",
+    "possession_team",
+    "related_events",
+    "second",
+    "shot",
+    "substitution",
+    "tactics",
+    "team",
+    "timestamp",
+    "type",
+    "under_pressure"
+   ],
+   "shot_keys": [
+    "aerial_won",
+    "body_part",
+    "end_location",
+    "first_time",
+    "freeze_frame",
+    "key_pass_id",
+    "one_on_one",
+    "outcome",
+    "statsbomb_xg",
+    "technique",
+    "type"
+   ],
+   "shot_outcomes": {
+    "Blocked": 5,
+    "Goal": 4,
+    "Saved": 6,
+    "Off T": 7
+   },
+   "shot_types": {
+    "Open Play": 22
+   },
+   "shots_with_xg": 22,
+   "n_shots": 22,
+   "goal_shots": [
+    {
+     "team": "Watford",
+     "player": "Miguel Arturo Layún Prado",
+     "period": 1,
+     "minute": 12,
+     "second": 58,
+     "xg": 0.14806268,
+     "type": "Open Play"
+    },
+    {
+     "team": "Everton",
+     "player": "Ross Barkley",
+     "period": 2,
+     "minute": 75,
+     "second": 12,
+     "xg": 0.036634006,
+     "type": "Open Play"
+    },
+    {
+     "team": "Watford",
+     "player": "Odion Jude Ighalo",
+     "period": 2,
+     "minute": 82,
+     "second": 40,
+     "xg": 0.12112719,
+     "type": "Open Play"
+    },
+    {
+     "team": "Everton",
+     "player": "Arouna Koné",
+     "period": 2,
+     "minute": 85,
+     "second": 41,
+     "xg": 0.071732424,
+     "type": "Open Play"
+    }
+   ],
+   "own_goal_events": [],
+   "card_events": [
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Watford",
+     "player": "Troy Deeney",
+     "period": 1,
+     "minute": 41,
+     "second": 37
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Everton",
+     "player": "Séamus Coleman",
+     "period": 2,
+     "minute": 53,
+     "second": 23
+    },
+    {
+     "source_event": "Bad Behaviour",
+     "card": "Yellow Card",
+     "team": "Watford",
+     "player": "José Holebas",
+     "period": 2,
+     "minute": 65,
+     "second": 18
+    }
+   ],
+   "substitutions": [
+    {
+     "team": "Watford",
+     "off": "Miguel Arturo Layún Prado",
+     "on": "Juan Carlos Paredes Reasco",
+     "period": 2,
+     "minute": 58,
+     "second": 50,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Everton",
+     "off": "Brendan Joel Zibusiso Galloway",
+     "on": "Arouna Koné",
+     "period": 2,
+     "minute": 62,
+     "second": 0,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Watford",
+     "off": "José Manuel Jurado Marín",
+     "on": "Odion Jude Ighalo",
+     "period": 2,
+     "minute": 73,
+     "second": 15,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Everton",
+     "off": "Kevin Mirallas",
+     "on": "Bryan Oviedo",
+     "period": 2,
+     "minute": 76,
+     "second": 1,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Watford",
+     "off": "Valon Behrami",
+     "on": "Ben Watson",
+     "period": 2,
+     "minute": 78,
+     "second": 30,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Everton",
+     "off": "Romelu Lukaku Menama",
+     "on": "Steven Naismith",
+     "period": 2,
+     "minute": 90,
+     "second": 11,
+     "reason": "Tactical"
+    }
+   ],
+   "player_off_on_events": [],
+   "lineup_player_keys": [
+    "cards",
+    "country",
+    "jersey_number",
+    "player_id",
+    "player_name",
+    "player_nickname",
+    "positions"
+   ],
+   "lineup_position_keys": [
+    "end_reason",
+    "from",
+    "from_period",
+    "position",
+    "position_id",
+    "start_reason",
+    "to",
+    "to_period"
+   ],
+   "lineup_card_keys": [
+    "card_type",
+    "period",
+    "reason",
+    "time"
+   ],
+   "lineup_sizes": {
+    "Everton": 18,
+    "Watford": 18
+   },
+   "n_starters": 22,
+   "n_unused_bench": 8,
+   "dismissals": [],
+   "tactical_lineup_sizes": [
+    {
+     "team": "Everton",
+     "type": "Starting XI",
+     "period": 1,
+     "clock": "0:00",
+     "n_players": 11
+    },
+    {
+     "team": "Watford",
+     "type": "Starting XI",
+     "period": 1,
+     "clock": "0:00",
+     "n_players": 11
+    },
+    {
+     "team": "Watford",
+     "type": "Tactical Shift",
+     "period": 2,
+     "clock": "58:53",
+     "n_players": 11
+    },
+    {
+     "team": "Everton",
+     "type": "Tactical Shift",
+     "period": 2,
+     "clock": "67:44",
+     "n_players": 11
+    }
+   ]
+  },
+  {
+   "match_id": 3825652,
+   "match_date": "2015-11-06",
+   "home": "Las Palmas",
+   "away": "Real Sociedad",
+   "final_score": [
+    2,
+    0
+   ],
+   "goals_from_events": {
+    "Las Palmas": 2,
+    "Real Sociedad": 0
+   },
+   "n_events": 3538,
+   "period_end_clock_seconds": {
+    "1": 2815,
+    "2": 5584
+   },
+   "max_minute_by_period": {
+    "1": 46,
+    "2": 93
+   },
+   "event_type_counts": {
+    "Starting XI": 2,
+    "Half Start": 4,
+    "Pass": 980,
+    "Ball Receipt*": 928,
+    "Carry": 764,
+    "Foul Committed": 35,
+    "Foul Won": 34,
+    "Ball Recovery": 125,
+    "Pressure": 285,
+    "Interception": 32,
+    "Duel": 79,
+    "Miscontrol": 37,
+    "Clearance": 44,
+    "Block": 38,
+    "Dispossessed": 20,
+    "Shot": 20,
+    "Goal Keeper": 24,
+    "Dribble": 44,
+    "Shield": 2,
+    "Dribbled Past": 25,
+    "Injury Stoppage": 3,
+    "Player Off": 1,
+    "Player On": 1,
+    "Half End": 4,
+    "Substitution": 6,
+    "Tactical Shift": 1
+   },
+   "event_keys": [
+    "ball_receipt",
+    "ball_recovery",
+    "block",
+    "carry",
+    "clearance",
+    "counterpress",
+    "dribble",
+    "duel",
+    "duration",
+    "foul_committed",
+    "foul_won",
+    "goalkeeper",
+    "id",
+    "index",
+    "interception",
+    "location",
+    "minute",
+    "miscontrol",
+    "off_camera",
+    "out",
+    "pass",
+    "period",
+    "play_pattern",
+    "player",
+    "position",
+    "possession",
+    "possession_team",
+    "related_events",
+    "second",
+    "shot",
+    "substitution",
+    "tactics",
+    "team",
+    "timestamp",
+    "type",
+    "under_pressure"
+   ],
+   "shot_keys": [
+    "body_part",
+    "end_location",
+    "first_time",
+    "freeze_frame",
+    "key_pass_id",
+    "one_on_one",
+    "outcome",
+    "saved_to_post",
+    "statsbomb_xg",
+    "technique",
+    "type"
+   ],
+   "shot_outcomes": {
+    "Blocked": 4,
+    "Saved": 7,
+    "Wayward": 3,
+    "Goal": 2,
+    "Off T": 3,
+    "Saved to Post": 1
+   },
+   "shot_types": {
+    "Open Play": 20
+   },
+   "shots_with_xg": 20,
+   "n_shots": 20,
+   "goal_shots": [
+    {
+     "team": "Las Palmas",
+     "player": "Jonathan Viera Ramos",
+     "period": 1,
+     "minute": 27,
+     "second": 39,
+     "xg": 0.28228688,
+     "type": "Open Play"
+    },
+    {
+     "team": "Las Palmas",
+     "player": "Sergio Ezequiel Araújo",
+     "period": 2,
+     "minute": 50,
+     "second": 22,
+     "xg": 0.12484168,
+     "type": "Open Play"
+    }
+   ],
+   "own_goal_events": [],
+   "card_events": [
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Las Palmas",
+     "player": "Pedro Bigas Rigo",
+     "period": 1,
+     "minute": 7,
+     "second": 32
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Real Sociedad",
+     "player": "Asier Illarramendi Andonegi",
+     "period": 1,
+     "minute": 35,
+     "second": 1
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Real Sociedad",
+     "player": "Carlos Alberto Vela Garrido",
+     "period": 1,
+     "minute": 38,
+     "second": 8
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Real Sociedad",
+     "player": "Íñigo Martínez Berridi",
+     "period": 2,
+     "minute": 67,
+     "second": 55
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Real Sociedad",
+     "player": "Yuri Berchiche Izeta",
+     "period": 2,
+     "minute": 84,
+     "second": 10
+    }
+   ],
+   "substitutions": [
+    {
+     "team": "Real Sociedad",
+     "off": "Carlos Alberto Vela Garrido",
+     "on": "Armindo Tué Na Bangna",
+     "period": 2,
+     "minute": 45,
+     "second": 0,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Real Sociedad",
+     "off": "Gonzalo Castro Irizábal",
+     "on": "Sergio Canales Madrazo",
+     "period": 2,
+     "minute": 56,
+     "second": 52,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Las Palmas",
+     "off": "Jonathan Viera Ramos",
+     "on": "Jerónimo Figueroa Cabrera",
+     "period": 2,
+     "minute": 66,
+     "second": 48,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Real Sociedad",
+     "off": "Asier Illarramendi Andonegi",
+     "on": "Rubén Pardo Gutiérrez",
+     "period": 2,
+     "minute": 69,
+     "second": 53,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Las Palmas",
+     "off": "Sergio Ezequiel Araújo",
+     "on": "Willian José da Silva",
+     "period": 2,
+     "minute": 74,
+     "second": 35,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Las Palmas",
+     "off": "Nabil El Zhar",
+     "on": "Juan Carlos Valerón Santana",
+     "period": 2,
+     "minute": 83,
+     "second": 20,
+     "reason": "Injury"
+    }
+   ],
+   "player_off_on_events": [
+    {
+     "type": "Player Off",
+     "player": "José Vicente Gómez Umpiérrez",
+     "period": 1,
+     "clock": "41:19"
+    },
+    {
+     "type": "Player On",
+     "player": "José Vicente Gómez Umpiérrez",
+     "period": 1,
+     "clock": "41:59"
+    }
+   ],
+   "lineup_player_keys": [
+    "cards",
+    "country",
+    "jersey_number",
+    "player_id",
+    "player_name",
+    "player_nickname",
+    "positions"
+   ],
+   "lineup_position_keys": [
+    "end_reason",
+    "from",
+    "from_period",
+    "position",
+    "position_id",
+    "start_reason",
+    "to",
+    "to_period"
+   ],
+   "lineup_card_keys": [
+    "card_type",
+    "period",
+    "reason",
+    "time"
+   ],
+   "lineup_sizes": {
+    "Real Sociedad": 18,
+    "Las Palmas": 18
+   },
+   "n_starters": 22,
+   "n_unused_bench": 8,
+   "dismissals": [],
+   "tactical_lineup_sizes": [
+    {
+     "team": "Las Palmas",
+     "type": "Starting XI",
+     "period": 1,
+     "clock": "0:00",
+     "n_players": 11
+    },
+    {
+     "team": "Real Sociedad",
+     "type": "Starting XI",
+     "period": 1,
+     "clock": "0:00",
+     "n_players": 11
+    },
+    {
+     "team": "Las Palmas",
+     "type": "Tactical Shift",
+     "period": 2,
+     "clock": "84:29",
+     "n_players": 11
+    }
+   ]
+  },
+  {
+   "match_id": 3829513,
+   "match_date": "2015-10-23",
+   "home": "Stade Malherbe Caen",
+   "away": "Nantes",
+   "final_score": [
+    0,
+    2
+   ],
+   "goals_from_events": {
+    "Stade Malherbe Caen": 0,
+    "Nantes": 2
+   },
+   "n_events": 3296,
+   "period_end_clock_seconds": {
+    "1": 2759,
+    "2": 5648
+   },
+   "max_minute_by_period": {
+    "1": 45,
+    "2": 94
+   },
+   "event_type_counts": {
+    "Starting XI": 2,
+    "Half Start": 4,
+    "Pass": 859,
+    "Ball Receipt*": 801,
+    "Carry": 598,
+    "Pressure": 398,
+    "Ball Recovery": 114,
+    "Block": 51,
+    "Dispossessed": 36,
+    "Duel": 119,
+    "Shot": 27,
+    "Goal Keeper": 31,
+    "Miscontrol": 42,
+    "Foul Committed": 34,
+    "Foul Won": 32,
+    "Dribble": 30,
+    "Clearance": 50,
+    "Error": 1,
+    "Interception": 20,
+    "Dribbled Past": 17,
+    "Shield": 1,
+    "Player Off": 2,
+    "Player On": 2,
+    "50/50": 12,
+    "Half End": 4,
+    "Injury Stoppage": 1,
+    "Substitution": 6,
+    "Tactical Shift": 1,
+    "Bad Behaviour": 1
+   },
+   "event_keys": [
+    "50_50",
+    "bad_behaviour",
+    "ball_receipt",
+    "ball_recovery",
+    "block",
+    "carry",
+    "clearance",
+    "counterpress",
+    "dribble",
+    "duel",
+    "duration",
+    "foul_committed",
+    "foul_won",
+    "goalkeeper",
+    "id",
+    "index",
+    "interception",
+    "location",
+    "minute",
+    "miscontrol",
+    "off_camera",
+    "out",
+    "pass",
+    "period",
+    "play_pattern",
+    "player",
+    "position",
+    "possession",
+    "possession_team",
+    "related_events",
+    "second",
+    "shot",
+    "substitution",
+    "tactics",
+    "team",
+    "timestamp",
+    "type",
+    "under_pressure"
+   ],
+   "shot_keys": [
+    "aerial_won",
+    "body_part",
+    "end_location",
+    "first_time",
+    "freeze_frame",
+    "key_pass_id",
+    "one_on_one",
+    "outcome",
+    "statsbomb_xg",
+    "technique",
+    "type"
+   ],
+   "shot_outcomes": {
+    "Saved": 5,
+    "Off T": 12,
+    "Blocked": 7,
+    "Goal": 2,
+    "Wayward": 1
+   },
+   "shot_types": {
+    "Open Play": 26,
+    "Free Kick": 1
+   },
+   "shots_with_xg": 27,
+   "n_shots": 27,
+   "goal_shots": [
+    {
+     "team": "Nantes",
+     "player": "Yacine Bammou",
+     "period": 1,
+     "minute": 22,
+     "second": 30,
+     "xg": 0.07031049,
+     "type": "Open Play"
+    },
+    {
+     "team": "Nantes",
+     "player": "Adrien Thomasson",
+     "period": 2,
+     "minute": 60,
+     "second": 14,
+     "xg": 0.3672967,
+     "type": "Open Play"
+    }
+   ],
+   "own_goal_events": [],
+   "card_events": [
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Stade Malherbe Caen",
+     "player": "Dennis Appiah",
+     "period": 1,
+     "minute": 35,
+     "second": 28
+    },
+    {
+     "source_event": "Foul Committed",
+     "card": "Yellow Card",
+     "team": "Nantes",
+     "player": "Wilfried Moimbé",
+     "period": 2,
+     "minute": 72,
+     "second": 35
+    },
+    {
+     "source_event": "Bad Behaviour",
+     "card": "Yellow Card",
+     "team": "Nantes",
+     "player": "Rémy Riou",
+     "period": 2,
+     "minute": 82,
+     "second": 19
+    }
+   ],
+   "substitutions": [
+    {
+     "team": "Nantes",
+     "off": "Valentin Rongier",
+     "on": "Lucas Deaux",
+     "period": 2,
+     "minute": 64,
+     "second": 43,
+     "reason": "Injury"
+    },
+    {
+     "team": "Stade Malherbe Caen",
+     "off": "Vincent Bessat",
+     "on": "Michaël Jordan Nkololo",
+     "period": 2,
+     "minute": 65,
+     "second": 36,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Stade Malherbe Caen",
+     "off": "Jeff Louis",
+     "on": "Saïdi Ntibazonkiza",
+     "period": 2,
+     "minute": 70,
+     "second": 57,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Stade Malherbe Caen",
+     "off": "Nicolas Seube",
+     "on": "Jordan Adéoti",
+     "period": 2,
+     "minute": 76,
+     "second": 13,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Nantes",
+     "off": "Johan Audel",
+     "on": "Ermir Lenjani",
+     "period": 2,
+     "minute": 76,
+     "second": 58,
+     "reason": "Tactical"
+    },
+    {
+     "team": "Nantes",
+     "off": "Adrien Thomasson",
+     "on": "Jules Iloki",
+     "period": 2,
+     "minute": 86,
+     "second": 56,
+     "reason": "Tactical"
+    }
+   ],
+   "player_off_on_events": [
+    {
+     "type": "Player Off",
+     "player": "Damien Da Silva",
+     "period": 1,
+     "clock": "25:50"
+    },
+    {
+     "type": "Player On",
+     "player": "Damien Da Silva",
+     "period": 1,
+     "clock": "26:18"
+    },
+    {
+     "type": "Player Off",
+     "player": "Emiliano Sala",
+     "period": 1,
+     "clock": "35:22"
+    },
+    {
+     "type": "Player On",
+     "player": "Emiliano Sala",
+     "period": 1,
+     "clock": "36:14"
+    }
+   ],
+   "lineup_player_keys": [
+    "cards",
+    "country",
+    "jersey_number",
+    "player_id",
+    "player_name",
+    "player_nickname",
+    "positions"
+   ],
+   "lineup_position_keys": [
+    "end_reason",
+    "from",
+    "from_period",
+    "position",
+    "position_id",
+    "start_reason",
+    "to",
+    "to_period"
+   ],
+   "lineup_card_keys": [
+    "card_type",
+    "period",
+    "reason",
+    "time"
+   ],
+   "lineup_sizes": {
+    "Nantes": 18,
+    "Stade Malherbe Caen": 18
+   },
+   "n_starters": 22,
+   "n_unused_bench": 8,
+   "dismissals": [],
+   "tactical_lineup_sizes": [
+    {
+     "team": "Stade Malherbe Caen",
+     "type": "Starting XI",
+     "period": 1,
+     "clock": "0:00",
+     "n_players": 11
+    },
+    {
+     "team": "Nantes",
+     "type": "Starting XI",
+     "period": 1,
+     "clock": "0:00",
+     "n_players": 11
+    },
+    {
+     "team": "Stade Malherbe Caen",
+     "type": "Tactical Shift",
+     "period": 2,
+     "clock": "70:59",
+     "n_players": 11
+    }
+   ]
+  }
+ ],
+ "download_estimate": {
+  "tree_truncated": false,
+  "n_match_ids": 1517,
+  "files_missing_from_tree": 0,
+  "events_bytes_total": 4568675058,
+  "lineups_bytes_total": 29133963,
+  "mean_events_bytes": 3011651.3236651286,
+  "n_requests_events_and_lineups": 3034,
+  "throttle_floor_seconds": 3034.0,
+  "measured_samples": 1513,
+  "measured_bytes_per_second": 6204637.880599535,
+  "transfer_seconds_at_measured_rate": 741.027777846034,
+  "repo_total_blob_bytes": 16128701593
+ }
+}
