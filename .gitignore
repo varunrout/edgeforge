@@ -1,5 +1,5 @@
 # Raw/derived data is never committed (CLAUDE.md)
-data/
+/data/
 artifacts/sims/
 .env
 .venv/
