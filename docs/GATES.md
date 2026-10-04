@@ -241,7 +241,7 @@ football-data: 33 new CSV requests (30 history + 3 for 2015/16; E0 files were ca
 | 13 | Figures for each result | **PASS** | `ls artifacts/figures` | reliability by league, by season phase, by promoted status, early vs close, favourite-longshot plot, model-vs-market forest plot, for blocks F1, F2 and F4 (18 figures), alongside the 11 Phase 2 baseline figures: 29 PNGs in total |
 | 14 | BH-adjusted list of surviving findings | **PASS** | `pillar_a.json` `bh_survivors` | see "Surviving findings" below |
 | 15 | Registry updated | **PASS** | see criterion 3 | |
-| 16 | Tests and CI-equivalent checks pass locally | **PASS** | `uv sync --locked && uv run ruff check . && uv run ruff format --check . && uv run mypy && uv run pytest -q` | 75 tests pass locally; ruff and mypy clean (49 source files). Fresh-clone result: see the line added at the end of this section |
+| 16 | Tests and CI-equivalent checks pass locally | **PASS** | `uv sync --locked && uv run ruff check . && uv run ruff format --check . && uv run mypy && uv run pytest -q` | 75 tests pass locally; ruff and mypy clean (49 source files). Fresh clone (short path): 74 passed, 1 skipped (the real-data smoke test needs the local warehouse), ruff and mypy clean |
 | 17 | **Green GitHub Actions run** | **FAIL (blocked)** | `gh run list` | every run since the first push has failed before executing a step (billing lock, then `startup_failure`); not attributable to the code |
 
 ### Surviving findings (BH, 10% FDR; D-037 allows only these to be called findings)
