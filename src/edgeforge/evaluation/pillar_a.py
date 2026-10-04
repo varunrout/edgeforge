@@ -68,6 +68,7 @@ class Frame:
     early: dict[str, FloatArray]
     model: FloatArray
     model_fix: FloatArray
+    has_fix: bool = True
 
     @property
     def n(self) -> int:
@@ -127,7 +128,10 @@ def build_frame(
         model_fix = dc_probs(pf, ev)["1x2"]
     else:
         model_fix = model
-    return Frame(name, family, bookmaker, ev, y, probs("close"), probs("early"), model, model_fix)
+    has_fix = "lam_h_fix" in p.columns and bool(p["lam_h_fix"].notna().any())
+    return Frame(
+        name, family, bookmaker, ev, y, probs("close"), probs("early"), model, model_fix, has_fix
+    )
 
 
 # ------------------------------------------------------------------------ statistic helpers
@@ -185,17 +189,21 @@ def _pool_probs(theta: FloatArray, lm: FloatArray, ld: FloatArray) -> FloatArray
     return out
 
 
-def fit_pool(pm: FloatArray, pd_: FloatArray, y: NDArray[np.int64]) -> FloatArray:
+def fit_pool(
+    pm: FloatArray, pd_: FloatArray, y: NDArray[np.int64], use_model: bool = True
+) -> FloatArray:
     lm, ld = np.log(np.clip(pm, EPS, 1)), np.log(np.clip(pd_, EPS, 1))
 
     def nll(th: FloatArray) -> float:
+        th = th if use_model else np.append(th[:3], 0.0)
         p = _pool_probs(th, lm, ld)
         return float(
             -np.log(np.clip(p[np.arange(len(y)), y], EPS, 1)).mean() + 1e-4 * (th[:2] ** 2).sum()
         )
 
     res = minimize(nll, np.array([0.0, 0.0, 1.0, 0.0]), method="BFGS")
-    return np.asarray(res.x)
+    th_hat = np.asarray(res.x)
+    return th_hat if use_model else np.append(th_hat[:3], 0.0)
 
 
 def encompassing(
@@ -207,6 +215,7 @@ def encompassing(
     if ok_t.sum() < 200:
         return None
     th = fit_pool(tune.close[method][ok_t], tune.model[ok_t], tune.y[ok_t])
+    th0 = fit_pool(tune.close[method][ok_t], tune.model[ok_t], tune.y[ok_t], use_model=False)
     rng = np.random.default_rng(seed)
     ws, bds = [], []
     idx_all = np.flatnonzero(ok_t)
@@ -227,7 +236,13 @@ def encompassing(
         "model_weight": float(th[3] / (th[2] + th[3])),
         "model_weight_ci95": [float(np.nanpercentile(ws, 2.5)), float(np.nanpercentile(ws, 97.5))],
         "beta_model_ci95": [float(np.percentile(bds, 2.5)), float(np.percentile(bds, 97.5))],
+        "market_only_recalibration": {
+            "alpha_draw": th0[0],
+            "alpha_away": th0[1],
+            "beta_market": th0[2],
+        },
         "_theta": th,
+        "_theta_market_only": th0,
     }
 
 
@@ -516,20 +531,40 @@ def build_claims(
         pp[both_m] = _pool_probs(
             th, np.log(np.clip(pc[both_m], EPS, 1)), np.log(np.clip(f.model[both_m], EPS, 1))
         )
+        th0 = enc["_theta_market_only"]
+        p0 = np.full((n, 3), np.nan)
+        p0[both_m] = _pool_probs(
+            th0, np.log(np.clip(pc[both_m], EPS, 1)), np.log(np.clip(f.model[both_m], EPS, 1))
+        )
         dpool = np.where(
             both_m,
-            _ll_match(np.nan_to_num(pp, nan=1 / 3), y) - _ll_match(np.nan_to_num(pc, nan=1 / 3), y),
+            _ll_match(np.nan_to_num(pp, nan=1 / 3), y) - _ll_match(np.nan_to_num(p0, nan=1 / 3), y),
             0.0,
+        )
+        drecal = np.where(
+            both_m,
+            _ll_match(np.nan_to_num(p0, nan=1 / 3), y) - _ll_match(np.nan_to_num(pc, nan=1 / 3), y),
+            0.0,
+        )
+        recal = _entry(
+            "desc.market_recalibration",
+            "descriptive",
+            "Recalibrated market (power and class constants fitted on the tuning window) minus raw closing market, log loss",
+            False,
+            0.0,
+            *_mean_stat(boot, drecal, both_m),
+            int(both_m.sum()),
         )
         add(
             "mvm.encompassing.test_delta",
             "mvm_encompassing",
-            "Log loss of the model+market combination (weights fitted on the tuning window) minus market alone",
+            "Log loss of the model+market combination minus the recalibrated market alone, both fitted on the tuning window (isolates the model's marginal information)",
             False,
             0.0,
             _mean_stat(boot, dpool, both_m),
             int(both_m.sum()),
         )
+        out.append(recal)
     # --- line movement toward the model
     bm = both & ok_m
     d = np.where(bm[:, None], np.nan_to_num(f.model) - np.nan_to_num(pe), 0.0)
@@ -543,23 +578,24 @@ def build_claims(
         _ratio(boot, (mv2 * d).sum(axis=1), (d * d).sum(axis=1)),
         int(bm.sum()),
     )
-    # --- cold-start fix (promoted team, first 10), fix minus no fix
-    okf = ~np.isnan(f.model_fix).any(axis=1) & ok_m
-    dfix = np.where(
-        okf,
-        _ll_match(np.nan_to_num(f.model_fix, nan=1 / 3), y)
-        - _ll_match(np.nan_to_num(f.model, nan=1 / 3), y),
-        0.0,
-    )
-    add(
-        "coldstart.fix_vs_none.first10",
-        "cold_start",
-        "Promoted-team prior fix minus no fix, log loss on promoted teams' first 10 matches",
-        False,
-        0.0,
-        _mean_stat(boot, dfix, p1 & okf),
-        int((p1 & okf).sum()),
-    )
+    if f.has_fix:
+        # --- cold-start fix (promoted team, first 10), fix minus no fix
+        okf = ~np.isnan(f.model_fix).any(axis=1) & ok_m
+        dfix = np.where(
+            okf,
+            _ll_match(np.nan_to_num(f.model_fix, nan=1 / 3), y)
+            - _ll_match(np.nan_to_num(f.model, nan=1 / 3), y),
+            0.0,
+        )
+        add(
+            "coldstart.fix_vs_none.first10",
+            "cold_start",
+            "Promoted-team prior fix minus no fix, log loss on promoted teams' first 10 matches",
+            False,
+            0.0,
+            _mean_stat(boot, dfix, p1 & okf),
+            int((p1 & okf).sum()),
+        )
     del rowmatch, cls
     return out
 
@@ -707,26 +743,40 @@ def make_figures(f: Frame, claims: list[dict[str, Any]], stem: str) -> None:
 # ------------------------------------------------------------------------ run
 
 
-def analyse_frame(f: Frame, tune: Frame | None, boot: Boot, seed: int) -> dict[str, Any]:
+def analyse_frame(
+    f: Frame, tune: Frame | None, boot: Boot, seed: int, alt_methods: bool = True
+) -> dict[str, Any]:
     enc = encompassing(tune, f, "proportional", seed)
     base = build_claims(f, boot, "proportional", enc)
     alt = {
         m: build_claims(f, boot, m, encompassing(tune, f, m, seed) if tune is not None else None)
-        for m in ("power", "shin")
+        for m in (("power", "shin") if alt_methods else ())
     }
     altmap = {m: {c["id"]: c for c in cl} for m, cl in alt.items()}
-    ps = [c["p"] for c in base]
-    q, keep = benjamini_hochberg(ps, FDR)
-    for c, qq, kk in zip(base, q, keep, strict=True):
-        c["q_bh"], c["survives_bh_10pct"] = qq, bool(kk)
+    testable = [
+        c
+        for c in base
+        if c["segment"] != "descriptive" and np.isfinite(c["estimate"]) and c["n"] > 0
+    ]
+    q, keep = benjamini_hochberg([c["p"] for c in testable], FDR)
+    qmap = {c["id"]: (qq, bool(kk)) for c, qq, kk in zip(testable, q, keep, strict=True)}
+    for c in base:
+        c["q_bh"], c["survives_bh_10pct"] = qmap.get(c["id"], (None, False))
+        c["in_bh_family"] = c["id"] in qmap
+        if c["id"] not in qmap:
+            c["status"] = (
+                "descriptive, not tested"
+                if c["segment"] == "descriptive"
+                else "not estimable in this block (no matches in the segment)"
+            )
         c["power"] = (
             {k: altmap["power"][c["id"]][k] for k in ("estimate", "ci_low", "ci_high", "p")}
-            if c["id"] in altmap["power"]
+            if "power" in altmap and c["id"] in altmap["power"]
             else None
         )
         c["shin"] = (
             {k: altmap["shin"][c["id"]][k] for k in ("estimate", "ci_low", "ci_high", "p")}
-            if c["id"] in altmap["shin"]
+            if "shin" in altmap and c["id"] in altmap["shin"]
             else None
         )
     survivors = [
@@ -746,7 +796,10 @@ def analyse_frame(f: Frame, tune: Frame | None, boot: Boot, seed: int) -> dict[s
         "name": f.name,
         "bookmaker": f.bookmaker,
         "n_matches": f.n,
-        "n_claims_in_bh_family": len(base),
+        "n_claims_in_bh_family": len(testable),
+        "n_claims_not_estimable": sum(
+            1 for c in base if c.get("status", "").startswith("not estimable")
+        ),
         "fdr": FDR,
         "n_boot": boot.n_boot,
         "claims": base,
@@ -801,10 +854,10 @@ def run_pillar_a(cfg: dict[str, Any] | None = None) -> Path:
             600,
         ),
         (
-            "F4_team_2015_16_mw20_38",
+            "F4_team_2015_16_all",
             "team_block",
             "PS",
-            t_ids["test_2015_16_mw20_38"],
+            t_ids["eval_2015_16_all"],
             pr("team_2015_16", "all_2015_16"),
             "team_2015_16",
             N_BOOT,

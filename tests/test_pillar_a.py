@@ -127,3 +127,58 @@ def test_pool_weight_on_informative_model() -> None:
     model /= model.sum(axis=1, keepdims=True)
     th = fit_pool(market, model, y)
     assert th[3] > th[2]  # the less noisy forecast gets the larger weight
+
+
+def _frame_underconfident(seed: int, n: int = 3000, informative: bool = False) -> Frame:
+    """Market quotes `raw`. Uninformative case: truth is a sharpened `raw` (the market is merely
+    under-confident) and the model is noise. Informative case: truth also depends on a signal s that
+    the market does not see and the model partly observes."""
+    rng = np.random.default_rng(seed)
+    raw = rng.dirichlet([4, 2.5, 3.5], n)
+    if informative:
+        s_ = rng.normal(0, 0.45, (n, 3))
+        truth = raw * np.exp(s_)
+        model = raw * np.exp(0.8 * s_ + rng.normal(0, 0.1, (n, 3)))
+        model = model / model.sum(axis=1, keepdims=True)
+    else:
+        truth = np.exp(np.log(raw) * 1.4)
+        model = rng.dirichlet([4, 2.5, 3.5], n)
+    truth = truth / truth.sum(axis=1, keepdims=True)
+    y = np.array([rng.choice(3, p=t) for t in truth])
+    f = _frame(0.0, n=n, seed=seed)
+    f.y = y
+    f.close = {m: raw for m in f.close}
+    f.early = {m: raw for m in f.early}
+    f.model = model
+    f.model_fix = model
+    return f
+
+
+def test_encompassing_isolates_model_information_from_market_sharpening() -> None:
+    tune, test = _frame_underconfident(21), _frame_underconfident(22)
+    res = analyse_frame(test, tune, Boot.make(test.n, 400, 4), 4, alt_methods=False)
+    enc = next(c for c in res["claims"] if c["id"] == "mvm.encompassing.test_delta")
+    recal = next(c for c in res["claims"] if c["id"] == "desc.market_recalibration")
+    assert recal["ci_high"] < 0  # sharpening the under-confident market helps
+    assert enc["ci_low"] < 0 < enc["ci_high"] or enc["ci_low"] >= -0.002  # noise model adds nothing
+    assert not enc["survives_bh_10pct"]
+    assert recal["in_bh_family"] is False and recal["status"] == "descriptive, not tested"
+
+
+def test_encompassing_detects_an_informative_model() -> None:
+    tune, test = (
+        _frame_underconfident(31, informative=True),
+        _frame_underconfident(32, informative=True),
+    )
+    res = analyse_frame(test, tune, Boot.make(test.n, 400, 4), 4, alt_methods=False)
+    enc = next(c for c in res["claims"] if c["id"] == "mvm.encompassing.test_delta")
+    assert enc["ci_high"] < 0 and res["encompassing_fit"]["model_weight"] > 0.2
+
+
+def test_non_estimable_claims_are_excluded_from_the_bh_family() -> None:
+    f = _frame(0.0, n=800)
+    f.ev["early_phase"] = False  # no early-phase matches: phase claims cannot be estimated
+    res = analyse_frame(f, None, Boot.make(f.n, 200, 2), 2)
+    phase = next(c for c in res["claims"] if c["id"] == "eff.phase.draw_bias_diff")
+    assert phase["in_bh_family"] is False and phase["status"].startswith("not estimable")
+    assert res["n_claims_in_bh_family"] == sum(c["in_bh_family"] for c in res["claims"])
