@@ -120,11 +120,34 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
 - **Decision:** No route can be chosen yet. Facts established: football-data has red-card **counts** per team-match (`HR`, `AR`, E0 from 2000/01), and no minutes, so it can only cross-check a timeline built elsewhere. Whether Understat exposes card flags or a recoverable dismissal minute is **not verified** because no Understat payload has been retrieved (D-021).
 - **Why:** D-017 requires this to be verified on real data. The only payload source that could settle it was blocked by `robots.txt` before any data request was made.
 - **Next step:** once D-021 is resolved, fetch one Understat match-level payload and answer the D-017 questions from it. D-017's fallback order is unchanged (derive from player minutes and card flags; StatsBomb Open Data; drop dismissals from the state and document it).
-- **Status:** Open (blocked by D-021)
+- **Status:** Route changes to StatsBomb event data per D-022; to be verified in Phase 0b
 
 ### D-021 Understat access: robots.txt disallows all crawling; owner decision required
 - **Decision:** No request to any Understat page or endpoint other than `/robots.txt` has been made. `https://understat.com/robots.txt` returned HTTP 200 with `User-agent: *` / `Disallow: /`.
 - **Options for the owner:** (1) explicitly accept local, non-commercial, throttled caching despite `Disallow: /` (supersedes the D-003 constraint wording and carries terms-of-service risk), (2) ask Understat for permission, (3) select another player-level source, which requires a separate payload-verified evaluation. No alternative's fields or coverage have been checked.
 - **Related note, football-data.co.uk:** its `robots.txt` allows `*` but separately disallows named AI crawlers, including `Anthropic-AI`, `Claude-Web` and `ClaudeBot`. The project downloader uses its own user agent and is a user-run script caching CSVs locally, so it falls under `*`, and 62 CSVs were fetched on that basis. The owner may veto this reading, in which case the football-data cache must be deleted and an alternative odds source chosen.
 - **Rejected:** Proceeding with a spoofed user agent or a third-party scraper (would be working around the block silently).
-- **Status:** Open (owner decision needed)
+- **Status:** Resolved by D-022 and D-023 (locked, owner, 2026-10-04)
+
+### D-022 Player and event data: StatsBomb Open Data replaces Understat (resolves D-021)
+- **Decision:** Understat is not used. Its `robots.txt` disallows all crawling, and a portfolio aimed at sportsbook employers (who care about data rights) should not be built on a source that explicitly refuses access. No Understat request beyond `/robots.txt` will be made.
+- **Replacement, verified by the lead from the public repo on 2026-10-04** (`statsbomb/open-data`, `data/competitions.json` and `data/matches/<comp>/<season>.json`): full 2015/16 seasons for Premier League (380 matches), La Liga (380), Serie A (380) and Ligue 1 (377). Bundesliga 2015/16 has only 34 matches and is excluded. All other league-seasons in the repo are partial or club-selected and are excluded.
+- **Data split by pillar:**
+  - **Pillar A (market efficiency, cold start):** football-data.co.uk only, five leagues, 2019/20 to 2025/26 per D-019. Needs no player data.
+  - **Pillars B and C, plus all player props and SGA:** StatsBomb 2015/16 for the four leagues (1,517 matches). Event data gives lineups, substitution minutes, card minutes, shots with outcome and xG, goals with minute.
+  - **Team model:** Dixon-Coles needs only scores, so it trains on football-data results for the same leagues from earlier seasons (to be fetched) and updates through 2015/16. football-data 2015/16 odds give a market anchor for team markets in that season.
+- **Validation consequence:** player models validate walk-forward **within** 2015/16 (for example, train on matchweeks before k, predict k; report on the second half of the season), with position-level shrinkage to handle thin early-season data. Single season of player data is a stated limitation everywhere.
+- **Licence:** StatsBomb Open Data is published under its own user agreement with attribution requirements. Phase 0b must read it, record the terms in DATA.md and comply (attribution in README and app).
+- **Status:** Locked (owner, 2026-10-04)
+
+### D-023 football-data.co.uk access (resolves the D-021 note)
+- **Decision:** Keep using football-data.co.uk. The site exists to distribute these CSVs for download; its AI-crawler entries in `robots.txt` target bulk crawlers, not a user-run script downloading a few dozen published files. Volume stays minimal (one request per file, cached, never re-fetched without cause), raw files are never committed or redistributed, and the source is credited in the README.
+- **Status:** Locked (owner, 2026-10-04)
+
+### D-024 `opening` state label
+- **Decision:** The `opening` information state means "football-data pre-closing snapshot". Per the site's notes, weekend odds are collected Friday afternoon and midweek odds Tuesday afternoon, so roughly one to three days before kickoff, but no row-level timestamp exists. Every Pillar A output and the app must use the label "early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)", never "opening price".
+- **Status:** Locked (lead)
+
+### D-025 Pillar A test seasons
+- **Decision:** 2024/25 is the primary held-out test season for Pillar A (Pinnacle complete). 2025/26 is a secondary out-of-sample check using market average (`Avg*`) closing only, because Pinnacle columns stop after 2026-01-08. Tuning uses 2019/20 to 2023/24.
+- **Status:** Locked (lead)
