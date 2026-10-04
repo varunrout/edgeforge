@@ -1,0 +1,5864 @@
+{
+ "provenance": {
+  "git_sha": "42bf9563b0816dd41a33d3afea09c86a0f07a1d6",
+  "data_version": "137781cbbd858114",
+  "command": "edgeforge pillar-a run",
+  "config_hash": "39f96c7271994bec",
+  "created_at": "2026-10-04T20:41:08Z",
+  "seed": 20261004
+ },
+ "design": {
+  "segments": "D-037 pre-registered; claims enumerated in build_claims()",
+  "de_vig": "proportional (D-036); power and Shin shown alongside, outside the BH family",
+  "bh": "Benjamini-Hochberg at 10% FDR within each block's claim family",
+  "early_snapshot_label": "early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)"
+ },
+ "blocks": {
+  "F1_primary_2024_25": {
+   "family": "confirmatory",
+   "name": "F1_primary_2024_25",
+   "bookmaker": "PS",
+   "n_matches": 1752,
+   "n_claims_in_bh_family": 47,
+   "n_claims_not_estimable": 0,
+   "fdr": 0.1,
+   "n_boot": 2000,
+   "claims": [
+    {
+     "id": "eff.league.D1.home_bias",
+     "segment": "league",
+     "description": "League D1: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 306,
+     "estimate": -0.06946191786115893,
+     "ci_low": -0.11724235475510995,
+     "ci_high": -0.018793999588661972,
+     "p": 0.008995502248875561,
+     "q_bh": 0.04227886056971514,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.07381507455558169,
+      "ci_low": -0.1215385772819327,
+      "ci_high": -0.023503195038705075,
+      "p": 0.0069965017491254375
+     },
+     "shin": {
+      "estimate": -0.07238691401137162,
+      "ci_low": -0.12015855917469333,
+      "ci_high": -0.021981309638662058,
+      "p": 0.0069965017491254375
+     }
+    },
+    {
+     "id": "eff.league.D1.draw_bias",
+     "segment": "league",
+     "description": "League D1: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 306,
+     "estimate": 0.016742805723131443,
+     "ci_low": -0.03280528922894997,
+     "ci_high": 0.0664999174492179,
+     "p": 0.5037481259370314,
+     "q_bh": 0.639896268082175,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.020580951474540383,
+      "ci_low": -0.02901112462848772,
+      "ci_high": 0.07006563643600847,
+      "p": 0.40879560219890054
+     },
+     "shin": {
+      "estimate": 0.019092748869645546,
+      "ci_low": -0.030464630863888325,
+      "ci_high": 0.06882743815039293,
+      "p": 0.4387806096951524
+     }
+    },
+    {
+     "id": "eff.league.E0.home_bias",
+     "segment": "league",
+     "description": "League E0: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": -0.040812677498166666,
+     "ci_low": -0.08442433555499691,
+     "ci_high": 0.005404745445752772,
+     "p": 0.08295852073963018,
+     "q_bh": 0.19495252373813093,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.044850707669146665,
+      "ci_low": -0.08869168127201217,
+      "ci_high": 0.001268381454220195,
+      "p": 0.05897051474262868
+     },
+     "shin": {
+      "estimate": -0.043521666381034836,
+      "ci_low": -0.08723686392356565,
+      "ci_high": 0.002609932471458159,
+      "p": 0.06596701649175413
+     }
+    },
+    {
+     "id": "eff.league.E0.draw_bias",
+     "segment": "league",
+     "description": "League E0: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.012155553837281096,
+     "ci_low": -0.0287179729616997,
+     "ci_high": 0.0565298873595273,
+     "p": 0.6006996501749126,
+     "q_bh": 0.7000646018454187,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.015951095687070333,
+      "ci_low": -0.024883287188686296,
+      "ci_high": 0.060283914147242754,
+      "p": 0.47276361819090457
+     },
+     "shin": {
+      "estimate": 0.014487551232976252,
+      "ci_low": -0.026369934663533247,
+      "ci_high": 0.0588423949640749,
+      "p": 0.526736631684158
+     }
+    },
+    {
+     "id": "eff.league.F1.home_bias",
+     "segment": "league",
+     "description": "League F1: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 306,
+     "estimate": 0.027071347145772223,
+     "ci_low": -0.023055463988031776,
+     "ci_high": 0.0781716366942798,
+     "p": 0.3078460769615192,
+     "q_bh": 0.48542395468932203,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.02317684183741405,
+      "ci_low": -0.02728189871864573,
+      "ci_high": 0.07406830254628692,
+      "p": 0.3918040979510245
+     },
+     "shin": {
+      "estimate": 0.024460187986895088,
+      "ci_low": -0.025818614126687647,
+      "ci_high": 0.07545119531291859,
+      "p": 0.36281859070464767
+     }
+    },
+    {
+     "id": "eff.league.F1.draw_bias",
+     "segment": "league",
+     "description": "League F1: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 306,
+     "estimate": -0.04295757457153973,
+     "ci_low": -0.08467168823633217,
+     "ci_high": 0.003786510401756,
+     "p": 0.06996501749125437,
+     "q_bh": 0.1934326954169974,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.03947212434304755,
+      "ci_low": -0.08126319200974931,
+      "ci_high": 0.0073052281023055065,
+      "p": 0.08395802098950525
+     },
+     "shin": {
+      "estimate": -0.04085670112157328,
+      "ci_low": -0.08258621134282369,
+      "ci_high": 0.005925081991054485,
+      "p": 0.07396301849075462
+     }
+    },
+    {
+     "id": "eff.league.I1.home_bias",
+     "segment": "league",
+     "description": "League I1: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": -0.024571636669533863,
+     "ci_low": -0.06752726097561218,
+     "ci_high": 0.019460183866518693,
+     "p": 0.28585707146426786,
+     "q_bh": 0.48542395468932203,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.027771336923867674,
+      "ci_low": -0.0705738060536261,
+      "ci_high": 0.016203982950367606,
+      "p": 0.22288855572213892
+     },
+     "shin": {
+      "estimate": -0.026679242375110476,
+      "ci_low": -0.06961106295782683,
+      "ci_high": 0.01734101506088112,
+      "p": 0.25487256371814093
+     }
+    },
+    {
+     "id": "eff.league.I1.draw_bias",
+     "segment": "league",
+     "description": "League I1: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.017678234073647162,
+     "ci_low": -0.024833360044039077,
+     "ci_high": 0.06269348310331097,
+     "p": 0.43478260869565216,
+     "q_bh": 0.6010230179028133,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.02056638529731009,
+      "ci_low": -0.02204809461172124,
+      "ci_high": 0.06536807880787662,
+      "p": 0.3408295852073963
+     },
+     "shin": {
+      "estimate": 0.019266054488421207,
+      "ci_low": -0.023250482853906435,
+      "ci_high": 0.06415217567281394,
+      "p": 0.3808095952023988
+     }
+    },
+    {
+     "id": "eff.league.SP1.home_bias",
+     "segment": "league",
+     "description": "League SP1: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": -0.0019735387871137803,
+     "ci_low": -0.04623960496642706,
+     "ci_high": 0.04580266774003396,
+     "p": 0.9205397301349325,
+     "q_bh": 0.9405514633987354,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.006058695213948559,
+      "ci_low": -0.050366298823306364,
+      "ci_high": 0.04172819583253428,
+      "p": 0.7866066966516742
+     },
+     "shin": {
+      "estimate": -0.0047247898925730685,
+      "ci_low": -0.04893482020605967,
+      "ci_high": 0.04308849832823125,
+      "p": 0.8305847076461769
+     }
+    },
+    {
+     "id": "eff.league.SP1.draw_bias",
+     "segment": "league",
+     "description": "League SP1: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": -0.010159206122515639,
+     "ci_low": -0.05306116158640756,
+     "ci_high": 0.0344520957331782,
+     "p": 0.6416791604197901,
+     "q_bh": 0.7180695366602413,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.007114052981007488,
+      "ci_low": -0.05012260191406279,
+      "ci_high": 0.037524523212514226,
+      "p": 0.750624687656172
+     },
+     "shin": {
+      "estimate": -0.008503397072652555,
+      "ci_low": -0.051447861144309895,
+      "ci_high": 0.03602298487754517,
+      "p": 0.704647676161919
+     }
+    },
+    {
+     "id": "eff.phase.home_bias_diff",
+     "segment": "season_phase",
+     "description": "Season phase: home bias, early-phase minus rest (closing)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 290,
+     "estimate": -0.016590055722261757,
+     "ci_low": -0.0733874862118319,
+     "ci_high": 0.04024722019131464,
+     "p": 0.5647176411794103,
+     "q_bh": 0.6805571573187764,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.01644170069104719,
+      "ci_low": -0.0730230216070752,
+      "ci_high": 0.04018068546726436,
+      "p": 0.5677161419290355
+     },
+     "shin": {
+      "estimate": -0.01650167541125428,
+      "ci_low": -0.07314802756956201,
+      "ci_high": 0.04009217598218187,
+      "p": 0.5657171414292853
+     }
+    },
+    {
+     "id": "eff.phase.draw_bias_diff",
+     "segment": "season_phase",
+     "description": "Season phase: draw bias, early-phase minus rest (closing)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 290,
+     "estimate": 0.03441501534806228,
+     "ci_low": -0.02035331314007648,
+     "ci_high": 0.09264198270346391,
+     "p": 0.21689155422288856,
+     "q_bh": 0.3920731941721447,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.03427762440470004,
+      "ci_low": -0.020438698534045847,
+      "ci_high": 0.0926229697257408,
+      "p": 0.22088955522238882
+     },
+     "shin": {
+      "estimate": 0.03436194792720254,
+      "ci_low": -0.02044956328041619,
+      "ci_high": 0.09271537141934898,
+      "p": 0.21989005497251374
+     }
+    },
+    {
+     "id": "eff.flb.close.band0_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.00, 0.20)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1060,
+     "estimate": -0.009756863295898139,
+     "ci_low": -0.02850371449627539,
+     "ci_high": 0.009240518395865488,
+     "p": 0.3098450774612694,
+     "q_bh": 0.48542395468932203,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.00019453786720585338,
+      "ci_low": -0.01824682590714852,
+      "ci_high": 0.0191388652313016,
+      "p": 0.992503748125937
+     },
+     "shin": {
+      "estimate": -0.0028045032715171268,
+      "ci_low": -0.02121915739050398,
+      "ci_high": 0.016397439481714897,
+      "p": 0.768615692153923
+     }
+    },
+    {
+     "id": "eff.flb.close.band1_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.20, 0.40)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 2720,
+     "estimate": -0.0041088984739380534,
+     "ci_low": -0.015741825169936555,
+     "ci_high": 0.0073148167497694766,
+     "p": 0.5247376311844077,
+     "q_bh": 0.6490175964649254,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.003247810790745031,
+      "ci_low": -0.014567195963251027,
+      "ci_high": 0.008578202458822341,
+      "p": 0.6166916541729135
+     },
+     "shin": {
+      "estimate": -0.003443861760892231,
+      "ci_low": -0.014694867145921086,
+      "ci_high": 0.008217946479214438,
+      "p": 0.5937031484257871
+     }
+    },
+    {
+     "id": "eff.flb.close.band2_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.40, 0.60)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 978,
+     "estimate": 0.014387376927874077,
+     "ci_low": -0.016846968683693512,
+     "ci_high": 0.04514232127736218,
+     "p": 0.35782108945527236,
+     "q_bh": 0.5425029420773484,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.009514195610064545,
+      "ci_low": -0.020680082855926395,
+      "ci_high": 0.04021055894805204,
+      "p": 0.5487256371814093
+     },
+     "shin": {
+      "estimate": 0.010342517448186483,
+      "ci_low": -0.020867143337042232,
+      "ci_high": 0.0413956889527928,
+      "p": 0.5187406296851574
+     }
+    },
+    {
+     "id": "eff.flb.close.band3_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.60, 1.00)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 498,
+     "estimate": 0.01495506889016604,
+     "ci_low": -0.024305301257324004,
+     "ci_high": 0.05259558537948444,
+     "p": 0.41879060469765117,
+     "q_bh": 0.5964593460845335,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0014881473944598595,
+      "ci_low": -0.04001119165088306,
+      "ci_high": 0.03532488445476295,
+      "p": 0.9545227386306847
+     },
+     "shin": {
+      "estimate": 0.004472975104712561,
+      "ci_low": -0.03405879179519253,
+      "ci_high": 0.04166928505287583,
+      "p": 0.784607696151924
+     }
+    },
+    {
+     "id": "eff.flb.close.slope",
+     "segment": "favourite_longshot",
+     "description": "FLB close: logit slope of outcome on implied probability (1 = calibrated)",
+     "uses_early_snapshot": false,
+     "null": 1.0,
+     "n": 1752,
+     "estimate": 1.0694722078772054,
+     "ci_low": 0.9653743924465472,
+     "ci_high": 1.1798230511264964,
+     "p": 0.19590204897551225,
+     "q_bh": 0.3720539730134933,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 1.0233194432887909,
+      "ci_low": 0.9235031477469152,
+      "ci_high": 1.1293674961400249,
+      "p": 0.624687656171914
+     },
+     "shin": {
+      "estimate": 1.0371249062562011,
+      "ci_low": 0.9362167392603373,
+      "ci_high": 1.144308125222885,
+      "p": 0.463768115942029
+     }
+    },
+    {
+     "id": "eff.flb.early.band0_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.00, 0.20) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 1029,
+     "estimate": -0.018846855516793146,
+     "ci_low": -0.037188040426274216,
+     "ci_high": 0.0009512013155451232,
+     "p": 0.057971014492753624,
+     "q_bh": 0.17028985507246377,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0008640597568303422,
+      "ci_low": -0.01948306291360983,
+      "ci_high": 0.01862595083140459,
+      "p": 0.9065467266366817
+     },
+     "shin": {
+      "estimate": -0.005830501765192741,
+      "ci_low": -0.02417817426968489,
+      "ci_high": 0.013628239535520446,
+      "p": 0.543728135932034
+     }
+    },
+    {
+     "id": "eff.flb.early.band1_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.20, 0.40) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 2765,
+     "estimate": 0.0012542289263136502,
+     "ci_low": -0.010253287872450481,
+     "ci_high": 0.012382128659077667,
+     "p": 0.8285857071464268,
+     "q_bh": 0.8654117385751567,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0010914531779002222,
+      "ci_low": -0.012432297019279741,
+      "ci_high": 0.00996241007817851,
+      "p": 0.8765617191404298
+     },
+     "shin": {
+      "estimate": -0.0009608133005454844,
+      "ci_low": -0.012692047250091914,
+      "ci_high": 0.010356456793241037,
+      "p": 0.8895552223888056
+     }
+    },
+    {
+     "id": "eff.flb.early.band2_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.40, 0.60) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 978,
+     "estimate": 0.011331752116768845,
+     "ci_low": -0.019352087078918494,
+     "ci_high": 0.04157775477794998,
+     "p": 0.4817591204397801,
+     "q_bh": 0.639896268082175,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.012760103538766054,
+      "ci_low": -0.016922578813224735,
+      "ci_high": 0.0440051633016802,
+      "p": 0.4177911044477761
+     },
+     "shin": {
+      "estimate": 0.013354306374447967,
+      "ci_low": -0.016424189599213962,
+      "ci_high": 0.043827708386187374,
+      "p": 0.3938030984507746
+     }
+    },
+    {
+     "id": "eff.flb.early.band3_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.60, 1.00) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 484,
+     "estimate": 0.010006235072981344,
+     "ci_low": -0.03037331802083095,
+     "ci_high": 0.04741796422427009,
+     "p": 0.6106946526736632,
+     "q_bh": 0.7000646018454187,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.015563765962776055,
+      "ci_low": -0.055402968809813304,
+      "ci_high": 0.021983029887680954,
+      "p": 0.44177911044477763
+     },
+     "shin": {
+      "estimate": -0.008148220157277616,
+      "ci_low": -0.0495575822849095,
+      "ci_high": 0.029299507284030284,
+      "p": 0.6826586706646677
+     }
+    },
+    {
+     "id": "eff.flb.early.slope",
+     "segment": "favourite_longshot",
+     "description": "FLB early: logit slope of outcome on implied probability (1 = calibrated) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 1.0,
+     "n": 1752,
+     "estimate": 1.0712487759257248,
+     "ci_low": 0.966331684167693,
+     "ci_high": 1.1814594713069135,
+     "p": 0.18790604697651175,
+     "q_bh": 0.3720539730134933,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 1.0170149746999992,
+      "ci_low": 0.9169052692354774,
+      "ci_high": 1.123231254201876,
+      "p": 0.7256371814092953
+     },
+     "shin": {
+      "estimate": 1.0337897684606907,
+      "ci_low": 0.9318664444569952,
+      "ci_high": 1.141361046623868,
+      "p": 0.5147426286856571
+     }
+    },
+    {
+     "id": "eff.draw.close.bias",
+     "segment": "draw",
+     "description": "Draw: mean(draw outcome - closing draw prob)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": -0.00031128892010053646,
+     "ci_low": -0.019716489486013677,
+     "ci_high": 0.020267603745627694,
+     "p": 0.9965017491254373,
+     "q_bh": 0.9965017491254373,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.003077970173241163,
+      "ci_low": -0.016282349586649106,
+      "ci_high": 0.023618158278672176,
+      "p": 0.7336331834082959
+     },
+     "shin": {
+      "estimate": 0.0016754051925988468,
+      "ci_low": -0.017706675516819703,
+      "ci_high": 0.022236672765679973,
+      "p": 0.8405797101449275
+     }
+    },
+    {
+     "id": "eff.draw.early.bias",
+     "segment": "draw",
+     "description": "Draw: mean(draw outcome - early draw prob) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": 0.0038028973726487716,
+     "ci_low": -0.015580984994931619,
+     "ci_high": 0.024404344902911327,
+     "p": 0.6866566716641679,
+     "q_bh": 0.7505317108887416,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.007880914326552706,
+      "ci_low": -0.01150078288099212,
+      "ci_high": 0.028592043446388028,
+      "p": 0.4257871064467766
+     },
+     "shin": {
+      "estimate": 0.006275779384962273,
+      "ci_low": -0.013094084441806871,
+      "ci_high": 0.02694322058330035,
+      "p": 0.5247376311844077
+     }
+    },
+    {
+     "id": "eff.draw.close.slope",
+     "segment": "draw",
+     "description": "Draw: logit slope of draw outcome on closing draw prob (1 = calibrated)",
+     "uses_early_snapshot": false,
+     "null": 1.0,
+     "n": 1752,
+     "estimate": 1.1327882801607811,
+     "ci_low": 0.7638893185086516,
+     "ci_high": 1.5412320206182695,
+     "p": 0.4917541229385307,
+     "q_bh": 0.639896268082175,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 1.054678136403652,
+      "ci_low": 0.7109569877097508,
+      "ci_high": 1.4360608163154298,
+      "p": 0.7586206896551724
+     },
+     "shin": {
+      "estimate": 1.0919398485555234,
+      "ci_low": 0.7359099018030787,
+      "ci_high": 1.4861674637482485,
+      "p": 0.6206896551724138
+     }
+    },
+    {
+     "id": "eff.promoted.first10.win_bias",
+     "segment": "promoted",
+     "description": "Promoted team's win: mean(outcome - closing prob), its first 10 matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 140,
+     "estimate": -0.05546600244365539,
+     "ci_low": -0.11766267613095185,
+     "ci_high": 0.004921140469564731,
+     "p": 0.07596201899050475,
+     "q_bh": 0.19495252373813093,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.052884614866687434,
+      "ci_low": -0.11537072330044595,
+      "ci_high": 0.007335303373229478,
+      "p": 0.09395302348825588
+     },
+     "shin": {
+      "estimate": -0.05328285770047387,
+      "ci_low": -0.11566918996718832,
+      "ci_high": 0.006968194177109975,
+      "p": 0.09195402298850575
+     }
+    },
+    {
+     "id": "eff.promoted.later.win_bias",
+     "segment": "promoted",
+     "description": "Promoted team's win: mean(outcome - closing prob), later matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 372,
+     "estimate": -0.017640247096507588,
+     "ci_low": -0.055857759628438246,
+     "ci_high": 0.02050405937732545,
+     "p": 0.3868065967016492,
+     "q_bh": 0.5681221889055472,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.014663852769383054,
+      "ci_low": -0.052818235994862094,
+      "ci_high": 0.02328033416314409,
+      "p": 0.47176411794102946
+     },
+     "shin": {
+      "estimate": -0.015125383339546074,
+      "ci_low": -0.053257599321075544,
+      "ci_high": 0.0228735145946453,
+      "p": 0.4617691154422789
+     }
+    },
+    {
+     "id": "eff.promoted.diff.win_bias",
+     "segment": "promoted",
+     "description": "Promoted team's win bias: first 10 minus later",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 512,
+     "estimate": -0.0378257553471478,
+     "ci_low": -0.10930201767968695,
+     "ci_high": 0.03403922409276509,
+     "p": 0.2978510744627686,
+     "q_bh": 0.48542395468932203,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.03822076209730438,
+      "ci_low": -0.10949621261402226,
+      "ci_high": 0.03388028013833388,
+      "p": 0.28585707146426786
+     },
+     "shin": {
+      "estimate": -0.0381574743609278,
+      "ci_low": -0.10937226379426881,
+      "ci_high": 0.033933174466986536,
+      "p": 0.2898550724637681
+     }
+    },
+    {
+     "id": "eff.snapshot.movement_slope",
+     "segment": "snapshot",
+     "description": "Does the line move toward the outcome: slope of (outcome - early prob) on (close - early) prob (0 = no information in the move, 1 = closing fully efficient) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": 1.0864633256788978,
+     "ci_low": 0.44654842370623715,
+     "ci_high": 1.7138792844556259,
+     "p": 0.001999000499750125,
+     "q_bh": 0.015658837248042644,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 1.0494338126308647,
+      "ci_low": 0.42426257667411554,
+      "ci_high": 1.652209437570004,
+      "p": 0.001999000499750125
+     },
+     "shin": {
+      "estimate": 1.054584348329233,
+      "ci_low": 0.4276138394533244,
+      "ci_high": 1.6621350283578984,
+      "p": 0.001999000499750125
+     }
+    },
+    {
+     "id": "eff.snapshot.logloss_close_minus_early",
+     "segment": "snapshot",
+     "description": "Closing minus early log loss (negative = closing better calibrated) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": -0.0028902962577100543,
+     "ci_low": -0.00645048573513625,
+     "ci_high": 0.0007012735472912496,
+     "p": 0.12193903048475763,
+     "q_bh": 0.2729111634658861,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0028074382539964556,
+      "ci_low": -0.0065061377336543425,
+      "ci_high": 0.0009353906551936255,
+      "p": 0.14392803598200898
+     },
+     "shin": {
+      "estimate": -0.0027586314800292742,
+      "ci_low": -0.006392697505950691,
+      "ci_high": 0.0009601748062475012,
+      "p": 0.14392803598200898
+     }
+    },
+    {
+     "id": "mvm.league.D1",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league D1",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 306,
+     "estimate": 0.037841041550201744,
+     "ci_low": 0.016605445956213723,
+     "ci_high": 0.05872659018512536,
+     "p": 0.0009995002498750624,
+     "q_bh": 0.009395302348825586,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.03722118868959627,
+      "ci_low": 0.016203190931425616,
+      "ci_high": 0.05789992427024071,
+      "p": 0.001999000499750125
+     },
+     "shin": {
+      "estimate": 0.037458079701822716,
+      "ci_low": 0.01633996521295671,
+      "ci_high": 0.05813776035475698,
+      "p": 0.0009995002498750624
+     }
+    },
+    {
+     "id": "mvm.league.E0",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league E0",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.021361502159594144,
+     "ci_low": 0.0019114851718866066,
+     "ci_high": 0.0394588065663153,
+     "p": 0.029985007496251874,
+     "q_bh": 0.10840733479414139,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.02106415772015277,
+      "ci_low": 0.0008733360055168683,
+      "ci_high": 0.039574558149748154,
+      "p": 0.041979010494752625
+     },
+     "shin": {
+      "estimate": 0.021215461361418813,
+      "ci_low": 0.001234544965846524,
+      "ci_high": 0.039543700606442994,
+      "p": 0.03698150924537731
+     }
+    },
+    {
+     "id": "mvm.league.F1",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league F1",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 306,
+     "estimate": 0.019255560860001443,
+     "ci_low": -0.0006611638926247391,
+     "ci_high": 0.03962200595684943,
+     "p": 0.05697151424287856,
+     "q_bh": 0.17028985507246377,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.019829177695047776,
+      "ci_low": -0.0009785891256474232,
+      "ci_high": 0.04118918220255579,
+      "p": 0.063968015992004
+     },
+     "shin": {
+      "estimate": 0.019697886970706395,
+      "ci_low": -0.0010859858876535926,
+      "ci_high": 0.0407703639251332,
+      "p": 0.06096951524237881
+     }
+    },
+    {
+     "id": "mvm.league.I1",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league I1",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.020441275273038923,
+     "ci_low": 0.00356971998009169,
+     "ci_high": 0.039078872691090935,
+     "p": 0.0239880059970015,
+     "q_bh": 0.09395302348825586,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.021926879682228295,
+      "ci_low": 0.004928897246505882,
+      "ci_high": 0.04065933462103717,
+      "p": 0.01999000499750125
+     },
+     "shin": {
+      "estimate": 0.021696646967239937,
+      "ci_low": 0.004696105936499178,
+      "ci_high": 0.04049667909086254,
+      "p": 0.01999000499750125
+     }
+    },
+    {
+     "id": "mvm.league.SP1",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league SP1",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.026147064754436296,
+     "ci_low": 0.010174281577205964,
+     "ci_high": 0.04188439243874276,
+     "p": 0.0029985007496251873,
+     "q_bh": 0.015658837248042644,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.027094238096413478,
+      "ci_low": 0.010655037012793437,
+      "ci_high": 0.04361111285052643,
+      "p": 0.001999000499750125
+     },
+     "shin": {
+      "estimate": 0.026642745548109005,
+      "ci_low": 0.01034772762976836,
+      "ci_high": 0.04293049101054686,
+      "p": 0.001999000499750125
+     }
+    },
+    {
+     "id": "mvm.phase.early",
+     "segment": "mvm_season_phase",
+     "description": "Model minus market log loss, early phase",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 290,
+     "estimate": 0.01842760946806779,
+     "ci_low": -0.0026709267582115935,
+     "ci_high": 0.041767852944749835,
+     "p": 0.08095952023988005,
+     "q_bh": 0.19495252373813093,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.018961003485455864,
+      "ci_low": -0.002221082311628084,
+      "ci_high": 0.04247770253487625,
+      "p": 0.08395802098950525
+     },
+     "shin": {
+      "estimate": 0.01908609141086578,
+      "ci_low": -0.0018894726006743795,
+      "ci_high": 0.04223519237866788,
+      "p": 0.079960019990005
+     }
+    },
+    {
+     "id": "mvm.phase.rest",
+     "segment": "mvm_season_phase",
+     "description": "Model minus market log loss, rest of season",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1462,
+     "estimate": 0.025956561985546425,
+     "ci_low": 0.01713019386501799,
+     "ci_high": 0.03439832330501499,
+     "p": 0.0009995002498750624,
+     "q_bh": 0.009395302348825586,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.026396118873092202,
+      "ci_low": 0.017319361975219723,
+      "ci_high": 0.03518021927539498,
+      "p": 0.0009995002498750624
+     },
+     "shin": {
+      "estimate": 0.02625554293147372,
+      "ci_low": 0.01711790754816522,
+      "ci_high": 0.034914491669133,
+      "p": 0.0009995002498750624
+     }
+    },
+    {
+     "id": "mvm.promoted.first10",
+     "segment": "mvm_promoted",
+     "description": "Model minus market log loss, promoted team's first 10 matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 132,
+     "estimate": 0.02874731421815774,
+     "ci_low": -0.01562933878748072,
+     "ci_high": 0.07551554740134013,
+     "p": 0.19790104947526238,
+     "q_bh": 0.3720539730134933,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.027965712683253343,
+      "ci_low": -0.01527682561493064,
+      "ci_high": 0.07252182234641627,
+      "p": 0.20689655172413793
+     },
+     "shin": {
+      "estimate": 0.028726489131254942,
+      "ci_low": -0.015488415796634323,
+      "ci_high": 0.07430704236647753,
+      "p": 0.19290354822588707
+     }
+    },
+    {
+     "id": "mvm.promoted.later",
+     "segment": "mvm_promoted",
+     "description": "Model minus market log loss, promoted team later matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 354,
+     "estimate": 0.02692544636797972,
+     "ci_low": 0.009210778510745388,
+     "ci_high": 0.04507022552859146,
+     "p": 0.0029985007496251873,
+     "q_bh": 0.015658837248042644,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.028590604791128585,
+      "ci_low": 0.01027356184715104,
+      "ci_high": 0.04756443923695414,
+      "p": 0.001999000499750125
+     },
+     "shin": {
+      "estimate": 0.028154401407000415,
+      "ci_low": 0.010053890598321864,
+      "ci_high": 0.046874025272238905,
+      "p": 0.0029985007496251873
+     }
+    },
+    {
+     "id": "mvm.flb.band0",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.00, 0.20)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1060,
+     "estimate": 0.012795274260982988,
+     "ci_low": 0.006368586737422161,
+     "ci_high": 0.019222953095144168,
+     "p": 0.0009995002498750624,
+     "q_bh": 0.009395302348825586,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.012250573948767178,
+      "ci_low": 0.005222595310117448,
+      "ci_high": 0.01890422425930688,
+      "p": 0.0009995002498750624
+     },
+     "shin": {
+      "estimate": 0.012527230812205258,
+      "ci_low": 0.0057038862544967345,
+      "ci_high": 0.018978789220868795,
+      "p": 0.0009995002498750624
+     }
+    },
+    {
+     "id": "mvm.flb.band1",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.20, 0.40)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 2720,
+     "estimate": 0.009355475163498045,
+     "ci_low": 0.004537382960077667,
+     "ci_high": 0.013909203090030443,
+     "p": 0.0009995002498750624,
+     "q_bh": 0.009395302348825586,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.009860528629929624,
+      "ci_low": 0.004973486749356024,
+      "ci_high": 0.014496206475943152,
+      "p": 0.0009995002498750624
+     },
+     "shin": {
+      "estimate": 0.009563201651567727,
+      "ci_low": 0.004777440789145154,
+      "ci_high": 0.014171709877466469,
+      "p": 0.0009995002498750624
+     }
+    },
+    {
+     "id": "mvm.flb.band2",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.40, 0.60)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 978,
+     "estimate": 0.021806690113434703,
+     "ci_low": 0.012113409682353346,
+     "ci_high": 0.03248710030522216,
+     "p": 0.0009995002498750624,
+     "q_bh": 0.009395302348825586,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.021499419946969352,
+      "ci_low": 0.011512715501673805,
+      "ci_high": 0.032385570172593754,
+      "p": 0.0009995002498750624
+     },
+     "shin": {
+      "estimate": 0.021782813124705418,
+      "ci_low": 0.011771834832133265,
+      "ci_high": 0.03253834836449264,
+      "p": 0.0009995002498750624
+     }
+    },
+    {
+     "id": "mvm.flb.band3",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.60, 1.00)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 498,
+     "estimate": 0.021855335265642883,
+     "ci_low": 0.00875323480754817,
+     "ci_high": 0.035497498019536534,
+     "p": 0.0029985007496251873,
+     "q_bh": 0.015658837248042644,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.023051302733418898,
+      "ci_low": 0.008931898360193464,
+      "ci_high": 0.036815232868367645,
+      "p": 0.0029985007496251873
+     },
+     "shin": {
+      "estimate": 0.023042530160484187,
+      "ci_low": 0.009359857542650818,
+      "ci_high": 0.03678009918094104,
+      "p": 0.0029985007496251873
+     }
+    },
+    {
+     "id": "mvm.draw",
+     "segment": "mvm_draw",
+     "description": "Model minus market log loss on the draw selection",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": 0.004420015682920835,
+     "ci_low": 0.0010297796431709696,
+     "ci_high": 0.008039577930389731,
+     "p": 0.01199400299850075,
+     "q_bh": 0.051247103720866834,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.004556803786549813,
+      "ci_low": 0.0010363273959191302,
+      "ci_high": 0.008154939870919854,
+      "p": 0.010994502748625687
+     },
+     "shin": {
+      "estimate": 0.004506325393810366,
+      "ci_low": 0.0010625518352925967,
+      "ci_high": 0.008039742397204043,
+      "p": 0.010994502748625687
+     }
+    },
+    {
+     "id": "mvm.encompassing.test_delta",
+     "segment": "mvm_encompassing",
+     "description": "Log loss of the model+market combination minus the recalibrated market alone, both fitted on the tuning window (isolates the model's marginal information)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": -0.00043991718525604337,
+     "ci_low": -0.0010322621516437689,
+     "ci_high": 0.00014829500207512696,
+     "p": 0.1489255372313843,
+     "q_bh": 0.3181591022670483,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.00041929931591433423,
+      "ci_low": -0.0009690589674579276,
+      "ci_high": 0.00012540405646210013,
+      "p": 0.13993003498250875
+     },
+     "shin": {
+      "estimate": -0.00043025298439662866,
+      "ci_low": -0.001000715904862193,
+      "ci_high": 0.00013376773247592502,
+      "p": 0.14192903548225888
+     }
+    },
+    {
+     "id": "desc.market_recalibration",
+     "segment": "descriptive",
+     "description": "Recalibrated market (power and class constants fitted on the tuning window) minus raw closing market, log loss",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": -0.001432815120253421,
+     "ci_low": -0.0026902042870295528,
+     "ci_high": -0.00017113416433808067,
+     "p": 0.026986506746626688,
+     "q_bh": null,
+     "survives_bh_10pct": false,
+     "in_bh_family": false,
+     "status": "descriptive, not tested",
+     "power": {
+      "estimate": -0.001026417004174149,
+      "ci_low": -0.001948471123952922,
+      "ci_high": -9.615036871635165e-05,
+      "p": 0.031984007996002
+     },
+     "shin": {
+      "estimate": -0.0011043867199450697,
+      "ci_low": -0.0020664312690011006,
+      "ci_high": -0.00014599779850827722,
+      "p": 0.020989505247376312
+     }
+    },
+    {
+     "id": "mvm.linemove.slope",
+     "segment": "mvm_line_movement",
+     "description": "Does the close move toward the model: slope of (close - early) on (model - early) probability [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": -0.0034939094112534067,
+     "ci_low": -0.025907503012141137,
+     "ci_high": 0.018436175880482717,
+     "p": 0.767616191904048,
+     "q_bh": 0.8199536595338693,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.004646701725650671,
+      "ci_low": -0.017773723621060788,
+      "ci_high": 0.026409366309827348,
+      "p": 0.6746626686656672
+     },
+     "shin": {
+      "estimate": 0.001226922798770555,
+      "ci_low": -0.021306497367600305,
+      "ci_high": 0.02298881337758021,
+      "p": 0.8985507246376812
+     }
+    },
+    {
+     "id": "coldstart.fix_vs_none.first10",
+     "segment": "cold_start",
+     "description": "Promoted-team prior fix minus no fix, log loss on promoted teams' first 10 matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 132,
+     "estimate": -0.024537199863058856,
+     "ci_low": -0.049294091815421735,
+     "ci_high": 0.0002683899794518421,
+     "p": 0.053973013493253376,
+     "q_bh": 0.17028985507246377,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.024537199863058856,
+      "ci_low": -0.049294091815421735,
+      "ci_high": 0.0002683899794518421,
+      "p": 0.053973013493253376
+     },
+     "shin": {
+      "estimate": -0.024537199863058856,
+      "ci_low": -0.049294091815421735,
+      "ci_high": 0.0002683899794518421,
+      "p": 0.053973013493253376
+     }
+    }
+   ],
+   "bh_survivors": [
+    {
+     "id": "eff.league.D1.home_bias",
+     "description": "League D1: mean(outcome - closing prob) for home",
+     "estimate": -0.06946191786115893,
+     "ci": [
+      -0.11724235475510995,
+      -0.018793999588661972
+     ],
+     "q_bh": 0.04227886056971514
+    },
+    {
+     "id": "eff.snapshot.movement_slope",
+     "description": "Does the line move toward the outcome: slope of (outcome - early prob) on (close - early) prob (0 = no information in the move, 1 = closing fully efficient) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "estimate": 1.0864633256788978,
+     "ci": [
+      0.44654842370623715,
+      1.7138792844556259
+     ],
+     "q_bh": 0.015658837248042644
+    },
+    {
+     "id": "mvm.league.D1",
+     "description": "Model minus closing-market log loss, league D1",
+     "estimate": 0.037841041550201744,
+     "ci": [
+      0.016605445956213723,
+      0.05872659018512536
+     ],
+     "q_bh": 0.009395302348825586
+    },
+    {
+     "id": "mvm.league.I1",
+     "description": "Model minus closing-market log loss, league I1",
+     "estimate": 0.020441275273038923,
+     "ci": [
+      0.00356971998009169,
+      0.039078872691090935
+     ],
+     "q_bh": 0.09395302348825586
+    },
+    {
+     "id": "mvm.league.SP1",
+     "description": "Model minus closing-market log loss, league SP1",
+     "estimate": 0.026147064754436296,
+     "ci": [
+      0.010174281577205964,
+      0.04188439243874276
+     ],
+     "q_bh": 0.015658837248042644
+    },
+    {
+     "id": "mvm.phase.rest",
+     "description": "Model minus market log loss, rest of season",
+     "estimate": 0.025956561985546425,
+     "ci": [
+      0.01713019386501799,
+      0.03439832330501499
+     ],
+     "q_bh": 0.009395302348825586
+    },
+    {
+     "id": "mvm.promoted.later",
+     "description": "Model minus market log loss, promoted team later matches",
+     "estimate": 0.02692544636797972,
+     "ci": [
+      0.009210778510745388,
+      0.04507022552859146
+     ],
+     "q_bh": 0.015658837248042644
+    },
+    {
+     "id": "mvm.flb.band0",
+     "description": "Model minus market selection log loss, closing implied prob in [0.00, 0.20)",
+     "estimate": 0.012795274260982988,
+     "ci": [
+      0.006368586737422161,
+      0.019222953095144168
+     ],
+     "q_bh": 0.009395302348825586
+    },
+    {
+     "id": "mvm.flb.band1",
+     "description": "Model minus market selection log loss, closing implied prob in [0.20, 0.40)",
+     "estimate": 0.009355475163498045,
+     "ci": [
+      0.004537382960077667,
+      0.013909203090030443
+     ],
+     "q_bh": 0.009395302348825586
+    },
+    {
+     "id": "mvm.flb.band2",
+     "description": "Model minus market selection log loss, closing implied prob in [0.40, 0.60)",
+     "estimate": 0.021806690113434703,
+     "ci": [
+      0.012113409682353346,
+      0.03248710030522216
+     ],
+     "q_bh": 0.009395302348825586
+    },
+    {
+     "id": "mvm.flb.band3",
+     "description": "Model minus market selection log loss, closing implied prob in [0.60, 1.00)",
+     "estimate": 0.021855335265642883,
+     "ci": [
+      0.00875323480754817,
+      0.035497498019536534
+     ],
+     "q_bh": 0.015658837248042644
+    },
+    {
+     "id": "mvm.draw",
+     "description": "Model minus market log loss on the draw selection",
+     "estimate": 0.004420015682920835,
+     "ci": [
+      0.0010297796431709696,
+      0.008039577930389731
+     ],
+     "q_bh": 0.051247103720866834
+    }
+   ],
+   "encompassing_fit": {
+    "method": "proportional",
+    "fitted_on_tuning_matches": 8955,
+    "theta": {
+     "alpha_draw": 0.06041477426162971,
+     "alpha_away": 0.039982435856028876,
+     "beta_market": 1.1344594975635003,
+     "beta_model": -0.07592808849286044
+    },
+    "model_weight": -0.07172965095057794,
+    "model_weight_ci95": [
+     -0.1721264648857655,
+     0.04616316067258464
+    ],
+    "beta_model_ci95": [
+     -0.18551567453355078,
+     0.05066415299117126
+    ],
+    "market_only_recalibration": {
+     "alpha_draw": 0.06462825654495237,
+     "alpha_away": 0.04127378825472153,
+     "beta_market": 1.0672958110530335
+    }
+   },
+   "extras_line_movement": {
+    "label": "early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)",
+    "n_matches": 1752,
+    "movement_on_disagreement_by_size": [
+     {
+      "abs_disagreement": [
+       0,
+       0.02
+      ],
+      "n_selections": 1961,
+      "slope": 0.006588737608746951,
+      "share_close_moves_toward_model": 0.49719530851606325
+     },
+     {
+      "abs_disagreement": [
+       0.02,
+       0.05
+      ],
+      "n_selections": 1828,
+      "slope": -0.01751913862017332,
+      "share_close_moves_toward_model": 0.4907002188183807
+     },
+     {
+      "abs_disagreement": [
+       0.05,
+       1.0
+      ],
+      "n_selections": 1467,
+      "slope": -0.0014061829531697527,
+      "share_close_moves_toward_model": 0.48807089297886846
+     }
+    ],
+    "model_favoured_d_gt_0.03": {
+     "n_selections": 1276,
+     "mean_log_close_over_early": -0.009250235525426668,
+     "share_close_prob_above_early": 0.49294670846394983
+    },
+    "model_disfavoured_d_lt_-0.03": {
+     "n_selections": 1232,
+     "mean_log_close_over_early": -0.00500136824343125,
+     "share_close_prob_above_early": 0.5056818181818182
+    },
+    "note": "CLV-style description of probability drift only; no betting P&L is claimed."
+   }
+  },
+  "F2_secondary_2025_26": {
+   "family": "replication",
+   "name": "F2_secondary_2025_26",
+   "bookmaker": "Avg",
+   "n_matches": 1752,
+   "n_claims_in_bh_family": 47,
+   "n_claims_not_estimable": 0,
+   "fdr": 0.1,
+   "n_boot": 2000,
+   "claims": [
+    {
+     "id": "eff.league.D1.home_bias",
+     "segment": "league",
+     "description": "League D1: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 306,
+     "estimate": -0.006646114074141293,
+     "ci_low": -0.05556782903797894,
+     "ci_high": 0.04295696687472693,
+     "p": 0.8075962018990505,
+     "q_bh": 0.896923631207652,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.014243370671445802,
+      "ci_low": -0.06258979713427777,
+      "ci_high": 0.035049268159847186,
+      "p": 0.5947026486756621
+     },
+     "shin": {
+      "estimate": -0.011818946625331455,
+      "ci_low": -0.060366088101025096,
+      "ci_high": 0.0379388318858175,
+      "p": 0.6586706646676662
+     }
+    },
+    {
+     "id": "eff.league.D1.draw_bias",
+     "segment": "league",
+     "description": "League D1: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 306,
+     "estimate": 0.007350348607752135,
+     "ci_low": -0.04021699252717325,
+     "ci_high": 0.056479120236840395,
+     "p": 0.7576211894052973,
+     "q_bh": 0.8684925829768043,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.014224989593355502,
+      "ci_low": -0.03339997597029479,
+      "ci_high": 0.06361383977405172,
+      "p": 0.5327336331834083
+     },
+     "shin": {
+      "estimate": 0.011864843694931534,
+      "ci_low": -0.03570632521043441,
+      "ci_high": 0.060909549797810804,
+      "p": 0.6066966516741629
+     }
+    },
+    {
+     "id": "eff.league.E0.home_bias",
+     "segment": "league",
+     "description": "League E0: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": -0.005328066870529838,
+     "ci_low": -0.05104670524094335,
+     "ci_high": 0.040691956070651604,
+     "p": 0.8205897051474262,
+     "q_bh": 0.896923631207652,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.011440734729955531,
+      "ci_low": -0.05700376153376812,
+      "ci_high": 0.03443142683728504,
+      "p": 0.6256871564217891
+     },
+     "shin": {
+      "estimate": -0.009448601792936665,
+      "ci_low": -0.055077939693902164,
+      "ci_high": 0.03654808269102078,
+      "p": 0.6806596701649176
+     }
+    },
+    {
+     "id": "eff.league.E0.draw_bias",
+     "segment": "league",
+     "description": "League E0: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.02529194374808392,
+     "ci_low": -0.018382806019251956,
+     "ci_high": 0.06920226286015074,
+     "p": 0.2698650674662669,
+     "q_bh": 0.5254409832120976,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.03103807210443804,
+      "ci_low": -0.01254703234475476,
+      "ci_high": 0.07499494208009048,
+      "p": 0.16591704147926037
+     },
+     "shin": {
+      "estimate": 0.02890261525735733,
+      "ci_low": -0.014806307924603484,
+      "ci_high": 0.07284829012629385,
+      "p": 0.20389805097451275
+     }
+    },
+    {
+     "id": "eff.league.F1.home_bias",
+     "segment": "league",
+     "description": "League F1: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 306,
+     "estimate": 0.028002881485655218,
+     "ci_low": -0.025729289630802215,
+     "ci_high": 0.08071056427650912,
+     "p": 0.2978510744627686,
+     "q_bh": 0.5254409832120976,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.02107149081650197,
+      "ci_low": -0.03237311236009166,
+      "ci_high": 0.07393946300414533,
+      "p": 0.4237881059470265
+     },
+     "shin": {
+      "estimate": 0.023397210388009237,
+      "ci_low": -0.03005586390378424,
+      "ci_high": 0.07622748358776509,
+      "p": 0.37681159420289856
+     }
+    },
+    {
+     "id": "eff.league.F1.draw_bias",
+     "segment": "league",
+     "description": "League F1: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 306,
+     "estimate": -0.00011240007558645664,
+     "ci_low": -0.04443308815839265,
+     "ci_high": 0.04755020424539378,
+     "p": 0.9985007496251874,
+     "q_bh": 0.9985007496251873,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.006608017845082242,
+      "ci_low": -0.03756985094371745,
+      "ci_high": 0.0544718952280053,
+      "p": 0.7666166916541729
+     },
+     "shin": {
+      "estimate": 0.004027790680622917,
+      "ci_low": -0.04024635688375865,
+      "ci_high": 0.05181241615060669,
+      "p": 0.8705647176411794
+     }
+    },
+    {
+     "id": "eff.league.I1.home_bias",
+     "segment": "league",
+     "description": "League I1: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": -0.023953427309854048,
+     "ci_low": -0.07039609224049076,
+     "ci_high": 0.021244103119915106,
+     "p": 0.30184907546226886,
+     "q_bh": 0.5254409832120976,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.029755737048698487,
+      "ci_low": -0.07604586371728324,
+      "ci_high": 0.015689290845103034,
+      "p": 0.18190904547726136
+     },
+     "shin": {
+      "estimate": -0.02765353566200644,
+      "ci_low": -0.07401652786262618,
+      "ci_high": 0.017677271466701137,
+      "p": 0.21889055472263869
+     }
+    },
+    {
+     "id": "eff.league.I1.draw_bias",
+     "segment": "league",
+     "description": "League I1: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": -0.008092477921380336,
+     "ci_low": -0.04881929138393511,
+     "ci_high": 0.04027039938573309,
+     "p": 0.7406296851574213,
+     "q_bh": 0.8684925829768043,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0023627890432410723,
+      "ci_low": -0.04291713314501041,
+      "ci_high": 0.0454878782598639,
+      "p": 0.9325337331334332
+     },
+     "shin": {
+      "estimate": -0.004997309442242728,
+      "ci_low": -0.045634355406476756,
+      "ci_high": 0.04310060670843951,
+      "p": 0.8555722138930535
+     }
+    },
+    {
+     "id": "eff.league.SP1.home_bias",
+     "segment": "league",
+     "description": "League SP1: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.04791270828993476,
+     "ci_low": 4.022175933697835e-05,
+     "ci_high": 0.09285303371436048,
+     "p": 0.04997501249375312,
+     "q_bh": 0.23040860522119894,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.04059420338095487,
+      "ci_low": -0.007233222993486936,
+      "ci_high": 0.08544718591573454,
+      "p": 0.09395302348825588
+     },
+     "shin": {
+      "estimate": 0.04295624429963846,
+      "ci_low": -0.004814508828733163,
+      "ci_high": 0.08790538361294026,
+      "p": 0.07496251874062969
+     }
+    },
+    {
+     "id": "eff.league.SP1.draw_bias",
+     "segment": "league",
+     "description": "League SP1: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": -0.01846509205475501,
+     "ci_low": -0.061163308761635365,
+     "ci_high": 0.024997420057017914,
+     "p": 0.4017991004497751,
+     "q_bh": 0.674448490040694,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.013130667725660633,
+      "ci_low": -0.055939426817830484,
+      "ci_high": 0.03037504792237155,
+      "p": 0.5417291354322838
+     },
+     "shin": {
+      "estimate": -0.015250385491157854,
+      "ci_low": -0.05808649085395398,
+      "ci_high": 0.02821623298682241,
+      "p": 0.4947526236881559
+     }
+    },
+    {
+     "id": "eff.phase.home_bias_diff",
+     "segment": "season_phase",
+     "description": "Season phase: home bias, early-phase minus rest (closing)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 288,
+     "estimate": 0.0170902061944748,
+     "ci_low": -0.038302430666160896,
+     "ci_high": 0.0748368297290108,
+     "p": 0.5467266366816592,
+     "q_bh": 0.7557691742364113,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.017257399479012295,
+      "ci_low": -0.037895446727223364,
+      "ci_high": 0.0752442992046301,
+      "p": 0.5397301349325337
+     },
+     "shin": {
+      "estimate": 0.017238065810144233,
+      "ci_low": -0.037977140268656125,
+      "ci_high": 0.07516667313520471,
+      "p": 0.5417291354322838
+     }
+    },
+    {
+     "id": "eff.phase.draw_bias_diff",
+     "segment": "season_phase",
+     "description": "Season phase: draw bias, early-phase minus rest (closing)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 288,
+     "estimate": -0.004171885272917674,
+     "ci_low": -0.05792069836850657,
+     "ci_high": 0.04773885591500314,
+     "p": 0.8565717141429285,
+     "q_bh": 0.9129782934619647,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0044140778014868445,
+      "ci_low": -0.058406883002586,
+      "ci_high": 0.04745677270245612,
+      "p": 0.8505747126436781
+     },
+     "shin": {
+      "estimate": -0.004323903760321371,
+      "ci_low": -0.058238257139827936,
+      "ci_high": 0.04759097478286121,
+      "p": 0.8545727136431784
+     }
+    },
+    {
+     "id": "eff.flb.close.band0_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.00, 0.20)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 840,
+     "estimate": -0.02285387081014226,
+     "ci_low": -0.04411516095735414,
+     "ci_high": -0.001078666183943732,
+     "p": 0.03798100949525238,
+     "q_bh": 0.1983452718085402,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0037061771842088523,
+      "ci_low": -0.024025474211266277,
+      "ci_high": 0.01736272159676815,
+      "p": 0.703648175912044
+     },
+     "shin": {
+      "estimate": -0.008697292643684998,
+      "ci_low": -0.029292018578848705,
+      "ci_high": 0.011930515937968476,
+      "p": 0.41679160419790107
+     }
+    },
+    {
+     "id": "eff.flb.close.band1_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.20, 0.40)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 3002,
+     "estimate": -0.002353370587938284,
+     "ci_low": -0.012453415104980527,
+     "ci_high": 0.008766464204593868,
+     "p": 0.6776611694152923,
+     "q_bh": 0.8608128368248308,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.002354430562015367,
+      "ci_low": -0.012822192948272816,
+      "ci_high": 0.009380631110260187,
+      "p": 0.6906546726636682
+     },
+     "shin": {
+      "estimate": -0.002999116857954692,
+      "ci_low": -0.013594267421152117,
+      "ci_high": 0.008543123738501574,
+      "p": 0.607696151924038
+     }
+    },
+    {
+     "id": "eff.flb.close.band2_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.40, 0.60)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 986,
+     "estimate": 0.011450544018270031,
+     "ci_low": -0.020121479394889046,
+     "ci_high": 0.0414904356341193,
+     "p": 0.47176411794102946,
+     "q_bh": 0.7288476973634395,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.003926104300445286,
+      "ci_low": -0.028074405852594464,
+      "ci_high": 0.03396666096164283,
+      "p": 0.8235882058970515
+     },
+     "shin": {
+      "estimate": 0.01014271075521731,
+      "ci_low": -0.021632660722334666,
+      "ci_high": 0.04016528213611761,
+      "p": 0.5257371314342829
+     }
+    },
+    {
+     "id": "eff.flb.close.band3_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.60, 1.00)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 428,
+     "estimate": 0.03498091958760742,
+     "ci_low": -0.0070277068234799395,
+     "ci_high": 0.07591298182205998,
+     "p": 0.10294852573713144,
+     "q_bh": 0.23040860522119894,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.0134340809569123,
+      "ci_low": -0.025854814701488732,
+      "ci_high": 0.05193307619786794,
+      "p": 0.5247376311844077
+     },
+     "shin": {
+      "estimate": 0.014577092187330833,
+      "ci_low": -0.026082688303901976,
+      "ci_high": 0.05469739752814467,
+      "p": 0.5007496251874063
+     }
+    },
+    {
+     "id": "eff.flb.close.slope",
+     "segment": "favourite_longshot",
+     "description": "FLB close: logit slope of outcome on implied probability (1 = calibrated)",
+     "uses_early_snapshot": false,
+     "null": 1.0,
+     "n": 1752,
+     "estimate": 1.1047140256506403,
+     "ci_low": 0.9908298267782868,
+     "ci_high": 1.230416901785229,
+     "p": 0.07796101949025487,
+     "q_bh": 0.23040860522119894,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 1.0212940455879642,
+      "ci_low": 0.9150422383343196,
+      "ci_high": 1.138715707965747,
+      "p": 0.7246376811594203
+     },
+     "shin": {
+      "estimate": 1.0468460767769303,
+      "ci_low": 0.9386480984896158,
+      "ci_high": 1.1668091629468886,
+      "p": 0.40679660169915044
+     }
+    },
+    {
+     "id": "eff.flb.early.band0_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.00, 0.20) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 824,
+     "estimate": -0.01771107531104596,
+     "ci_low": -0.03898756174674552,
+     "ci_high": 0.003329095137121605,
+     "p": 0.10294852573713144,
+     "q_bh": 0.23040860522119894,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0055263624867540875,
+      "ci_low": -0.0255237754645682,
+      "ci_high": 0.015315186787358749,
+      "p": 0.5967016491754122
+     },
+     "shin": {
+      "estimate": -0.009867034710929345,
+      "ci_low": -0.030165490504066597,
+      "ci_high": 0.011150031522249526,
+      "p": 0.3638180909545227
+     }
+    },
+    {
+     "id": "eff.flb.early.band1_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.20, 0.40) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 3006,
+     "estimate": -0.002076554665199105,
+     "ci_low": -0.012634869085054146,
+     "ci_high": 0.00870324930251059,
+     "p": 0.7276361819090454,
+     "q_bh": 0.8684925829768043,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.00045600980744428055,
+      "ci_low": -0.010106831439849154,
+      "ci_high": 0.011855529815719556,
+      "p": 0.912543728135932
+     },
+     "shin": {
+      "estimate": -0.0006209616341632969,
+      "ci_low": -0.011111910700229146,
+      "ci_high": 0.010650671930568699,
+      "p": 0.9395302348825587
+     }
+    },
+    {
+     "id": "eff.flb.early.band2_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.40, 0.60) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 1005,
+     "estimate": 0.005555599917172236,
+     "ci_low": -0.025370849118902077,
+     "ci_high": 0.035173181258280076,
+     "p": 0.7376311844077961,
+     "q_bh": 0.8684925829768043,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0061962189485493535,
+      "ci_low": -0.03727482065789301,
+      "ci_high": 0.02372805263769584,
+      "p": 0.6586706646676662
+     },
+     "shin": {
+      "estimate": -0.0018238747156563155,
+      "ci_low": -0.033114996105575924,
+      "ci_high": 0.0284009978614918,
+      "p": 0.8845577211394303
+     }
+    },
+    {
+     "id": "eff.flb.early.band3_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.60, 1.00) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 421,
+     "estimate": 0.03622962342786765,
+     "ci_low": -0.004385894731460631,
+     "ci_high": 0.0774180670662542,
+     "p": 0.08395802098950525,
+     "q_bh": 0.23040860522119894,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.020825361929628833,
+      "ci_low": -0.01674651033423085,
+      "ci_high": 0.059317140476578635,
+      "p": 0.3028485757121439
+     },
+     "shin": {
+      "estimate": 0.02700071167365707,
+      "ci_low": -0.012468858986563185,
+      "ci_high": 0.0665413290802742,
+      "p": 0.18790604697651175
+     }
+    },
+    {
+     "id": "eff.flb.early.slope",
+     "segment": "favourite_longshot",
+     "description": "FLB early: logit slope of outcome on implied probability (1 = calibrated) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 1.0,
+     "n": 1752,
+     "estimate": 1.0986226226095699,
+     "ci_low": 0.9826487483642125,
+     "ci_high": 1.2214876280165645,
+     "p": 0.09095452273863068,
+     "q_bh": 0.23040860522119894,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 1.0117314171209488,
+      "ci_low": 0.9060895298704599,
+      "ci_high": 1.1261833992569241,
+      "p": 0.8695652173913043
+     },
+     "shin": {
+      "estimate": 1.0384778114983695,
+      "ci_low": 0.9293680528227236,
+      "ci_high": 1.1552551972103295,
+      "p": 0.512743628185907
+     }
+    },
+    {
+     "id": "eff.draw.close.bias",
+     "segment": "draw",
+     "description": "Draw: mean(draw outcome - closing draw prob)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": 0.0009896542717940373,
+     "ci_low": -0.018672261840087585,
+     "ci_high": 0.021515583850559503,
+     "p": 0.8935532233883059,
+     "q_bh": 0.9129782934619647,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.007010190698439361,
+      "ci_low": -0.012586658244530955,
+      "ci_high": 0.02754390489451406,
+      "p": 0.4877561219390305
+     },
+     "shin": {
+      "estimate": 0.00465297707878038,
+      "ci_low": -0.014975280849476526,
+      "ci_high": 0.025242235330910884,
+      "p": 0.6166916541729135
+     }
+    },
+    {
+     "id": "eff.draw.early.bias",
+     "segment": "draw",
+     "description": "Draw: mean(draw outcome - early draw prob) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": 0.0038012764215293805,
+     "ci_low": -0.01595051804736811,
+     "ci_high": 0.02441624457426842,
+     "p": 0.6756621689155422,
+     "q_bh": 0.8608128368248308,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.010262969598959972,
+      "ci_low": -0.009404646490769985,
+      "ci_high": 0.030854614709640314,
+      "p": 0.31584207896051975
+     },
+     "shin": {
+      "estimate": 0.007766321831829617,
+      "ci_low": -0.011969789224430467,
+      "ci_high": 0.028354039364878413,
+      "p": 0.4497751124437781
+     }
+    },
+    {
+     "id": "eff.draw.close.slope",
+     "segment": "draw",
+     "description": "Draw: logit slope of draw outcome on closing draw prob (1 = calibrated)",
+     "uses_early_snapshot": false,
+     "null": 1.0,
+     "n": 1752,
+     "estimate": 1.1418392212916582,
+     "ci_low": 0.712755899996098,
+     "ci_high": 1.586794219943669,
+     "p": 0.511744127936032,
+     "q_bh": 0.7288476973634395,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 1.0117145984441112,
+      "ci_low": 0.6304404167907157,
+      "ci_high": 1.41693283265218,
+      "p": 0.9495252373813093
+     },
+     "shin": {
+      "estimate": 1.0721543372475177,
+      "ci_low": 0.6699605684737089,
+      "ci_high": 1.4930949997126608,
+      "p": 0.719640179910045
+     }
+    },
+    {
+     "id": "eff.promoted.first10.win_bias",
+     "segment": "promoted",
+     "description": "Promoted team's win: mean(outcome - closing prob), its first 10 matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 140,
+     "estimate": 0.00541105432480579,
+     "ci_low": -0.058334352960328455,
+     "ci_high": 0.06884319351570423,
+     "p": 0.8895552223888056,
+     "q_bh": 0.9129782934619647,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.009234110007815504,
+      "ci_low": -0.0547807293009035,
+      "ci_high": 0.07348472369732374,
+      "p": 0.7816091954022989
+     },
+     "shin": {
+      "estimate": 0.008539020782906019,
+      "ci_low": -0.05552279026329615,
+      "ci_high": 0.07272309259342905,
+      "p": 0.7956021989005497
+     }
+    },
+    {
+     "id": "eff.promoted.later.win_bias",
+     "segment": "promoted",
+     "description": "Promoted team's win: mean(outcome - closing prob), later matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 372,
+     "estimate": -0.03487407747420188,
+     "ci_low": -0.07265293926901131,
+     "ci_high": 0.0038928016499288685,
+     "p": 0.08095952023988005,
+     "q_bh": 0.23040860522119894,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.030811093460062403,
+      "ci_low": -0.06859556185234424,
+      "ci_high": 0.007931864474325756,
+      "p": 0.12493753123438281
+     },
+     "shin": {
+      "estimate": -0.03161755938601001,
+      "ci_low": -0.06937308649985521,
+      "ci_high": 0.007139399559323568,
+      "p": 0.111944027986007
+     }
+    },
+    {
+     "id": "eff.promoted.diff.win_bias",
+     "segment": "promoted",
+     "description": "Promoted team's win bias: first 10 minus later",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 512,
+     "estimate": 0.040285131799007674,
+     "ci_low": -0.03615655377399553,
+     "ci_high": 0.11325425468376213,
+     "p": 0.29485257371314344,
+     "q_bh": 0.5254409832120976,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.040045203467877905,
+      "ci_low": -0.03676644151758766,
+      "ci_high": 0.11297989287757293,
+      "p": 0.2988505747126437
+     },
+     "shin": {
+      "estimate": 0.04015658016891603,
+      "ci_low": -0.03659382181507819,
+      "ci_high": 0.11317508981681314,
+      "p": 0.29685157421289354
+     }
+    },
+    {
+     "id": "eff.snapshot.movement_slope",
+     "segment": "snapshot",
+     "description": "Does the line move toward the outcome: slope of (outcome - early prob) on (close - early) prob (0 = no information in the move, 1 = closing fully efficient) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": 0.6841276273500247,
+     "ci_low": -0.06428714669972865,
+     "ci_high": 1.455835779196892,
+     "p": 0.06496751624187906,
+     "q_bh": 0.23040860522119894,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.6676869171769146,
+      "ci_low": -0.04062834111407943,
+      "ci_high": 1.3999858191222323,
+      "p": 0.05697151424287856
+     },
+     "shin": {
+      "estimate": 0.6736419050368383,
+      "ci_low": -0.04039871619049003,
+      "ci_high": 1.4179079275996338,
+      "p": 0.06196901549225387
+     }
+    },
+    {
+     "id": "eff.snapshot.logloss_close_minus_early",
+     "segment": "snapshot",
+     "description": "Closing minus early log loss (negative = closing better calibrated) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": -0.0009334130302895894,
+     "ci_low": -0.003951979586330092,
+     "ci_high": 0.0019653746876338815,
+     "p": 0.4877561219390305,
+     "q_bh": 0.7288476973634395,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0010483247805575494,
+      "ci_low": -0.004321952994607859,
+      "ci_high": 0.0020923777991462,
+      "p": 0.4767616191904048
+     },
+     "shin": {
+      "estimate": -0.0010262304658076715,
+      "ci_low": -0.004228953203059332,
+      "ci_high": 0.0020599455370319637,
+      "p": 0.4757621189405297
+     }
+    },
+    {
+     "id": "mvm.league.D1",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league D1",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 306,
+     "estimate": 0.0273934602115889,
+     "ci_low": 0.006488759954198709,
+     "ci_high": 0.05181291894632845,
+     "p": 0.008995502248875561,
+     "q_bh": 0.0704647676161919,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.029327131972686323,
+      "ci_low": 0.00800160306256329,
+      "ci_high": 0.05389533563658921,
+      "p": 0.008995502248875561
+     },
+     "shin": {
+      "estimate": 0.02905825675474314,
+      "ci_low": 0.008112920037045683,
+      "ci_high": 0.053322477850689304,
+      "p": 0.005997001499250375
+     }
+    },
+    {
+     "id": "mvm.league.E0",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league E0",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.017852300432357825,
+     "ci_low": -0.0023293460050350222,
+     "ci_high": 0.039581872839831854,
+     "p": 0.08295852073963018,
+     "q_bh": 0.23040860522119894,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.01683901049298654,
+      "ci_low": -0.004692206811252968,
+      "ci_high": 0.03896244892131796,
+      "p": 0.12393803098450774
+     },
+     "shin": {
+      "estimate": 0.01740238716932217,
+      "ci_low": -0.003726633853460762,
+      "ci_high": 0.03920231980673617,
+      "p": 0.1089455272363818
+     }
+    },
+    {
+     "id": "mvm.league.F1",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league F1",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 306,
+     "estimate": 0.02467454152452814,
+     "ci_low": 0.0054454439685553985,
+     "ci_high": 0.042923293432773624,
+     "p": 0.015992003998001,
+     "q_bh": 0.10737488398657813,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.025311750304632848,
+      "ci_low": 0.004209622214828033,
+      "ci_high": 0.04465826542686176,
+      "p": 0.015992003998001
+     },
+     "shin": {
+      "estimate": 0.025348133475804183,
+      "ci_low": 0.005223109560325287,
+      "ci_high": 0.044068673596590655,
+      "p": 0.015992003998001
+     }
+    },
+    {
+     "id": "mvm.league.I1",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league I1",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.014840845539141152,
+     "ci_low": -0.0012860910655000447,
+     "ci_high": 0.03125920955970749,
+     "p": 0.06696651674162919,
+     "q_bh": 0.23040860522119894,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.015011705973702088,
+      "ci_low": -0.0021278883291596822,
+      "ci_high": 0.03238839376567359,
+      "p": 0.08595702148925537
+     },
+     "shin": {
+      "estimate": 0.015181321961000301,
+      "ci_low": -0.0015980819936544204,
+      "ci_high": 0.03209025611090961,
+      "p": 0.07496251874062969
+     }
+    },
+    {
+     "id": "mvm.league.SP1",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league SP1",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.014938120223099545,
+     "ci_low": -0.0026739805983707504,
+     "ci_high": 0.03236097507444383,
+     "p": 0.09395302348825588,
+     "q_bh": 0.23040860522119894,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.01780462339809454,
+      "ci_low": -0.00013664323692630292,
+      "ci_high": 0.03585550169230471,
+      "p": 0.051974012993503245
+     },
+     "shin": {
+      "estimate": 0.01677958137890129,
+      "ci_low": -0.001163071164306513,
+      "ci_high": 0.03447951743073038,
+      "p": 0.06096951524237881
+     }
+    },
+    {
+     "id": "mvm.phase.early",
+     "segment": "mvm_season_phase",
+     "description": "Model minus market log loss, early phase",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 288,
+     "estimate": 0.04300645589039941,
+     "ci_low": 0.01543120521004306,
+     "ci_high": 0.07409087046283379,
+     "p": 0.001999000499750125,
+     "q_bh": 0.03131767449608529,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.046068787356881365,
+      "ci_low": 0.017954675475985248,
+      "ci_high": 0.07709347701126755,
+      "p": 0.0009995002498750624
+     },
+     "shin": {
+      "estimate": 0.04516343789654182,
+      "ci_low": 0.017181126110213406,
+      "ci_high": 0.07651134014598929,
+      "p": 0.0009995002498750624
+     }
+    },
+    {
+     "id": "mvm.phase.rest",
+     "segment": "mvm_season_phase",
+     "description": "Model minus market log loss, rest of season",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1464,
+     "estimate": 0.014786086331123103,
+     "ci_low": 0.006453760667316947,
+     "ci_high": 0.02358301434081114,
+     "p": 0.0009995002498750624,
+     "q_bh": 0.023488255872063966,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.015246390960857536,
+      "ci_low": 0.006539745489349873,
+      "ci_high": 0.024471756742883762,
+      "p": 0.001999000499750125
+     },
+     "shin": {
+      "estimate": 0.015300092684322721,
+      "ci_low": 0.006741036472470959,
+      "ci_high": 0.02432758665094219,
+      "p": 0.0009995002498750624
+     }
+    },
+    {
+     "id": "mvm.promoted.first10",
+     "segment": "mvm_promoted",
+     "description": "Model minus market log loss, promoted team's first 10 matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 131,
+     "estimate": 0.06398663847351281,
+     "ci_low": 0.004630401024246457,
+     "ci_high": 0.13183070046381243,
+     "p": 0.03498250874562719,
+     "q_bh": 0.1983452718085402,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.06351420976057277,
+      "ci_low": 0.003925611003821854,
+      "ci_high": 0.13160014691218605,
+      "p": 0.03798100949525238
+     },
+     "shin": {
+      "estimate": 0.0637837162018125,
+      "ci_low": 0.005279895382654876,
+      "ci_high": 0.13172221191636618,
+      "p": 0.03798100949525238
+     }
+    },
+    {
+     "id": "mvm.promoted.later",
+     "segment": "mvm_promoted",
+     "description": "Model minus market log loss, promoted team later matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 355,
+     "estimate": 0.02931940665876335,
+     "ci_low": 0.0113606704974231,
+     "ci_high": 0.04834169253372329,
+     "p": 0.00399800099950025,
+     "q_bh": 0.037581209395302344,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.03155597098983557,
+      "ci_low": 0.012733281326950053,
+      "ci_high": 0.05110435193151329,
+      "p": 0.0029985007496251873
+     },
+     "shin": {
+      "estimate": 0.03136639523791955,
+      "ci_low": 0.012906109344341133,
+      "ci_high": 0.050439689081295785,
+      "p": 0.0029985007496251873
+     }
+    },
+    {
+     "id": "mvm.flb.band0",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.00, 0.20)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 840,
+     "estimate": 0.006150840003621968,
+     "ci_low": -0.001564553139502549,
+     "ci_high": 0.013351796061760172,
+     "p": 0.11694152923538231,
+     "q_bh": 0.23896747278534647,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.006440558765300974,
+      "ci_low": -0.0019773472730338732,
+      "ci_high": 0.014231375221543016,
+      "p": 0.127936031984008
+     },
+     "shin": {
+      "estimate": 0.005176865592300078,
+      "ci_low": -0.003133352332252339,
+      "ci_high": 0.012579592725881206,
+      "p": 0.20589705147426288
+     }
+    },
+    {
+     "id": "mvm.flb.band1",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.20, 0.40)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 3002,
+     "estimate": 0.010858008052796023,
+     "ci_low": 0.006269756534704989,
+     "ci_high": 0.01601809815202222,
+     "p": 0.0009995002498750624,
+     "q_bh": 0.023488255872063966,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.010603914092375592,
+      "ci_low": 0.006249157367683363,
+      "ci_high": 0.015038939852103592,
+      "p": 0.0009995002498750624
+     },
+     "shin": {
+      "estimate": 0.01064882061667499,
+      "ci_low": 0.006289314974007862,
+      "ci_high": 0.015116977801358648,
+      "p": 0.0009995002498750624
+     }
+    },
+    {
+     "id": "mvm.flb.band2",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.40, 0.60)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 986,
+     "estimate": 0.013341609605295427,
+     "ci_low": 0.0038531252385988215,
+     "ci_high": 0.023857435067427775,
+     "p": 0.00399800099950025,
+     "q_bh": 0.037581209395302344,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.01563844687081881,
+      "ci_low": 0.00487506253027307,
+      "ci_high": 0.027045476369780552,
+      "p": 0.0029985007496251873
+     },
+     "shin": {
+      "estimate": 0.017143920152552745,
+      "ci_low": 0.006695450641607386,
+      "ci_high": 0.0287946629889145,
+      "p": 0.001999000499750125
+     }
+    },
+    {
+     "id": "mvm.flb.band3",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.60, 1.00)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 428,
+     "estimate": 0.005200100968739799,
+     "ci_low": -0.009549029660462944,
+     "ci_high": 0.020016281619926437,
+     "p": 0.5087456271864068,
+     "q_bh": 0.7288476973634395,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.008794126735497385,
+      "ci_low": -0.007205554273358161,
+      "ci_high": 0.02447759071373513,
+      "p": 0.29185407296351823
+     },
+     "shin": {
+      "estimate": 0.006572439321778791,
+      "ci_low": -0.008736676878562229,
+      "ci_high": 0.021320370869822487,
+      "p": 0.4047976011994003
+     }
+    },
+    {
+     "id": "mvm.draw",
+     "segment": "mvm_draw",
+     "description": "Model minus market log loss on the draw selection",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": 0.0029106722433368173,
+     "ci_low": -0.0006420391287104359,
+     "ci_high": 0.006609564611787249,
+     "p": 0.1089455272363818,
+     "q_bh": 0.23274726273227023,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.0029459816533573754,
+      "ci_low": -0.0008310406979816811,
+      "ci_high": 0.006812814859305006,
+      "p": 0.1359320339830085
+     },
+     "shin": {
+      "estimate": 0.0029590683926824773,
+      "ci_low": -0.0007049594049502586,
+      "ci_high": 0.006730710765545903,
+      "p": 0.10994502748625687
+     }
+    },
+    {
+     "id": "mvm.encompassing.test_delta",
+     "segment": "mvm_encompassing",
+     "description": "Log loss of the model+market combination minus the recalibrated market alone, both fitted on the tuning window (isolates the model's marginal information)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": -0.00018246147724763895,
+     "ci_low": -0.0008721601199299779,
+     "ci_high": 0.0005023154200994427,
+     "p": 0.6036981509245377,
+     "q_bh": 0.8106803740986649,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0001907479651772647,
+      "ci_low": -0.0008451090345466318,
+      "ci_high": 0.00046098902334261,
+      "p": 0.5717141429285357
+     },
+     "shin": {
+      "estimate": -0.00019684770284632616,
+      "ci_low": -0.0008713960501942157,
+      "ci_high": 0.00047151177956101,
+      "p": 0.5747126436781609
+     }
+    },
+    {
+     "id": "desc.market_recalibration",
+     "segment": "descriptive",
+     "description": "Recalibrated market (power and class constants fitted on the tuning window) minus raw closing market, log loss",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": -0.0007665194251141375,
+     "ci_low": -0.002230302159194026,
+     "ci_high": 0.0007448435635835516,
+     "p": 0.3328335832083958,
+     "q_bh": null,
+     "survives_bh_10pct": false,
+     "in_bh_family": false,
+     "status": "descriptive, not tested",
+     "power": {
+      "estimate": -4.260439576752814e-05,
+      "ci_low": -0.0011935010930625037,
+      "ci_high": 0.001040705328298351,
+      "p": 0.9385307346326837
+     },
+     "shin": {
+      "estimate": -0.00013438154682879715,
+      "ci_low": -0.0012576690413671763,
+      "ci_high": 0.0009650449289019614,
+      "p": 0.8135932033983009
+     }
+    },
+    {
+     "id": "mvm.linemove.slope",
+     "segment": "mvm_line_movement",
+     "description": "Does the close move toward the model: slope of (close - early) on (model - early) probability [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 1752,
+     "estimate": -0.007386233407267703,
+     "ci_low": -0.027474892269437008,
+     "ci_high": 0.012138923227590592,
+     "p": 0.4707646176911544,
+     "q_bh": 0.7288476973634395,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.0013472485122258742,
+      "ci_low": -0.018260454808591363,
+      "ci_high": 0.020238034683845094,
+      "p": 0.881559220389805
+     },
+     "shin": {
+      "estimate": -0.0020826538897824416,
+      "ci_low": -0.02164965288198964,
+      "ci_high": 0.017358394454303247,
+      "p": 0.8445777111444278
+     }
+    },
+    {
+     "id": "coldstart.fix_vs_none.first10",
+     "segment": "cold_start",
+     "description": "Promoted-team prior fix minus no fix, log loss on promoted teams' first 10 matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 131,
+     "estimate": -0.047048092807139556,
+     "ci_low": -0.10450985147206222,
+     "ci_high": 0.0034768384741127823,
+     "p": 0.07496251874062969,
+     "q_bh": 0.23040860522119894,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.047048092807139556,
+      "ci_low": -0.10450985147206222,
+      "ci_high": 0.0034768384741127823,
+      "p": 0.07496251874062969
+     },
+     "shin": {
+      "estimate": -0.047048092807139556,
+      "ci_low": -0.10450985147206222,
+      "ci_high": 0.0034768384741127823,
+      "p": 0.07496251874062969
+     }
+    }
+   ],
+   "bh_survivors": [
+    {
+     "id": "mvm.league.D1",
+     "description": "Model minus closing-market log loss, league D1",
+     "estimate": 0.0273934602115889,
+     "ci": [
+      0.006488759954198709,
+      0.05181291894632845
+     ],
+     "q_bh": 0.0704647676161919
+    },
+    {
+     "id": "mvm.phase.early",
+     "description": "Model minus market log loss, early phase",
+     "estimate": 0.04300645589039941,
+     "ci": [
+      0.01543120521004306,
+      0.07409087046283379
+     ],
+     "q_bh": 0.03131767449608529
+    },
+    {
+     "id": "mvm.phase.rest",
+     "description": "Model minus market log loss, rest of season",
+     "estimate": 0.014786086331123103,
+     "ci": [
+      0.006453760667316947,
+      0.02358301434081114
+     ],
+     "q_bh": 0.023488255872063966
+    },
+    {
+     "id": "mvm.promoted.later",
+     "description": "Model minus market log loss, promoted team later matches",
+     "estimate": 0.02931940665876335,
+     "ci": [
+      0.0113606704974231,
+      0.04834169253372329
+     ],
+     "q_bh": 0.037581209395302344
+    },
+    {
+     "id": "mvm.flb.band1",
+     "description": "Model minus market selection log loss, closing implied prob in [0.20, 0.40)",
+     "estimate": 0.010858008052796023,
+     "ci": [
+      0.006269756534704989,
+      0.01601809815202222
+     ],
+     "q_bh": 0.023488255872063966
+    },
+    {
+     "id": "mvm.flb.band2",
+     "description": "Model minus market selection log loss, closing implied prob in [0.40, 0.60)",
+     "estimate": 0.013341609605295427,
+     "ci": [
+      0.0038531252385988215,
+      0.023857435067427775
+     ],
+     "q_bh": 0.037581209395302344
+    }
+   ],
+   "encompassing_fit": {
+    "method": "proportional",
+    "fitted_on_tuning_matches": 8955,
+    "theta": {
+     "alpha_draw": 0.07333222925790517,
+     "alpha_away": 0.0363076914549135,
+     "beta_market": 1.1724465567914324,
+     "beta_model": -0.08964906374212883
+    },
+    "model_weight": -0.08279393360033092,
+    "model_weight_ci95": [
+     -0.18154012069434342,
+     0.03216008277022449
+    ],
+    "beta_model_ci95": [
+     -0.20119236159795212,
+     0.03470473288211134
+    ],
+    "market_only_recalibration": {
+     "alpha_draw": 0.07723462557311908,
+     "alpha_away": 0.037982144623880415,
+     "beta_market": 1.0911152010988514
+    }
+   },
+   "extras_line_movement": {
+    "label": "early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)",
+    "n_matches": 1752,
+    "movement_on_disagreement_by_size": [
+     {
+      "abs_disagreement": [
+       0,
+       0.02
+      ],
+      "n_selections": 2077,
+      "slope": -0.03942245839486869,
+      "share_close_moves_toward_model": 0.4915743861338469
+     },
+     {
+      "abs_disagreement": [
+       0.02,
+       0.05
+      ],
+      "n_selections": 1907,
+      "slope": -0.01656762126390716,
+      "share_close_moves_toward_model": 0.4714210802307289
+     },
+     {
+      "abs_disagreement": [
+       0.05,
+       1.0
+      ],
+      "n_selections": 1272,
+      "slope": -0.004982029835031008,
+      "share_close_moves_toward_model": 0.5141509433962265
+     }
+    ],
+    "model_favoured_d_gt_0.03": {
+     "n_selections": 1189,
+     "mean_log_close_over_early": -0.002583136492998605,
+     "share_close_prob_above_early": 0.5096719932716569
+    },
+    "model_disfavoured_d_lt_-0.03": {
+     "n_selections": 1164,
+     "mean_log_close_over_early": 1.1674408092928376e-05,
+     "share_close_prob_above_early": 0.5146048109965635
+    },
+    "note": "CLV-style description of probability drift only; no betting P&L is claimed."
+   }
+  },
+  "F3_earlier_2019_20_to_2023_24": {
+   "family": "exploratory",
+   "name": "F3_earlier_2019_20_to_2023_24",
+   "bookmaker": "PS",
+   "n_matches": 8955,
+   "n_claims_in_bh_family": 45,
+   "n_claims_not_estimable": 0,
+   "fdr": 0.1,
+   "n_boot": 600,
+   "claims": [
+    {
+     "id": "eff.league.D1.home_bias",
+     "segment": "league",
+     "description": "League D1: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1530,
+     "estimate": -0.0021233751366935894,
+     "ci_low": -0.02793933388337942,
+     "ci_high": 0.019286290608662843,
+     "p": 0.831946755407654,
+     "q_bh": 0.8319467554076538,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.005579485200750342,
+      "ci_low": -0.03127382617529579,
+      "ci_high": 0.015745281016847166,
+      "p": 0.6056572379367721
+     },
+     "shin": {
+      "estimate": -0.0044577223009424445,
+      "ci_low": -0.030191799033323537,
+      "ci_high": 0.016938440305461742,
+      "p": 0.6888519134775375
+     }
+    },
+    {
+     "id": "eff.league.D1.draw_bias",
+     "segment": "league",
+     "description": "League D1: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1530,
+     "estimate": 0.013236478568208912,
+     "ci_low": -0.008986042640388844,
+     "ci_high": 0.03570149885534461,
+     "p": 0.24958402662229617,
+     "q_bh": 0.3864526863829102,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.01661252166635831,
+      "ci_low": -0.005585370976197937,
+      "ci_high": 0.039040303798877504,
+      "p": 0.1464226289517471
+     },
+     "shin": {
+      "estimate": 0.01533744553209105,
+      "ci_low": -0.006847059803548088,
+      "ci_high": 0.03780959456575928,
+      "p": 0.18635607321131448
+     }
+    },
+    {
+     "id": "eff.league.E0.home_bias",
+     "segment": "league",
+     "description": "League E0: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1900,
+     "estimate": 0.005949543855536856,
+     "ci_low": -0.01182127701373743,
+     "ci_high": 0.025507719048970763,
+     "p": 0.5657237936772047,
+     "q_bh": 0.6318737064242523,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.0026926989101371457,
+      "ci_low": -0.015344224993990869,
+      "ci_high": 0.02223708715410757,
+      "p": 0.7520798668885191
+     },
+     "shin": {
+      "estimate": 0.003800905476149978,
+      "ci_low": -0.014114751692445365,
+      "ci_high": 0.023345232508622336,
+      "p": 0.6755407653910149
+     }
+    },
+    {
+     "id": "eff.league.E0.draw_bias",
+     "segment": "league",
+     "description": "League E0: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1900,
+     "estimate": -0.01217032241810142,
+     "ci_low": -0.030561341939815447,
+     "ci_high": 0.006950412248585534,
+     "p": 0.18635607321131448,
+     "q_bh": 0.32253935748112117,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.008881679867854432,
+      "ci_low": -0.02731712593381567,
+      "ci_high": 0.010237669908502703,
+      "p": 0.3161397670549085
+     },
+     "shin": {
+      "estimate": -0.010222683551074373,
+      "ci_low": -0.02863672199550118,
+      "ci_high": 0.008901024160837394,
+      "p": 0.24292845257903495
+     }
+    },
+    {
+     "id": "eff.league.F1.home_bias",
+     "segment": "league",
+     "description": "League F1: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1725,
+     "estimate": -0.01469015607932466,
+     "ci_low": -0.03844893787735506,
+     "ci_high": 0.006013959564270277,
+     "p": 0.16638935108153077,
+     "q_bh": 0.29950083194675536,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.017702306680639598,
+      "ci_low": -0.04142028528661022,
+      "ci_high": 0.003115641262881569,
+      "p": 0.09983361064891846
+     },
+     "shin": {
+      "estimate": -0.016745291727214437,
+      "ci_low": -0.04048212402797562,
+      "ci_high": 0.004029815722201816,
+      "p": 0.11647254575707154
+     }
+    },
+    {
+     "id": "eff.league.F1.draw_bias",
+     "segment": "league",
+     "description": "League F1: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1725,
+     "estimate": -0.002748991382139182,
+     "ci_low": -0.021561471212215175,
+     "ci_high": 0.017826560816286047,
+     "p": 0.7953410981697171,
+     "q_bh": 0.8134170322190287,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.00014961794248812053,
+      "ci_low": -0.019033360307610332,
+      "ci_high": 0.020503157711109568,
+      "p": 0.9750415973377704
+     },
+     "shin": {
+      "estimate": -0.001195292635071085,
+      "ci_low": -0.020041979778959416,
+      "ci_high": 0.019417008154813196,
+      "p": 0.9450915141430949
+     }
+    },
+    {
+     "id": "eff.league.I1.home_bias",
+     "segment": "league",
+     "description": "League I1: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1900,
+     "estimate": -0.018776806125866657,
+     "ci_low": -0.04019220444438742,
+     "ci_high": 0.0011141621458277998,
+     "p": 0.06988352745424292,
+     "q_bh": 0.1647254575707155,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0218887860108128,
+      "ci_low": -0.04337723067340632,
+      "ci_high": -0.0017844784222965269,
+      "p": 0.03993344425956739
+     },
+     "shin": {
+      "estimate": -0.02084638502762251,
+      "ci_low": -0.04229527532792083,
+      "ci_high": -0.000844340469027638,
+      "p": 0.04991680532445923
+     }
+    },
+    {
+     "id": "eff.league.I1.draw_bias",
+     "segment": "league",
+     "description": "League I1: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1900,
+     "estimate": 0.008670128632452536,
+     "ci_low": -0.010640609351869426,
+     "ci_high": 0.027947055411078007,
+     "p": 0.43261231281198004,
+     "q_bh": 0.540765391014975,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.011643959712374806,
+      "ci_low": -0.0076767904891058844,
+      "ci_high": 0.030923515931924356,
+      "p": 0.28286189683860236
+     },
+     "shin": {
+      "estimate": 0.010412071489027177,
+      "ci_low": -0.008899507516593764,
+      "ci_high": 0.02969175994691598,
+      "p": 0.3427620632279534
+     }
+    },
+    {
+     "id": "eff.league.SP1.home_bias",
+     "segment": "league",
+     "description": "League SP1: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1900,
+     "estimate": 0.005155031864963509,
+     "ci_low": -0.015271996071332459,
+     "ci_high": 0.026141059680631216,
+     "p": 0.6755407653910149,
+     "q_bh": 0.7069612661068762,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.0018427548015893373,
+      "ci_low": -0.018522967362472532,
+      "ci_high": 0.022826148885537884,
+      "p": 0.8951747088186356
+     },
+     "shin": {
+      "estimate": 0.0028945137136706487,
+      "ci_low": -0.017448719356738716,
+      "ci_high": 0.02387232159944951,
+      "p": 0.7986688851913477
+     }
+    },
+    {
+     "id": "eff.league.SP1.draw_bias",
+     "segment": "league",
+     "description": "League SP1: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1900,
+     "estimate": 0.0077511611794202915,
+     "ci_low": -0.012767584927844999,
+     "ci_high": 0.027924328302364635,
+     "p": 0.4525790349417637,
+     "q_bh": 0.5504339614156586,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.010253637390357076,
+      "ci_low": -0.010282148687154663,
+      "ci_high": 0.030423127508902203,
+      "p": 0.34941763727121466
+     },
+     "shin": {
+      "estimate": 0.009160102950978187,
+      "ci_low": -0.01134547444039936,
+      "ci_high": 0.0293347048757489,
+      "p": 0.36938435940099834
+     }
+    },
+    {
+     "id": "eff.phase.home_bias_diff",
+     "segment": "season_phase",
+     "description": "Season phase: home bias, early-phase minus rest (closing)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1476,
+     "estimate": -0.02414269286107236,
+     "ci_low": -0.05042082497972091,
+     "ci_high": -0.0010532597519959577,
+     "p": 0.04658901830282862,
+     "q_bh": 0.12332387197807575,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.02386572802133921,
+      "ci_low": -0.049874732643328284,
+      "ci_high": -0.0008701860800251521,
+      "p": 0.04658901830282862
+     },
+     "shin": {
+      "estimate": -0.023961535666271194,
+      "ci_low": -0.04997178082579915,
+      "ci_high": -0.0009519583689888334,
+      "p": 0.04658901830282862
+     }
+    },
+    {
+     "id": "eff.phase.draw_bias_diff",
+     "segment": "season_phase",
+     "description": "Season phase: draw bias, early-phase minus rest (closing)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1476,
+     "estimate": 0.01241641174098712,
+     "ci_low": -0.010101717132831709,
+     "ci_high": 0.035666230661079844,
+     "p": 0.2795341098169717,
+     "q_bh": 0.39309484193011646,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.012192821739401128,
+      "ci_low": -0.01040403616267853,
+      "ci_high": 0.03548980744378561,
+      "p": 0.2895174708818636
+     },
+     "shin": {
+      "estimate": 0.01229514436938631,
+      "ci_low": -0.010239017653835456,
+      "ci_high": 0.03556409371147265,
+      "p": 0.28286189683860236
+     }
+    },
+    {
+     "id": "eff.flb.close.band0_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.00, 0.20)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 5093,
+     "estimate": -0.0058361988001324,
+     "ci_low": -0.014115513191460108,
+     "ci_high": 0.003251889678215874,
+     "p": 0.22628951747088186,
+     "q_bh": 0.3771491957848031,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0013220634781114368,
+      "ci_low": -0.009878543689650424,
+      "ci_high": 0.007673328965768487,
+      "p": 0.7254575707154742
+     },
+     "shin": {
+      "estimate": -0.002387142692988061,
+      "ci_low": -0.011036602282710275,
+      "ci_high": 0.006730831221814394,
+      "p": 0.5856905158069884
+     }
+    },
+    {
+     "id": "eff.flb.close.band1_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.20, 0.40)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 14395,
+     "estimate": -0.0035725704802311285,
+     "ci_low": -0.008151277109261461,
+     "ci_high": 0.0009941112533094624,
+     "p": 0.129783693843594,
+     "q_bh": 0.24334442595673877,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0012140939729294118,
+      "ci_low": -0.005781643920924124,
+      "ci_high": 0.003282914769483276,
+      "p": 0.6056572379367721
+     },
+     "shin": {
+      "estimate": -0.0018884773679815827,
+      "ci_low": -0.006531502800206099,
+      "ci_high": 0.002559298429251938,
+      "p": 0.40266222961730447
+     }
+    },
+    {
+     "id": "eff.flb.close.band2_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.40, 0.60)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 4890,
+     "estimate": 0.007991231272153653,
+     "ci_low": -0.00520477066412098,
+     "ci_high": 0.021186153693134573,
+     "p": 0.24292845257903495,
+     "q_bh": 0.3864526863829102,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.003076244002006426,
+      "ci_low": -0.01093822510782522,
+      "ci_high": 0.016602661060542957,
+      "p": 0.6089850249584027
+     },
+     "shin": {
+      "estimate": 0.0038616747642641054,
+      "ci_low": -0.009673768435133144,
+      "ci_high": 0.01735424735371405,
+      "p": 0.5357737104825291
+     }
+    },
+    {
+     "id": "eff.flb.close.band3_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.60, 1.00)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 2487,
+     "estimate": 0.01691748758792523,
+     "ci_low": -0.0015825353122910437,
+     "ci_high": 0.03539231564909658,
+     "p": 0.07986688851913477,
+     "q_bh": 0.17114333254100308,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.003545987037668432,
+      "ci_low": -0.015374310716161937,
+      "ci_high": 0.021246794855719932,
+      "p": 0.6688851913477537
+     },
+     "shin": {
+      "estimate": 0.007952203023347463,
+      "ci_low": -0.010645095578855512,
+      "ci_high": 0.02662153785112944,
+      "p": 0.3527454242928453
+     }
+    },
+    {
+     "id": "eff.flb.close.slope",
+     "segment": "favourite_longshot",
+     "description": "FLB close: logit slope of outcome on implied probability (1 = calibrated)",
+     "uses_early_snapshot": false,
+     "null": 1.0,
+     "n": 8955,
+     "estimate": 1.0384271009794215,
+     "ci_low": 0.9913677973299113,
+     "ci_high": 1.0876181869584356,
+     "p": 0.11980033277870217,
+     "q_bh": 0.23439195543659122,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.9972660861433789,
+      "ci_low": 0.9511092406282923,
+      "ci_high": 1.0448654639150567,
+      "p": 0.9916805324459235
+     },
+     "shin": {
+      "estimate": 1.0096780470529967,
+      "ci_low": 0.9634460933893244,
+      "ci_high": 1.0577569637090907,
+      "p": 0.6821963394342762
+     }
+    },
+    {
+     "id": "eff.flb.early.band0_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.00, 0.20) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 4947,
+     "estimate": -0.005425994684672686,
+     "ci_low": -0.014659329122186893,
+     "ci_high": 0.0033676899090284078,
+     "p": 0.259567387687188,
+     "q_bh": 0.3864526863829102,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 5.54172352188033e-05,
+      "ci_low": -0.009295195227629888,
+      "ci_high": 0.009218320588652781,
+      "p": 0.9816971713810316
+     },
+     "shin": {
+      "estimate": -0.0013384564238120439,
+      "ci_low": -0.010482501633012333,
+      "ci_high": 0.007865319327354134,
+      "p": 0.762063227953411
+     }
+    },
+    {
+     "id": "eff.flb.early.band1_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.20, 0.40) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 14514,
+     "estimate": -0.002656983247695089,
+     "ci_low": -0.007422992005098831,
+     "ci_high": 0.001894783605583518,
+     "p": 0.26622296173044924,
+     "q_bh": 0.3864526863829102,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0008455218294131349,
+      "ci_low": -0.005443001922231298,
+      "ci_high": 0.003954019621053227,
+      "p": 0.6955074875207987
+     },
+     "shin": {
+      "estimate": -0.001421320265831896,
+      "ci_low": -0.0061298953190634786,
+      "ci_high": 0.003190565515165808,
+      "p": 0.5391014975041597
+     }
+    },
+    {
+     "id": "eff.flb.early.band2_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.40, 0.60) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 4945,
+     "estimate": 0.004393405537360671,
+     "ci_low": -0.009101746393441884,
+     "ci_high": 0.017032775804459634,
+     "p": 0.4891846921797005,
+     "q_bh": 0.5644438755919621,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.003833623710810605,
+      "ci_low": -0.009400261238081839,
+      "ci_high": 0.01617964727837905,
+      "p": 0.562396006655574
+     },
+     "shin": {
+      "estimate": 0.004463721032691509,
+      "ci_low": -0.008714417563477262,
+      "ci_high": 0.017176593391065417,
+      "p": 0.5058236272878536
+     }
+    },
+    {
+     "id": "eff.flb.early.band3_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.60, 1.00) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 2435,
+     "estimate": 0.017938587342863965,
+     "ci_low": -0.0015602693726197484,
+     "ci_high": 0.03728582013052121,
+     "p": 0.07321131447587355,
+     "q_bh": 0.1647254575707155,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.002707412118582335,
+      "ci_low": -0.02164820107773992,
+      "ci_high": 0.01576034874141363,
+      "p": 0.7953410981697171
+     },
+     "shin": {
+      "estimate": 0.0020999286735912787,
+      "ci_low": -0.016737758533865506,
+      "ci_high": 0.020544462599110608,
+      "p": 0.7753743760399334
+     }
+    },
+    {
+     "id": "eff.flb.early.slope",
+     "segment": "favourite_longshot",
+     "description": "FLB early: logit slope of outcome on implied probability (1 = calibrated) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 1.0,
+     "n": 8947,
+     "estimate": 1.0404066847307907,
+     "ci_low": 0.9924335467424181,
+     "ci_high": 1.0915471412429274,
+     "p": 0.1064891846921797,
+     "q_bh": 0.21781878687036757,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.9965279603795645,
+      "ci_low": 0.9498622394362541,
+      "ci_high": 1.045554157137921,
+      "p": 0.9450915141430949
+     },
+     "shin": {
+      "estimate": 1.00972021284166,
+      "ci_low": 0.962660814189619,
+      "ci_high": 1.059452259844526,
+      "p": 0.64891846921797
+     }
+    },
+    {
+     "id": "eff.draw.close.bias",
+     "segment": "draw",
+     "description": "Draw: mean(draw outcome - closing draw prob)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 8955,
+     "estimate": 0.0026339073281223015,
+     "ci_low": -0.005243551083161143,
+     "ci_high": 0.010883618532718537,
+     "p": 0.5757071547420965,
+     "q_bh": 0.6318737064242523,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.005571112221664251,
+      "ci_low": -0.0023402253774833623,
+      "ci_high": 0.013862262129581542,
+      "p": 0.2562396006655574
+     },
+     "shin": {
+      "estimate": 0.004373918990236802,
+      "ci_low": -0.0035168163480279882,
+      "ci_high": 0.012643650470380912,
+      "p": 0.4226289517470882
+     }
+    },
+    {
+     "id": "eff.draw.early.bias",
+     "segment": "draw",
+     "description": "Draw: mean(draw outcome - early draw prob) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 8947,
+     "estimate": 0.004986509965413,
+     "ci_low": -0.002922983584497388,
+     "ci_high": 0.013346832985891443,
+     "p": 0.33943427620632277,
+     "q_bh": 0.46286492209953106,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.008187753085673061,
+      "ci_low": 0.0002721053625902858,
+      "ci_high": 0.016572610714349848,
+      "p": 0.04991680532445923
+     },
+     "shin": {
+      "estimate": 0.006912759970856523,
+      "ci_low": -0.000998287506629337,
+      "ci_high": 0.015273157655237452,
+      "p": 0.11314475873544093
+     }
+    },
+    {
+     "id": "eff.draw.close.slope",
+     "segment": "draw",
+     "description": "Draw: logit slope of draw outcome on closing draw prob (1 = calibrated)",
+     "uses_early_snapshot": false,
+     "null": 1.0,
+     "n": 8955,
+     "estimate": 1.0752663715099524,
+     "ci_low": 0.8995050701215127,
+     "ci_high": 1.2619290958552998,
+     "p": 0.389351081530782,
+     "q_bh": 0.5005942476824341,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 1.0011110554977798,
+      "ci_low": 0.834875699967331,
+      "ci_high": 1.1763217079206547,
+      "p": 0.9883527454242929
+     },
+     "shin": {
+      "estimate": 1.0368719587528243,
+      "ci_low": 0.8663755444535897,
+      "ci_high": 1.2176534027862733,
+      "p": 0.6722129783693843
+     }
+    },
+    {
+     "id": "eff.promoted.first10.win_bias",
+     "segment": "promoted",
+     "description": "Promoted team's win: mean(outcome - closing prob), its first 10 matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 670,
+     "estimate": -0.013780969286380798,
+     "ci_low": -0.040655948621720166,
+     "ci_high": 0.016021478639892776,
+     "p": 0.3826955074875208,
+     "q_bh": 0.5005942476824341,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.011720983349765929,
+      "ci_low": -0.03869086996423491,
+      "ci_high": 0.01803763814247568,
+      "p": 0.4525790349417637
+     },
+     "shin": {
+      "estimate": -0.012058147702812954,
+      "ci_low": -0.03900934368779477,
+      "ci_high": 0.0177110085627087,
+      "p": 0.4425956738768719
+     }
+    },
+    {
+     "id": "eff.promoted.later.win_bias",
+     "segment": "promoted",
+     "description": "Promoted team's win: mean(outcome - closing prob), later matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1804,
+     "estimate": -0.006133023609671305,
+     "ci_low": -0.023057204073777027,
+     "ci_high": 0.011066474730240507,
+     "p": 0.4891846921797005,
+     "q_bh": 0.5644438755919621,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.004134774499467551,
+      "ci_low": -0.02105514231844513,
+      "ci_high": 0.012982701600506172,
+      "p": 0.632279534109817
+     },
+     "shin": {
+      "estimate": -0.004432571197371382,
+      "ci_low": -0.021343880624346664,
+      "ci_high": 0.012705342790139261,
+      "p": 0.6189683860232945
+     }
+    },
+    {
+     "id": "eff.promoted.diff.win_bias",
+     "segment": "promoted",
+     "description": "Promoted team's win bias: first 10 minus later",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 2474,
+     "estimate": -0.007647945676709493,
+     "ci_low": -0.038240323426616055,
+     "ci_high": 0.030368156764350576,
+     "p": 0.6589018302828619,
+     "q_bh": 0.7059662467316377,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.007586208850298378,
+      "ci_low": -0.03808289302423183,
+      "ci_high": 0.030353420229096876,
+      "p": 0.6622296173044925
+     },
+     "shin": {
+      "estimate": -0.007625576505441572,
+      "ci_low": -0.03812461072517982,
+      "ci_high": 0.0303260045956838,
+      "p": 0.6555740432612313
+     }
+    },
+    {
+     "id": "eff.snapshot.movement_slope",
+     "segment": "snapshot",
+     "description": "Does the line move toward the outcome: slope of (outcome - early prob) on (close - early) prob (0 = no information in the move, 1 = closing fully efficient) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 8947,
+     "estimate": 0.9620345822073543,
+     "ci_low": 0.6759825158196949,
+     "ci_high": 1.2577908845059578,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.9310486780053493,
+      "ci_low": 0.653931872512416,
+      "ci_high": 1.2123503993464646,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": 0.9401644080032417,
+      "ci_low": 0.6616903746588061,
+      "ci_high": 1.224273205146977,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "eff.snapshot.logloss_close_minus_early",
+     "segment": "snapshot",
+     "description": "Closing minus early log loss (negative = closing better calibrated) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 8947,
+     "estimate": -0.0027153401406198015,
+     "ci_low": -0.004292231102968398,
+     "ci_high": -0.0011251752518953116,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.002691459854525865,
+      "ci_low": -0.0042913415912917904,
+      "ci_high": -0.0010362157317102593,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": -0.0027133526030817374,
+      "ci_low": -0.004331698877402708,
+      "ci_high": -0.0010792351344366096,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "mvm.league.D1",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league D1",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1530,
+     "estimate": 0.025247218810818567,
+     "ci_low": 0.015644761319198362,
+     "ci_high": 0.03472975921863175,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.024680679074696715,
+      "ci_low": 0.014656693729379234,
+      "ci_high": 0.03454802604805122,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": 0.024875146935118678,
+      "ci_low": 0.01498310054985484,
+      "ci_high": 0.03464938319073687,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "mvm.league.E0",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league E0",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1900,
+     "estimate": 0.021627790646823852,
+     "ci_low": 0.013214872993585178,
+     "ci_high": 0.03087630775318159,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.02164537316297763,
+      "ci_low": 0.013034369807946838,
+      "ci_high": 0.031459658487311463,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": 0.021619393765386588,
+      "ci_low": 0.013022175476951994,
+      "ci_high": 0.031199764560719326,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "mvm.league.F1",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league F1",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1725,
+     "estimate": 0.022635622132038145,
+     "ci_low": 0.014313273499032898,
+     "ci_high": 0.03159419745385114,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.02268361736752234,
+      "ci_low": 0.014199097507858372,
+      "ci_high": 0.031921767258427866,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": 0.02270658061359847,
+      "ci_low": 0.014486910722345077,
+      "ci_high": 0.031933126417982766,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "mvm.league.I1",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league I1",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1900,
+     "estimate": 0.023423929798363823,
+     "ci_low": 0.01546970541300953,
+     "ci_high": 0.03196315709304173,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.02355934998250465,
+      "ci_low": 0.015350890212171658,
+      "ci_high": 0.032191479321899336,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": 0.023595201009704074,
+      "ci_low": 0.015452919522369405,
+      "ci_high": 0.03222213052830948,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "mvm.league.SP1",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league SP1",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1900,
+     "estimate": 0.020408835073890692,
+     "ci_low": 0.011480780078394967,
+     "ci_high": 0.028869861728485692,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.02064841867835871,
+      "ci_low": 0.011604122691869681,
+      "ci_high": 0.02927926035318875,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": 0.02068976652163646,
+      "ci_low": 0.011648145702042858,
+      "ci_high": 0.02924470434052516,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "mvm.phase.early",
+     "segment": "mvm_season_phase",
+     "description": "Model minus market log loss, early phase",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1476,
+     "estimate": 0.02879766969005627,
+     "ci_low": 0.01740687582263502,
+     "ci_high": 0.04116751184561023,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.02898804163817872,
+      "ci_low": 0.017699587496045513,
+      "ci_high": 0.042086365203096755,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": 0.028920168538265466,
+      "ci_low": 0.017709969406263685,
+      "ci_high": 0.04176467452641273,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "mvm.phase.rest",
+     "segment": "mvm_season_phase",
+     "description": "Model minus market log loss, rest of season",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 7479,
+     "estimate": 0.0213323155478064,
+     "ci_low": 0.0169001319185973,
+     "ci_high": 0.025706002044709266,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.021289650882552223,
+      "ci_low": 0.0169037508454679,
+      "ci_high": 0.02573640495192968,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": 0.02136113705983295,
+      "ci_low": 0.01703336901823374,
+      "ci_high": 0.025773590787374002,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "mvm.promoted.first10",
+     "segment": "mvm_promoted",
+     "description": "Model minus market log loss, promoted team's first 10 matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 640,
+     "estimate": 0.0624679007851075,
+     "ci_low": 0.03601199573061836,
+     "ci_high": 0.08834273232186271,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.06350878951446796,
+      "ci_low": 0.03794255751184062,
+      "ci_high": 0.089557196793546,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": 0.06312393631412105,
+      "ci_low": 0.03736024549842666,
+      "ci_high": 0.08896946062425443,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "mvm.promoted.later",
+     "segment": "mvm_promoted",
+     "description": "Model minus market log loss, promoted team later matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1717,
+     "estimate": 0.027302817488355068,
+     "ci_low": 0.01751158480432436,
+     "ci_high": 0.037518095955326736,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.02764429283325662,
+      "ci_low": 0.01772200811976971,
+      "ci_high": 0.03794191477693545,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": 0.027679795921692105,
+      "ci_low": 0.01755991465561084,
+      "ci_high": 0.03792788895883531,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "mvm.flb.band0",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.00, 0.20)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 5093,
+     "estimate": 0.0105703227716513,
+     "ci_low": 0.006590342227156607,
+     "ci_high": 0.014184441612957977,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.010556877524510499,
+      "ci_low": 0.006531881816443573,
+      "ci_high": 0.014271705641065119,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": 0.010793232153551593,
+      "ci_low": 0.006823099794766233,
+      "ci_high": 0.014494072230416278,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "mvm.flb.band1",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.20, 0.40)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 14395,
+     "estimate": 0.009420204178447132,
+     "ci_low": 0.007216901442395953,
+     "ci_high": 0.011434355096067652,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.009406539698225578,
+      "ci_low": 0.007208567057469313,
+      "ci_high": 0.011511540625973142,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": 0.009412997638180615,
+      "ci_low": 0.00714341449381133,
+      "ci_high": 0.011498240340005,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "mvm.flb.band2",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.40, 0.60)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 4890,
+     "estimate": 0.01974237910529251,
+     "ci_low": 0.014810548017926235,
+     "ci_high": 0.024958092031963898,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.019217904940039825,
+      "ci_low": 0.01405441278562172,
+      "ci_high": 0.024381770932019924,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": 0.01927740924003785,
+      "ci_low": 0.014262808102193323,
+      "ci_high": 0.02431903945605858,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "mvm.flb.band3",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.60, 1.00)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 2487,
+     "estimate": 0.016150389168424206,
+     "ci_low": 0.008730477007131523,
+     "ci_high": 0.023017938408131818,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.016819670643399787,
+      "ci_low": 0.009578427051970172,
+      "ci_high": 0.024327598198687756,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": 0.0165946466345349,
+      "ci_low": 0.009281397397278257,
+      "ci_high": 0.023926886048027174,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "mvm.draw",
+     "segment": "mvm_draw",
+     "description": "Model minus market log loss on the draw selection",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 8955,
+     "estimate": 0.0034768257236537235,
+     "ci_low": 0.0018172145139045471,
+     "ci_high": 0.005090751098146985,
+     "p": 0.0033277870216306157,
+     "q_bh": 0.009359400998336107,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.003422704896788762,
+      "ci_low": 0.0017009200479653314,
+      "ci_high": 0.005134862853596014,
+      "p": 0.0033277870216306157
+     },
+     "shin": {
+      "estimate": 0.003460295944105619,
+      "ci_low": 0.0017707209939046523,
+      "ci_high": 0.005126460638708524,
+      "p": 0.0033277870216306157
+     }
+    },
+    {
+     "id": "mvm.linemove.slope",
+     "segment": "mvm_line_movement",
+     "description": "Does the close move toward the model: slope of (close - early) on (model - early) probability [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 8947,
+     "estimate": -0.00816851388311641,
+     "ci_low": -0.0177590411944777,
+     "ci_high": 0.00017795604224363237,
+     "p": 0.056572379367720464,
+     "q_bh": 0.14143094841930115,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.006157992475116643,
+      "ci_low": -0.015510809935176496,
+      "ci_high": 0.001993400747307569,
+      "p": 0.1464226289517471
+     },
+     "shin": {
+      "estimate": -0.006971023180299302,
+      "ci_low": -0.016326297649367674,
+      "ci_high": 0.0010819591767195617,
+      "p": 0.11647254575707154
+     }
+    }
+   ],
+   "bh_survivors": [
+    {
+     "id": "eff.snapshot.movement_slope",
+     "description": "Does the line move toward the outcome: slope of (outcome - early prob) on (close - early) prob (0 = no information in the move, 1 = closing fully efficient) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "estimate": 0.9620345822073543,
+     "ci": [
+      0.6759825158196949,
+      1.2577908845059578
+     ],
+     "q_bh": 0.009359400998336107
+    },
+    {
+     "id": "eff.snapshot.logloss_close_minus_early",
+     "description": "Closing minus early log loss (negative = closing better calibrated) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "estimate": -0.0027153401406198015,
+     "ci": [
+      -0.004292231102968398,
+      -0.0011251752518953116
+     ],
+     "q_bh": 0.009359400998336107
+    },
+    {
+     "id": "mvm.league.D1",
+     "description": "Model minus closing-market log loss, league D1",
+     "estimate": 0.025247218810818567,
+     "ci": [
+      0.015644761319198362,
+      0.03472975921863175
+     ],
+     "q_bh": 0.009359400998336107
+    },
+    {
+     "id": "mvm.league.E0",
+     "description": "Model minus closing-market log loss, league E0",
+     "estimate": 0.021627790646823852,
+     "ci": [
+      0.013214872993585178,
+      0.03087630775318159
+     ],
+     "q_bh": 0.009359400998336107
+    },
+    {
+     "id": "mvm.league.F1",
+     "description": "Model minus closing-market log loss, league F1",
+     "estimate": 0.022635622132038145,
+     "ci": [
+      0.014313273499032898,
+      0.03159419745385114
+     ],
+     "q_bh": 0.009359400998336107
+    },
+    {
+     "id": "mvm.league.I1",
+     "description": "Model minus closing-market log loss, league I1",
+     "estimate": 0.023423929798363823,
+     "ci": [
+      0.01546970541300953,
+      0.03196315709304173
+     ],
+     "q_bh": 0.009359400998336107
+    },
+    {
+     "id": "mvm.league.SP1",
+     "description": "Model minus closing-market log loss, league SP1",
+     "estimate": 0.020408835073890692,
+     "ci": [
+      0.011480780078394967,
+      0.028869861728485692
+     ],
+     "q_bh": 0.009359400998336107
+    },
+    {
+     "id": "mvm.phase.early",
+     "description": "Model minus market log loss, early phase",
+     "estimate": 0.02879766969005627,
+     "ci": [
+      0.01740687582263502,
+      0.04116751184561023
+     ],
+     "q_bh": 0.009359400998336107
+    },
+    {
+     "id": "mvm.phase.rest",
+     "description": "Model minus market log loss, rest of season",
+     "estimate": 0.0213323155478064,
+     "ci": [
+      0.0169001319185973,
+      0.025706002044709266
+     ],
+     "q_bh": 0.009359400998336107
+    },
+    {
+     "id": "mvm.promoted.first10",
+     "description": "Model minus market log loss, promoted team's first 10 matches",
+     "estimate": 0.0624679007851075,
+     "ci": [
+      0.03601199573061836,
+      0.08834273232186271
+     ],
+     "q_bh": 0.009359400998336107
+    },
+    {
+     "id": "mvm.promoted.later",
+     "description": "Model minus market log loss, promoted team later matches",
+     "estimate": 0.027302817488355068,
+     "ci": [
+      0.01751158480432436,
+      0.037518095955326736
+     ],
+     "q_bh": 0.009359400998336107
+    },
+    {
+     "id": "mvm.flb.band0",
+     "description": "Model minus market selection log loss, closing implied prob in [0.00, 0.20)",
+     "estimate": 0.0105703227716513,
+     "ci": [
+      0.006590342227156607,
+      0.014184441612957977
+     ],
+     "q_bh": 0.009359400998336107
+    },
+    {
+     "id": "mvm.flb.band1",
+     "description": "Model minus market selection log loss, closing implied prob in [0.20, 0.40)",
+     "estimate": 0.009420204178447132,
+     "ci": [
+      0.007216901442395953,
+      0.011434355096067652
+     ],
+     "q_bh": 0.009359400998336107
+    },
+    {
+     "id": "mvm.flb.band2",
+     "description": "Model minus market selection log loss, closing implied prob in [0.40, 0.60)",
+     "estimate": 0.01974237910529251,
+     "ci": [
+      0.014810548017926235,
+      0.024958092031963898
+     ],
+     "q_bh": 0.009359400998336107
+    },
+    {
+     "id": "mvm.flb.band3",
+     "description": "Model minus market selection log loss, closing implied prob in [0.60, 1.00)",
+     "estimate": 0.016150389168424206,
+     "ci": [
+      0.008730477007131523,
+      0.023017938408131818
+     ],
+     "q_bh": 0.009359400998336107
+    },
+    {
+     "id": "mvm.draw",
+     "description": "Model minus market log loss on the draw selection",
+     "estimate": 0.0034768257236537235,
+     "ci": [
+      0.0018172145139045471,
+      0.005090751098146985
+     ],
+     "q_bh": 0.009359400998336107
+    }
+   ],
+   "encompassing_fit": null,
+   "extras_line_movement": {
+    "label": "early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)",
+    "n_matches": 8947,
+    "movement_on_disagreement_by_size": [
+     {
+      "abs_disagreement": [
+       0,
+       0.02
+      ],
+      "n_selections": 9714,
+      "slope": -0.04133212314280159,
+      "share_close_moves_toward_model": 0.48548486720197653
+     },
+     {
+      "abs_disagreement": [
+       0.02,
+       0.05
+      ],
+      "n_selections": 9032,
+      "slope": -0.010758553440854038,
+      "share_close_moves_toward_model": 0.49025686448184236
+     },
+     {
+      "abs_disagreement": [
+       0.05,
+       1.0
+      ],
+      "n_selections": 8095,
+      "slope": -0.007322283312678983,
+      "share_close_moves_toward_model": 0.4820259419394688
+     }
+    ],
+    "model_favoured_d_gt_0.03": {
+     "n_selections": 6745,
+     "mean_log_close_over_early": -0.007879647456393624,
+     "share_close_prob_above_early": 0.4772424017790956
+    },
+    "model_disfavoured_d_lt_-0.03": {
+     "n_selections": 6600,
+     "mean_log_close_over_early": -0.0027533620586088965,
+     "share_close_prob_above_early": 0.5134848484848484
+    },
+    "note": "CLV-style description of probability drift only; no betting P&L is claimed."
+   }
+  },
+  "F4_team_2015_16_all": {
+   "family": "team_block",
+   "name": "F4_team_2015_16_all",
+   "bookmaker": "PS",
+   "n_matches": 1520,
+   "n_claims_in_bh_family": 44,
+   "n_claims_not_estimable": 0,
+   "fdr": 0.1,
+   "n_boot": 2000,
+   "claims": [
+    {
+     "id": "eff.league.E0.home_bias",
+     "segment": "league",
+     "description": "League E0: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": -0.033164746097383874,
+     "ci_low": -0.08125719215250274,
+     "ci_high": 0.016142292981246902,
+     "p": 0.18490754622688654,
+     "q_bh": 0.45199622411016704,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.035669109266580616,
+      "ci_low": -0.08369913415920083,
+      "ci_high": 0.013420336065866706,
+      "p": 0.15592203898050974
+     },
+     "shin": {
+      "estimate": -0.03490462719595208,
+      "ci_low": -0.08302569247731036,
+      "ci_high": 0.01425376040932496,
+      "p": 0.16591704147926037
+     }
+    },
+    {
+     "id": "eff.league.E0.draw_bias",
+     "segment": "league",
+     "description": "League E0: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.025759049444845607,
+     "ci_low": -0.020405447326738473,
+     "ci_high": 0.06973764308415285,
+     "p": 0.2638680659670165,
+     "q_bh": 0.5528664239308918,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.027736857625740886,
+      "ci_low": -0.018317974532056365,
+      "ci_high": 0.0717401299311772,
+      "p": 0.2318840579710145
+     },
+     "shin": {
+      "estimate": 0.026955044585099012,
+      "ci_low": -0.019151796046729112,
+      "ci_high": 0.07095177837002863,
+      "p": 0.24687656171914044
+     }
+    },
+    {
+     "id": "eff.league.F1.home_bias",
+     "segment": "league",
+     "description": "League F1: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": -0.021394963954816142,
+     "ci_low": -0.07044803912198745,
+     "ci_high": 0.026094907094096034,
+     "p": 0.3888055972013993,
+     "q_bh": 0.7405897051474263,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.02377356333304564,
+      "ci_low": -0.0728213068911852,
+      "ci_high": 0.023528793325622688,
+      "p": 0.3448275862068966
+     },
+     "shin": {
+      "estimate": -0.023064623853103677,
+      "ci_low": -0.07212639443083903,
+      "ci_high": 0.024255759122211736,
+      "p": 0.3618190904547726
+     }
+    },
+    {
+     "id": "eff.league.F1.draw_bias",
+     "segment": "league",
+     "description": "League F1: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.00932052025656175,
+     "ci_low": -0.034941554507291,
+     "ci_high": 0.05493512331282542,
+     "p": 0.6966516741629185,
+     "q_bh": 0.8757906760905261,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.01093577644152594,
+      "ci_low": -0.0332787364363587,
+      "ci_high": 0.05665117477764996,
+      "p": 0.6486756621689156
+     },
+     "shin": {
+      "estimate": 0.010226379825454445,
+      "ci_low": -0.034012369676371376,
+      "ci_high": 0.055886071201703455,
+      "p": 0.6666666666666666
+     }
+    },
+    {
+     "id": "eff.league.I1.home_bias",
+     "segment": "league",
+     "description": "League I1: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.015574173074708741,
+     "ci_low": -0.0277610697024524,
+     "ci_high": 0.06260206552866876,
+     "p": 0.5047476261869065,
+     "q_bh": 0.7703734339726689,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.013120860832955402,
+      "ci_low": -0.03045365210982015,
+      "ci_high": 0.06036942026033295,
+      "p": 0.5697151424287856
+     },
+     "shin": {
+      "estimate": 0.013905516488335505,
+      "ci_low": -0.02951576416477517,
+      "ci_high": 0.06109646724671889,
+      "p": 0.5487256371814093
+     }
+    },
+    {
+     "id": "eff.league.I1.draw_bias",
+     "segment": "league",
+     "description": "League I1: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": -0.00938225058796165,
+     "ci_low": -0.05188681669528507,
+     "ci_high": 0.03456761891148238,
+     "p": 0.6816591704147926,
+     "q_bh": 0.8757906760905261,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.007379933566349628,
+      "ci_low": -0.04986862537488441,
+      "ci_high": 0.036592354472278904,
+      "p": 0.7456271864067966
+     },
+     "shin": {
+      "estimate": -0.008263618050566229,
+      "ci_low": -0.05077017698600352,
+      "ci_high": 0.035694367443689826,
+      "p": 0.719640179910045
+     }
+    },
+    {
+     "id": "eff.league.SP1.home_bias",
+     "segment": "league",
+     "description": "League SP1: mean(outcome - closing prob) for home",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.01161712240046292,
+     "ci_low": -0.033757436134814855,
+     "ci_high": 0.058136495641593136,
+     "p": 0.6256871564217891,
+     "q_bh": 0.8422455438947193,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.00848453062775187,
+      "ci_low": -0.0367344386279603,
+      "ci_high": 0.05522226579821357,
+      "p": 0.719640179910045
+     },
+     "shin": {
+      "estimate": 0.009523933922148842,
+      "ci_low": -0.035728564076855145,
+      "ci_high": 0.05625979169167441,
+      "p": 0.6786606696651675
+     }
+    },
+    {
+     "id": "eff.league.SP1.draw_bias",
+     "segment": "league",
+     "description": "League SP1: mean(outcome - closing prob) for draw",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.0021773601937806145,
+     "ci_low": -0.038385431076824066,
+     "ci_high": 0.04564396364003472,
+     "p": 0.9105447276361819,
+     "q_bh": 0.9358111641853493,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.004713216731288648,
+      "ci_low": -0.03596747195077528,
+      "ci_high": 0.048121965074661564,
+      "p": 0.8225887056471765
+     },
+     "shin": {
+      "estimate": 0.003612133408743744,
+      "ci_low": -0.037006834180001856,
+      "ci_high": 0.04705571204919726,
+      "p": 0.863568215892054
+     }
+    },
+    {
+     "id": "eff.phase.home_bias_diff",
+     "segment": "season_phase",
+     "description": "Season phase: home bias, early-phase minus rest (closing)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 240,
+     "estimate": -0.043665526588170855,
+     "ci_low": -0.10646771421051864,
+     "ci_high": 0.023145269742022752,
+     "p": 0.21489255372313842,
+     "q_bh": 0.4976459138851627,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.04358442729914605,
+      "ci_low": -0.10691557586301867,
+      "ci_high": 0.023381478109216314,
+      "p": 0.21889055472263869
+     },
+     "shin": {
+      "estimate": -0.0436139116711974,
+      "ci_low": -0.10676282234650789,
+      "ci_high": 0.023293056044931443,
+      "p": 0.2178910544727636
+     }
+    },
+    {
+     "id": "eff.phase.draw_bias_diff",
+     "segment": "season_phase",
+     "description": "Season phase: draw bias, early-phase minus rest (closing)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 240,
+     "estimate": -0.003674321718827068,
+     "ci_low": -0.06771027326346207,
+     "ci_high": 0.06058062148720504,
+     "p": 0.9145427286356822,
+     "q_bh": 0.9358111641853493,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.003813291221954981,
+      "ci_low": -0.06778788765351412,
+      "ci_high": 0.06049601415816137,
+      "p": 0.912543728135932
+     },
+     "shin": {
+      "estimate": -0.003765066867728633,
+      "ci_low": -0.0677777796868748,
+      "ci_high": 0.060503209448721416,
+      "p": 0.9135432283858071
+     }
+    },
+    {
+     "id": "eff.flb.close.band0_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.00, 0.20)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 801,
+     "estimate": -0.0030253770696076652,
+     "ci_low": -0.02605422585375842,
+     "ci_high": 0.020239072645178584,
+     "p": 0.7746126936531734,
+     "q_bh": 0.9211610411010711,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.006345951959405758,
+      "ci_low": -0.01632892512414978,
+      "ci_high": 0.030051721743122893,
+      "p": 0.6036981509245377
+     },
+     "shin": {
+      "estimate": 0.004165450879987946,
+      "ci_low": -0.018808849110915696,
+      "ci_high": 0.02754083994222054,
+      "p": 0.7406296851574213
+     }
+    },
+    {
+     "id": "eff.flb.close.band1_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.20, 0.40)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 2513,
+     "estimate": 0.005460740781360441,
+     "ci_low": -0.00680565817157465,
+     "ci_high": 0.017324541681649396,
+     "p": 0.39080459770114945,
+     "q_bh": 0.7405897051474263,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.004943534793224294,
+      "ci_low": -0.007631463775188647,
+      "ci_high": 0.017158264866424574,
+      "p": 0.44877561219390305
+     },
+     "shin": {
+      "estimate": 0.005044474147232997,
+      "ci_low": -0.007376098934551978,
+      "ci_high": 0.017212791063849972,
+      "p": 0.43478260869565216
+     }
+    },
+    {
+     "id": "eff.flb.close.band2_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.40, 0.60)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 842,
+     "estimate": -0.01417409669235344,
+     "ci_low": -0.04797303007253321,
+     "ci_high": 0.02031875454806445,
+     "p": 0.4097951024487756,
+     "q_bh": 0.7405897051474263,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.01755839261907282,
+      "ci_low": -0.051944002480156404,
+      "ci_high": 0.0171970916857857,
+      "p": 0.31384307846076964
+     },
+     "shin": {
+      "estimate": -0.016547294136612448,
+      "ci_low": -0.050774202459938536,
+      "ci_high": 0.01850729481650682,
+      "p": 0.3568215892053973
+     }
+    },
+    {
+     "id": "eff.flb.close.band3_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB close: mean(outcome - implied) for selections with implied prob in [0.60, 1.00)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 404,
+     "estimate": 0.0015719674855409619,
+     "ci_low": -0.04083297812503077,
+     "ci_high": 0.045235079632276874,
+     "p": 0.9105447276361819,
+     "q_bh": 0.9358111641853493,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.006676067979005217,
+      "ci_low": -0.048060220102549865,
+      "ci_high": 0.035482346319448334,
+      "p": 0.784607696151924
+     },
+     "shin": {
+      "estimate": -0.005035412896414059,
+      "ci_low": -0.046546235107487205,
+      "ci_high": 0.03722017269950114,
+      "p": 0.847576211894053
+     }
+    },
+    {
+     "id": "eff.flb.close.slope",
+     "segment": "favourite_longshot",
+     "description": "FLB close: logit slope of outcome on implied probability (1 = calibrated)",
+     "uses_early_snapshot": false,
+     "null": 1.0,
+     "n": 1520,
+     "estimate": 0.989380631015096,
+     "ci_low": 0.8765289412525831,
+     "ci_high": 1.1136576380209096,
+     "p": 0.9005497251374313,
+     "q_bh": 0.9358111641853493,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.9618892382945331,
+      "ci_low": 0.8518273107764812,
+      "ci_high": 1.0821866611473745,
+      "p": 0.559720139930035
+     },
+     "shin": {
+      "estimate": 0.9697280644214117,
+      "ci_low": 0.8587002541466388,
+      "ci_high": 1.0909422901657961,
+      "p": 0.655672163918041
+     }
+    },
+    {
+     "id": "eff.flb.early.band0_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.00, 0.20) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 771,
+     "estimate": -0.0018058238597588028,
+     "ci_low": -0.02522469428812301,
+     "ci_high": 0.02199320223713724,
+     "p": 0.863568215892054,
+     "q_bh": 0.9358111641853493,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.0030845331869381433,
+      "ci_low": -0.02004530744792998,
+      "ci_high": 0.02721814720129616,
+      "p": 0.8425787106446777
+     },
+     "shin": {
+      "estimate": 0.0018047345411019865,
+      "ci_low": -0.021409252073581464,
+      "ci_high": 0.02566159577465407,
+      "p": 0.9305347326336831
+     }
+    },
+    {
+     "id": "eff.flb.early.band1_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.20, 0.40) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 2538,
+     "estimate": 0.004637526407645528,
+     "ci_low": -0.00791331976595567,
+     "ci_high": 0.016170543263440876,
+     "p": 0.4427786106946527,
+     "q_bh": 0.7493176488678738,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.006341938779931365,
+      "ci_low": -0.006523957670260456,
+      "ci_high": 0.018443994619039453,
+      "p": 0.31784107946026985
+     },
+     "shin": {
+      "estimate": 0.005860213853389204,
+      "ci_low": -0.006951595088692908,
+      "ci_high": 0.017799912906745066,
+      "p": 0.3498250874562719
+     }
+    },
+    {
+     "id": "eff.flb.early.band2_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.40, 0.60) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 848,
+     "estimate": -0.011628664236316366,
+     "ci_low": -0.04490985001863761,
+     "ci_high": 0.02287876961399134,
+     "p": 0.49775112443778113,
+     "q_bh": 0.7703734339726689,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.016991164329179364,
+      "ci_low": -0.050675526175288844,
+      "ci_high": 0.01749600509438451,
+      "p": 0.3498250874562719
+     },
+     "shin": {
+      "estimate": -0.016386778630409996,
+      "ci_low": -0.05000087952949506,
+      "ci_high": 0.01809090076804391,
+      "p": 0.36081959020489757
+     }
+    },
+    {
+     "id": "eff.flb.early.band3_bias",
+     "segment": "favourite_longshot",
+     "description": "FLB early: mean(outcome - implied) for selections with implied prob in [0.60, 1.00) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 400,
+     "estimate": -0.0012916113858350608,
+     "ci_low": -0.043571145956159886,
+     "ci_high": 0.04309345097781784,
+     "p": 0.9625187406296851,
+     "q_bh": 0.962518740629685,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.009627611132342142,
+      "ci_low": -0.05196110256245403,
+      "ci_high": 0.034385520482556955,
+      "p": 0.6796601699150425
+     },
+     "shin": {
+      "estimate": -0.005514236001241222,
+      "ci_low": -0.04756225924451716,
+      "ci_high": 0.038198342510195174,
+      "p": 0.8065967016491754
+     }
+    },
+    {
+     "id": "eff.flb.early.slope",
+     "segment": "favourite_longshot",
+     "description": "FLB early: logit slope of outcome on implied probability (1 = calibrated) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 1.0,
+     "n": 1519,
+     "estimate": 0.986230609627025,
+     "ci_low": 0.8721610215721626,
+     "ci_high": 1.1077783826833276,
+     "p": 0.8675662168915542,
+     "q_bh": 0.9358111641853493,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.9591364611955691,
+      "ci_low": 0.848185900941804,
+      "ci_high": 1.077768340314594,
+      "p": 0.5237381309345327
+     },
+     "shin": {
+      "estimate": 0.9667326994053012,
+      "ci_low": 0.8548276040074997,
+      "ci_high": 1.0862270875610625,
+      "p": 0.6096951524237881
+     }
+    },
+    {
+     "id": "eff.draw.close.bias",
+     "segment": "draw",
+     "description": "Draw: mean(draw outcome - closing draw prob)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1520,
+     "estimate": 0.006968669826806581,
+     "ci_low": -0.015414461708787549,
+     "ci_high": 0.02930547102053083,
+     "p": 0.545727136431784,
+     "q_bh": 0.774580451709629,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.009001479308051459,
+      "ci_low": -0.013399074040869527,
+      "ci_high": 0.0313365120957792,
+      "p": 0.43778110944527737
+     },
+     "shin": {
+      "estimate": 0.008132484942182742,
+      "ci_low": -0.014253593234875515,
+      "ci_high": 0.030463539026863905,
+      "p": 0.48575712143928035
+     }
+    },
+    {
+     "id": "eff.draw.early.bias",
+     "segment": "draw",
+     "description": "Draw: mean(draw outcome - early draw prob) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 1519,
+     "estimate": 0.007101172351502027,
+     "ci_low": -0.01547883588950678,
+     "ci_high": 0.02926146720385739,
+     "p": 0.5367316341829086,
+     "q_bh": 0.774580451709629,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.009185445250594278,
+      "ci_low": -0.013409243029894128,
+      "ci_high": 0.03132629427107006,
+      "p": 0.4307846076961519
+     },
+     "shin": {
+      "estimate": 0.00830205108464902,
+      "ci_low": -0.014282911943082156,
+      "ci_high": 0.030458228993551675,
+      "p": 0.4737631184407796
+     }
+    },
+    {
+     "id": "eff.draw.close.slope",
+     "segment": "draw",
+     "description": "Draw: logit slope of draw outcome on closing draw prob (1 = calibrated)",
+     "uses_early_snapshot": false,
+     "null": 1.0,
+     "n": 1520,
+     "estimate": 1.099258146884353,
+     "ci_low": 0.721142801529613,
+     "ci_high": 1.5493501699778358,
+     "p": 0.6316841579210395,
+     "q_bh": 0.8422455438947193,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 1.0454891618117774,
+      "ci_low": 0.6782233378834008,
+      "ci_high": 1.4801915071067915,
+      "p": 0.8095952023988006
+     },
+     "shin": {
+      "estimate": 1.072323133258895,
+      "ci_low": 0.6988462382601878,
+      "ci_high": 1.5127306847694293,
+      "p": 0.7296351824087957
+     }
+    },
+    {
+     "id": "eff.promoted.first10.win_bias",
+     "segment": "promoted",
+     "description": "Promoted team's win: mean(outcome - closing prob), its first 10 matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 120,
+     "estimate": -0.057992762159769014,
+     "ci_low": -0.1299203751203577,
+     "ci_high": 0.012687042259491247,
+     "p": 0.10794602698650675,
+     "q_bh": 0.3166416791604198,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.05707628627117224,
+      "ci_low": -0.12909812393992956,
+      "ci_high": 0.013685066738808127,
+      "p": 0.11394302848575712
+     },
+     "shin": {
+      "estimate": -0.057115643771506554,
+      "ci_low": -0.1291143688739353,
+      "ci_high": 0.013612902443767071,
+      "p": 0.11394302848575712
+     }
+    },
+    {
+     "id": "eff.promoted.later.win_bias",
+     "segment": "promoted",
+     "description": "Promoted team's win: mean(outcome - closing prob), later matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 336,
+     "estimate": 0.017872272511898084,
+     "ci_low": -0.025354375072682567,
+     "ci_high": 0.06154135569222201,
+     "p": 0.4207896051974013,
+     "q_bh": 0.7405897051474263,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.01920725611316785,
+      "ci_low": -0.023967605227903848,
+      "ci_high": 0.06290214573243806,
+      "p": 0.39980009995002497
+     },
+     "shin": {
+      "estimate": 0.019076116227908883,
+      "ci_low": -0.024124603897178548,
+      "ci_high": 0.06276977864095404,
+      "p": 0.4027986006996502
+     }
+    },
+    {
+     "id": "eff.promoted.diff.win_bias",
+     "segment": "promoted",
+     "description": "Promoted team's win bias: first 10 minus later",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 456,
+     "estimate": -0.0758650346716671,
+     "ci_low": -0.15969165674549315,
+     "ci_high": 0.007085047969117137,
+     "p": 0.08095952023988005,
+     "q_bh": 0.3166416791604198,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0762835423843401,
+      "ci_low": -0.16014387140944888,
+      "ci_high": 0.006670007642505854,
+      "p": 0.08195902048975512
+     },
+     "shin": {
+      "estimate": -0.07619175999941544,
+      "ci_low": -0.16003891918995403,
+      "ci_high": 0.006748275979488741,
+      "p": 0.08195902048975512
+     }
+    },
+    {
+     "id": "eff.snapshot.movement_slope",
+     "segment": "snapshot",
+     "description": "Does the line move toward the outcome: slope of (outcome - early prob) on (close - early) prob (0 = no information in the move, 1 = closing fully efficient) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 1519,
+     "estimate": 1.0902849231504514,
+     "ci_low": 0.33262062165849954,
+     "ci_high": 1.9011050608204951,
+     "p": 0.004997501249375313,
+     "q_bh": 0.03664834249541896,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 1.05604709647023,
+      "ci_low": 0.3191029711601946,
+      "ci_high": 1.8522900895191654,
+      "p": 0.005997001499250375
+     },
+     "shin": {
+      "estimate": 1.0668034259558692,
+      "ci_low": 0.3264936298380559,
+      "ci_high": 1.8641436322308358,
+      "p": 0.005997001499250375
+     }
+    },
+    {
+     "id": "eff.snapshot.logloss_close_minus_early",
+     "segment": "snapshot",
+     "description": "Closing minus early log loss (negative = closing better calibrated) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 1519,
+     "estimate": -0.0024535163735428306,
+     "ci_low": -0.006115750066951602,
+     "ci_high": 0.001021446946112295,
+     "p": 0.1539230384807596,
+     "q_bh": 0.4232883558220889,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.0023578256467411724,
+      "ci_low": -0.006090853146181325,
+      "ci_high": 0.001258771803408719,
+      "p": 0.19390304847576212
+     },
+     "shin": {
+      "estimate": -0.0023928096618139535,
+      "ci_low": -0.006115835641680056,
+      "ci_high": 0.0011471423426075733,
+      "p": 0.18290854572713644
+     }
+    },
+    {
+     "id": "mvm.league.E0",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league E0",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.01628343845471917,
+     "ci_low": -0.0029226534910077287,
+     "ci_high": 0.035988815845639635,
+     "p": 0.10794602698650675,
+     "q_bh": 0.3166416791604198,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.015339568215978679,
+      "ci_low": -0.004116214355070091,
+      "ci_high": 0.03537408609885601,
+      "p": 0.1359320339830085
+     },
+     "shin": {
+      "estimate": 0.015496563397618048,
+      "ci_low": -0.003816421972610787,
+      "ci_high": 0.03527421154689904,
+      "p": 0.1329335332333833
+     }
+    },
+    {
+     "id": "mvm.league.F1",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league F1",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.007386247872676715,
+     "ci_low": -0.014880647981487196,
+     "ci_high": 0.028580602652015816,
+     "p": 0.5077461269365318,
+     "q_bh": 0.7703734339726689,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.007400475757246146,
+      "ci_low": -0.014914611713216844,
+      "ci_high": 0.028724816724163108,
+      "p": 0.5097451274362819
+     },
+     "shin": {
+      "estimate": 0.007346924925646895,
+      "ci_low": -0.01503237444816267,
+      "ci_high": 0.02878727266835258,
+      "p": 0.5147426286856571
+     }
+    },
+    {
+     "id": "mvm.league.I1",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league I1",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.03791969154387547,
+     "ci_low": 0.02054204712844532,
+     "ci_high": 0.0563238498601321,
+     "p": 0.0009995002498750624,
+     "q_bh": 0.010994502748625687,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.038602732600449365,
+      "ci_low": 0.020941166503754653,
+      "ci_high": 0.057338695138952324,
+      "p": 0.0009995002498750624
+     },
+     "shin": {
+      "estimate": 0.03849288206316404,
+      "ci_low": 0.020925025669208692,
+      "ci_high": 0.05707896012543386,
+      "p": 0.0009995002498750624
+     }
+    },
+    {
+     "id": "mvm.league.SP1",
+     "segment": "mvm_league",
+     "description": "Model minus closing-market log loss, league SP1",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 380,
+     "estimate": 0.02508433256015043,
+     "ci_low": 0.00647405644000934,
+     "ci_high": 0.04408849552563304,
+     "p": 0.005997001499250375,
+     "q_bh": 0.03769543799528807,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.02523050498105261,
+      "ci_low": 0.006400962590564788,
+      "ci_high": 0.044774071766697385,
+      "p": 0.005997001499250375
+     },
+     "shin": {
+      "estimate": 0.025299908715919164,
+      "ci_low": 0.006550041472700043,
+      "ci_high": 0.0447825588908538,
+      "p": 0.005997001499250375
+     }
+    },
+    {
+     "id": "mvm.phase.early",
+     "segment": "mvm_season_phase",
+     "description": "Model minus market log loss, early phase",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 240,
+     "estimate": 0.03822204120775768,
+     "ci_low": 0.00939250143941156,
+     "ci_high": 0.06767397175898542,
+     "p": 0.008995502248875561,
+     "q_bh": 0.04947526236881559,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.03648824368787458,
+      "ci_low": 0.0069538424736687475,
+      "ci_high": 0.0661315513973256,
+      "p": 0.013993003498250875
+     },
+     "shin": {
+      "estimate": 0.03714143863341503,
+      "ci_low": 0.007815800387439512,
+      "ci_high": 0.06672536357722252,
+      "p": 0.01199400299850075
+     }
+    },
+    {
+     "id": "mvm.phase.rest",
+     "segment": "mvm_season_phase",
+     "description": "Model minus market log loss, rest of season",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1280,
+     "estimate": 0.018564625057873776,
+     "ci_low": 0.008727009851466657,
+     "ci_high": 0.02859130902497656,
+     "p": 0.001999000499750125,
+     "q_bh": 0.0175912043978011,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.018859897270083033,
+      "ci_low": 0.008949700853695496,
+      "ci_high": 0.028958445363225564,
+      "p": 0.001999000499750125
+     },
+     "shin": {
+      "estimate": 0.01875612561474429,
+      "ci_low": 0.008865497776126625,
+      "ci_high": 0.02890961862676916,
+      "p": 0.001999000499750125
+     }
+    },
+    {
+     "id": "mvm.promoted.first10",
+     "segment": "mvm_promoted",
+     "description": "Model minus market log loss, promoted team's first 10 matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 111,
+     "estimate": 0.0440369563986068,
+     "ci_low": -0.015489130413189342,
+     "ci_high": 0.10499006913037333,
+     "p": 0.1679160419790105,
+     "q_bh": 0.43460622629861545,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.04422634477949887,
+      "ci_low": -0.01624665597425537,
+      "ci_high": 0.10490011825560734,
+      "p": 0.16491754122938532
+     },
+     "shin": {
+      "estimate": 0.044326461156297785,
+      "ci_low": -0.01563612661852468,
+      "ci_high": 0.10512575853417716,
+      "p": 0.16391804097951024
+     }
+    },
+    {
+     "id": "mvm.promoted.later",
+     "segment": "mvm_promoted",
+     "description": "Model minus market log loss, promoted team later matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 321,
+     "estimate": 0.04195401745547385,
+     "ci_low": 0.01917555677413572,
+     "ci_high": 0.06622579187895127,
+     "p": 0.0009995002498750624,
+     "q_bh": 0.010994502748625687,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.0424636914987251,
+      "ci_low": 0.019404443433908333,
+      "ci_high": 0.06701518202943614,
+      "p": 0.0009995002498750624
+     },
+     "shin": {
+      "estimate": 0.04229798764249983,
+      "ci_low": 0.019261388070959236,
+      "ci_high": 0.066723616345529,
+      "p": 0.0009995002498750624
+     }
+    },
+    {
+     "id": "mvm.flb.band0",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.00, 0.20)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 801,
+     "estimate": 0.007557756092917623,
+     "ci_low": -0.0010780219528118565,
+     "ci_high": 0.016486399003426123,
+     "p": 0.0879560219890055,
+     "q_bh": 0.3166416791604198,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.007357622112711604,
+      "ci_low": -0.0013137258024858835,
+      "ci_high": 0.016280804409111307,
+      "p": 0.10194902548725637
+     },
+     "shin": {
+      "estimate": 0.006838589454592426,
+      "ci_low": -0.0017354804549446115,
+      "ci_high": 0.015859377143897842,
+      "p": 0.12193903048475763
+     }
+    },
+    {
+     "id": "mvm.flb.band1",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.20, 0.40)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 2513,
+     "estimate": 0.010738649266146868,
+     "ci_low": 0.005410639120157255,
+     "ci_high": 0.01623070818310086,
+     "p": 0.0009995002498750624,
+     "q_bh": 0.010994502748625687,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.010811227862648223,
+      "ci_low": 0.005446653931059141,
+      "ci_high": 0.016423039134308676,
+      "p": 0.0009995002498750624
+     },
+     "shin": {
+      "estimate": 0.011015362219575003,
+      "ci_low": 0.005672658478613256,
+      "ci_high": 0.016630273521405715,
+      "p": 0.0009995002498750624
+     }
+    },
+    {
+     "id": "mvm.flb.band2",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.40, 0.60)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 842,
+     "estimate": 0.01497680805447595,
+     "ci_low": 0.0030474393546546697,
+     "ci_high": 0.027391970927052898,
+     "p": 0.01199400299850075,
+     "q_bh": 0.058637347992670334,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.01365015461773938,
+      "ci_low": 0.00173770746315292,
+      "ci_high": 0.026085093333126478,
+      "p": 0.020989505247376312
+     },
+     "shin": {
+      "estimate": 0.013722248366845676,
+      "ci_low": 0.001877002202684266,
+      "ci_high": 0.026144621090648846,
+      "p": 0.01999000499750125
+     }
+    },
+    {
+     "id": "mvm.flb.band3",
+     "segment": "mvm_favourite_longshot",
+     "description": "Model minus market selection log loss, closing implied prob in [0.60, 1.00)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 404,
+     "estimate": 0.018635896076835867,
+     "ci_low": 0.002252613055175528,
+     "ci_high": 0.03625124140131815,
+     "p": 0.022988505747126436,
+     "q_bh": 0.10114942528735633,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.02139172715821672,
+      "ci_low": 0.00374631777097037,
+      "ci_high": 0.04124420651356364,
+      "p": 0.013993003498250875
+     },
+     "shin": {
+      "estimate": 0.021023140603798975,
+      "ci_low": 0.003612366737951087,
+      "ci_high": 0.04061973167907227,
+      "p": 0.013993003498250875
+     }
+    },
+    {
+     "id": "mvm.draw",
+     "segment": "mvm_draw",
+     "description": "Model minus market log loss on the draw selection",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1520,
+     "estimate": 0.008639415978225599,
+     "ci_low": 0.004278754406992429,
+     "ci_high": 0.012906545891195205,
+     "p": 0.0009995002498750624,
+     "q_bh": 0.010994502748625687,
+     "survives_bh_10pct": true,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.008640063375731713,
+      "ci_low": 0.004142895135273608,
+      "ci_high": 0.012929969274688952,
+      "p": 0.0009995002498750624
+     },
+     "shin": {
+      "estimate": 0.008630119118377933,
+      "ci_low": 0.0042344869038370495,
+      "ci_high": 0.01288350360247694,
+      "p": 0.0009995002498750624
+     }
+    },
+    {
+     "id": "mvm.encompassing.test_delta",
+     "segment": "mvm_encompassing",
+     "description": "Log loss of the model+market combination minus the recalibrated market alone, both fitted on the tuning window (isolates the model's marginal information)",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1520,
+     "estimate": 0.00032148390586884794,
+     "ci_low": -0.0016991637141502778,
+     "ci_high": 0.0023155745490130194,
+     "p": 0.7526236881559221,
+     "q_bh": 0.9198733966350159,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.00029528514550163017,
+      "ci_low": -0.001736749447192211,
+      "ci_high": 0.0023088835455577538,
+      "p": 0.7726136931534233
+     },
+     "shin": {
+      "estimate": 0.00030094581415905127,
+      "ci_low": -0.0017328537317566808,
+      "ci_high": 0.0023083210438604976,
+      "p": 0.7656171914042978
+     }
+    },
+    {
+     "id": "desc.market_recalibration",
+     "segment": "descriptive",
+     "description": "Recalibrated market (power and class constants fitted on the tuning window) minus raw closing market, log loss",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 1520,
+     "estimate": 0.0007007117671972191,
+     "ci_low": -0.0011978660274670583,
+     "ci_high": 0.002479983156630817,
+     "p": 0.45377311344327836,
+     "q_bh": null,
+     "survives_bh_10pct": false,
+     "in_bh_family": false,
+     "status": "descriptive, not tested",
+     "power": {
+      "estimate": 0.0005440725298349191,
+      "ci_low": -0.0008678747346800977,
+      "ci_high": 0.001904777337523769,
+      "p": 0.44177911044477763
+     },
+     "shin": {
+      "estimate": 0.0006142048305463421,
+      "ci_low": -0.0009234308703516917,
+      "ci_high": 0.0020690984961532367,
+      "p": 0.431784107946027
+     }
+    },
+    {
+     "id": "mvm.linemove.slope",
+     "segment": "mvm_line_movement",
+     "description": "Does the close move toward the model: slope of (close - early) on (model - early) probability [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "uses_early_snapshot": true,
+     "null": 0.0,
+     "n": 1519,
+     "estimate": 0.012781376331050262,
+     "ci_low": -0.007865122926939413,
+     "ci_high": 0.035174937188501114,
+     "p": 0.2518740629685157,
+     "q_bh": 0.5528664239308918,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": 0.013231308087951735,
+      "ci_low": -0.007394225650354231,
+      "ci_high": 0.03555513291858,
+      "p": 0.23788105947026486
+     },
+     "shin": {
+      "estimate": 0.013091857009237984,
+      "ci_low": -0.007558606742273256,
+      "ci_high": 0.03541455627644102,
+      "p": 0.24187906046976512
+     }
+    },
+    {
+     "id": "coldstart.fix_vs_none.first10",
+     "segment": "cold_start",
+     "description": "Promoted-team prior fix minus no fix, log loss on promoted teams' first 10 matches",
+     "uses_early_snapshot": false,
+     "null": 0.0,
+     "n": 111,
+     "estimate": -0.037126667679770374,
+     "ci_low": -0.08083312127652366,
+     "ci_high": 0.00551440768886675,
+     "p": 0.09395302348825588,
+     "q_bh": 0.3166416791604198,
+     "survives_bh_10pct": false,
+     "in_bh_family": true,
+     "power": {
+      "estimate": -0.037126667679770374,
+      "ci_low": -0.08083312127652366,
+      "ci_high": 0.00551440768886675,
+      "p": 0.09395302348825588
+     },
+     "shin": {
+      "estimate": -0.037126667679770374,
+      "ci_low": -0.08083312127652366,
+      "ci_high": 0.00551440768886675,
+      "p": 0.09395302348825588
+     }
+    }
+   ],
+   "bh_survivors": [
+    {
+     "id": "eff.snapshot.movement_slope",
+     "description": "Does the line move toward the outcome: slope of (outcome - early prob) on (close - early) prob (0 = no information in the move, 1 = closing fully efficient) [early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)]",
+     "estimate": 1.0902849231504514,
+     "ci": [
+      0.33262062165849954,
+      1.9011050608204951
+     ],
+     "q_bh": 0.03664834249541896
+    },
+    {
+     "id": "mvm.league.I1",
+     "description": "Model minus closing-market log loss, league I1",
+     "estimate": 0.03791969154387547,
+     "ci": [
+      0.02054204712844532,
+      0.0563238498601321
+     ],
+     "q_bh": 0.010994502748625687
+    },
+    {
+     "id": "mvm.league.SP1",
+     "description": "Model minus closing-market log loss, league SP1",
+     "estimate": 0.02508433256015043,
+     "ci": [
+      0.00647405644000934,
+      0.04408849552563304
+     ],
+     "q_bh": 0.03769543799528807
+    },
+    {
+     "id": "mvm.phase.early",
+     "description": "Model minus market log loss, early phase",
+     "estimate": 0.03822204120775768,
+     "ci": [
+      0.00939250143941156,
+      0.06767397175898542
+     ],
+     "q_bh": 0.04947526236881559
+    },
+    {
+     "id": "mvm.phase.rest",
+     "description": "Model minus market log loss, rest of season",
+     "estimate": 0.018564625057873776,
+     "ci": [
+      0.008727009851466657,
+      0.02859130902497656
+     ],
+     "q_bh": 0.0175912043978011
+    },
+    {
+     "id": "mvm.promoted.later",
+     "description": "Model minus market log loss, promoted team later matches",
+     "estimate": 0.04195401745547385,
+     "ci": [
+      0.01917555677413572,
+      0.06622579187895127
+     ],
+     "q_bh": 0.010994502748625687
+    },
+    {
+     "id": "mvm.flb.band1",
+     "description": "Model minus market selection log loss, closing implied prob in [0.20, 0.40)",
+     "estimate": 0.010738649266146868,
+     "ci": [
+      0.005410639120157255,
+      0.01623070818310086
+     ],
+     "q_bh": 0.010994502748625687
+    },
+    {
+     "id": "mvm.flb.band2",
+     "description": "Model minus market selection log loss, closing implied prob in [0.40, 0.60)",
+     "estimate": 0.01497680805447595,
+     "ci": [
+      0.0030474393546546697,
+      0.027391970927052898
+     ],
+     "q_bh": 0.058637347992670334
+    },
+    {
+     "id": "mvm.draw",
+     "description": "Model minus market log loss on the draw selection",
+     "estimate": 0.008639415978225599,
+     "ci": [
+      0.004278754406992429,
+      0.012906545891195205
+     ],
+     "q_bh": 0.010994502748625687
+    }
+   ],
+   "encompassing_fit": {
+    "method": "proportional",
+    "fitted_on_tuning_matches": 3040,
+    "theta": {
+     "alpha_draw": 0.006971841443986718,
+     "alpha_away": 0.05216432988181669,
+     "beta_market": 1.2809393632331993,
+     "beta_model": -0.23485355060770557
+    },
+    "model_weight": -0.22450696469944845,
+    "model_weight_ci95": [
+     -0.4407761561353746,
+     -0.030805595832087584
+    ],
+    "beta_model_ci95": [
+     -0.44184813329177514,
+     -0.03486972944328769
+    ],
+    "market_only_recalibration": {
+     "alpha_draw": 0.028517697331630947,
+     "alpha_away": 0.06646278761701875,
+     "beta_market": 1.0817287667892341
+    }
+   },
+   "extras_line_movement": {
+    "label": "early-market snapshot (approx. 1 to 3 days pre-kickoff, not timestamped)",
+    "n_matches": 1519,
+    "movement_on_disagreement_by_size": [
+     {
+      "abs_disagreement": [
+       0,
+       0.02
+      ],
+      "n_selections": 1656,
+      "slope": 0.016128844808291038,
+      "share_close_moves_toward_model": 0.49577294685990336
+     },
+     {
+      "abs_disagreement": [
+       0.02,
+       0.05
+      ],
+      "n_selections": 1579,
+      "slope": 0.032675120317195196,
+      "share_close_moves_toward_model": 0.5294490183660545
+     },
+     {
+      "abs_disagreement": [
+       0.05,
+       1.0
+      ],
+      "n_selections": 1322,
+      "slope": 0.010259190097694128,
+      "share_close_moves_toward_model": 0.4947049924357035
+     }
+    ],
+    "model_favoured_d_gt_0.03": {
+     "n_selections": 1154,
+     "mean_log_close_over_early": 0.0019943951260811806,
+     "share_close_prob_above_early": 0.5181975736568457
+    },
+    "model_disfavoured_d_lt_-0.03": {
+     "n_selections": 1087,
+     "mean_log_close_over_early": -0.005567849500783006,
+     "share_close_prob_above_early": 0.47470101195952163
+    },
+    "note": "CLV-style description of probability drift only; no betting P&L is claimed."
+   }
+  }
+ },
+ "replication_of_primary_survivors": [
+  {
+   "id": "eff.league.D1.home_bias",
+   "primary_estimate": -0.06946191786115893,
+   "secondary_estimate": -0.006646114074141293,
+   "secondary_p": 0.8075962018990505,
+   "same_sign_and_secondary_p_lt_0.05": false
+  },
+  {
+   "id": "eff.snapshot.movement_slope",
+   "primary_estimate": 1.0864633256788978,
+   "secondary_estimate": 0.6841276273500247,
+   "secondary_p": 0.06496751624187906,
+   "same_sign_and_secondary_p_lt_0.05": false
+  },
+  {
+   "id": "mvm.league.D1",
+   "primary_estimate": 0.037841041550201744,
+   "secondary_estimate": 0.0273934602115889,
+   "secondary_p": 0.008995502248875561,
+   "same_sign_and_secondary_p_lt_0.05": true
+  },
+  {
+   "id": "mvm.league.I1",
+   "primary_estimate": 0.020441275273038923,
+   "secondary_estimate": 0.014840845539141152,
+   "secondary_p": 0.06696651674162919,
+   "same_sign_and_secondary_p_lt_0.05": false
+  },
+  {
+   "id": "mvm.league.SP1",
+   "primary_estimate": 0.026147064754436296,
+   "secondary_estimate": 0.014938120223099545,
+   "secondary_p": 0.09395302348825588,
+   "same_sign_and_secondary_p_lt_0.05": false
+  },
+  {
+   "id": "mvm.phase.rest",
+   "primary_estimate": 0.025956561985546425,
+   "secondary_estimate": 0.014786086331123103,
+   "secondary_p": 0.0009995002498750624,
+   "same_sign_and_secondary_p_lt_0.05": true
+  },
+  {
+   "id": "mvm.promoted.later",
+   "primary_estimate": 0.02692544636797972,
+   "secondary_estimate": 0.02931940665876335,
+   "secondary_p": 0.00399800099950025,
+   "same_sign_and_secondary_p_lt_0.05": true
+  },
+  {
+   "id": "mvm.flb.band0",
+   "primary_estimate": 0.012795274260982988,
+   "secondary_estimate": 0.006150840003621968,
+   "secondary_p": 0.11694152923538231,
+   "same_sign_and_secondary_p_lt_0.05": false
+  },
+  {
+   "id": "mvm.flb.band1",
+   "primary_estimate": 0.009355475163498045,
+   "secondary_estimate": 0.010858008052796023,
+   "secondary_p": 0.0009995002498750624,
+   "same_sign_and_secondary_p_lt_0.05": true
+  },
+  {
+   "id": "mvm.flb.band2",
+   "primary_estimate": 0.021806690113434703,
+   "secondary_estimate": 0.013341609605295427,
+   "secondary_p": 0.00399800099950025,
+   "same_sign_and_secondary_p_lt_0.05": true
+  },
+  {
+   "id": "mvm.flb.band3",
+   "primary_estimate": 0.021855335265642883,
+   "secondary_estimate": 0.005200100968739799,
+   "secondary_p": 0.5087456271864068,
+   "same_sign_and_secondary_p_lt_0.05": false
+  },
+  {
+   "id": "mvm.draw",
+   "primary_estimate": 0.004420015682920835,
+   "secondary_estimate": 0.0029106722433368173,
+   "secondary_p": 0.1089455272363818,
+   "same_sign_and_secondary_p_lt_0.05": false
+  }
+ ]
+}

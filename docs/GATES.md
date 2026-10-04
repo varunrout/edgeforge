@@ -206,3 +206,69 @@ football-data: 33 new CSV requests (30 history + 3 for 2015/16; E0 files were ca
 - Locked: D-035 (opening-state player baseline mandatory at Gate 4). New: D-036 (proportional de-vig default), D-037 (pre-registered Pillar A segments with BH FDR control), D-038 (repo private until Phase 10).
 - D-034 residue: the sample-match event lists may stay while the repo is private; remove them before the repo goes public.
 - Phase 3 may start.
+
+---
+
+## Gate 3: Team model and Pillar A (market efficiency and cold start)
+
+**Report date:** 2026-10-04. Metrics: `team_model.json` from commit `fddfc09`, `pillar_a.json` from commit `42bf956` (clean trees). **Implementer verdict: every analytical criterion is met; the hard criterion "green GitHub Actions run" is NOT met, so Gate 3 cannot pass yet.** Phase 4 not started.
+
+### Step 0
+- Lead edits to `DECISIONS.md` and `GATES.md` committed (D-036, D-037, D-038 read).
+- D-038: repository set to private (`gh repo view` -> `"visibility":"PRIVATE"`).
+- CI re-run once: the run now ends as `startup_failure` ("workflow file issue", 0 s, no jobs) instead of the earlier billing-lock failure. The workflow file is unchanged and valid YAML, the repo is private, and the Actions permissions API shows Actions enabled; I cannot read the account billing state with the current token scopes (and did not widen them). It most likely remains an account-level billing/plan block, but I have not been able to confirm the cause. Owner action: resolve the GitHub billing state, then `gh run rerun`.
+
+### What was built
+- Dixon-Coles with time decay, weekly refits, analytic-gradient fit (`models/dixon_coles.py`); walk-forward runner with decay and kappa tuning, comparison A, calibration study, persistence (`evaluation/team_model.py`, `edgeforge team-model run`).
+- Pillar A analysis (`evaluation/pillar_a.py`, `edgeforge pillar-a run`), D-037 segments (`evaluation/segments.py`), bootstrap, batched logistic slopes and Benjamini-Hochberg (`evaluation/stats.py`).
+- 75 tests (up from 60), including a null control (calibrated market gives no BH survivors), detection of a planted favourite-longshot distortion, and the encompassing isolation tests.
+
+### Gate criteria
+| # | Criterion | Result | Proving command | Observed (from metrics files) |
+|---|---|---|---|---|
+| 1 | Dixon-Coles with decay, per league, weekly refits, decay tuned on tuning windows only | **PASS** | `uv run edgeforge team-model run` -> `team_model.json` | half-life 365 days in both blocks, interior optimum (grids in D-039); Pillar A tuning 1X2 log loss 0.99327 vs static Poisson 0.99958 vs league average 1.07495; 2015/16 tuning 0.97901 vs 0.98530 vs 1.0655 |
+| 2 | Comparison A on 1X2, O/U 0.5-4.5, BTTS with paired bootstrap CIs | **PASS** | same | 2024/25 test (n=1,752), DC minus static Poisson, 1X2 log loss -0.0046 [-0.0084, -0.0004], RPS -0.0016 [-0.0028, -0.0004]; O/U 2.5 -0.0004 [-0.0035, +0.0029]; BTTS -0.0011 [-0.0038, +0.0016]. DC minus league average: 1X2 -0.0929 [-0.1109, -0.0733]; O/U 2.5 -0.0119 [-0.0220, -0.0014]; O/U 3.5 -0.0121 [-0.0226, -0.0021]; O/U 4.5 -0.0120 [-0.0213, -0.0035]; O/U 0.5, 1.5 and BTTS not distinguishable from zero. 2025/26: DC minus static Poisson 1X2 -0.0041 [-0.0084, -0.0001]; totals and BTTS vs league average not distinguishable from zero. 2015/16 matchweeks 20-38 (n=758): DC minus static Poisson 1X2 -0.0018 [-0.0072, +0.0034] (no demonstrable gain); whole 2015/16 (n=1,520) -0.0047 [-0.0089, -0.0006] |
+| 3 | Register promoted and rejected candidates | **PASS** | `experiments/registry.jsonl` | 151 records: 94 `team_model`, 10 `pillar_a`, 47 baselines; statuses promoted 27, rejected 90, baseline 34. Decay candidates, kappa candidates and every calibrator x window are individual records |
+| 4 | Fit and persist the 2015/16-block team model | **PASS** | same | `data/processed/team_model_preds.parquet` (git-ignored) and committed `artifacts/models/team_dc_params.parquet` (13,901 parameter rows); kappa and half-life recorded in `team_model.json` |
+| 5 | Post-hoc calibration (Platt, isotonic) on the tuning window; keep only with CI excluding zero; log either way | **PASS** | same | 1X2 calibration never helps (Platt differences range from -0.0002 to +0.0011 across the four windows, none with a CI below zero); adopted on primary windows: BTTS for Pillar A (2024/25 -0.0054 [-0.0102, -0.0008]); over 2.5 for 2015/16 (-0.0068 [-0.0132, -0.0013]). Verdicts differ across windows (56 tests); recorded as provisional in D-039. The model's totals and BTTS probabilities are over-confident (raw log loss close to ln 2) |
+| 6 | Efficiency map on real odds vs outcomes, only the D-037 segments, paired bootstrap CIs, BH at 10% FDR, proportional de-vig with power and Shin alongside, early-snapshot labels | **PASS** | `uv run edgeforge pillar-a run` -> `pillar_a.json` | F1 2024/25: 47 claims in the BH family, 0 not estimable; all six D-037 segments reported (league 10 claims, season phase 2, favourite-longshot 10, draw 3, promoted 3, snapshot 2). Every claim carries estimate, 95% CI, p, BH q and power/Shin estimates. 18 `pillar_a_*` figures (6 types for each of F1, F2 and F4) |
+| 7 | Favourite-longshot logit-slope test, closing and early | **PASS** | same | slope (1 = calibrated) closing 1.0695 [0.9654, 1.1798] and early snapshot 1.0712 [0.9663, 1.1815] in 2024/25; 2025/26 1.1047 [0.9908, 1.2304]; 2019/20-2023/24 1.0384 [0.9914, 1.0876]; 2015/16 0.9894 [0.8765, 1.1137]. **Not distinguishable from 1 in any block**; no favourite-longshot band bias survives BH |
+| 8 | Early vs close: does the line move toward the outcome; closing vs early calibration | **PASS** | same | movement slope (0 = no information in the move, 1 = closing fully efficient): 2024/25 1.0865 [0.4465, 1.7139] q=0.016; 2019/20-2023/24 0.9620 [0.6760, 1.2578] q=0.009; 2015/16 1.0903 [0.3326, 1.9011] q=0.037; 2025/26 0.6841 [-0.0643, 1.4558] (p=0.065, same sign, not significant). Closing minus early log loss: 2019/20-2023/24 -0.0027 [-0.0043, -0.0011] q=0.009; 2024/25 -0.0029 [-0.0065, +0.0007]; 2025/26 -0.0009 [-0.0040, +0.0020]. All early-snapshot results carry the D-024 label |
+| 9 | Head-to-head model vs market by D-037 segment | **PASS** | same | 2024/25 model minus Pinnacle-closing log loss is positive (market better) in all 14 segments; BH-surviving: league D1 +0.0378, I1 +0.0204, SP1 +0.0261; rest of season +0.0260; promoted later matches +0.0269; favourite-longshot bands 0 to 3 +0.0128, +0.0094, +0.0218, +0.0219; draw selection +0.0044. Replicated in 2025/26 (same sign, p<0.05): D1, rest of season, promoted later, bands 1 and 2. Did not survive BH: E0 (q=0.101, just above the threshold), F1, early phase, promoted first 10 matches |
+| 10 | Forecast-encompassing test, weight with CI | **PASS (null result)** | same | model weight in the log-linear pool (fitted on the tuning window): 2024/25 -0.072 [-0.172, +0.046]; 2025/26 -0.083 [-0.182, +0.032]; 2015/16 -0.225 [-0.441, -0.031]. Pool minus recalibrated market on the test window: 2024/25 -0.0004 [-0.0010, +0.0001]; 2025/26 -0.0002 [-0.0009, +0.0005]; 2015/16 +0.0003 [-0.0017, +0.0023]. **The model adds no information beyond the closing market.** Descriptive: recalibrating the market alone (exponent 1.067 on the tuning window) improves 2024/25 log loss by -0.0014 [-0.0027, -0.0002], i.e. the closing market is mildly under-confident |
+| 11 | Line movement toward the model; CLV-style description (no P&L) | **PASS (null result)** | same | slope of (close - early) on (model - early) probability: 2024/25 -0.0035 [-0.0259, +0.0184]; 2025/26 -0.0074 [-0.0275, +0.0121]; 2019/20-2023/24 -0.0082 [-0.0178, +0.0002]; 2015/16 +0.0128 [-0.0079, +0.0352]. By disagreement size the share of selections where the close moves toward the model is 0.497, 0.491 and 0.488 (chance level). No betting P&L is claimed |
+| 12 | Cold start: model vs market error for promoted teams' first 10 matches; test ONE fix, chosen on the tuning window | **PASS (fix not demonstrated)** | same | model minus market log loss, promoted first 10 matches: 2019/20-2023/24 +0.0625 [+0.0360, +0.0883] (n=640) vs later matches +0.0273 [+0.0175, +0.0375]; 2024/25 first 10 +0.0287 [-0.0156, +0.0755] (n=132, not significant); 2025/26 +0.0640 [+0.0046, +0.1318] (n=131). Fix (promoted-team prior, kappa 80 / 20 chosen on tuning): improves every test window but no CI excludes zero (D-039): 2024/25 -0.0245 [-0.0493, +0.0003] (q=0.17), 2025/26 -0.0470 [-0.1045, +0.0035], 2015/16 -0.0371 [-0.0808, +0.0055]. Not adopted as default |
+| 13 | Figures for each result | **PASS** | `ls artifacts/figures` | reliability by league, by season phase, by promoted status, early vs close, favourite-longshot plot, model-vs-market forest plot, for blocks F1, F2 and F4 (18 figures), alongside the 11 Phase 2 baseline figures: 29 PNGs in total |
+| 14 | BH-adjusted list of surviving findings | **PASS** | `pillar_a.json` `bh_survivors` | see "Surviving findings" below |
+| 15 | Registry updated | **PASS** | see criterion 3 | |
+| 16 | Tests and CI-equivalent checks pass locally | **PASS** | `uv sync --locked && uv run ruff check . && uv run ruff format --check . && uv run mypy && uv run pytest -q` | 75 tests pass locally; ruff and mypy clean (49 source files). Fresh-clone result: see the line added at the end of this section |
+| 17 | **Green GitHub Actions run** | **FAIL (blocked)** | `gh run list` | every run since the first push has failed before executing a step (billing lock, then `startup_failure`); not attributable to the code |
+
+### Surviving findings (BH, 10% FDR; D-037 allows only these to be called findings)
+**Efficiency of the market (what the pre-registered segments actually found):**
+1. *Closing line vs early snapshot* (early-market snapshot, approx. 1 to 3 days pre-kickoff, not timestamped): the move to the close carries information about the outcome (slope near 1) and closing log loss is lower than early in 2019/20-2023/24. Survives BH in 2024/25, 2019/20-2023/24 and 2015/16; same sign but not significant in 2025/26.
+2. *Bundesliga home-win bias in 2024/25* (closing market over-prices home wins by 6.95 percentage points, CI [-11.72, -1.88], q=0.042) **survives BH in the confirmatory block but does not replicate**: 2025/26 -0.66 points (p=0.81) and 2019/20-2023/24 -0.21 points (p=0.83). With 47 claims at 10% FDR a few false discoveries are expected; this one is treated as probable noise and is not offered as an inefficiency.
+
+Everything else in the efficiency map is **not distinguishable from zero**: no league other than D1 (2024/25), no season-phase effect, no favourite-longshot bias (slope or bands, closing or early), no draw bias or draw slope effect, no promoted-team win bias in either the first 10 matches or later.
+
+**Model vs market:** the market beats the model in every segment; the BH-surviving differences are listed under criterion 9. The model adds no information beyond the market (criterion 10) and the close does not move toward the model (criterion 11).
+
+### Honest summary for the technical report
+- The football market is hard to beat: against real Pinnacle closing odds on 2024/25 the best model (Dixon-Coles, tuned decay) has 1X2 log loss 0.9853 vs the market's 0.9606 (static Poisson 0.9899).
+- The pre-registered inefficiency hunt found no replicated inefficiency. The only evidence of a market mechanism is that prices move toward the outcome between the early snapshot and the close.
+- The model's value is as a structural source of probabilities for the markets without prices (totals, BTTS, props), not as an edge against the 1X2 close.
+
+### Deviations, decisions and caveats
+1. **D-039 (new, Proposed)** records the model specification, the selection and adoption rules, the analysis design and the correction record.
+2. **A self-caught definition error** in the first complete Pillar A run (encompassing claim credited the model with the market's own sharpening) was corrected before anything was reported; see D-039. A regression test covers it.
+3. **Grid edge, again.** The cold-start kappa grid first stopped at 40 with the Pillar A optimum on the edge; I widened it (to 160) and the optimum moved to an interior value (80). I had seen the test numbers of the first grid, though the choice is the minimum of the widened tuning-window grid. Disclose in the technical report.
+4. **F3 is in-sample for the model** (decay tuned on that window); its model-vs-market numbers are exploratory. F4 uses the whole of 2015/16 (not only matchweeks 20-38) because the team model was not tuned on any 2015/16 match and the early-phase and promoted segments need the early weeks; the matchweek 20-38 team-model results are reported under criterion 2.
+5. **Calibration decisions are provisional** (56 tests, verdicts differ across windows).
+6. **Power and Shin** estimates are shown beside every proportional claim but are outside the BH family (D-036).
+7. The registry file briefly contained lines from the discarded first Pillar A run; they were removed before commit (uncommitted working state, not history).
+8. Fitted team parameters are committed (`artifacts/models/team_dc_params.parquet`, D-028 allows fitted parameters); per-match intensities stay git-ignored.
+
+### Open issues
+- **GitHub Actions has never executed a job** (hard criterion).
+- Cold-start fix: suggestive but not demonstrated; revisit with more seasons or pooled evidence before relying on it.
+- The football-data early snapshot remains untimestamped (D-024).
