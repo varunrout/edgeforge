@@ -1,0 +1,949 @@
+{
+ "provenance": {
+  "git_sha": "1095de4e68a10e96176c0877838933c9c7305795",
+  "data_version": "e9f85707213e3f78",
+  "command": "edgeforge build-warehouse",
+  "config_hash": "39f96c7271994bec",
+  "created_at": "2026-10-04T08:42:51Z",
+  "seed": 20261004
+ },
+ "row_counts": {
+  "matches": 36539,
+  "odds": 1879580,
+  "team_name_map": 80,
+  "sb_matches": 1517,
+  "sb_match_link": 1517,
+  "player_match": 57665,
+  "shots": 37888,
+  "events_timeline": 4410,
+  "sb_match_checks": 1517,
+  "team_season": 1962
+ },
+ "football_data_build": {
+  "n_files": 99,
+  "drops_by_file": {
+   "D1_1819": {
+    "rows_read": 306,
+    "rows_dropped_bad_date": 0
+   },
+   "D1_1920": {
+    "rows_read": 306,
+    "rows_dropped_bad_date": 0
+   },
+   "D1_2021": {
+    "rows_read": 306,
+    "rows_dropped_bad_date": 0
+   },
+   "D1_2122": {
+    "rows_read": 306,
+    "rows_dropped_bad_date": 0
+   },
+   "D1_2223": {
+    "rows_read": 306,
+    "rows_dropped_bad_date": 0
+   },
+   "D1_2324": {
+    "rows_read": 306,
+    "rows_dropped_bad_date": 0
+   },
+   "D1_2425": {
+    "rows_read": 306,
+    "rows_dropped_bad_date": 0
+   },
+   "D1_2526": {
+    "rows_read": 306,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_9394": {
+    "rows_read": 462,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_9495": {
+    "rows_read": 462,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_9596": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_9697": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_9798": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_9899": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_9900": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_0001": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_0102": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_0203": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_0304": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_0405": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_0506": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_0607": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_0708": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_0809": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_0910": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_1011": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_1112": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_1213": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_1314": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_1415": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_1516": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_1617": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_1718": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_1819": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_1920": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_2021": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_2122": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_2223": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_2324": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_2425": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_2526": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "E0_2627": {
+    "rows_read": 50,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_0506": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_0607": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_0708": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_0809": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_0910": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_1011": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_1112": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_1213": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_1314": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_1415": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_1516": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_1819": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_1920": {
+    "rows_read": 279,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_2021": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_2122": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_2223": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_2324": {
+    "rows_read": 306,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_2425": {
+    "rows_read": 306,
+    "rows_dropped_bad_date": 0
+   },
+   "F1_2526": {
+    "rows_read": 306,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_0506": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_0607": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_0708": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_0809": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_0910": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_1011": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_1112": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_1213": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_1314": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_1415": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_1516": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_1819": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_1920": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_2021": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_2122": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_2223": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_2324": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_2425": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "I1_2526": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_0506": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_0607": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_0708": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_0809": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_0910": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_1011": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_1112": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_1213": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_1314": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_1415": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_1516": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_1819": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_1920": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_2021": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_2122": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_2223": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_2324": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_2425": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   },
+   "SP1_2526": {
+    "rows_read": 380,
+    "rows_dropped_bad_date": 0
+   }
+  },
+  "price_cells_nonblank": 1882381,
+  "price_cells_invalid_or_le_1": 16,
+  "ah_price_rows_dropped_no_line": 39,
+  "odds_rows_skipped_ragged_matches": 248,
+  "odds_rows": 1879580,
+  "odds_by_file": {
+   "D1_1819": {
+    "price_cells_nonblank": 10704,
+    "price_cells_invalid": 0,
+    "rows": 10704
+   },
+   "D1_1920": {
+    "price_cells_nonblank": 24453,
+    "price_cells_invalid": 1,
+    "rows": 24452
+   },
+   "D1_2021": {
+    "price_cells_nonblank": 24460,
+    "price_cells_invalid": 0,
+    "rows": 24460
+   },
+   "D1_2122": {
+    "price_cells_nonblank": 24459,
+    "price_cells_invalid": 0,
+    "rows": 24459
+   },
+   "D1_2223": {
+    "price_cells_nonblank": 24428,
+    "price_cells_invalid": 0,
+    "rows": 24428
+   },
+   "D1_2324": {
+    "price_cells_nonblank": 23392,
+    "price_cells_invalid": 0,
+    "rows": 23392
+   },
+   "D1_2425": {
+    "price_cells_nonblank": 27541,
+    "price_cells_invalid": 4,
+    "rows": 27537
+   },
+   "D1_2526": {
+    "price_cells_nonblank": 28892,
+    "price_cells_invalid": 0,
+    "rows": 28892
+   },
+   "E0_9394": {
+    "price_cells_nonblank": 0,
+    "price_cells_invalid": 0,
+    "rows": 0
+   },
+   "E0_9495": {
+    "price_cells_nonblank": 0,
+    "price_cells_invalid": 0,
+    "rows": 0
+   },
+   "E0_9596": {
+    "price_cells_nonblank": 0,
+    "price_cells_invalid": 0,
+    "rows": 0
+   },
+   "E0_9697": {
+    "price_cells_nonblank": 0,
+    "price_cells_invalid": 0,
+    "rows": 0
+   },
+   "E0_9798": {
+    "price_cells_nonblank": 0,
+    "price_cells_invalid": 0,
+    "rows": 0
+   },
+   "E0_9899": {
+    "price_cells_nonblank": 0,
+    "price_cells_invalid": 0,
+    "rows": 0
+   },
+   "E0_9900": {
+    "price_cells_nonblank": 0,
+    "price_cells_invalid": 0,
+    "rows": 0
+   },
+   "E0_0001": {
+    "price_cells_nonblank": 5535,
+    "price_cells_invalid": 0,
+    "rows": 5535
+   },
+   "E0_0102": {
+    "price_cells_nonblank": 6363,
+    "price_cells_invalid": 0,
+    "rows": 6363
+   },
+   "E0_0203": {
+    "price_cells_nonblank": 9201,
+    "price_cells_invalid": 0,
+    "rows": 9201
+   },
+   "E0_0304": {
+    "price_cells_nonblank": 11666,
+    "price_cells_invalid": 0,
+    "rows": 10284
+   },
+   "E0_0405": {
+    "price_cells_nonblank": 11732,
+    "price_cells_invalid": 0,
+    "rows": 10359
+   },
+   "E0_0506": {
+    "price_cells_nonblank": 15580,
+    "price_cells_invalid": 0,
+    "rows": 15580
+   },
+   "E0_0607": {
+    "price_cells_nonblank": 15577,
+    "price_cells_invalid": 0,
+    "rows": 15577
+   },
+   "E0_0708": {
+    "price_cells_nonblank": 16399,
+    "price_cells_invalid": 0,
+    "rows": 16399
+   },
+   "E0_0809": {
+    "price_cells_nonblank": 16717,
+    "price_cells_invalid": 0,
+    "rows": 16717
+   },
+   "E0_0910": {
+    "price_cells_nonblank": 16720,
+    "price_cells_invalid": 0,
+    "rows": 16720
+   },
+   "E0_1011": {
+    "price_cells_nonblank": 16720,
+    "price_cells_invalid": 0,
+    "rows": 16720
+   },
+   "E0_1112": {
+    "price_cells_nonblank": 16720,
+    "price_cells_invalid": 0,
+    "rows": 16720
+   },
+   "E0_1213": {
+    "price_cells_nonblank": 17854,
+    "price_cells_invalid": 0,
+    "rows": 17854
+   },
+   "E0_1314": {
+    "price_cells_nonblank": 15540,
+    "price_cells_invalid": 0,
+    "rows": 15540
+   },
+   "E0_1415": {
+    "price_cells_nonblank": 14557,
+    "price_cells_invalid": 0,
+    "rows": 14557
+   },
+   "E0_1516": {
+    "price_cells_nonblank": 14437,
+    "price_cells_invalid": 0,
+    "rows": 14437
+   },
+   "E0_1617": {
+    "price_cells_nonblank": 14440,
+    "price_cells_invalid": 0,
+    "rows": 14440
+   },
+   "E0_1718": {
+    "price_cells_nonblank": 14440,
+    "price_cells_invalid": 0,
+    "rows": 14440
+   },
+   "E0_1819": {
+    "price_cells_nonblank": 13300,
+    "price_cells_invalid": 0,
+    "rows": 13300
+   },
+   "E0_1920": {
+    "price_cells_nonblank": 30400,
+    "price_cells_invalid": 0,
+    "rows": 30400
+   },
+   "E0_2021": {
+    "price_cells_nonblank": 30400,
+    "price_cells_invalid": 0,
+    "rows": 30400
+   },
+   "E0_2122": {
+    "price_cells_nonblank": 30387,
+    "price_cells_invalid": 2,
+    "rows": 30385
+   },
+   "E0_2223": {
+    "price_cells_nonblank": 30396,
+    "price_cells_invalid": 0,
+    "rows": 30396
+   },
+   "E0_2324": {
+    "price_cells_nonblank": 29234,
+    "price_cells_invalid": 0,
+    "rows": 29234
+   },
+   "E0_2425": {
+    "price_cells_nonblank": 34280,
+    "price_cells_invalid": 0,
+    "rows": 34280
+   },
+   "E0_2526": {
+    "price_cells_nonblank": 36310,
+    "price_cells_invalid": 0,
+    "rows": 36304
+   },
+   "E0_2627": {
+    "price_cells_nonblank": 4270,
+    "price_cells_invalid": 0,
+    "rows": 4270
+   },
+   "F1_0506": {
+    "price_cells_nonblank": 15571,
+    "price_cells_invalid": 0,
+    "rows": 15571
+   },
+   "F1_0607": {
+    "price_cells_nonblank": 15562,
+    "price_cells_invalid": 0,
+    "rows": 15562
+   },
+   "F1_0708": {
+    "price_cells_nonblank": 16363,
+    "price_cells_invalid": 0,
+    "rows": 16363
+   },
+   "F1_0809": {
+    "price_cells_nonblank": 16714,
+    "price_cells_invalid": 0,
+    "rows": 16714
+   },
+   "F1_0910": {
+    "price_cells_nonblank": 16720,
+    "price_cells_invalid": 0,
+    "rows": 16720
+   },
+   "F1_1011": {
+    "price_cells_nonblank": 16714,
+    "price_cells_invalid": 0,
+    "rows": 16714
+   },
+   "F1_1112": {
+    "price_cells_nonblank": 16717,
+    "price_cells_invalid": 0,
+    "rows": 16717
+   },
+   "F1_1213": {
+    "price_cells_nonblank": 17851,
+    "price_cells_invalid": 0,
+    "rows": 17851
+   },
+   "F1_1314": {
+    "price_cells_nonblank": 15537,
+    "price_cells_invalid": 0,
+    "rows": 15537
+   },
+   "F1_1415": {
+    "price_cells_nonblank": 14581,
+    "price_cells_invalid": 0,
+    "rows": 14581
+   },
+   "F1_1516": {
+    "price_cells_nonblank": 14434,
+    "price_cells_invalid": 0,
+    "rows": 14434
+   },
+   "F1_1819": {
+    "price_cells_nonblank": 13294,
+    "price_cells_invalid": 0,
+    "rows": 13294
+   },
+   "F1_1920": {
+    "price_cells_nonblank": 22318,
+    "price_cells_invalid": 0,
+    "rows": 22318
+   },
+   "F1_2021": {
+    "price_cells_nonblank": 30353,
+    "price_cells_invalid": 0,
+    "rows": 30353
+   },
+   "F1_2122": {
+    "price_cells_nonblank": 30376,
+    "price_cells_invalid": 0,
+    "rows": 30376
+   },
+   "F1_2223": {
+    "price_cells_nonblank": 30376,
+    "price_cells_invalid": 0,
+    "rows": 30376
+   },
+   "F1_2324": {
+    "price_cells_nonblank": 23508,
+    "price_cells_invalid": 0,
+    "rows": 23508
+   },
+   "F1_2425": {
+    "price_cells_nonblank": 27579,
+    "price_cells_invalid": 7,
+    "rows": 27572
+   },
+   "F1_2526": {
+    "price_cells_nonblank": 28968,
+    "price_cells_invalid": 0,
+    "rows": 28968
+   },
+   "I1_0506": {
+    "price_cells_nonblank": 15428,
+    "price_cells_invalid": 0,
+    "rows": 15428
+   },
+   "I1_0607": {
+    "price_cells_nonblank": 15484,
+    "price_cells_invalid": 0,
+    "rows": 15484
+   },
+   "I1_0708": {
+    "price_cells_nonblank": 16398,
+    "price_cells_invalid": 0,
+    "rows": 16398
+   },
+   "I1_0809": {
+    "price_cells_nonblank": 16649,
+    "price_cells_invalid": 0,
+    "rows": 16649
+   },
+   "I1_0910": {
+    "price_cells_nonblank": 16558,
+    "price_cells_invalid": 0,
+    "rows": 16558
+   },
+   "I1_1011": {
+    "price_cells_nonblank": 16540,
+    "price_cells_invalid": 0,
+    "rows": 16540
+   },
+   "I1_1112": {
+    "price_cells_nonblank": 16705,
+    "price_cells_invalid": 0,
+    "rows": 16705
+   },
+   "I1_1213": {
+    "price_cells_nonblank": 17815,
+    "price_cells_invalid": 0,
+    "rows": 17815
+   },
+   "I1_1314": {
+    "price_cells_nonblank": 15577,
+    "price_cells_invalid": 0,
+    "rows": 15577
+   },
+   "I1_1415": {
+    "price_cells_nonblank": 14482,
+    "price_cells_invalid": 0,
+    "rows": 14482
+   },
+   "I1_1516": {
+    "price_cells_nonblank": 14437,
+    "price_cells_invalid": 0,
+    "rows": 14437
+   },
+   "I1_1819": {
+    "price_cells_nonblank": 13300,
+    "price_cells_invalid": 0,
+    "rows": 13300
+   },
+   "I1_1920": {
+    "price_cells_nonblank": 30400,
+    "price_cells_invalid": 0,
+    "rows": 30400
+   },
+   "I1_2021": {
+    "price_cells_nonblank": 30345,
+    "price_cells_invalid": 0,
+    "rows": 30345
+   },
+   "I1_2122": {
+    "price_cells_nonblank": 30345,
+    "price_cells_invalid": 0,
+    "rows": 30345
+   },
+   "I1_2223": {
+    "price_cells_nonblank": 30400,
+    "price_cells_invalid": 0,
+    "rows": 30400
+   },
+   "I1_2324": {
+    "price_cells_nonblank": 29146,
+    "price_cells_invalid": 0,
+    "rows": 29146
+   },
+   "I1_2425": {
+    "price_cells_nonblank": 34284,
+    "price_cells_invalid": 0,
+    "rows": 34284
+   },
+   "I1_2526": {
+    "price_cells_nonblank": 36123,
+    "price_cells_invalid": 0,
+    "rows": 36123
+   },
+   "SP1_0506": {
+    "price_cells_nonblank": 15559,
+    "price_cells_invalid": 0,
+    "rows": 15559
+   },
+   "SP1_0607": {
+    "price_cells_nonblank": 15574,
+    "price_cells_invalid": 0,
+    "rows": 15574
+   },
+   "SP1_0708": {
+    "price_cells_nonblank": 16420,
+    "price_cells_invalid": 0,
+    "rows": 16420
+   },
+   "SP1_0809": {
+    "price_cells_nonblank": 16717,
+    "price_cells_invalid": 0,
+    "rows": 16717
+   },
+   "SP1_0910": {
+    "price_cells_nonblank": 16716,
+    "price_cells_invalid": 0,
+    "rows": 16716
+   },
+   "SP1_1011": {
+    "price_cells_nonblank": 16711,
+    "price_cells_invalid": 0,
+    "rows": 16711
+   },
+   "SP1_1112": {
+    "price_cells_nonblank": 16720,
+    "price_cells_invalid": 0,
+    "rows": 16720
+   },
+   "SP1_1213": {
+    "price_cells_nonblank": 17842,
+    "price_cells_invalid": 0,
+    "rows": 17842
+   },
+   "SP1_1314": {
+    "price_cells_nonblank": 15534,
+    "price_cells_invalid": 0,
+    "rows": 15534
+   },
+   "SP1_1415": {
+    "price_cells_nonblank": 14515,
+    "price_cells_invalid": 0,
+    "rows": 14515
+   },
+   "SP1_1516": {
+    "price_cells_nonblank": 14437,
+    "price_cells_invalid": 0,
+    "rows": 14437
+   },
+   "SP1_1819": {
+    "price_cells_nonblank": 13300,
+    "price_cells_invalid": 0,
+    "rows": 13300
+   },
+   "SP1_1920": {
+    "price_cells_nonblank": 30366,
+    "price_cells_invalid": 0,
+    "rows": 30366
+   },
+   "SP1_2021": {
+    "price_cells_nonblank": 30396,
+    "price_cells_invalid": 0,
+    "rows": 30396
+   },
+   "SP1_2122": {
+    "price_cells_nonblank": 30380,
+    "price_cells_invalid": 0,
+    "rows": 30380
+   },
+   "SP1_2223": {
+    "price_cells_nonblank": 30400,
+    "price_cells_invalid": 0,
+    "rows": 30400
+   },
+   "SP1_2324": {
+    "price_cells_nonblank": 29195,
+    "price_cells_invalid": 0,
+    "rows": 29195
+   },
+   "SP1_2425": {
+    "price_cells_nonblank": 34154,
+    "price_cells_invalid": 0,
+    "rows": 34154
+   },
+   "SP1_2526": {
+    "price_cells_nonblank": 35989,
+    "price_cells_invalid": 2,
+    "rows": 35963
+   }
+  }
+ },
+ "fd_2015_16_unlinked": [
+  {
+   "match_id": "F1_1516_20151122_bastia_ajaccio_gfco",
+   "league": "F1",
+   "date": "2015-11-22",
+   "home": "Bastia",
+   "away": "Ajaccio GFCO"
+  },
+  {
+   "match_id": "F1_1516_20160131_st_etienne_paris_sg",
+   "league": "F1",
+   "date": "2016-01-31",
+   "home": "St Etienne",
+   "away": "Paris SG"
+  },
+  {
+   "match_id": "F1_1516_20160430_troyes_bordeaux",
+   "league": "F1",
+   "date": "2016-04-30",
+   "home": "Troyes",
+   "away": "Bordeaux"
+  }
+ ],
+ "sb_unlinked": []
+}

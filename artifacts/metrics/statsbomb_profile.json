@@ -1,0 +1,431 @@
+{
+ "provenance": {
+  "git_sha": "1095de4e68a10e96176c0877838933c9c7305795",
+  "data_version": "472c822bbbfe1ecf",
+  "command": "edgeforge data profile-statsbomb",
+  "config_hash": "39f96c7271994bec",
+  "created_at": "2026-10-04T08:38:45Z",
+  "seed": 20261004
+ },
+ "n_matches": 1517,
+ "distinct_values": {
+  "shot_outcome": {
+   "Off T": 12637,
+   "Blocked": 9472,
+   "Saved": 8783,
+   "Goal": 3869,
+   "Wayward": 2154,
+   "Post": 710,
+   "Saved Off Target": 145,
+   "Saved to Post": 118
+  },
+  "shot_type": {
+   "Open Play": 35732,
+   "Free Kick": 1749,
+   "Penalty": 400,
+   "Corner": 7
+  },
+  "event_card_name": {
+   "Yellow Card": 6682,
+   "Second Yellow": 217,
+   "Red Card": 196
+  },
+  "event_card_source_event": {
+   "Foul Committed:Yellow Card": 5509,
+   "Bad Behaviour:Yellow Card": 1173,
+   "Foul Committed:Second Yellow": 200,
+   "Foul Committed:Red Card": 149,
+   "Bad Behaviour:Red Card": 47,
+   "Bad Behaviour:Second Yellow": 17
+  },
+  "lineup_card_type": {
+   "Yellow Card": 6682,
+   "Second Yellow": 217,
+   "Red Card": 196
+  },
+  "lineup_card_reason": {
+   "Foul Committed": 5858,
+   "Bad Behaviour": 1237
+  },
+  "start_reason": {
+   "Starting XI": 33361,
+   "Tactical Shift": 13348,
+   "Substitution - On (Tactical)": 7997,
+   "Player On": 1292,
+   "Substitution - On (Injury)": 676,
+   "Player On (Off Camera)": 190,
+   "Substitution - On (Off Camera)": 20
+  },
+  "end_reason": {
+   "Final Whistle": 33391,
+   "Tactical Shift": 12918,
+   "Substitution - Off (Tactical)": 8019,
+   "Player Off": 1425,
+   "Substitution - Off (Injury)": 657,
+   "Substitution - On (Tactical)": 330,
+   "Player Off (Off Camera)": 59,
+   "Substitution - On (Injury)": 23,
+   "Substitution - Off (Off Camera)": 20,
+   "Player Off (Permanent)": 15,
+   "Foul Committed (Red Card)": 10,
+   "Starting XI": 9,
+   "Foul Committed (Second Yellow)": 5,
+   "Substitution - On (Off Camera)": 2,
+   "Player On": 1
+  },
+  "substitution_outcome": {
+   "Tactical": 8041,
+   "Injury": 681
+  },
+  "event_period": {
+   "1": 2680612,
+   "2": 2640847
+  },
+  "position_from_period": {
+   "1": 35809,
+   "2": 21075
+  },
+  "position_to_period": {
+   "None": 33391,
+   "2": 21071,
+   "1": 2422
+  },
+  "position_name": {
+   "Center Forward": 3911,
+   "Right Center Back": 3815,
+   "Right Wing": 3808,
+   "Left Center Back": 3762,
+   "Left Wing": 3735,
+   "Right Back": 3676,
+   "Left Back": 3526,
+   "Center Attacking Midfield": 3228,
+   "Goalkeeper": 3081,
+   "Right Defensive Midfield": 2902,
+   "Left Defensive Midfield": 2865,
+   "Right Center Midfield": 2856,
+   "Left Center Midfield": 2842,
+   "Left Midfield": 2281,
+   "Right Midfield": 2221,
+   "Center Defensive Midfield": 2129,
+   "Right Center Forward": 2055,
+   "Left Center Forward": 2022,
+   "Right Wing Back": 676,
+   "Left Wing Back": 653,
+   "Center Back": 519,
+   "Left Attacking Midfield": 157,
+   "Right Attacking Midfield": 154,
+   "Center Midfield": 10
+  },
+  "event_type": {
+   "Pass": 1481813,
+   "Ball Receipt*": 1384869,
+   "Carry": 1117196,
+   "Pressure": 491104,
+   "Ball Recovery": 162682,
+   "Duel": 125123,
+   "Clearance": 73006,
+   "Block": 59169,
+   "Dribble": 52321,
+   "Goal Keeper": 46365,
+   "Foul Committed": 45517,
+   "Miscontrol": 44606,
+   "Foul Won": 43273,
+   "Dispossessed": 39944,
+   "Shot": 37888,
+   "Interception": 37580,
+   "Dribbled Past": 31950,
+   "Substitution": 8722,
+   "Half End": 6068,
+   "Half Start": 6068,
+   "Injury Stoppage": 5409,
+   "50/50": 4864,
+   "Tactical Shift": 3887,
+   "Starting XI": 3034,
+   "Shield": 2189,
+   "Player Off": 1505,
+   "Player On": 1489,
+   "Bad Behaviour": 1237,
+   "Referee Ball-Drop": 1210,
+   "Error": 597,
+   "Offside": 518,
+   "Own Goal Against": 128,
+   "Own Goal For": 128
+  }
+ },
+ "shot_outcomes_unclassified_by_d030": [],
+ "matches_missing_half_end": [],
+ "dismissals": {
+  "from_event_cards": {
+   "Second Yellow": 217,
+   "Red Card": 196
+  },
+  "from_lineup_cards": {
+   "Second Yellow": 217,
+   "Red Card": 196
+  },
+  "positions_vs_card": {
+   "Second Yellow:open_until_final_whistle": 216,
+   "Red Card:open_until_final_whistle": 190,
+   "Red Card:no_positions": 4,
+   "Red Card:closed_at_card": 1,
+   "Red Card:closed_elsewhere": 1,
+   "Second Yellow:closed_at_card": 1
+  },
+  "events_by_dismissed_player_after_card": {
+   "Second Yellow:none": 217,
+   "Red Card:none": 196
+  },
+  "non_closing_examples_first_25": [
+   {
+    "match_id": 3825894,
+    "player": "Celso Borges Mora",
+    "card_type": "Second Yellow",
+    "card_time": "63:12",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825876,
+    "player": "Emiliano Buendía",
+    "card_type": "Red Card",
+    "card_time": "74:04",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825869,
+    "player": "Jorge Andújar Moreno",
+    "card_type": "Red Card",
+    "card_time": "33:15",
+    "card_period": 1,
+    "last_position_to": null,
+    "last_end_reason": null,
+    "state": "no_positions"
+   },
+   {
+    "match_id": 3825869,
+    "player": "Timothée Kolodziejczak",
+    "card_type": "Red Card",
+    "card_time": "57:18",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825869,
+    "player": "Mikel Rico Moreno",
+    "card_type": "Red Card",
+    "card_time": "89:49",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825896,
+    "player": "Simão Mate",
+    "card_type": "Second Yellow",
+    "card_time": "90:42",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825837,
+    "player": "Aythami Artiles Oliva",
+    "card_type": "Second Yellow",
+    "card_time": "40:28",
+    "card_period": 1,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825825,
+    "player": "Zouhair Feddal",
+    "card_type": "Second Yellow",
+    "card_time": "93:15",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825823,
+    "player": "Markel Bergara Larrañaga",
+    "card_type": "Second Yellow",
+    "card_time": "67:02",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825887,
+    "player": "Isaac Ajayi Success",
+    "card_type": "Second Yellow",
+    "card_time": "69:23",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825816,
+    "player": "Éver Maximiliano David Banega",
+    "card_type": "Second Yellow",
+    "card_time": "78:54",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825858,
+    "player": "Josip Radošević",
+    "card_type": "Second Yellow",
+    "card_time": "84:37",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825811,
+    "player": "Víctor Sánchez Mata",
+    "card_type": "Second Yellow",
+    "card_time": "88:47",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825807,
+    "player": "Aderllan Leandro de Jesus Santos",
+    "card_type": "Second Yellow",
+    "card_time": "79:48",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825809,
+    "player": "Andrés Eduardo Fernández Moreno",
+    "card_type": "Red Card",
+    "card_time": "92:01",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825809,
+    "player": "Juan Manuel Vargas Risco",
+    "card_type": "Second Yellow",
+    "card_time": "52:30",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825808,
+    "player": "Aymeric Laporte",
+    "card_type": "Second Yellow",
+    "card_time": "73:13",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825804,
+    "player": "Ignacio Camacho Barnola",
+    "card_type": "Second Yellow",
+    "card_time": "92:06",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825803,
+    "player": "Sergio Álvarez Díaz",
+    "card_type": "Second Yellow",
+    "card_time": "83:11",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825801,
+    "player": "Manuel Castellano Castro",
+    "card_type": "Second Yellow",
+    "card_time": "86:53",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825796,
+    "player": "Álvaro Daniel Pereira Barragán",
+    "card_type": "Second Yellow",
+    "card_time": "64:51",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825792,
+    "player": "Germán Darío Lux",
+    "card_type": "Red Card",
+    "card_time": "92:50",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825794,
+    "player": "David Navarro Pedrós",
+    "card_type": "Second Yellow",
+    "card_time": "55:06",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825790,
+    "player": "Ignacio Cases Mora",
+    "card_type": "Red Card",
+    "card_time": "82:36",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   },
+   {
+    "match_id": 3825770,
+    "player": "Raphaël Varane",
+    "card_type": "Second Yellow",
+    "card_time": "82:01",
+    "card_period": 2,
+    "last_position_to": null,
+    "last_end_reason": "Final Whistle",
+    "state": "open_until_final_whistle"
+   }
+  ]
+ }
+}

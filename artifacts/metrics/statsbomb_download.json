@@ -1,0 +1,19 @@
+{
+ "provenance": {
+  "git_sha": "529ab828fbc97081bbaf2a5c9eaf710903e0ef08-dirty",
+  "data_version": "472c822bbbfe1ecf",
+  "command": "edgeforge data fetch-statsbomb-all",
+  "config_hash": "ec2a6284bdaee458",
+  "created_at": "2026-10-04T08:12:11Z",
+  "seed": 20261004
+ },
+ "n_matches": 1517,
+ "files_downloaded_this_run": 3020,
+ "bytes_downloaded_this_run": 4577103127,
+ "files_already_cached": 14,
+ "bytes_already_cached": 20705894,
+ "http_requests_this_run": 3024,
+ "retries_this_run": 4,
+ "elapsed_seconds_this_run": 19922.4,
+ "failures": []
+}

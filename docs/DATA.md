@@ -158,7 +158,7 @@ Sample: 3754097, 3754138, 3754217, 3754237, 3754300 (PL), 3825652 (La Liga), 382
 **Red-card route (settles D-017 / D-020).** The dismissal minute is recoverable **directly** from the card events (and the duplicate in lineups `cards[]`), as `(period, minute, second)`. Do not derive dismissals from `positions` or `Tactical Shift` lineups:
 - Gabriel's `Red Card` (45:44, period 1): his last event in the stream is that card, but his `positions` run to `Final Whistle` (`to: null`; `positions_closed_at_card: false`), derived minutes from positions are 99.3 (the full match), and every later `Tactical Shift` event still lists 11 Arsenal players including him.
 - Cazorla's `Second Yellow` (78:23): `positions` close at 78:23 with `end_reason` `Foul Committed (Second Yellow)` (82.0 minutes).
-So position data is correct for one dismissal and wrong for the other. Rule for Phase 1: cap each player's minutes at the card timestamp when a `Red Card` or `Second Yellow` exists. Evidence is two dismissals in one match; Phase 1 must count, over all 1,517 matches, how often positions fail to close at a dismissal.
+So position data is correct for one dismissal and wrong for the other. **Phase 1 correction (full corpus):** across all 1,517 matches `positions` close at the card for only 2 of 413 dismissals, so the Phase 0b impression that `Second Yellow` closes correctly came from a single match; see D-031. Rule for Phase 1: cap each player's minutes at the card timestamp when a `Red Card` or `Second Yellow` exists. Evidence is two dismissals in one match; Phase 1 must count, over all 1,517 matches, how often positions fail to close at a dismissal.
 
 **Clock hazard for in-play (Pillar B).** The `minute` field restarts at 45 in period 2, while period 1 stoppage runs past it (period 1 ended at 45:xx to 48:38 across the 7 matches; period 2 started at 45:00). So `minute` alone is not monotonic: the same minute value occurs in both halves (e.g. a 45:44 first-half card and a 45:12 second-half event). The in-play state must use `(period, minute, second)` or `timestamp`. Observed period lengths: period 1 ended at 2,759 to 2,918 s and period 2 at 5,584 to 5,738 s on the period clocks.
 
@@ -193,3 +193,58 @@ Names differ between football-data and StatsBomb for 2015/16 (`team_names_2015_1
 | Ligue 1 | 20 vs 20 | 12 | 310 / 67 / 3 | 20 of 20, 0 conflicts |
 
 Examples: `Man United` vs `Manchester United`, `Ath Madrid` vs `Atlético Madrid`, `Paris SG` vs `Paris Saint-Germain`, `Inter` vs `Inter Milan`. Accents differ (`Málaga`, `Saint-Étienne`). Exact-name joins fail for 4 to 11 teams per league. A date-and-score join is unique for 76 to 85% of matches and recovers a complete, conflict-free name map for every league, so Phase 1 can bootstrap `team_name_map` from unique joins and then join all matches on (date, mapped home, mapped away). Three Ligue 1 football-data matches have no StatsBomb counterpart (377 vs 380). Pre-2015/16 and 2019/20+ football-data seasons will need names for teams not in the 2015/16 StatsBomb set (relegated and promoted clubs), so the map needs a manual extension for those. A manual review of the generated map is required.
+
+---
+
+## 5. Phase 1: full StatsBomb corpus and the warehouse
+
+All numbers below are in `artifacts/metrics/` (`statsbomb_download.json`, `statsbomb_profile.json`, `warehouse_build.json`, `gate1_validation.json`), produced by the commands in section 5.5.
+
+### 5.1 Download (D-026)
+3,034 files (1,517 events + 1,517 lineups): 3,020 fetched in this run and 14 already cached. 4,577,103,127 bytes fetched plus 20,705,894 already cached (4.60 GB). 3,024 HTTP requests, 4 retries, 0 failures. The run's wall-clock figure (19,922 s) includes a period when the machine was suspended and the network was down; it is not a download time. The sum of per-request durations was 1,135 s over 3,024 timed requests, and before the suspension the log shows 1,250 matches in 2,494 s (2.0 s per match), so the active time was roughly 50 minutes (derived from that rate, not separately measured after the resume). No rate limiting was observed.
+
+### 5.2 Distinct values in the full corpus (`statsbomb_profile.json`)
+- **Shot outcome** (37,888 shots): `Off T` 12,637; `Blocked` 9,472; `Saved` 8,783; `Goal` 3,869; `Wayward` 2,154; `Post` 710; `Saved Off Target` 145; `Saved to Post` 118. All are classified by D-030 (`Saved Off Target` is not on target); none unclassified.
+- **Shot type:** `Open Play` 35,732; `Free Kick` 1,749; `Penalty` 400; `Corner` 7.
+- **Card name** (events and lineups agree, 0 mismatching matches): `Yellow Card` 6,682; `Second Yellow` 217; `Red Card` 196. Sources: `Foul Committed` and `Bad Behaviour` (a red or second yellow can come from either).
+- **Substitution outcome:** `Tactical` 8,041; `Injury` 681. **Event period:** 1 and 2 only (no extra time); `Half End` is present for both periods in every match.
+- **Lineup `start_reason`:** `Starting XI`, `Tactical Shift`, `Substitution - On (Tactical|Injury|Off Camera)`, `Player On`, `Player On (Off Camera)`. **`end_reason`** includes `Final Whistle`, `Tactical Shift`, `Substitution - Off (...)`, `Player Off`, `Player Off (Off Camera)`, `Player Off (Permanent)` (15), `Foul Committed (Red Card)` (10), `Foul Committed (Second Yellow)` (5), plus odd values (`Substitution - On (...)` used as an end reason, `Starting XI` used as an end reason 9 times).
+- **Positions:** 24 distinct names, all mapped to GK / DEF / MID / FWD by `position_group`.
+- **Dismissals:** 413 (196 `Red Card`, 217 `Second Yellow`). Lineup `positions` closed at the card for 2 of them (D-031).
+
+### 5.3 Quirks found
+- Within StatsBomb, event team names differ from the match record's names in 20 matches (for example `Marseille` versus `Olympique de Marseille`). All tables key on `team_id` and take names from the match record.
+- `positions` spans can be out of period order and can restart a substituted player (D-031).
+- Unused bench players can be carded (10 player-matches: 4 red, 6 yellow).
+- Players can leave without replacement (`Player Off (Permanent)`) and replacements can arrive late, so a team can play short without a dismissal.
+- Own goals are paired events (`Own Goal For` / `Own Goal Against`), balanced in all 1,517 matches.
+
+### 5.4 Tables (DuckDB `data/warehouse.duckdb`, Parquet in `data/processed/`; git-ignored, D-028)
+| Table | Rows | Key | Notes |
+|---|---|---|---|
+| `matches` | 36,539 | `match_id` (`<league>_<season>_<yyyymmdd>_<home>_<away>`) | 99 football-data files, all cached league-seasons; scores, match stats, `kickoff_time` where present (2019/20 onward), `ragged_row` flag; 0 rows dropped for bad dates |
+| `odds` | 1,879,580 | `match_id, bookmaker, market, selection, snapshot` | Long format built by column name (`1X2`, `OU` at 2.5, `AH` home line); snapshot `early` / `close`; `line_source` shared / book / bb. 16 price cells invalid (non-numeric or <= 1) dropped; 39 AH price rows without a line dropped; 248 odds rows of the ragged-row seasons skipped |
+| `team_name_map` | 80 | `league, fd_name` | Committed as `configs/team_name_map.csv` (names only); bootstrapped from unique (date, score) joins, then reviewed |
+| `sb_matches` | 1,517 | `sb_match_id` | Manager ids, period lengths, `match_length_s` |
+| `sb_match_link` | 1,517 | `sb_match_id` | Date + mapped names; 3 football-data Ligue 1 matches have no StatsBomb counterpart (named in `gate1_validation.json`) |
+| `player_match` | 57,665 | `sb_match_id, player_id` | Fields per D-030/D-031; `minutes_positions` and `started_lineup` kept as cross-checks |
+| `shots` | 37,888 | `sb_match_id, event_id` | `elapsed_s` and `(period, minute, second)`, outcome, type, xG, `on_target` |
+| `events_timeline` | 4,410 | `sb_match_id, event_index, kind` | goals, own goals (credited team), `red_card`, `second_yellow`; running score |
+| `sb_match_checks` | 1,517 | `sb_match_id` | Per-match raw-event reconciliation counts |
+| `team_season` | 1,962 | `league, season, team` | `promoted` where the previous season of that league is cached, else null; `manager_change_flag` for the 80 StatsBomb-covered teams only |
+
+Elapsed time is real match seconds on the period-aware clock (period 2 starts where period 1 ended, stoppage included).
+
+### 5.5 Reproduce
+```
+uv run edgeforge data fetch-statsbomb-all      # about 1 hour, resumable
+uv run edgeforge data profile-statsbomb        # stops if a shot outcome is unclassified
+uv run edgeforge build-warehouse
+uv run edgeforge validate                      # exit 1 if a Gate 1 check fails
+```
+
+### 5.6 Not derivable / limits
+- **Manager changes** exist only for 2015/16 in the four StatsBomb leagues (80 teams, 38 with more than one manager id, mean per-team share of matches with manager data 0.98). For every other league-season they are unavailable.
+- **Promoted flag** is null where the previous season of the same league is not cached.
+- **Closing odds** exist for 63.5% of in-scope matches (none before 2012/13); early snapshots cover 99.997% (`matches_have_1x2_odds_in_scope`).
+- Single-season player data (2015/16) is a stated limitation everywhere (D-022).

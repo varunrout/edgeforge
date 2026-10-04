@@ -96,3 +96,49 @@ football-data: 33 new CSV requests (30 history + 3 for 2015/16; E0 files were ca
 - Locked: D-019, D-020, D-026, D-027. New: D-028 (licence and publishing), D-029 (confirmed-lineup assumption), D-030 (prop settlement conventions).
 - Carried into Phase 1 as hard checks: full-corpus profiling of every enumeration (shot outcomes, card types, start/end reasons), dismissal-minute check across all 1,517 matches, SoT classification per D-030, minutes capped at dismissals, team-name map reviewed.
 - Phase 1 may start.
+
+
+---
+
+## Gate 1: Ingestion and warehouse
+
+**Report date:** 2026-10-04. Code commit for all regenerated metrics: `1095de4`. **Implementer verdict: all Gate 1 criteria pass** (`gate1_pass: true` in `artifacts/metrics/gate1_validation.json`). Phase 2 not started.
+
+### What was built
+- `fetch-statsbomb-all`: resumable download of events and lineups for the 1,517 in-scope matches (D-026). The fetcher now retries 429/5xx/connection errors with backoff and caches only HTTP 200 (previously it would have cached an error response permanently).
+- `data profile-statsbomb`: full-corpus distinct values and dismissal statistics; stops if a shot outcome is unclassified under D-030.
+- Tables (Parquet + DuckDB, git-ignored): `matches`, `odds` (long format, by column name), `team_name_map` (committed CSV, names only), `sb_matches`, `sb_match_link`, `player_match`, `shots`, `events_timeline`, `sb_match_checks`, `team_season`. Described in `docs/DATA.md` section 5.
+- `build-warehouse` and `validate` commands; modules for the period-aware clock, dismissal cap, D-030 classification, date parsing; 29 tests on synthetic fixtures.
+
+### Gate criteria
+| # | Criterion | Result | Proof command | Observed (from `gate1_validation.json` unless stated) |
+|---|---|---|---|---|
+| 1 | All 1,517 matches downloaded (events + lineups), resumable, progress logged, time and bytes reported | **PASS** | `uv run edgeforge data fetch-statsbomb-all` -> `statsbomb_download.json` | 3,034 files, 4.60 GB, 0 failures, 4 retries; see DATA.md 5.1 for the time caveat |
+| 2 | Every shot outcome classified under D-030 | **PASS** | `uv run edgeforge data profile-statsbomb` | 8 outcomes, 0 unclassified (`Saved Off Target` 145 treated as off target per D-030) |
+| 3 | Dismissals counted and positions-closure rate measured on the full corpus | **PASS** | same -> `statsbomb_profile.json` | 413 dismissals (196 `Red Card`, 217 `Second Yellow`); positions closed at the card for 2 (D-031) |
+| 4 | Row counts per league-season and per source | **PASS** | `uv run edgeforge validate` (`row_counts`) | matches 36,539; odds 1,879,580; sb_matches 1,517; player_match 57,665; shots 37,888; events_timeline 4,410; team_season 1,962; per league-season counts in the JSON |
+| 5 | Odds-to-match join coverage >= 99%, unmatched listed | **PASS** | `validate` (`odds_rows_join_to_match`, `matches_have_1x2_odds_in_scope`) | odds rows with a match: 1,879,580 of 1,879,580; in-scope matches with a 1X2 row: 29,179 of 29,179 (early snapshot 99.997%, closing 63.5% because closing columns do not exist before 2012/13); 0 league-seasons below 99% |
+| 6 | StatsBomb <-> football-data link: 1,517 linked, 3 Ligue 1 gaps named | **PASS** | `validate` (`statsbomb_football_data_link`) | 1,517 linked; unlinked football-data matches: Bastia v Ajaccio GFCO (2015-11-22), St Etienne v Paris SG (2016-01-31), Troyes v Bordeaux (2016-04-30) |
+| 7 | Goal reconciliation: StatsBomb goals (shots + own goals) == StatsBomb score == football-data score, >= 99% | **PASS** | `validate` (`goal_reconciliation`) | 1,517 of 1,517 (100%); the goal timeline's final running score equals the final score in all of them |
+| 8 | Player invariants: goals <= SoT <= shots, penalties consistent, off-pitch players record nothing | **PASS** | `validate` (`player_match_invariants`) | 0 violations on 57,665 player-matches; 0 shots by players outside the lineup; player shots sum equals shot events in every match |
+| 9 | Minutes sanity | **PASS** | `validate` (`minutes_not_above_match_length`, `minutes_team_consistency`) | 0 players above match length; 3,034 team-matches: sum of minutes equals 11 x length minus vacancy within 2 s in all, 11 starters in all; 24,299 never-exiting starters play the full match (less temporary absences), 0 exceptions |
+| 10 | Dismissal timeline count vs football-data HR/AR, mismatches listed | **PASS (informational)** | `validate` (`dismissals_vs_football_data`) | 1,514 of 1,517 agree (99.8%); mismatches: Chelsea v Newcastle 2016-02-13 (StatsBomb 0, football-data HR 1), Sassuolo v Bologna 2016-01-24 (0 vs 1), Crystal Palace v Watford 2016-02-13 (StatsBomb home 1 vs football-data 0). Totals: StatsBomb 413, football-data 414 |
+| 11 | Early-vs-close 1X2 overround between 1.00 and 1.20, outliers listed | **PASS** | `validate` (`overround_1x2`) | 388,119 bookmaker snapshots; 13 outside [1.00, 1.20] (0.003%), all listed (one `Avg` closing snapshot at 0.929, Mallorca v Barcelona 2025-08-16; implied sums among the 13 range from 0.929 to 1.584; most are legacy bookmakers on single matches). Max-of-bookmakers aggregates excluded: 16,511 of 44,322 are below 1.00, as expected for a maximum |
+| 12 | No duplicate keys in any table | **PASS** | `validate` (`no_duplicate_keys`) | 0 for all 10 tables plus both uniqueness constraints on the link and the name map |
+| 13 | AH line-consistency check from DATA.md | **PASS** | `validate` (`ah_line_consistency`) | Pinnacle vs Bet365 and vs market average at the shared line: mean abs difference in de-vigged home-cover probability 0.0038 to 0.0059 across early/close; share above 0.10 at most 0.32%; the sign of the line agrees with the Pinnacle 1X2 favourite for 100.0% (early) and 99.99% (close) of 10,210 and 10,301 matches. No evidence of a line mismatch |
+| 14 | Tests; CI-equivalent checks | **PASS (local)** | `uv sync --locked && uv run ruff check . && uv run ruff format --check . && uv run mypy && uv run pytest -q` in a fresh `git clone` of the repository at the Gate 1 commit | 29 tests pass, ruff check and format clean, mypy clean on 31 files (all run in that clone). The workflow has still not run on GitHub (no remote) |
+| 15 | team_name_map reviewed and committed; team_season built | **PASS** | `validate` (`team_name_map_complete`, `team_season_summary`) | 80 of 80 teams mapped, reviewed (support 23 to 36 matches per team); promoted counts are within 2 to 4 in every league-season where derivable (no exceptions; 2 or 3 in the seasons inspected: 2015/16, 2019/20, 2024/25, 2025/26); manager-change flag for 80 teams (38 with a change), unavailable elsewhere |
+
+### Deviations and decisions for the lead
+1. **D-031 (new, Proposed):** minutes, substitution times and the starter flag come from the event stream, not lineup `positions`, because positions give minutes above match length (7 player-matches), disagree with events for 40 player-matches, mis-flag starters in 22, and almost never close at a dismissal. The clock and the cap are unchanged. This supersedes only the minutes source in the locked D-030.
+2. **Invariant redefined.** My first invariant counted cards against players who never appeared. 10 unused bench players were carded (4 red, 6 yellow), which is real; the invariant now covers shots and minutes only, and the cards are reported separately. Their dismissals are included in the 413 and are not on-pitch dismissals.
+3. **Implementer-chosen thresholds, for the lead to confirm or replace:** overround outliers < 1% outside [1.00, 1.20]; AH line test (< 1% of matches differing by more than 0.10 in de-vigged probability, line-sign agreement >= 95%); team minutes identity tolerance 2 s. PLAN fixed only the 99% criteria.
+4. **D-028 hygiene.** `data_audit_statsbomb.json` (committed in Phase 0b) contained per-player rows for 7 matches; the audit no longer writes them and is limited to the 7 named sample matches (`audit_sample_match_ids`). The earlier version remains in git history. `gate1_validation.json` and `statsbomb_profile.json` list a small number of player names in failure and example lists (tens of rows, for audit); no table is committed.
+5. **Provenance.** `statsbomb_download.json` records `git_sha ...-dirty` (code of commit `529ab82`; uncommitted Phase 1 work was in the tree). The run cannot be repeated without redownloading; every other metrics file was regenerated from commit `1095de4` on a clean tree.
+6. The download's wall-clock time in the metrics includes a machine suspension (DATA.md 5.1).
+
+### Open issues
+- Single-season player data (2015/16) remains the main validity limit for Pillars B and C (D-022).
+- 22 player-matches have a lineup-positions starter flag that disagrees with the `Starting XI` event; the event is used (D-031).
+- Football-data odds timing is still unknown (D-024).
+- CI has not run on GitHub (no remote; pushing needs Varun's say-so).

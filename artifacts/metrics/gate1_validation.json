@@ -1,0 +1,3119 @@
+{
+ "provenance": {
+  "git_sha": "1095de4e68a10e96176c0877838933c9c7305795",
+  "data_version": "bb8a6be5d1deece1",
+  "command": "edgeforge validate",
+  "config_hash": "39f96c7271994bec",
+  "created_at": "2026-10-04T08:42:59Z",
+  "seed": 20261004
+ },
+ "gate1_pass": true,
+ "failed_checks": [],
+ "summary": [
+  {
+   "id": "row_counts",
+   "pass": null,
+   "threshold": "informational"
+  },
+  {
+   "id": "odds_rows_join_to_match",
+   "pass": true,
+   "threshold": ">= 99%"
+  },
+  {
+   "id": "matches_have_1x2_odds_in_scope",
+   "pass": true,
+   "threshold": ">= 99% over in-scope league-seasons (configs/data.yaml scope)"
+  },
+  {
+   "id": "statsbomb_football_data_link",
+   "pass": true,
+   "threshold": "1,517 StatsBomb matches linked"
+  },
+  {
+   "id": "goal_reconciliation",
+   "pass": true,
+   "threshold": ">= 99% of linked matches"
+  },
+  {
+   "id": "player_match_invariants",
+   "pass": true,
+   "threshold": "all violation counts == 0"
+  },
+  {
+   "id": "minutes_not_above_match_length",
+   "pass": true,
+   "threshold": "0 player-matches"
+  },
+  {
+   "id": "minutes_team_consistency",
+   "pass": true,
+   "threshold": "0 violations (tolerance 2 s per team; implementer-chosen)"
+  },
+  {
+   "id": "minutes_events_vs_positions",
+   "pass": null,
+   "threshold": "informational"
+  },
+  {
+   "id": "dismissals_vs_football_data",
+   "pass": null,
+   "threshold": "informational; mismatches listed (no threshold fixed by PLAN)"
+  },
+  {
+   "id": "event_cards_vs_lineup_cards",
+   "pass": true,
+   "threshold": "0 mismatching matches"
+  },
+  {
+   "id": "statsbomb_structure",
+   "pass": true,
+   "threshold": "0 violations"
+  },
+  {
+   "id": "overround_1x2",
+   "pass": true,
+   "threshold": "< 1% outside [1.00, 1.20] (implementer-chosen); outliers listed"
+  },
+  {
+   "id": "ah_line_consistency",
+   "pass": true,
+   "threshold": "share |P - other| > 0.10 below 1% and line sign agrees with 1X2 favourite in >= 95% (implementer-chosen)"
+  },
+  {
+   "id": "no_duplicate_keys",
+   "pass": true,
+   "threshold": "0 duplicate keys per table"
+  },
+  {
+   "id": "team_name_map_complete",
+   "pass": true,
+   "threshold": "0 unmapped teams"
+  },
+  {
+   "id": "team_season_summary",
+   "pass": null,
+   "threshold": "informational"
+  }
+ ],
+ "checks": [
+  {
+   "id": "row_counts",
+   "description": "Row counts per league-season and per source",
+   "pass": null,
+   "threshold": "informational",
+   "observed": {
+    "table_totals": {
+     "matches": 36539,
+     "odds": 1879580,
+     "team_name_map": 80,
+     "sb_matches": 1517,
+     "sb_match_link": 1517,
+     "player_match": 57665,
+     "shots": 37888,
+     "events_timeline": 4410,
+     "team_season": 1962
+    },
+    "statsbomb_matches": [
+     {
+      "competition": "La Liga",
+      "season": "2015/2016",
+      "matches": 380
+     },
+     {
+      "competition": "Ligue 1",
+      "season": "2015/2016",
+      "matches": 377
+     },
+     {
+      "competition": "Premier League",
+      "season": "2015/2016",
+      "matches": 380
+     },
+     {
+      "competition": "Serie A",
+      "season": "2015/2016",
+      "matches": 380
+     }
+    ]
+   },
+   "details": {
+    "football_data_per_league_season": [
+     {
+      "league": "D1",
+      "season": "1819",
+      "matches": 306,
+      "odds_rows": 10704.0
+     },
+     {
+      "league": "D1",
+      "season": "1920",
+      "matches": 306,
+      "odds_rows": 24452.0
+     },
+     {
+      "league": "D1",
+      "season": "2021",
+      "matches": 306,
+      "odds_rows": 24460.0
+     },
+     {
+      "league": "D1",
+      "season": "2122",
+      "matches": 306,
+      "odds_rows": 24459.0
+     },
+     {
+      "league": "D1",
+      "season": "2223",
+      "matches": 306,
+      "odds_rows": 24428.0
+     },
+     {
+      "league": "D1",
+      "season": "2324",
+      "matches": 306,
+      "odds_rows": 23392.0
+     },
+     {
+      "league": "D1",
+      "season": "2425",
+      "matches": 306,
+      "odds_rows": 27537.0
+     },
+     {
+      "league": "D1",
+      "season": "2526",
+      "matches": 306,
+      "odds_rows": 28892.0
+     },
+     {
+      "league": "E0",
+      "season": "0001",
+      "matches": 380,
+      "odds_rows": 5535.0
+     },
+     {
+      "league": "E0",
+      "season": "0102",
+      "matches": 380,
+      "odds_rows": 6363.0
+     },
+     {
+      "league": "E0",
+      "season": "0203",
+      "matches": 380,
+      "odds_rows": 9201.0
+     },
+     {
+      "league": "E0",
+      "season": "0304",
+      "matches": 380,
+      "odds_rows": 10284.0
+     },
+     {
+      "league": "E0",
+      "season": "0405",
+      "matches": 380,
+      "odds_rows": 10359.0
+     },
+     {
+      "league": "E0",
+      "season": "0506",
+      "matches": 380,
+      "odds_rows": 15580.0
+     },
+     {
+      "league": "E0",
+      "season": "0607",
+      "matches": 380,
+      "odds_rows": 15577.0
+     },
+     {
+      "league": "E0",
+      "season": "0708",
+      "matches": 380,
+      "odds_rows": 16399.0
+     },
+     {
+      "league": "E0",
+      "season": "0809",
+      "matches": 380,
+      "odds_rows": 16717.0
+     },
+     {
+      "league": "E0",
+      "season": "0910",
+      "matches": 380,
+      "odds_rows": 16720.0
+     },
+     {
+      "league": "E0",
+      "season": "1011",
+      "matches": 380,
+      "odds_rows": 16720.0
+     },
+     {
+      "league": "E0",
+      "season": "1112",
+      "matches": 380,
+      "odds_rows": 16720.0
+     },
+     {
+      "league": "E0",
+      "season": "1213",
+      "matches": 380,
+      "odds_rows": 17854.0
+     },
+     {
+      "league": "E0",
+      "season": "1314",
+      "matches": 380,
+      "odds_rows": 15540.0
+     },
+     {
+      "league": "E0",
+      "season": "1415",
+      "matches": 380,
+      "odds_rows": 14557.0
+     },
+     {
+      "league": "E0",
+      "season": "1516",
+      "matches": 380,
+      "odds_rows": 14437.0
+     },
+     {
+      "league": "E0",
+      "season": "1617",
+      "matches": 380,
+      "odds_rows": 14440.0
+     },
+     {
+      "league": "E0",
+      "season": "1718",
+      "matches": 380,
+      "odds_rows": 14440.0
+     },
+     {
+      "league": "E0",
+      "season": "1819",
+      "matches": 380,
+      "odds_rows": 13300.0
+     },
+     {
+      "league": "E0",
+      "season": "1920",
+      "matches": 380,
+      "odds_rows": 30400.0
+     },
+     {
+      "league": "E0",
+      "season": "2021",
+      "matches": 380,
+      "odds_rows": 30400.0
+     },
+     {
+      "league": "E0",
+      "season": "2122",
+      "matches": 380,
+      "odds_rows": 30385.0
+     },
+     {
+      "league": "E0",
+      "season": "2223",
+      "matches": 380,
+      "odds_rows": 30396.0
+     },
+     {
+      "league": "E0",
+      "season": "2324",
+      "matches": 380,
+      "odds_rows": 29234.0
+     },
+     {
+      "league": "E0",
+      "season": "2425",
+      "matches": 380,
+      "odds_rows": 34280.0
+     },
+     {
+      "league": "E0",
+      "season": "2526",
+      "matches": 380,
+      "odds_rows": 36304.0
+     },
+     {
+      "league": "E0",
+      "season": "2627",
+      "matches": 50,
+      "odds_rows": 4270.0
+     },
+     {
+      "league": "E0",
+      "season": "9394",
+      "matches": 462,
+      "odds_rows": null
+     },
+     {
+      "league": "E0",
+      "season": "9495",
+      "matches": 462,
+      "odds_rows": null
+     },
+     {
+      "league": "E0",
+      "season": "9596",
+      "matches": 380,
+      "odds_rows": null
+     },
+     {
+      "league": "E0",
+      "season": "9697",
+      "matches": 380,
+      "odds_rows": null
+     },
+     {
+      "league": "E0",
+      "season": "9798",
+      "matches": 380,
+      "odds_rows": null
+     },
+     {
+      "league": "E0",
+      "season": "9899",
+      "matches": 380,
+      "odds_rows": null
+     },
+     {
+      "league": "E0",
+      "season": "9900",
+      "matches": 380,
+      "odds_rows": null
+     },
+     {
+      "league": "F1",
+      "season": "0506",
+      "matches": 380,
+      "odds_rows": 15571.0
+     },
+     {
+      "league": "F1",
+      "season": "0607",
+      "matches": 380,
+      "odds_rows": 15562.0
+     },
+     {
+      "league": "F1",
+      "season": "0708",
+      "matches": 380,
+      "odds_rows": 16363.0
+     },
+     {
+      "league": "F1",
+      "season": "0809",
+      "matches": 380,
+      "odds_rows": 16714.0
+     },
+     {
+      "league": "F1",
+      "season": "0910",
+      "matches": 380,
+      "odds_rows": 16720.0
+     },
+     {
+      "league": "F1",
+      "season": "1011",
+      "matches": 380,
+      "odds_rows": 16714.0
+     },
+     {
+      "league": "F1",
+      "season": "1112",
+      "matches": 380,
+      "odds_rows": 16717.0
+     },
+     {
+      "league": "F1",
+      "season": "1213",
+      "matches": 380,
+      "odds_rows": 17851.0
+     },
+     {
+      "league": "F1",
+      "season": "1314",
+      "matches": 380,
+      "odds_rows": 15537.0
+     },
+     {
+      "league": "F1",
+      "season": "1415",
+      "matches": 380,
+      "odds_rows": 14581.0
+     },
+     {
+      "league": "F1",
+      "season": "1516",
+      "matches": 380,
+      "odds_rows": 14434.0
+     },
+     {
+      "league": "F1",
+      "season": "1819",
+      "matches": 380,
+      "odds_rows": 13294.0
+     },
+     {
+      "league": "F1",
+      "season": "1920",
+      "matches": 279,
+      "odds_rows": 22318.0
+     },
+     {
+      "league": "F1",
+      "season": "2021",
+      "matches": 380,
+      "odds_rows": 30353.0
+     },
+     {
+      "league": "F1",
+      "season": "2122",
+      "matches": 380,
+      "odds_rows": 30376.0
+     },
+     {
+      "league": "F1",
+      "season": "2223",
+      "matches": 380,
+      "odds_rows": 30376.0
+     },
+     {
+      "league": "F1",
+      "season": "2324",
+      "matches": 306,
+      "odds_rows": 23508.0
+     },
+     {
+      "league": "F1",
+      "season": "2425",
+      "matches": 306,
+      "odds_rows": 27572.0
+     },
+     {
+      "league": "F1",
+      "season": "2526",
+      "matches": 306,
+      "odds_rows": 28968.0
+     },
+     {
+      "league": "I1",
+      "season": "0506",
+      "matches": 380,
+      "odds_rows": 15428.0
+     },
+     {
+      "league": "I1",
+      "season": "0607",
+      "matches": 380,
+      "odds_rows": 15484.0
+     },
+     {
+      "league": "I1",
+      "season": "0708",
+      "matches": 380,
+      "odds_rows": 16398.0
+     },
+     {
+      "league": "I1",
+      "season": "0809",
+      "matches": 380,
+      "odds_rows": 16649.0
+     },
+     {
+      "league": "I1",
+      "season": "0910",
+      "matches": 380,
+      "odds_rows": 16558.0
+     },
+     {
+      "league": "I1",
+      "season": "1011",
+      "matches": 380,
+      "odds_rows": 16540.0
+     },
+     {
+      "league": "I1",
+      "season": "1112",
+      "matches": 380,
+      "odds_rows": 16705.0
+     },
+     {
+      "league": "I1",
+      "season": "1213",
+      "matches": 380,
+      "odds_rows": 17815.0
+     },
+     {
+      "league": "I1",
+      "season": "1314",
+      "matches": 380,
+      "odds_rows": 15577.0
+     },
+     {
+      "league": "I1",
+      "season": "1415",
+      "matches": 380,
+      "odds_rows": 14482.0
+     },
+     {
+      "league": "I1",
+      "season": "1516",
+      "matches": 380,
+      "odds_rows": 14437.0
+     },
+     {
+      "league": "I1",
+      "season": "1819",
+      "matches": 380,
+      "odds_rows": 13300.0
+     },
+     {
+      "league": "I1",
+      "season": "1920",
+      "matches": 380,
+      "odds_rows": 30400.0
+     },
+     {
+      "league": "I1",
+      "season": "2021",
+      "matches": 380,
+      "odds_rows": 30345.0
+     },
+     {
+      "league": "I1",
+      "season": "2122",
+      "matches": 380,
+      "odds_rows": 30345.0
+     },
+     {
+      "league": "I1",
+      "season": "2223",
+      "matches": 380,
+      "odds_rows": 30400.0
+     },
+     {
+      "league": "I1",
+      "season": "2324",
+      "matches": 380,
+      "odds_rows": 29146.0
+     },
+     {
+      "league": "I1",
+      "season": "2425",
+      "matches": 380,
+      "odds_rows": 34284.0
+     },
+     {
+      "league": "I1",
+      "season": "2526",
+      "matches": 380,
+      "odds_rows": 36123.0
+     },
+     {
+      "league": "SP1",
+      "season": "0506",
+      "matches": 380,
+      "odds_rows": 15559.0
+     },
+     {
+      "league": "SP1",
+      "season": "0607",
+      "matches": 380,
+      "odds_rows": 15574.0
+     },
+     {
+      "league": "SP1",
+      "season": "0708",
+      "matches": 380,
+      "odds_rows": 16420.0
+     },
+     {
+      "league": "SP1",
+      "season": "0809",
+      "matches": 380,
+      "odds_rows": 16717.0
+     },
+     {
+      "league": "SP1",
+      "season": "0910",
+      "matches": 380,
+      "odds_rows": 16716.0
+     },
+     {
+      "league": "SP1",
+      "season": "1011",
+      "matches": 380,
+      "odds_rows": 16711.0
+     },
+     {
+      "league": "SP1",
+      "season": "1112",
+      "matches": 380,
+      "odds_rows": 16720.0
+     },
+     {
+      "league": "SP1",
+      "season": "1213",
+      "matches": 380,
+      "odds_rows": 17842.0
+     },
+     {
+      "league": "SP1",
+      "season": "1314",
+      "matches": 380,
+      "odds_rows": 15534.0
+     },
+     {
+      "league": "SP1",
+      "season": "1415",
+      "matches": 380,
+      "odds_rows": 14515.0
+     },
+     {
+      "league": "SP1",
+      "season": "1516",
+      "matches": 380,
+      "odds_rows": 14437.0
+     },
+     {
+      "league": "SP1",
+      "season": "1819",
+      "matches": 380,
+      "odds_rows": 13300.0
+     },
+     {
+      "league": "SP1",
+      "season": "1920",
+      "matches": 380,
+      "odds_rows": 30366.0
+     },
+     {
+      "league": "SP1",
+      "season": "2021",
+      "matches": 380,
+      "odds_rows": 30396.0
+     },
+     {
+      "league": "SP1",
+      "season": "2122",
+      "matches": 380,
+      "odds_rows": 30380.0
+     },
+     {
+      "league": "SP1",
+      "season": "2223",
+      "matches": 380,
+      "odds_rows": 30400.0
+     },
+     {
+      "league": "SP1",
+      "season": "2324",
+      "matches": 380,
+      "odds_rows": 29195.0
+     },
+     {
+      "league": "SP1",
+      "season": "2425",
+      "matches": 380,
+      "odds_rows": 34154.0
+     },
+     {
+      "league": "SP1",
+      "season": "2526",
+      "matches": 380,
+      "odds_rows": 35963.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "odds_rows_join_to_match",
+   "description": "Share of odds rows whose match_id exists in matches",
+   "pass": true,
+   "threshold": ">= 99%",
+   "observed": {
+    "odds_rows": 1879580,
+    "unmatched_rows": 0,
+    "coverage": 1.0
+   },
+   "details": {
+    "unmatched_listed": []
+   }
+  },
+  {
+   "id": "matches_have_1x2_odds_in_scope",
+   "description": "Share of in-scope football-data matches with at least one 1X2 odds row",
+   "pass": true,
+   "threshold": ">= 99% over in-scope league-seasons (configs/data.yaml scope)",
+   "observed": {
+    "in_scope_matches": 29179,
+    "with_any_1x2": 29179,
+    "coverage": 1.0,
+    "with_early_snapshot": 0.9999657287775455,
+    "with_close_snapshot": 0.6352856506391583,
+    "n_league_seasons_below_99pct": 0,
+    "out_of_scope_matches": 7360
+   },
+   "details": {
+    "matches_without_1x2_listed": [],
+    "by_league_season": [
+     {
+      "league": "D1",
+      "season": "1920",
+      "matches": 306,
+      "with_1x2": 306,
+      "with_early": 306,
+      "with_close": 306,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "D1",
+      "season": "2021",
+      "matches": 306,
+      "with_1x2": 306,
+      "with_early": 306,
+      "with_close": 306,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "D1",
+      "season": "2122",
+      "matches": 306,
+      "with_1x2": 306,
+      "with_early": 306,
+      "with_close": 306,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "D1",
+      "season": "2223",
+      "matches": 306,
+      "with_1x2": 306,
+      "with_early": 306,
+      "with_close": 306,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "D1",
+      "season": "2324",
+      "matches": 306,
+      "with_1x2": 306,
+      "with_early": 306,
+      "with_close": 306,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "D1",
+      "season": "2425",
+      "matches": 306,
+      "with_1x2": 306,
+      "with_early": 306,
+      "with_close": 306,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "D1",
+      "season": "2526",
+      "matches": 306,
+      "with_1x2": 306,
+      "with_early": 306,
+      "with_close": 306,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "0506",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "0607",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "0708",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "0809",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "0910",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "1011",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "1112",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "1213",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "1314",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "1415",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "1516",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "1920",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "2021",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "2122",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "2223",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "2324",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "2425",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "E0",
+      "season": "2526",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "0506",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "0607",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "0708",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "0809",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "0910",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "1011",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "1112",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "1213",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "1314",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "1415",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "1516",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "1920",
+      "matches": 279,
+      "with_1x2": 279,
+      "with_early": 279,
+      "with_close": 279,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "2021",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "2122",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "2223",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "2324",
+      "matches": 306,
+      "with_1x2": 306,
+      "with_early": 306,
+      "with_close": 306,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "2425",
+      "matches": 306,
+      "with_1x2": 306,
+      "with_early": 306,
+      "with_close": 306,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "F1",
+      "season": "2526",
+      "matches": 306,
+      "with_1x2": 306,
+      "with_early": 306,
+      "with_close": 306,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "0506",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "0607",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "0708",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "0809",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "0910",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "1011",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "1112",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "1213",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 378,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "1314",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "1415",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "1516",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "1920",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "2021",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "2122",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 379,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "2223",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "2324",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "2425",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "I1",
+      "season": "2526",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "0506",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "0607",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "0708",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "0809",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "0910",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "1011",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "1112",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 0,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "1213",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "1314",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "1415",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "1516",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "1920",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "2021",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "2122",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "2223",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "2324",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "2425",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     },
+     {
+      "league": "SP1",
+      "season": "2526",
+      "matches": 380,
+      "with_1x2": 380,
+      "with_early": 380,
+      "with_close": 380,
+      "coverage_any_1x2": 1.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "statsbomb_football_data_link",
+   "description": "Every StatsBomb match links to one football-data match; unlinked football-data matches named",
+   "pass": true,
+   "threshold": "1,517 StatsBomb matches linked",
+   "observed": {
+    "statsbomb_matches": 1517,
+    "linked": 1517,
+    "football_data_2015_16_matches_in_linked_leagues": 1520,
+    "football_data_unlinked": 3,
+    "unlinked_by_league": {
+     "F1": 3
+    }
+   },
+   "details": {
+    "football_data_unlinked_listed": [
+     {
+      "match_id": "F1_1516_20151122_bastia_ajaccio_gfco",
+      "league": "F1",
+      "date": "2015-11-22",
+      "home": "Bastia",
+      "away": "Ajaccio GFCO",
+      "fthg": 1,
+      "ftag": 2
+     },
+     {
+      "match_id": "F1_1516_20160131_st_etienne_paris_sg",
+      "league": "F1",
+      "date": "2016-01-31",
+      "home": "St Etienne",
+      "away": "Paris SG",
+      "fthg": 0,
+      "ftag": 2
+     },
+     {
+      "match_id": "F1_1516_20160430_troyes_bordeaux",
+      "league": "F1",
+      "date": "2016-04-30",
+      "home": "Troyes",
+      "away": "Bordeaux",
+      "fthg": 2,
+      "ftag": 4
+     }
+    ]
+   }
+  },
+  {
+   "id": "goal_reconciliation",
+   "description": "StatsBomb goals (shots + own goals) == StatsBomb score == football-data score",
+   "pass": true,
+   "threshold": ">= 99% of linked matches",
+   "observed": {
+    "linked_matches": 1517,
+    "reconciled": 1517,
+    "share": 1.0,
+    "events_vs_sb_score_mismatch": 0,
+    "sb_vs_football_data_score_mismatch": 0
+   },
+   "details": {
+    "failures_listed": []
+   }
+  },
+  {
+   "id": "player_match_invariants",
+   "description": "goals <= shots_on_target <= shots, penalties consistent, off-pitch players record nothing",
+   "pass": true,
+   "threshold": "all violation counts == 0",
+   "observed": {
+    "sot_gt_shots": 0,
+    "goals_gt_sot": 0,
+    "penalty_goals_gt_penalties": 0,
+    "penalties_gt_shots": 0,
+    "negative_minutes": 0,
+    "events_without_appearance": 0,
+    "matches_where_player_shots_sum_ne_shot_events": 0,
+    "shots_by_players_not_in_lineup": 0
+   },
+   "details": {
+    "unused_bench_players_with_cards_not_a_violation": [
+     {
+      "players": 10,
+      "red": 4.0,
+      "second_yellow": 0.0,
+      "yellow": 6.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "minutes_not_above_match_length",
+   "description": "No player has minutes greater than the match length",
+   "pass": true,
+   "threshold": "0 player-matches",
+   "observed": {
+    "player_matches": 57665,
+    "violations": 0
+   },
+   "details": {
+    "violations_listed": []
+   }
+  },
+  {
+   "id": "minutes_team_consistency",
+   "description": "Per team: sum of minutes == 11 x match length - vacancy from events (+-2 s); every team has 11 starters (Starting XI event); starters who never exit play the full match (less temporary absences)",
+   "pass": true,
+   "threshold": "0 violations (tolerance 2 s per team; implementer-chosen)",
+   "observed": {
+    "team_matches": 3034,
+    "team_total_violations": 0,
+    "teams_without_11_starters": 0,
+    "full_match_starters_checked": 24299,
+    "full_match_starter_violations": 0
+   },
+   "details": {
+    "team_violations_listed": [],
+    "starter_count_violations_listed": [],
+    "full_match_starter_violations_listed": []
+   }
+  },
+  {
+   "id": "minutes_events_vs_positions",
+   "description": "Event-stream minutes (D-031) vs lineup-positions minutes (D-030 as written), and starter flags",
+   "pass": null,
+   "threshold": "informational",
+   "observed": {
+    "player_matches": 57665,
+    "disagree_over_1s": 40,
+    "positions_higher_than_events": 36,
+    "positions_over_match_length": 7,
+    "started_by_event_vs_lineup_positions_mismatch": 22
+   },
+   "details": {
+    "disagreements_listed": [
+     {
+      "sb_match_id": 3825739,
+      "team": "Real Madrid",
+      "player_name": "Gareth Frank Bale",
+      "minutes": 44.5666666667,
+      "minutes_positions": 91.6
+     },
+     {
+      "sb_match_id": 3825707,
+      "team": "Las Palmas",
+      "player_name": "Willian Jos\u00e9 da Silva",
+      "minutes": 33.45,
+      "minutes_positions": 91.55
+     },
+     {
+      "sb_match_id": 3825699,
+      "team": "Real Betis",
+      "player_name": "Francisco Jos\u00e9 Molinero Calder\u00f3n",
+      "minutes": 82.75,
+      "minutes_positions": 93.3166666667
+     },
+     {
+      "sb_match_id": 3825684,
+      "team": "Villarreal",
+      "player_name": "Jaume Vicent Costa Jord\u00e1",
+      "minutes": 46.1166666667,
+      "minutes_positions": 96.1166666667
+     },
+     {
+      "sb_match_id": 3825667,
+      "team": "Villarreal",
+      "player_name": "Eric Bertrand Bailly",
+      "minutes": 32.6833333333,
+      "minutes_positions": 96.7
+     },
+     {
+      "sb_match_id": 3825901,
+      "team": "Valencia",
+      "player_name": "Aymen Abdennour",
+      "minutes": 44.0166666667,
+      "minutes_positions": 92.1166666667
+     },
+     {
+      "sb_match_id": 3825729,
+      "team": "Sporting Gij\u00f3n",
+      "player_name": "Bernardo Jos\u00e9 Espinosa Z\u00fa\u00f1iga",
+      "minutes": 37.2833333333,
+      "minutes_positions": 92.5666666667
+     },
+     {
+      "sb_match_id": 3825565,
+      "team": "Espanyol",
+      "player_name": "\u00c1lvaro Gonz\u00e1lez Sober\u00f3n",
+      "minutes": 76.45,
+      "minutes_positions": 93.6833333333
+     },
+     {
+      "sb_match_id": 3901259,
+      "team": "Troyes",
+      "player_name": "Matthieu Saunier",
+      "minutes": 75.95,
+      "minutes_positions": 94.55
+     },
+     {
+      "sb_match_id": 3901165,
+      "team": "Bordeaux",
+      "player_name": "Fr\u00e9d\u00e9ric Guilbert",
+      "minutes": 94.3166666667,
+      "minutes_positions": 95.15
+     },
+     {
+      "sb_match_id": 3901163,
+      "team": "Troyes",
+      "player_name": "Mouhamadou Dabo",
+      "minutes": 47.3666666667,
+      "minutes_positions": 92.2
+     },
+     {
+      "sb_match_id": 3901155,
+      "team": "Lille",
+      "player_name": "Sofiane Boufal",
+      "minutes": 81.8333333333,
+      "minutes_positions": 96.2
+     },
+     {
+      "sb_match_id": 3901151,
+      "team": "Lille",
+      "player_name": "Florent Balmont",
+      "minutes": 31.9166666667,
+      "minutes_positions": 40.5666666667
+     },
+     {
+      "sb_match_id": 3900628,
+      "team": "Lille",
+      "player_name": "\u00c9derzito Ant\u00f3nio Macedo Lopes",
+      "minutes": 46.95,
+      "minutes_positions": 97.9833333333
+     },
+     {
+      "sb_match_id": 3900588,
+      "team": "AS Monaco",
+      "player_name": "J\u00e9r\u00e9my Toulalan",
+      "minutes": 68.4,
+      "minutes_positions": 93.5166666667
+     },
+     {
+      "sb_match_id": 3900539,
+      "team": "Rennes",
+      "player_name": "Edson Andr\u00e9 Sitoe",
+      "minutes": 62.25,
+      "minutes_positions": 93.4833333333
+     },
+     {
+      "sb_match_id": 3900529,
+      "team": "Saint-\u00c9tienne",
+      "player_name": "Rona\u00ebl Pierre-Gabriel",
+      "minutes": 61.9,
+      "minutes_positions": 97.7166666667
+     },
+     {
+      "sb_match_id": 3900519,
+      "team": "Rennes",
+      "player_name": "Benjamin Andr\u00e9",
+      "minutes": 48.3333333333,
+      "minutes_positions": 103.4833333333
+     },
+     {
+      "sb_match_id": 3829420,
+      "team": "Bordeaux",
+      "player_name": "Gr\u00e9gory Sertic",
+      "minutes": 22.8333333333,
+      "minutes_positions": 95.85
+     },
+     {
+      "sb_match_id": 3754217,
+      "team": "Arsenal",
+      "player_name": "Francis Joseph Coquelin",
+      "minutes": 48.25,
+      "minutes_positions": 99.85
+     },
+     {
+      "sb_match_id": 3754339,
+      "team": "Stoke City",
+      "player_name": "Xherdan Shaqiri",
+      "minutes": 52.25,
+      "minutes_positions": 103.5833333333
+     },
+     {
+      "sb_match_id": 3754023,
+      "team": "AFC Bournemouth",
+      "player_name": "Tyrone Mings",
+      "minutes": 11.25,
+      "minutes_positions": 11.2166666667
+     },
+     {
+      "sb_match_id": 3754099,
+      "team": "West Bromwich Albion",
+      "player_name": "Saido Berahino",
+      "minutes": 47.2166666667,
+      "minutes_positions": 96.2666666667
+     },
+     {
+      "sb_match_id": 3754148,
+      "team": "Tottenham Hotspur",
+      "player_name": "Ryan Mason",
+      "minutes": 85.1,
+      "minutes_positions": 95.5833333333
+     },
+     {
+      "sb_match_id": 3754336,
+      "team": "Everton",
+      "player_name": "S\u00e9amus Coleman",
+      "minutes": 77.7166666667,
+      "minutes_positions": 95.35
+     },
+     {
+      "sb_match_id": 3754274,
+      "team": "Stoke City",
+      "player_name": "Marc Muniesa Mart\u00ednez",
+      "minutes": 47.0833333333,
+      "minutes_positions": 98.1666666667
+     },
+     {
+      "sb_match_id": 3879863,
+      "team": "Udinese",
+      "player_name": "Molla Wagu\u00e9",
+      "minutes": 17.0833333333,
+      "minutes_positions": 93.5166666667
+     },
+     {
+      "sb_match_id": 3879772,
+      "team": "Torino",
+      "player_name": "Giuseppe Vives",
+      "minutes": 86.4166666667,
+      "minutes_positions": 94.3833333333
+     },
+     {
+      "sb_match_id": 3879622,
+      "team": "Carpi",
+      "player_name": "Lorenzo Pasciuti",
+      "minutes": 47.05,
+      "minutes_positions": 98.7333333333
+     },
+     {
+      "sb_match_id": 3878610,
+      "team": "Hellas Verona",
+      "player_name": "Rafael M\u00e1rquez \u00c1lvarez",
+      "minutes": 72.15,
+      "minutes_positions": 100.15
+     },
+     {
+      "sb_match_id": 3879874,
+      "team": "Fiorentina",
+      "player_name": "Marcos Alonso Mendoza",
+      "minutes": 26.3,
+      "minutes_positions": 92.85
+     },
+     {
+      "sb_match_id": 3879831,
+      "team": "Sassuolo",
+      "player_name": "Gregoire Defrel",
+      "minutes": 27.85,
+      "minutes_positions": 93.8833333333
+     },
+     {
+      "sb_match_id": 3879796,
+      "team": "Genoa",
+      "player_name": "Alessio Cerci",
+      "minutes": 26.9,
+      "minutes_positions": 33.05
+     },
+     {
+      "sb_match_id": 3879731,
+      "team": "Carpi",
+      "player_name": "Lorenzo Pasciuti",
+      "minutes": 10.4333333333,
+      "minutes_positions": 94.1
+     },
+     {
+      "sb_match_id": 3879690,
+      "team": "Fiorentina",
+      "player_name": "Marcos Alonso Mendoza",
+      "minutes": 73.5166666667,
+      "minutes_positions": 94.0
+     },
+     {
+      "sb_match_id": 3879639,
+      "team": "AS Roma",
+      "player_name": "Gervais Lombe Yao Kouassi",
+      "minutes": 23.5166666667,
+      "minutes_positions": 94.7
+     },
+     {
+      "sb_match_id": 3879637,
+      "team": "Lazio",
+      "player_name": "Sergej Milinkovi\u0107-Savi\u0107",
+      "minutes": 71.1666666667,
+      "minutes_positions": 67.65
+     },
+     {
+      "sb_match_id": 3879549,
+      "team": "AC Milan",
+      "player_name": "Rodrigo Ely",
+      "minutes": 52.15,
+      "minutes_positions": 50.6
+     },
+     {
+      "sb_match_id": 3879547,
+      "team": "AS Roma",
+      "player_name": "Francesco Totti",
+      "minutes": 6.75,
+      "minutes_positions": 44.0666666667
+     },
+     {
+      "sb_match_id": 3879541,
+      "team": "Bologna",
+      "player_name": "Amadou Diawara",
+      "minutes": 94.4833333333,
+      "minutes_positions": 93.8666666667
+     }
+    ],
+    "started_mismatch_listed": [
+     {
+      "sb_match_id": 3825596,
+      "team": "Sporting Gij\u00f3n",
+      "player_name": "Luis Hern\u00e1ndez Rodr\u00edguez",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3825596,
+      "team": "Sporting Gij\u00f3n",
+      "player_name": "Bernardo Jos\u00e9 Espinosa Z\u00fa\u00f1iga",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3825596,
+      "team": "Sporting Gij\u00f3n",
+      "player_name": "Miguel \u00c1ngel Guerrero Mart\u00edn",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3825596,
+      "team": "Sporting Gij\u00f3n",
+      "player_name": "Arnaldo Antonio Sanabria Ayala",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3825596,
+      "team": "Sporting Gij\u00f3n",
+      "player_name": "Alen Halilovi\u0107",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3825596,
+      "team": "Sporting Gij\u00f3n",
+      "player_name": "Alberto Garc\u00eda Cabrera",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3825596,
+      "team": "Sporting Gij\u00f3n",
+      "player_name": "Sergio \u00c1lvarez D\u00edaz",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3825596,
+      "team": "Sporting Gij\u00f3n",
+      "player_name": "Ignacio Cases Mora",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3825596,
+      "team": "Sporting Gij\u00f3n",
+      "player_name": "Alejandro Men\u00e9ndez D\u00edez",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3825596,
+      "team": "Sporting Gij\u00f3n",
+      "player_name": "Roberto Canella Su\u00e1rez",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3825596,
+      "team": "Sporting Gij\u00f3n",
+      "player_name": "Alberto Lora Ramos",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3754047,
+      "team": "Swansea City",
+      "player_name": "\u0141ukasz Fabia\u0144ski",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3754047,
+      "team": "Swansea City",
+      "player_name": "Kyle Naughton",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3754047,
+      "team": "Swansea City",
+      "player_name": "Andr\u00e9 Ayew Pel\u00e9",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3754047,
+      "team": "Swansea City",
+      "player_name": "Wayne Routledge",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3754047,
+      "team": "Swansea City",
+      "player_name": "Sung-Yeung Ki",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3754047,
+      "team": "Swansea City",
+      "player_name": "Ashley Williams",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3754047,
+      "team": "Swansea City",
+      "player_name": "Gylfi \u00de\u00f3r Sigur\u00f0sson",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3754047,
+      "team": "Swansea City",
+      "player_name": "Leon Britton",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3754047,
+      "team": "Swansea City",
+      "player_name": "Kyle Bartley",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3754047,
+      "team": "Swansea City",
+      "player_name": "Neil Taylor",
+      "started": true,
+      "started_lineup": false
+     },
+     {
+      "sb_match_id": 3754047,
+      "team": "Swansea City",
+      "player_name": "\u00c9derzito Ant\u00f3nio Macedo Lopes",
+      "started": true,
+      "started_lineup": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "dismissals_vs_football_data",
+   "description": "StatsBomb dismissal timeline (Red Card + Second Yellow) per team == football-data HR/AR",
+   "pass": null,
+   "threshold": "informational; mismatches listed (no threshold fixed by PLAN)",
+   "observed": {
+    "linked_matches": 1517,
+    "agree": 1514,
+    "share": 0.998022412656559,
+    "sb_more_than_fd": 1,
+    "sb_fewer_than_fd": 2,
+    "total_sb_dismissals": 413,
+    "total_fd_red_cards": 414
+   },
+   "details": {
+    "mismatches_listed": [
+     {
+      "sb_match_id": 3754264,
+      "fd_match_id": "E0_1516_20160213_chelsea_newcastle",
+      "home": "Chelsea",
+      "away": "Newcastle",
+      "date": "2016-02-13",
+      "sb_home": 0.0,
+      "sb_away": 0.0,
+      "hr": 1,
+      "ar": 0
+     },
+     {
+      "sb_match_id": 3879705,
+      "fd_match_id": "I1_1516_20160124_sassuolo_bologna",
+      "home": "Sassuolo",
+      "away": "Bologna",
+      "date": "2016-01-24",
+      "sb_home": 0.0,
+      "sb_away": 0.0,
+      "hr": 1,
+      "ar": 0
+     },
+     {
+      "sb_match_id": 3754039,
+      "fd_match_id": "E0_1516_20160213_crystal_palace_watford",
+      "home": "Crystal Palace",
+      "away": "Watford",
+      "date": "2016-02-13",
+      "sb_home": 1.0,
+      "sb_away": 0.0,
+      "hr": 0,
+      "ar": 0
+     }
+    ]
+   }
+  },
+  {
+   "id": "event_cards_vs_lineup_cards",
+   "description": "Per match, card counts in the event stream equal card counts in lineups cards[]",
+   "pass": true,
+   "threshold": "0 mismatching matches",
+   "observed": {
+    "matches": 1517,
+    "mismatching": 0
+   },
+   "details": {
+    "mismatches_listed": []
+   }
+  },
+  {
+   "id": "statsbomb_structure",
+   "description": "Only periods 1 and 2; Half End present in both periods; own-goal event pairs balanced",
+   "pass": true,
+   "threshold": "0 violations",
+   "observed": {
+    "matches_with_period_gt_2": 0,
+    "matches_missing_half_end": 0,
+    "matches_own_goal_pair_unbalanced": 0,
+    "matches_where_event_team_names_differ_from_match_record": 20
+   },
+   "details": {}
+  },
+  {
+   "id": "overround_1x2",
+   "description": "1X2 implied-probability sum between 1.00 and 1.20 for every bookmaker snapshot (maximum-of-bookmakers aggregates excluded; reported separately)",
+   "pass": true,
+   "threshold": "< 1% outside [1.00, 1.20] (implementer-chosen); outliers listed",
+   "observed": {
+    "bookmaker_snapshots": 388119,
+    "outliers": 13,
+    "outlier_share": 3.349488172441957e-05,
+    "implied_min": 0.9286797414365754,
+    "implied_median": 1.0587349476064676,
+    "implied_max": 1.5841638981173864,
+    "max_aggregate_snapshots": 44322,
+    "max_aggregate_below_one": 16511
+   },
+   "details": {
+    "outliers_by_bookmaker": [
+     {
+      "bookmaker": "Avg",
+      "snapshot": "close",
+      "outliers": 1
+     },
+     {
+      "bookmaker": "Avg",
+      "snapshot": "early",
+      "outliers": 1
+     },
+     {
+      "bookmaker": "BFE",
+      "snapshot": "close",
+      "outliers": 1
+     },
+     {
+      "bookmaker": "BFE",
+      "snapshot": "early",
+      "outliers": 1
+     },
+     {
+      "bookmaker": "BS",
+      "snapshot": "early",
+      "outliers": 1
+     },
+     {
+      "bookmaker": "BW",
+      "snapshot": "early",
+      "outliers": 1
+     },
+     {
+      "bookmaker": "GB",
+      "snapshot": "early",
+      "outliers": 1
+     },
+     {
+      "bookmaker": "IW",
+      "snapshot": "early",
+      "outliers": 1
+     },
+     {
+      "bookmaker": "SJ",
+      "snapshot": "early",
+      "outliers": 1
+     },
+     {
+      "bookmaker": "VC",
+      "snapshot": "early",
+      "outliers": 2
+     },
+     {
+      "bookmaker": "WH",
+      "snapshot": "early",
+      "outliers": 2
+     }
+    ],
+    "outliers_listed": [
+     {
+      "match_id": "SP1_2526_20250816_mallorca_barcelona",
+      "bookmaker": "Avg",
+      "snapshot": "close",
+      "implied": 0.9286797414,
+      "n": 3
+     },
+     {
+      "match_id": "I1_0506_20051204_fiorentina_juventus",
+      "bookmaker": "SJ",
+      "snapshot": "early",
+      "implied": 0.9674145299,
+      "n": 3
+     },
+     {
+      "match_id": "I1_2526_20251214_genoa_inter",
+      "bookmaker": "Avg",
+      "snapshot": "early",
+      "implied": 0.9938835046,
+      "n": 3
+     },
+     {
+      "match_id": "F1_2425_20250309_nice_lyon",
+      "bookmaker": "BFE",
+      "snapshot": "early",
+      "implied": 0.9980139027,
+      "n": 3
+     },
+     {
+      "match_id": "F1_2425_20250309_brest_angers",
+      "bookmaker": "BFE",
+      "snapshot": "close",
+      "implied": 0.998276743,
+      "n": 3
+     },
+     {
+      "match_id": "E0_0708_20071125_west_ham_tottenham",
+      "bookmaker": "GB",
+      "snapshot": "early",
+      "implied": 0.9999638546,
+      "n": 3
+     },
+     {
+      "match_id": "D1_2021_20210109_leverkusen_werder_bremen",
+      "bookmaker": "VC",
+      "snapshot": "early",
+      "implied": 1.202853598,
+      "n": 3
+     },
+     {
+      "match_id": "I1_1213_20130505_parma_atalanta",
+      "bookmaker": "VC",
+      "snapshot": "early",
+      "implied": 1.2142857143,
+      "n": 3
+     },
+     {
+      "match_id": "I1_2324_20231230_juventus_roma",
+      "bookmaker": "WH",
+      "snapshot": "early",
+      "implied": 1.2185487885,
+      "n": 3
+     },
+     {
+      "match_id": "F1_1011_20110518_lille_sochaux",
+      "bookmaker": "BS",
+      "snapshot": "early",
+      "implied": 1.2230103743,
+      "n": 3
+     },
+     {
+      "match_id": "F1_1011_20110518_lille_sochaux",
+      "bookmaker": "BW",
+      "snapshot": "early",
+      "implied": 1.2230103743,
+      "n": 3
+     },
+     {
+      "match_id": "D1_1920_20200523_bayern_munich_ein_frankfurt",
+      "bookmaker": "IW",
+      "snapshot": "early",
+      "implied": 1.3095238095,
+      "n": 3
+     },
+     {
+      "match_id": "I1_1415_20141207_parma_lazio",
+      "bookmaker": "WH",
+      "snapshot": "early",
+      "implied": 1.5841638981,
+      "n": 3
+     }
+    ]
+   }
+  },
+  {
+   "id": "ah_line_consistency",
+   "description": "Pinnacle AH prices are consistent with the shared line AHh/AHCh (2019/20 onward)",
+   "pass": true,
+   "threshold": "share |P - other| > 0.10 below 1% and line sign agrees with 1X2 favourite in >= 95% (implementer-chosen)",
+   "observed": {
+    "pinnacle_vs_other_bookmakers": [
+     {
+      "snapshot": "close",
+      "versus": "Avg",
+      "n": 11606,
+      "mean_abs_diff": 0.005876504164492404,
+      "p95_abs_diff": 0.016339864750247873,
+      "max_abs_diff": 0.10050041181021796,
+      "share_over_0_10": 8.616232982939858e-05
+     },
+     {
+      "snapshot": "close",
+      "versus": "B365",
+      "n": 11604,
+      "mean_abs_diff": 0.004464097519885887,
+      "p95_abs_diff": 0.013812471303631373,
+      "max_abs_diff": 0.12134069517527613,
+      "share_over_0_10": 8.617718028266115e-05
+     },
+     {
+      "snapshot": "early",
+      "versus": "Avg",
+      "n": 11597,
+      "mean_abs_diff": 0.004426610975731939,
+      "p95_abs_diff": 0.009882241552754556,
+      "max_abs_diff": 0.2556022408963585,
+      "share_over_0_10": 0.0031904802966284383
+     },
+     {
+      "snapshot": "early",
+      "versus": "B365",
+      "n": 11587,
+      "mean_abs_diff": 0.003754736201520684,
+      "p95_abs_diff": 0.009259042322875156,
+      "max_abs_diff": 0.1702498258186524,
+      "share_over_0_10": 8.630361612151549e-05
+     }
+    ],
+    "line_sign_vs_1x2_favourite": [
+     {
+      "snapshot": "close",
+      "n": 10301,
+      "sign_agree": 0.999902922
+     },
+     {
+      "snapshot": "early",
+      "n": 10210,
+      "sign_agree": 1.0
+     }
+    ]
+   },
+   "details": {}
+  },
+  {
+   "id": "no_duplicate_keys",
+   "description": "No duplicate primary keys in any table",
+   "pass": true,
+   "threshold": "0 duplicate keys per table",
+   "observed": {
+    "matches": 0,
+    "odds": 0,
+    "team_name_map": 0,
+    "sb_matches": 0,
+    "sb_match_link": 0,
+    "player_match": 0,
+    "shots": 0,
+    "events_timeline": 0,
+    "sb_match_checks": 0,
+    "team_season": 0,
+    "sb_match_link_fd_match_id": 0,
+    "team_name_map_sb_name": 0
+   },
+   "details": {
+    "keys": {
+     "matches": "match_id",
+     "odds": "match_id, bookmaker, market, selection, snapshot",
+     "team_name_map": "league, fd_name",
+     "sb_matches": "sb_match_id",
+     "sb_match_link": "sb_match_id",
+     "player_match": "sb_match_id, player_id",
+     "shots": "sb_match_id, event_id",
+     "events_timeline": "sb_match_id, event_index, kind",
+     "sb_match_checks": "sb_match_id",
+     "team_season": "league, season, team"
+    }
+   }
+  },
+  {
+   "id": "team_name_map_complete",
+   "description": "Every 2015/16 football-data team in the four StatsBomb leagues is in the reviewed map",
+   "pass": true,
+   "threshold": "0 unmapped teams",
+   "observed": {
+    "unmapped": 0,
+    "map_rows": 80
+   },
+   "details": {}
+  },
+  {
+   "id": "team_season_summary",
+   "description": "Promoted counts per league-season (null where the previous season is not cached) and manager-change availability",
+   "pass": null,
+   "threshold": "informational",
+   "observed": {
+    "manager_flag_rows": [
+     {
+      "teams": 80,
+      "with_change": 38.0,
+      "mean_coverage": 0.9807521337
+     }
+    ]
+   },
+   "details": {
+    "promoted_by_league_season": [
+     {
+      "league": "D1",
+      "season": "1819",
+      "teams": 18,
+      "promoted": 0.0,
+      "promoted_unknown": 18.0
+     },
+     {
+      "league": "D1",
+      "season": "1920",
+      "teams": 18,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "D1",
+      "season": "2021",
+      "teams": 18,
+      "promoted": 2.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "D1",
+      "season": "2122",
+      "teams": 18,
+      "promoted": 2.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "D1",
+      "season": "2223",
+      "teams": 18,
+      "promoted": 2.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "D1",
+      "season": "2324",
+      "teams": 18,
+      "promoted": 2.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "D1",
+      "season": "2425",
+      "teams": 18,
+      "promoted": 2.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "D1",
+      "season": "2526",
+      "teams": 18,
+      "promoted": 2.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "0001",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "0102",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "0203",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "0304",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "0405",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "0506",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "0607",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "0708",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "0809",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "0910",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "1011",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "1112",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "1213",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "1314",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "1415",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "1516",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "1617",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "1718",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "1819",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "1920",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "2021",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "2122",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "2223",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "2324",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "2425",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "2526",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "2627",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "9394",
+      "teams": 22,
+      "promoted": 0.0,
+      "promoted_unknown": 22.0
+     },
+     {
+      "league": "E0",
+      "season": "9495",
+      "teams": 22,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "9596",
+      "teams": 20,
+      "promoted": 2.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "9697",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "9798",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "9899",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "E0",
+      "season": "9900",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "0506",
+      "teams": 20,
+      "promoted": 0.0,
+      "promoted_unknown": 20.0
+     },
+     {
+      "league": "F1",
+      "season": "0607",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "0708",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "0809",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "0910",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "1011",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "1112",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "1213",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "1314",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "1415",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "1516",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "1819",
+      "teams": 20,
+      "promoted": 0.0,
+      "promoted_unknown": 20.0
+     },
+     {
+      "league": "F1",
+      "season": "1920",
+      "teams": 20,
+      "promoted": 2.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "2021",
+      "teams": 20,
+      "promoted": 2.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "2122",
+      "teams": 20,
+      "promoted": 2.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "2223",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "2324",
+      "teams": 18,
+      "promoted": 2.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "2425",
+      "teams": 18,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "F1",
+      "season": "2526",
+      "teams": 18,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "0506",
+      "teams": 20,
+      "promoted": 0.0,
+      "promoted_unknown": 20.0
+     },
+     {
+      "league": "I1",
+      "season": "0607",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "0708",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "0809",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "0910",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "1011",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "1112",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "1213",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "1314",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "1415",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "1516",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "1819",
+      "teams": 20,
+      "promoted": 0.0,
+      "promoted_unknown": 20.0
+     },
+     {
+      "league": "I1",
+      "season": "1920",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "2021",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "2122",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "2223",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "2324",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "2425",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "I1",
+      "season": "2526",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "0506",
+      "teams": 20,
+      "promoted": 0.0,
+      "promoted_unknown": 20.0
+     },
+     {
+      "league": "SP1",
+      "season": "0607",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "0708",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "0809",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "0910",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "1011",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "1112",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "1213",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "1314",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "1415",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "1516",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "1819",
+      "teams": 20,
+      "promoted": 0.0,
+      "promoted_unknown": 20.0
+     },
+     {
+      "league": "SP1",
+      "season": "1920",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "2021",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "2122",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "2223",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "2324",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "2425",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     },
+     {
+      "league": "SP1",
+      "season": "2526",
+      "teams": 20,
+      "promoted": 3.0,
+      "promoted_unknown": 0.0
+     }
+    ]
+   }
+  }
+ ]
+}
