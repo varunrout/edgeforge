@@ -148,3 +148,54 @@ football-data: 33 new CSV requests (30 history + 3 for 2015/16; E0 files were ca
 - Locked: D-031. New: D-032 (thresholds), D-033 (validation design per data block), D-034 (scrub player rows from history before first push).
 - Still open: GitHub CI has never run. It is a hard criterion at Gate 2.
 - Phase 2 may start.
+
+---
+
+## Gate 2: Evaluation harness, baselines, leakage tests
+
+**Report date:** 2026-10-04. Code commit for all Phase 2 metrics: `0e54107`. **Implementer verdict: all Gate 2 criteria pass except the GitHub CI confirmation, which is blocked by an account billing lock (item 11).** Phase 3 not started. No real models were built.
+
+### Step 0 (D-034) and push
+- History rewritten with `git filter-repo --path artifacts/metrics/data_audit_statsbomb.json --invert-paths`, then the clean version re-added in a new commit. Before the rewrite five commits contained `"players"` rows in that file; after it, a search of every file under `artifacts/` in every commit finds the key `"players"` only in `gate1_validation.json`, where it is a count (`{"players": 10, ...}` for unused bench players), not rows. All commit hashes changed.
+- Remote `origin` = `https://github.com/varunrout/edgeforge.git` added and `main` pushed (the repository was empty and public).
+- **GitHub Actions did not run the job.** Run `37196854779` failed in 4 seconds with the annotation "The job was not started because your account is locked due to a billing issue." No step executed, so this is not a code failure and cannot be fixed in the repository. Owner action: resolve the GitHub billing/payment lock, then re-run the workflow.
+
+### What was built
+- `edgeforge splits` -> `artifacts/splits/{pillar_a,team_2015_16,player_2015_16}.json` (ids only).
+- Point-in-time feature builder (`edgeforge.features.pit`): SQL on DuckDB, every row has `asof_ts` and a state tag (D-035).
+- Metrics module and plots (`edgeforge.evaluation.metrics`, `plots`), de-vig (`pricing.devig`), team market grid (`pricing.markets`), static Poisson (`models.poisson_static`), experiment registry, baseline runners (`edgeforge baselines team|player|inplay`).
+- 60 tests (up from 29), including leakage tests (a) to (d) and one real-data smoke test.
+
+### Gate criteria
+| # | Criterion | Result | Proving command | Observed (from metrics files unless stated) |
+|---|---|---|---|---|
+| 1 | Splitter implements the three D-033 blocks; id sets written | **PASS** | `uv run edgeforge splits` | Pillar A: history 2005-2018 19,306; burn-in/tune 2019/20-2023/24 8,955; test 2024/25 1,752; secondary 2025/26 1,752. Team 2015/16: history 15,200; decay tuning 2013/14-2014/15 3,040; evaluation 1,520; matchweek 20-38 test 758. Player: burn-in 360 + tune 399 + test 758 = 1,517 |
+| 2 | Point-in-time feature builder with `asof_ts` and information-state tag (opening, lineups, in-play) | **PASS** | `uv run pytest tests/test_leakage.py` | lineups state carries only the announced XI and named bench (`announced_starter`); minutes, subs, cards are targets only; opening state has no lineup columns; in-play state function `inplay_state` |
+| 3 | Metrics: log loss, Brier, RPS, ECE, reliability data and plots, PIT, central-interval coverage, MAE/RMSE, paired bootstrap | **PASS** | `uv run pytest tests/test_metrics_devig.py`; 11 figures in `artifacts/figures/` | bootstrap = 1,000 resamples of matches (seeded); 58 team comparisons plus 5 player comparisons carry CIs |
+| 4a | Baseline: league-average frequency per market | **PASS** | `uv run edgeforge baselines team` -> `baseline_team.json` | 1X2 log loss on 2024/25: 1.0782 (RPS 0.2331); 2025/26: 1.0721; 2015/16 mw20-38: 1.0635 |
+| 4b | Baseline: static Poisson (no decay) | **PASS** | same | 1X2 log loss 0.9899 (2024/25), 1.0010 (2025/26), 0.9839 (2015/16 mw20-38). vs league average on 1X2 log loss: 2024/25 -0.0883 [-0.1061, -0.0687]; 2015/16 mw20-38 -0.0795 [-0.1061, -0.0522]. On O/U 2.5 and BTTS the Poisson is **not** shown to beat league average outside 2024/25 O/U 2.5 (-0.0115 [-0.0214, -0.0016]); BTTS 2024/25 +0.0011 [-0.0068, +0.0087] |
+| 4c | Baseline: de-vigged market, proportional / power / Shin | **PASS** | same | Pinnacle closing 1X2 log loss 0.9606 / 0.9601 / 0.9602 (2024/25, n=1,752); market average 0.9774 / 0.9766 / 0.9767 (2025/26, n=1,752); Pinnacle 2015/16 mw20-38 0.9579 / 0.9573 / 0.9575 (n=758). Market vs static Poisson on 2024/25 (Pinnacle, proportional): -0.0293 [-0.0385, -0.0202]. Power or Shin vs proportional on 2024/25: -0.0004 [-0.0010, +0.0003], i.e. **no demonstrable difference** between de-vig methods |
+| 4d | Baseline: player rolling per-90 x expected minutes (props), choices on 2015/16 tune window only | **PASS** | `uv run edgeforge baselines player` -> `baseline_player.json` | chosen on mw10-19: all prior matches, 540 pseudo-minutes (interior of a 3 x 6 grid; mean log loss 0.3615 tune). Test mw20-38 (21,026 appeared player-matches): mean log loss 0.3629 vs position-average 0.3800. Log loss by market: shots 1+ 0.5462, shots 2+ 0.3983, SoT 1+ 0.4429, SoT 2+ 0.1727, anytime scorer 0.2545. vs position average: shots 1+ -0.0308 [-0.0339, -0.0275]; shots 2+ -0.0302 [-0.0335, -0.0270]; SoT 1+ -0.0139 [-0.0168, -0.0109]; SoT 2+ -0.0098 [-0.0120, -0.0075]; anytime scorer -0.0010 [-0.0037, +0.0013] (**no demonstrable gain** for goals). PIT histograms near uniform; 80% interval coverage 0.935 (shots), 0.956 (SoT), 0.964 (goals), over-covering as expected for discrete counts |
+| 4e | Baseline: in-play naive, minutes 15/30/45/60/75 on the test window | **PASS** | `uv run edgeforge baselines inplay` -> `baseline_inplay.json` | 758 test matches; final-1X2 log loss 0.9454 / 0.9123 / 0.8058 / 0.7001 / 0.5681 at 15/30/45/60/75. The baseline **under-predicts** remaining goals at every checkpoint: P(more than 1.5 remaining) predicted vs observed 0.635 vs 0.682 (min 15), 0.397 vs 0.468 (45), 0.108 vs 0.137 (75). By score state (pooled) n = 1,736 level, 1,426 one-goal margin, 628 two-plus; after a dismissal n = 214 |
+| 5 | Every baseline registered with status and provenance | **PASS** | `experiments/registry.jsonl` | 47 records: 30 `baseline`, 17 `rejected` (non-chosen player grid candidates), all with `git_sha` `0e54107...`, `data_version`, `command`, `config_hash`, `created_at`, `seed` |
+| 6a | Leakage test (a): altering rows at or after `asof_ts` leaves features unchanged | **PASS** | `uv run pytest tests/test_leakage.py -k test_a` | player (both states), group rates, league and team features; includes the 3-hour completion window and a power check showing earlier rows do change features |
+| 6b | Leakage test (b): minutes/subs/cards/post-kickoff stats never features in opening or lineups | **PASS** | `-k test_b` | `assert_no_forbidden` on both states; forbidden-column detection test |
+| 6c | Leakage test (c): in-play state at t uses only events before t | **PASS** | `-k test_c` | an event exactly at t is excluded; rewriting all events at or after t leaves the state identical |
+| 6d | Leakage test (d): no fitting/tuning code reads a test-window match_id | **PASS** | `-k test_d` and `-k real_data` | `SplitGuard` raises on test ids and on fits that read matches completing after the cutoff; the tuning stage passes its history and targets through it (reads logged); excluding test ids makes tuning features independent of them; real-data smoke test perturbs the whole test window and confirms tuning features are unchanged |
+| 7 | Tests and CI-equivalent checks | **PASS (local)** | `uv sync --locked && uv run ruff check . && uv run ruff format --check . && uv run mypy && uv run pytest -q` in a fresh clone | 60 tests pass (real-data smoke test skips in CI where no warehouse exists), ruff and mypy clean (43 source files) |
+| 8 | GitHub Actions run green | **BLOCKED** | `gh run list` | run `37196854779` not started: GitHub account billing lock (above) |
+| 9 | D-034 history scrub verified and first push | **PASS** | search of all commits (above) | see Step 0 |
+
+### Findings the lead should weigh
+1. The market is the best team-market baseline on every block; static Poisson is second; league average third. Differences among proportional, power and Shin de-vig are within noise on the 2024/25 primary block, and borderline (about 0.001 log loss) on the 898-match Pinnacle subset of 2025/26.
+2. Static Poisson shows no demonstrable edge over league-average frequencies for totals beyond 2024/25 O/U 2.5, or for BTTS: the bar for the Phase 3 team model on those markets is low.
+3. The in-play naive baseline's remaining-goals bias is systematic (uniform scaling of a rate that rises late plus stoppage time); this is the headroom Pillar B must show it can remove.
+4. Rolling per-90 beats the position average on shots and SoT but not demonstrably on anytime scorer.
+
+### Deviations, decisions and caveats
+1. **D-035 (new, Proposed)** records the completion-window eligibility rule (stricter than CLAUDE.md), weekly Monday cutoffs, fixed untuned baseline settings, settlement conventions and the in-play definition.
+2. **Opening-state player baseline deferred** to Phase 4 (feature builder and leakage tests exist for it). The PLAN baseline list does not name a state; the lineups state was evaluated.
+3. **Grid edge.** My first player grid chose the edge value (270 pseudo-minutes); I widened the grid before reporting so the chosen value is interior. Both grids were scored on the tune window only; the first-grid test numbers were seen in a shake-out run but did not drive the choice (the choice is the minimum of the wider tune-window grid).
+4. **Guard scope.** `SplitGuard` is called explicitly by the tuning stage of the player baseline, the in-play length fit and each Poisson fit; it does not intercept arbitrary code. Test (d) therefore proves the guard and the exclusion mechanism, plus the real-data perturbation, not a static analysis of all future fitting code.
+5. **D-034 residue.** The committed `data_audit_statsbomb.json` still lists scorers and the two dismissed players of the 7 sample matches (small event lists, no per-player rows); `gate1_validation.json` and `statsbomb_profile.json` list a few dozen player names in failure and example lists. The lead's D-034 text treats failure/example lists as acceptable; say if the sample-match event lists should go too.
+6. Pre-existing: closing odds do not exist before 2012/13 and the football-data "early" snapshot is untimestamped (D-024); the 2015/16 totals market has no Pinnacle price, so 2.5-goal market baselines exist for Pillar A only.
