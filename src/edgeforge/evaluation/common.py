@@ -54,8 +54,25 @@ def binary_metrics(p: FloatArray, y: FloatArray) -> dict[str, float]:
     }
 
 
+def _clean(obj: Any) -> Any:
+    """Replace non-finite floats with None so the output is strict JSON (empty segments)."""
+    import math
+
+    if isinstance(obj, float):
+        return obj if math.isfinite(obj) else None
+    if isinstance(obj, dict):
+        return {k: _clean(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [_clean(v) for v in obj]
+    if isinstance(obj, np.floating):
+        return _clean(float(obj))
+    return obj
+
+
 def write_json(path: Path, obj: Any) -> None:
     import json
 
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(obj, indent=1, default=str, allow_nan=False), encoding="utf-8")
+    path.write_text(
+        json.dumps(_clean(obj), indent=1, default=str, allow_nan=False), encoding="utf-8"
+    )
