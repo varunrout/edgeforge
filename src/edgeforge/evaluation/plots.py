@@ -68,3 +68,23 @@ def line_plot(
 
 def as_series(rows: list[dict[str, Any]], x: str, y: str) -> list[tuple[float, float]]:
     return [(float(r[x]), float(r[y])) for r in rows]
+
+
+def forest_plot(
+    rows: list[dict[str, Any]], path: Path, title: str, xlabel: str, null: float = 0.0
+) -> None:
+    """Point estimates with 95% CIs, one row per label. Rows: label, estimate, ci_low, ci_high."""
+    fig, ax = plt.subplots(figsize=(6.2, 0.32 * len(rows) + 1.4))
+    for i, r in enumerate(rows):
+        ax.plot([r["ci_low"], r["ci_high"]], [i, i], color="tab:blue", linewidth=1.4)
+        ax.plot(r["estimate"], i, "o", color="tab:blue", markersize=4)
+    ax.axvline(null, color="grey", linestyle="--", linewidth=1)
+    ax.set_yticks(range(len(rows)))
+    ax.set_yticklabels([r["label"] for r in rows], fontsize=7)
+    ax.invert_yaxis()
+    ax.set_xlabel(xlabel, fontsize=8)
+    ax.set_title(title, fontsize=9)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fig.tight_layout()
+    fig.savefig(path, dpi=110)
+    plt.close(fig)
