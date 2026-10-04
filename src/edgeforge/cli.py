@@ -87,3 +87,12 @@ def audit_statsbomb() -> None:
     from edgeforge.data.statsbomb_audit import run_statsbomb_audit
 
     typer.echo(str(run_statsbomb_audit()))
+
+
+@data_app.command("fetch-statsbomb-all")
+def fetch_statsbomb_all() -> None:
+    """Fetch events + lineups for all in-scope matches (resumable; ~1 hour)."""
+    from edgeforge.config import load_config
+    from edgeforge.data.statsbomb import download_all
+
+    typer.echo(str(download_all(load_config("data"))))

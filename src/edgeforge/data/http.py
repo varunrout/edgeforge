@@ -1,4 +1,4 @@
-"""Throttled, cached HTTP GET. Every response is stored on disk; cache hits cost no request."""
+"""Throttled, cached HTTP GET. 200 responses are stored on disk; cache hits cost no request."""
 
 import hashlib
 import json
@@ -30,6 +30,7 @@ class CachedFetcher:
         timeout_s: float = 30.0,
         user_agent_base: str = "edgeforge-research/0.1",
         session: requests.Session | None = None,
+        max_retries: int = 5,
     ) -> None:
         self.cache_dir = cache_dir
         self.min_interval_s = min_interval_s
@@ -39,6 +40,8 @@ class CachedFetcher:
         self._session = session or requests.Session()
         self._last_request = 0.0
         self.request_count = 0
+        self.retry_count = 0
+        self.max_retries = max_retries
 
     def _paths(self, url: str, name: str) -> tuple[Path, Path]:
         digest = hashlib.sha256(url.encode()).hexdigest()[:12]
@@ -46,23 +49,47 @@ class CachedFetcher:
         return body, body.with_suffix(".meta.json")
 
     def get(self, url: str, name: str) -> FetchResult:
+        """Return a cached 200 response, else fetch with retries.
+
+        Only HTTP 200 responses are cached. 429/5xx and connection errors are retried with
+        exponential backoff; other statuses (e.g. 404) are returned uncached.
+        """
         body, meta = self._paths(url, name)
         if body.exists() and meta.exists():
-            return FetchResult(
-                url, body, json.loads(meta.read_text())["status"], True, body.stat().st_size
-            )
-        wait = self.min_interval_s - (time.monotonic() - self._last_request)
-        if wait > 0:
-            time.sleep(wait)
-        self._last_request = time.monotonic()
-        self.request_count += 1
-        log.info("GET %s", url)
-        t0 = time.monotonic()
-        resp = self._session.get(
-            url, headers={"User-Agent": self.user_agent}, timeout=self.timeout_s
-        )
+            info = json.loads(meta.read_text())
+            if info["status"] == 200:
+                return FetchResult(url, body, 200, True, body.stat().st_size)
+        resp: requests.Response | None = None
+        for attempt in range(self.max_retries + 1):
+            wait = self.min_interval_s - (time.monotonic() - self._last_request)
+            if wait > 0:
+                time.sleep(wait)
+            self._last_request = time.monotonic()
+            self.request_count += 1
+            log.debug("GET %s (attempt %d)", url, attempt + 1)
+            t0 = time.monotonic()
+            try:
+                resp = self._session.get(
+                    url, headers={"User-Agent": self.user_agent}, timeout=self.timeout_s
+                )
+            except requests.RequestException as exc:
+                log.warning("request error for %s: %s", url, exc)
+                resp = None
+            else:
+                if resp.status_code != 429 and resp.status_code < 500:
+                    break
+                log.warning("HTTP %d for %s", resp.status_code, url)
+            if attempt < self.max_retries:
+                self.retry_count += 1
+                time.sleep(min(2.0**attempt * 2, 120.0))
+        if resp is None:
+            raise RuntimeError(f"no response for {url} after {self.max_retries + 1} attempts")
+        if resp.status_code != 200:
+            return FetchResult(url, body, resp.status_code, False, len(resp.content))
         self.cache_dir.mkdir(parents=True, exist_ok=True)
-        body.write_bytes(resp.content)
+        tmp = body.with_suffix(".tmp")
+        tmp.write_bytes(resp.content)
+        tmp.replace(body)
         meta.write_text(
             json.dumps(
                 {
@@ -75,4 +102,4 @@ class CachedFetcher:
                 }
             )
         )
-        return FetchResult(url, body, resp.status_code, False, len(resp.content))
+        return FetchResult(url, body, 200, False, len(resp.content))
