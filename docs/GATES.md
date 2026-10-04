@@ -199,3 +199,10 @@ football-data: 33 new CSV requests (30 history + 3 for 2015/16; E0 files were ca
 4. **Guard scope.** `SplitGuard` is called explicitly by the tuning stage of the player baseline, the in-play length fit and each Poisson fit; it does not intercept arbitrary code. Test (d) therefore proves the guard and the exclusion mechanism, plus the real-data perturbation, not a static analysis of all future fitting code.
 5. **D-034 residue.** The committed `data_audit_statsbomb.json` still lists scorers and the two dismissed players of the 7 sample matches (small event lists, no per-player rows); `gate1_validation.json` and `statsbomb_profile.json` list a few dozen player names in failure and example lists. The lead's D-034 text treats failure/example lists as acceptable; say if the sample-match event lists should go too.
 6. Pre-existing: closing odds do not exist before 2012/13 and the football-data "early" snapshot is untimestamped (D-024); the 2015/16 totals market has no Pinnacle price, so 2.5-goal market baselines exist for Pillar A only.
+
+### Lead audit of Gate 2 (2026-10-04): PASSED, conditional on CI
+- Criteria 1 to 7 and 9 accepted. Criterion 8 (GitHub CI green) is blocked by an owner billing lock and becomes a hard criterion at Gate 3: Phase 3 may proceed, Gate 3 cannot pass without a green run.
+- Grid-edge disclosure (deviation 3) accepted: the choice is the tune-window minimum of the widened grid. Keep disclosing it in the technical report.
+- Locked: D-035 (opening-state player baseline mandatory at Gate 4). New: D-036 (proportional de-vig default), D-037 (pre-registered Pillar A segments with BH FDR control), D-038 (repo private until Phase 10).
+- D-034 residue: the sample-match event lists may stay while the repo is private; remove them before the repo goes public.
+- Phase 3 may start.

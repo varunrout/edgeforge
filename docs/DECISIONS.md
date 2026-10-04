@@ -220,4 +220,24 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
 - **Props** are settled on players who appear (void otherwise, D-030); expected minutes are conditional on appearance. Rolling-rate settings (window N, shrinkage k pseudo-minutes toward the position-group rate) are chosen on matchweeks 10 to 19 only, with every test-window match excluded from the history those choices read. The comparator is the position-group average rate with the same minutes.
 - **In-play naive baseline.** Pre-match static-Poisson intensities times the share of the mean match length left (mean fitted on matchweeks 1 to 19), ignoring score and dismissals; the final result is the current score plus the remaining Poisson goals. Checkpoints are elapsed real-time minutes.
 - **Deferred.** An opening-state player baseline is not evaluated in Phase 2: the opening-state feature builder exists and is leakage-tested (candidates are players who appeared in the team's previous five matches), but a defensible opening baseline needs the starter-probability model of Phase 4.
-- **Status:** Proposed (implementing engineer, 2026-10-04)
+- **Status:** Locked (lead, Gate 2 audit, 2026-10-04). The opening-state player baseline is mandatory at Gate 4.
+
+### D-036 Default de-vig method
+- **Decision:** Proportional de-vig is the default everywhere. Power and Shin showed no demonstrable difference on the primary block (2024/25: -0.0004 log loss, CI [-0.0010, +0.0003], `baseline_team.json`), so the simplest method wins. All three stay implemented and are reported side by side in Pillar A.
+- **Status:** Locked (lead, 2026-10-04)
+
+### D-037 Pillar A pre-registered segments and multiple-testing control
+- **Decision:** Pillar A tests only these segments, fixed before any test-season result is examined:
+  1. League (E0, D1, SP1, I1, F1).
+  2. Season phase: each team's league matches 1 to 6 of the season versus the rest (a match counts as early if either team is in its first six).
+  3. Favourite-longshot: selection implied probability bands < 0.20, 0.20 to 0.40, 0.40 to 0.60, > 0.60, with a logit-slope test of outcome on implied probability.
+  4. Draw: calibration of the draw outcome specifically.
+  5. Promoted teams: matches involving a promoted team, first 10 league matches of their season versus later.
+  6. Early snapshot versus close: does the line move toward the outcome, and does closing calibration beat early calibration?
+- **Statistics:** every segment result reports a paired bootstrap CI over matches. Across all segment-level significance claims, Benjamini-Hochberg at 10% false discovery rate. Only BH-surviving findings may be called findings in docs; the rest are reported as "not distinguishable from zero".
+- **Why:** many segments times many metrics guarantees spurious "inefficiencies". Pre-registration plus FDR control is what a hostile reviewer will ask for first.
+- **Status:** Locked (lead, 2026-10-04)
+
+### D-038 Repository visibility
+- **Decision:** The repo was created public. Switch it to private until Phase 10 (owner approves going public after the final audit). Work in progress, interim numbers and sample-match event lists should not be public before the evidence pack exists.
+- **Status:** Locked (lead, 2026-10-04); owner to confirm
