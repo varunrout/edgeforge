@@ -11,7 +11,10 @@ from typing import Any
 
 from edgeforge.config import load_config, resolve_path
 from edgeforge.data import statsbomb
-from edgeforge.data.audit import _parse_date, _read
+from edgeforge.data.audit import _read
+from edgeforge.data.clock import minutes_played as _mp
+from edgeforge.data.clock import period_ends as _period_ends
+from edgeforge.data.dates import parse_fd_date as _parse_date
 from edgeforge.data.http import CachedFetcher
 from edgeforge.provenance import dir_digest, provenance
 
@@ -21,9 +24,9 @@ TREE_URL = "https://api.github.com/repos/statsbomb/open-data/git/trees/master?re
 RED_CARDS = {"Red Card", "Second Yellow"}
 
 
-def _secs(clock: str) -> int:
-    mm, ss = clock.split(":")
-    return int(mm) * 60 + int(ss)
+def _minutes_played(lineup_player: dict[str, Any], ends: dict[int, int]) -> float:
+    """Uncapped minutes from positions (the audit shows where this is wrong)."""
+    return _mp(lineup_player["positions"], ends)
 
 
 def _load(path: Path) -> Any:
@@ -35,34 +38,6 @@ def _cached(raw: Path, prefix: str) -> dict[int, Path]:
     for p in raw.glob(f"{prefix}_*.body"):
         out[int(p.name.split(".")[0].split("_")[1])] = p
     return out
-
-
-def _period_ends(events: list[dict[str, Any]]) -> dict[int, int]:
-    """Seconds on the period clock at 'Half End' (period clock, P2 starts at 2700)."""
-    ends: dict[int, int] = {}
-    for e in events:
-        if e["type"]["name"] == "Half End":
-            ends[e["period"]] = e["minute"] * 60 + e["second"]
-    return ends
-
-
-def _elapsed(clock: str, period: int, ends: dict[int, int]) -> int:
-    """Total elapsed match seconds for (period clock, period). Periods 1 and 2 only."""
-    c = _secs(clock)
-    if period == 1:
-        return c
-    return ends[1] + (c - 2700)
-
-
-def _minutes_played(lineup_player: dict[str, Any], ends: dict[int, int]) -> float | None:
-    """Sum of position spans in elapsed minutes; open-ended spans run to the final whistle."""
-    total_end = ends[1] + (ends[2] - 2700)
-    secs = 0
-    for pos in lineup_player["positions"]:
-        start = _elapsed(pos["from"], pos["from_period"], ends)
-        end = total_end if pos["to"] is None else _elapsed(pos["to"], pos["to_period"], ends)
-        secs += end - start
-    return secs / 60 if lineup_player["positions"] else 0.0
 
 
 def audit_match(
@@ -235,7 +210,6 @@ def audit_match(
         "n_unused_bench": sum(1 for p in players if not p["appeared"]),
         "dismissals": dismissals,
         "tactical_lineup_sizes": tactical,
-        "players": players,
     }
 
 
@@ -405,7 +379,8 @@ def run_statsbomb_audit(cfg: dict[str, Any] | None = None) -> Path:
     ev_files = _cached(raw, "events")
     lu_files = _cached(raw, "lineups")
     samples = []
-    for mid in sorted(set(ev_files) & set(lu_files)):
+    wanted = set(cfg["statsbomb"]["audit_sample_match_ids"])
+    for mid in sorted(set(ev_files) & set(lu_files) & wanted):
         samples.append(audit_match(_load(ev_files[mid]), _load(lu_files[mid]), match_index[mid]))
     bodies = sorted(raw.glob("*.body"))
     out = {

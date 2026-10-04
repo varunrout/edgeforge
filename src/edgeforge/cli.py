@@ -96,3 +96,40 @@ def fetch_statsbomb_all() -> None:
     from edgeforge.data.statsbomb import download_all
 
     typer.echo(str(download_all(load_config("data"))))
+
+
+@data_app.command("profile-statsbomb")
+def profile_statsbomb() -> None:
+    """Profile all cached StatsBomb payloads; stops if a shot outcome is unclassified (D-030)."""
+    from edgeforge.data.sb_profile import run_profile
+
+    typer.echo(str(run_profile()))
+
+
+@data_app.command("bootstrap-team-names")
+def bootstrap_team_names() -> None:
+    """Write candidate football-data <-> StatsBomb name pairs to configs/team_name_map.csv."""
+    from edgeforge.data.warehouse import bootstrap_team_names as run
+
+    typer.echo(str(run()))
+
+
+@app.command("build-warehouse")
+def build_warehouse() -> None:
+    """Build Parquet tables and the DuckDB warehouse from the raw caches."""
+    from edgeforge.data.warehouse import build_warehouse as run
+
+    typer.echo(str(run()))
+
+
+@app.command("validate")
+def validate() -> None:
+    """Run the Gate 1 checks against the warehouse; exit 1 if any check fails."""
+    import json
+
+    from edgeforge.data.validate import run_validate
+
+    path = run_validate()
+    typer.echo(str(path))
+    if not json.loads(path.read_text(encoding="utf-8"))["gate1_pass"]:
+        raise typer.Exit(code=1)

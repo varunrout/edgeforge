@@ -5,6 +5,7 @@ Terms: StatsBomb Public Data User Agreement (see docs/DATA.md). Raw files are ne
 
 import json
 import logging
+from collections.abc import Iterator
 from pathlib import Path
 from typing import Any
 
@@ -136,3 +137,29 @@ def download_all(cfg: dict[str, Any]) -> Path:
 
 def _get_soft(fetcher: CachedFetcher, cfg: dict[str, Any], rel: str, name: str) -> FetchResult:
     return fetcher.get(f"{cfg['statsbomb']['base_url']}/{rel}", name)
+
+
+def cached_files(raw: Path, prefix: str) -> dict[int, Path]:
+    """match_id -> cached body path for 'events' or 'lineups'."""
+    out: dict[int, Path] = {}
+    for p in raw.glob(f"{prefix}_*.body"):
+        out[int(p.name.split(".")[0].split("_")[1])] = p
+    return out
+
+
+def iter_payloads(
+    cfg: dict[str, Any], allow_partial: bool = False
+) -> Iterator[tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]]:
+    """Yield (match record, events, lineups) for every in-scope match, from the cache only."""
+    fetcher = make_fetcher(cfg)
+    raw = resolve_path(cfg, "raw_dir") / "statsbomb"
+    ev, lu = cached_files(raw, "events"), cached_files(raw, "lineups")
+    for m in in_scope_matches(fetcher, cfg):
+        mid = m["match_id"]
+        if mid not in ev or mid not in lu:
+            if allow_partial:
+                continue
+            raise FileNotFoundError(f"match {mid} not cached (run fetch-statsbomb-all)")
+        events = json.loads(ev[mid].read_text(encoding="utf-8"))
+        lineups = json.loads(lu[mid].read_text(encoding="utf-8"))
+        yield m, events, lineups

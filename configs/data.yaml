@@ -2,6 +2,8 @@ paths:
   raw_dir: data/raw
   warehouse: data/warehouse.duckdb
   metrics_dir: artifacts/metrics
+  processed_dir: data/processed
+  team_name_map: configs/team_name_map.csv
 http:
   min_interval_s: 1.0
   timeout_s: 30
@@ -17,4 +19,10 @@ statsbomb:
   # Phase 0b proof: one match from the in-scope set (chosen after reading matches/<comp>/<season>.json)
   scope_season_name: "2015/2016"
   scope_competitions: ["Premier League", "La Liga", "Serie A", "Ligue 1"]
+  # The 7 matches inspected by hand in Phase 0b (docs/DATA.md section 3)
+  audit_sample_match_ids: [3754097, 3754138, 3754217, 3754237, 3754300, 3825652, 3829513]
+# In-scope football-data league-seasons (D-019, D-027). Anything else cached is informational.
+scope:
+  - {leagues: [E0, SP1, I1, F1], first_start_year: 2005, last_start_year: 2015}  # team-model history + 2015/16
+  - {leagues: [E0, D1, SP1, I1, F1], first_start_year: 2019, last_start_year: 2025}  # Pillar A
 seed: 20261004

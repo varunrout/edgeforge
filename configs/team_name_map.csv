@@ -1,0 +1,81 @@
+league,fd_name,sb_name,support,method,reviewed
+E0,Arsenal,Arsenal,30,date_score_unique_join,yes
+E0,Aston Villa,Aston Villa,34,date_score_unique_join,yes
+E0,Bournemouth,AFC Bournemouth,30,date_score_unique_join,yes
+E0,Chelsea,Chelsea,26,date_score_unique_join,yes
+E0,Crystal Palace,Crystal Palace,30,date_score_unique_join,yes
+E0,Everton,Everton,32,date_score_unique_join,yes
+E0,Leicester,Leicester City,30,date_score_unique_join,yes
+E0,Liverpool,Liverpool,34,date_score_unique_join,yes
+E0,Man City,Manchester City,32,date_score_unique_join,yes
+E0,Man United,Manchester United,29,date_score_unique_join,yes
+E0,Newcastle,Newcastle United,29,date_score_unique_join,yes
+E0,Norwich,Norwich City,23,date_score_unique_join,yes
+E0,Southampton,Southampton,30,date_score_unique_join,yes
+E0,Stoke,Stoke City,28,date_score_unique_join,yes
+E0,Sunderland,Sunderland,31,date_score_unique_join,yes
+E0,Swansea,Swansea City,27,date_score_unique_join,yes
+E0,Tottenham,Tottenham Hotspur,34,date_score_unique_join,yes
+E0,Watford,Watford,32,date_score_unique_join,yes
+E0,West Brom,West Bromwich Albion,26,date_score_unique_join,yes
+E0,West Ham,West Ham United,29,date_score_unique_join,yes
+F1,Ajaccio GFCO,Gazélec Ajaccio,28,date_score_unique_join,yes
+F1,Angers,Angers,31,date_score_unique_join,yes
+F1,Bastia,Bastia,28,date_score_unique_join,yes
+F1,Bordeaux,Bordeaux,32,date_score_unique_join,yes
+F1,Caen,Stade Malherbe Caen,28,date_score_unique_join,yes
+F1,Guingamp,Guingamp,32,date_score_unique_join,yes
+F1,Lille,Lille,32,date_score_unique_join,yes
+F1,Lorient,Lorient,31,date_score_unique_join,yes
+F1,Lyon,Lyon,32,date_score_unique_join,yes
+F1,Marseille,Olympique de Marseille,31,date_score_unique_join,yes
+F1,Monaco,AS Monaco,33,date_score_unique_join,yes
+F1,Montpellier,Montpellier,32,date_score_unique_join,yes
+F1,Nantes,Nantes,29,date_score_unique_join,yes
+F1,Nice,OGC Nice,31,date_score_unique_join,yes
+F1,Paris SG,Paris Saint-Germain,34,date_score_unique_join,yes
+F1,Reims,Stade de Reims,32,date_score_unique_join,yes
+F1,Rennes,Rennes,32,date_score_unique_join,yes
+F1,St Etienne,Saint-Étienne,31,date_score_unique_join,yes
+F1,Toulouse,Toulouse,28,date_score_unique_join,yes
+F1,Troyes,Troyes,33,date_score_unique_join,yes
+I1,Atalanta,Atalanta,29,date_score_unique_join,yes
+I1,Bologna,Bologna,33,date_score_unique_join,yes
+I1,Carpi,Carpi,26,date_score_unique_join,yes
+I1,Chievo,Chievo,27,date_score_unique_join,yes
+I1,Empoli,Empoli,31,date_score_unique_join,yes
+I1,Fiorentina,Fiorentina,29,date_score_unique_join,yes
+I1,Frosinone,Frosinone,31,date_score_unique_join,yes
+I1,Genoa,Genoa,25,date_score_unique_join,yes
+I1,Inter,Inter Milan,24,date_score_unique_join,yes
+I1,Juventus,Juventus,34,date_score_unique_join,yes
+I1,Lazio,Lazio,28,date_score_unique_join,yes
+I1,Milan,AC Milan,32,date_score_unique_join,yes
+I1,Napoli,Napoli,30,date_score_unique_join,yes
+I1,Palermo,Palermo,27,date_score_unique_join,yes
+I1,Roma,AS Roma,35,date_score_unique_join,yes
+I1,Sampdoria,Sampdoria,32,date_score_unique_join,yes
+I1,Sassuolo,Sassuolo,28,date_score_unique_join,yes
+I1,Torino,Torino,32,date_score_unique_join,yes
+I1,Udinese,Udinese,24,date_score_unique_join,yes
+I1,Verona,Hellas Verona,25,date_score_unique_join,yes
+SP1,Ath Bilbao,Athletic Club,34,date_score_unique_join,yes
+SP1,Ath Madrid,Atlético Madrid,33,date_score_unique_join,yes
+SP1,Barcelona,Barcelona,35,date_score_unique_join,yes
+SP1,Betis,Real Betis,30,date_score_unique_join,yes
+SP1,Celta,Celta Vigo,31,date_score_unique_join,yes
+SP1,Eibar,Eibar,32,date_score_unique_join,yes
+SP1,Espanol,Espanyol,32,date_score_unique_join,yes
+SP1,Getafe,Getafe,32,date_score_unique_join,yes
+SP1,Granada,Granada,36,date_score_unique_join,yes
+SP1,La Coruna,RC Deportivo La Coruña,31,date_score_unique_join,yes
+SP1,Las Palmas,Las Palmas,32,date_score_unique_join,yes
+SP1,Levante,Levante UD,30,date_score_unique_join,yes
+SP1,Malaga,Málaga,32,date_score_unique_join,yes
+SP1,Real Madrid,Real Madrid,34,date_score_unique_join,yes
+SP1,Sevilla,Sevilla,33,date_score_unique_join,yes
+SP1,Sociedad,Real Sociedad,27,date_score_unique_join,yes
+SP1,Sp Gijon,Sporting Gijón,32,date_score_unique_join,yes
+SP1,Valencia,Valencia,30,date_score_unique_join,yes
+SP1,Vallecano,Rayo Vallecano,33,date_score_unique_join,yes
+SP1,Villarreal,Villarreal,33,date_score_unique_join,yes

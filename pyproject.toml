@@ -38,6 +38,10 @@ src = ["src", "tests"]
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
 
+[tool.ruff.lint.per-file-ignores]
+# long SQL and check descriptions
+"src/edgeforge/data/validate.py" = ["E501"]
+
 [tool.mypy]
 python_version = "3.12"
 strict = true
