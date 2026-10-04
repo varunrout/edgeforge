@@ -114,7 +114,7 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
 - **Conditional on Understat/player data:** the range may only shrink, never grow, once the player-data source is settled (D-021). A walk-forward design needs enough seasons for tuning plus a held-out final season; that count cannot be set until player-data coverage is known.
 - **Caveat that must travel with every Pillar A result:** the non-"C" odds are a pre-closing snapshot with no capture timestamp in the payload. They are not verified as market-open or as T-48h (DATA.md section 2).
 - **Rejected:** Using 2012/13 to 2018/19 for Pillar A beyond 1X2 (no Pinnacle O/U or AH there); excluding 2025/26 entirely (Avg/Max closing is complete and it is the most recent season).
-- **Status:** Proposed (implementing engineer, 2026-10-04). Update 2026-10-04 (Phase 0b): the Understat condition is cleared by D-022 (Pillar A uses football-data only), and test seasons are fixed by D-025. The range stands for Pillar A; awaiting lead confirmation. Not edited otherwise.
+- **Status:** Locked (lead, Gate 0 audit, 2026-10-04)
 
 ### D-020 Red-card minute data route (D-017): StatsBomb event cards
 - **Decision:** The dismissal minute is read directly from StatsBomb card events (`foul_committed.card` or `bad_behaviour.card` with name `Red Card` or `Second Yellow`, giving `period, minute, second`), cross-checked against `lineups[].cards[]`, which repeats them. It is not derived from lineup `positions` or `Tactical Shift` lineups. football-data `HR/AR` (red-card counts per team-match) are a sanity check only.
@@ -122,7 +122,7 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
 - **Limits:** two dismissals in one match out of 7 sampled matches. Phase 1 must count, across all 1,517 matches, how often `positions` fail to close at a dismissal and reconcile card counts per team-match with football-data `HR/AR`.
 - **Consequence for D-017:** dismissals stay in the in-play state (route found); the D-018 cut order is unchanged. The in-play clock must use `(period, minute, second)` because `minute` restarts at 45 in period 2 while period-1 stoppage runs past 45.
 - **Replaces:** the earlier "undetermined" text of this entry (which was blocked by D-021).
-- **Status:** Proposed (implementing engineer, 2026-10-04), based on a 7-match sample; awaiting lead confirmation.
+- **Status:** Locked (lead, 2026-10-04): dismissal minute read from card events; Phase 1 verifies across all 1,517 matches
 
 ### D-021 Understat access: robots.txt disallows all crawling; owner decision required
 - **Decision:** No request to any Understat page or endpoint other than `/robots.txt` has been made. `https://understat.com/robots.txt` returned HTTP 200 with `User-agent: *` / `Disallow: /`.
@@ -159,11 +159,28 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
 - **Why (numbers from `data_audit_statsbomb.json`):** in-scope events are 4.57 GB and lineups 29.1 MB over 3,034 requests; the whole repository is 16.13 GB, so a per-file fetch avoids the other ~11.5 GB. Throttle floor 50.6 minutes; measured transfer (3 samples, 2.10 MB/s) 36.4 minutes; modelled sequential time about 1 hour. Per-file caching reuses the existing code, resumes after interruption and keeps the request rate explicit.
 - **Rejected:** sparse partial `git clone` of the repository. Not tested, transfer volume unmeasured; would add a second retrieval path and a different on-disk layout.
 - **Risks:** GitHub raw rate limiting over about 3,000 requests is unknown (retry is cheap because of the cache); disk is 96% used with 24 GB free, so 4.6 GB raw leaves about 19 GB.
-- **Status:** Proposed (implementing engineer, 2026-10-04)
+- **Status:** Locked (lead, 2026-10-04)
 
 ### D-027 Team-model history range (scores only)
 - **Decision:** The Dixon-Coles team model for E0, SP1, I1 and F1 is trained on football-data results from 2005/06 to 2014/15 (10 seasons, 40 CSV files, 380 matches each), then updated through 2015/16 walk-forward. Requested in Phase 0b: 30 new CSVs (SP1, I1, F1) plus 3 for 2015/16; the 10 E0 files and E0 2015/16 were already cached.
 - **Why:** all 40 files have 380 rows, 0 ragged rows and the five fields needed (`Date, HomeTeam, AwayTeam, FTHG, FTAG`), per `data_audit_footballdata.json`. Ten seasons give a burn-in plus a pre-2015/16 tuning window for the time-decay hyperparameter, so tuning never touches the 2015/16 evaluation season. The known ragged-row seasons (1993/94, 1994/95, 2003/04, 2004/05; E0) are avoided.
 - **Limits:** the history covers only these four top flights, so relegated-from or promoted-to-lower-division strength is not observable (relevant to the cold-start fix in Phase 3; the D1/second-tier files are not fetched). Bundesliga is not in the player-data scope and is used for Pillar A only.
 - **Rejected:** going back to 1993/94 (parsing hazards, four decades of rule and style drift); fewer than 10 seasons (no clean tuning window).
-- **Status:** Proposed (implementing engineer, 2026-10-04)
+- **Status:** Locked (lead, 2026-10-04)
+
+### D-028 StatsBomb licence and what may be published
+- **Decision:** The repository, reports and any deployed app contain code, fitted parameters, model outputs (probabilities, prices) and aggregate metrics only. No raw StatsBomb JSON, no event-level or player-match tables, and no per-event views are committed, baked into images or displayed. The project is labelled a non-commercial portfolio project everywhere. The StatsBomb logo and source credit appear in the README, reports and app (clause 1.4).
+- **Owner actions:** register at the StatsBomb resource centre (clause 2.2) and download the logo from their Media Pack. Before Phase 9, optionally email StatsBomb describing the public demo; if they object, deployment shows Pillar A only (football-data based) and B/C stay local.
+- **Status:** Locked (lead, 2026-10-04)
+
+### D-029 Confirmed-lineup assumption
+- **Decision:** For the `lineups` state, the StatsBomb lineup file (starting XI plus named bench) is treated as the lineup announced at T-60min. Late withdrawals between announcement and kickoff are rare but not observable in this data. This is an assumption and is labelled as one in every Pillar C output. Who actually came on, minutes and cards remain targets, never features.
+- **Status:** Locked (lead, 2026-10-04)
+
+### D-030 Prop settlement conventions
+- **Shots on target:** shot outcome in {`Goal`, `Saved`, `Saved to Post`}. Not on target: `Off T`, `Wayward`, `Blocked`, `Post`, and any `Saved Off Target`-type outcome. Any outcome value not listed here that Phase 1 profiling discovers must be classified in a new decision before use.
+- **Shots:** every `Shot` event, including penalties and blocked shots. Own goals are not shots.
+- **Anytime goalscorer:** goals from `Shot` events with outcome `Goal`, penalties included; own goals do not count for the scorer. Player who does not take part: bet void (priced conditional on appearance in `lineups` state and documented for `opening`).
+- **Minutes:** computed on the period-aware clock from `positions`, capped at the dismissal timestamp for `Red Card` and `Second Yellow`.
+- **Why:** mirrors common bookmaker settlement rules closely enough for pricing; exact rules vary by operator and that variation is a stated limitation.
+- **Status:** Locked (lead, 2026-10-04)

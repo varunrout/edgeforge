@@ -90,3 +90,9 @@ football-data: 33 new CSV requests (30 history + 3 for 2015/16; E0 files were ca
 ### Deviations from plan
 - Fetched events and lineups for 7 matches rather than 1 (reason in criterion 5).
 - Added a `.gitattributes` commit and a DECISIONS content commit before the planned work, because the working-tree state differed from the prompt's description (see first bullet above).
+
+### Lead audit of Gate 0 (2026-10-04): PASSED
+- All ten criteria accepted. GitHub CI run deferred until the owner creates a remote; it becomes a hard criterion at Gate 2.
+- Locked: D-019, D-020, D-026, D-027. New: D-028 (licence and publishing), D-029 (confirmed-lineup assumption), D-030 (prop settlement conventions).
+- Carried into Phase 1 as hard checks: full-corpus profiling of every enumeration (shot outcomes, card types, start/end reasons), dismissal-minute check across all 1,517 matches, SoT classification per D-030, minutes capped at dismissals, team-name map reviewed.
+- Phase 1 may start.
