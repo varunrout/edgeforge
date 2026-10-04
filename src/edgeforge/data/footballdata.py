@@ -24,7 +24,9 @@ def make_fetcher(cfg: dict[str, Any]) -> CachedFetcher:
     )
 
 
-def fetch_league_season(fetcher: CachedFetcher, base_url: str, season: str, league: str) -> FetchResult:
+def fetch_league_season(
+    fetcher: CachedFetcher, base_url: str, season: str, league: str
+) -> FetchResult:
     return fetcher.get(season_url(base_url, season, league), f"{league}_{season}")
 
 
@@ -32,7 +34,9 @@ def fetch_proof(cfg: dict[str, Any] | None = None) -> Path:
     cfg = cfg or load_config("data")
     proof = cfg["footballdata"]["proof"]
     fetcher = make_fetcher(cfg)
-    res = fetch_league_season(fetcher, cfg["footballdata"]["base_url"], proof["season"], proof["league"])
+    res = fetch_league_season(
+        fetcher, cfg["footballdata"]["base_url"], proof["season"], proof["league"]
+    )
     if res.status != 200:
         raise RuntimeError(f"football-data returned HTTP {res.status} for {res.url}")
     log.info("cached %s (%d bytes, from_cache=%s)", res.path, res.bytes, res.from_cache)

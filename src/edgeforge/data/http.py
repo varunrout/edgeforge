@@ -48,14 +48,18 @@ class CachedFetcher:
     def get(self, url: str, name: str) -> FetchResult:
         body, meta = self._paths(url, name)
         if body.exists() and meta.exists():
-            return FetchResult(url, body, json.loads(meta.read_text())["status"], True, body.stat().st_size)
+            return FetchResult(
+                url, body, json.loads(meta.read_text())["status"], True, body.stat().st_size
+            )
         wait = self.min_interval_s - (time.monotonic() - self._last_request)
         if wait > 0:
             time.sleep(wait)
         self._last_request = time.monotonic()
         self.request_count += 1
         log.info("GET %s", url)
-        resp = self._session.get(url, headers={"User-Agent": self.user_agent}, timeout=self.timeout_s)
+        resp = self._session.get(
+            url, headers={"User-Agent": self.user_agent}, timeout=self.timeout_s
+        )
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         body.write_bytes(resp.content)
         meta.write_text(

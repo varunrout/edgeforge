@@ -141,9 +141,7 @@ def run_audit(cfg: dict[str, Any] | None = None) -> Path:
         files.append(audit_file(body, league=m.group(2), season=m.group(1)))
     files.sort(key=lambda f: (f["league"], f["season"]))
     out = {
-        "provenance": provenance(
-            "edgeforge data audit-footballdata", cfg, dir_digest(bodies)
-        ),
+        "provenance": provenance("edgeforge data audit-footballdata", cfg, dir_digest(bodies)),
         "key_columns": KEY_COLUMNS,
         "files": files,
     }
