@@ -133,3 +133,39 @@ def validate() -> None:
     typer.echo(str(path))
     if not json.loads(path.read_text(encoding="utf-8"))["gate1_pass"]:
         raise typer.Exit(code=1)
+
+
+@app.command("splits")
+def splits() -> None:
+    """Write the D-033 train/tune/test match-id sets to artifacts/splits/*.json."""
+    from edgeforge.evaluation.splits import write_splits
+
+    typer.echo(str(write_splits()))
+
+
+baselines_app = typer.Typer(help="Baseline models (Phase 2).", no_args_is_help=True)
+app.add_typer(baselines_app, name="baselines")
+
+
+@baselines_app.command("team")
+def baselines_team() -> None:
+    """League average, static Poisson and de-vigged market baselines."""
+    from edgeforge.evaluation.baselines_team import run_team_baselines
+
+    typer.echo(str(run_team_baselines()))
+
+
+@baselines_app.command("player")
+def baselines_player() -> None:
+    """Player rolling per-90 x expected minutes prop baseline."""
+    from edgeforge.evaluation.baselines_player import run_player_baselines
+
+    typer.echo(str(run_player_baselines()))
+
+
+@baselines_app.command("inplay")
+def baselines_inplay() -> None:
+    """Naive time-scaled in-play baseline (needs the team baseline run first)."""
+    from edgeforge.evaluation.baselines_inplay import run_inplay_baseline
+
+    typer.echo(str(run_inplay_baseline()))

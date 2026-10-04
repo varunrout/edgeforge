@@ -16,6 +16,7 @@ dependencies = [
     "pyarrow",
     "requests",
     "typer",
+    "matplotlib",
 ]
 
 [project.scripts]
@@ -49,3 +50,7 @@ files = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[[tool.mypy.overrides]]
+module = ["sklearn.*", "scipy.*", "matplotlib.*", "duckdb.*"]
+ignore_missing_imports = true
