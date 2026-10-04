@@ -1,0 +1,12 @@
+# Raw/derived data is never committed (CLAUDE.md)
+data/
+artifacts/sims/
+.env
+.venv/
+__pycache__/
+*.pyc
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+*.duckdb
+*.duckdb.wal

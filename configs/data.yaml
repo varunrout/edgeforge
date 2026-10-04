@@ -1,0 +1,15 @@
+paths:
+  raw_dir: data/raw
+  warehouse: data/warehouse.duckdb
+  metrics_dir: artifacts/metrics
+http:
+  min_interval_s: 1.0
+  timeout_s: 30
+  user_agent_base: "edgeforge-research/0.1 (personal non-commercial research; local cache only)"
+footballdata:
+  base_url: https://www.football-data.co.uk/mmz4281
+  # Phase 0 proof-of-access: one league-season
+  proof:
+    season: "2425"
+    league: E0
+seed: 20261004
