@@ -114,13 +114,15 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
 - **Conditional on Understat/player data:** the range may only shrink, never grow, once the player-data source is settled (D-021). A walk-forward design needs enough seasons for tuning plus a held-out final season; that count cannot be set until player-data coverage is known.
 - **Caveat that must travel with every Pillar A result:** the non-"C" odds are a pre-closing snapshot with no capture timestamp in the payload. They are not verified as market-open or as T-48h (DATA.md section 2).
 - **Rejected:** Using 2012/13 to 2018/19 for Pillar A beyond 1X2 (no Pinnacle O/U or AH there); excluding 2025/26 entirely (Avg/Max closing is complete and it is the most recent season).
-- **Status:** Proposed (implementing engineer, 2026-10-04); to be confirmed or revised by the lead after D-021.
+- **Status:** Proposed (implementing engineer, 2026-10-04). Update 2026-10-04 (Phase 0b): the Understat condition is cleared by D-022 (Pillar A uses football-data only), and test seasons are fixed by D-025. The range stands for Pillar A; awaiting lead confirmation. Not edited otherwise.
 
-### D-020 Red-card minute data route (D-017): undetermined
-- **Decision:** No route can be chosen yet. Facts established: football-data has red-card **counts** per team-match (`HR`, `AR`, E0 from 2000/01), and no minutes, so it can only cross-check a timeline built elsewhere. Whether Understat exposes card flags or a recoverable dismissal minute is **not verified** because no Understat payload has been retrieved (D-021).
-- **Why:** D-017 requires this to be verified on real data. The only payload source that could settle it was blocked by `robots.txt` before any data request was made.
-- **Next step:** once D-021 is resolved, fetch one Understat match-level payload and answer the D-017 questions from it. D-017's fallback order is unchanged (derive from player minutes and card flags; StatsBomb Open Data; drop dismissals from the state and document it).
-- **Status:** Route changes to StatsBomb event data per D-022; to be verified in Phase 0b
+### D-020 Red-card minute data route (D-017): StatsBomb event cards
+- **Decision:** The dismissal minute is read directly from StatsBomb card events (`foul_committed.card` or `bad_behaviour.card` with name `Red Card` or `Second Yellow`, giving `period, minute, second`), cross-checked against `lineups[].cards[]`, which repeats them. It is not derived from lineup `positions` or `Tactical Shift` lineups. football-data `HR/AR` (red-card counts per team-match) are a sanity check only.
+- **Evidence (`docs/DATA.md` section 3; `data_audit_statsbomb.json`):** In match 3754217 a `Red Card` (45:44, period 1) left the player in `positions` until the final whistle (derived minutes 99.3, the full match) and in every later `Tactical Shift` lineup (11 players), while a `Second Yellow` (78:23, period 2) closed `positions` correctly. Hence the rule: cap a dismissed player's minutes at the card timestamp.
+- **Limits:** two dismissals in one match out of 7 sampled matches. Phase 1 must count, across all 1,517 matches, how often `positions` fail to close at a dismissal and reconcile card counts per team-match with football-data `HR/AR`.
+- **Consequence for D-017:** dismissals stay in the in-play state (route found); the D-018 cut order is unchanged. The in-play clock must use `(period, minute, second)` because `minute` restarts at 45 in period 2 while period-1 stoppage runs past 45.
+- **Replaces:** the earlier "undetermined" text of this entry (which was blocked by D-021).
+- **Status:** Proposed (implementing engineer, 2026-10-04), based on a 7-match sample; awaiting lead confirmation.
 
 ### D-021 Understat access: robots.txt disallows all crawling; owner decision required
 - **Decision:** No request to any Understat page or endpoint other than `/robots.txt` has been made. `https://understat.com/robots.txt` returned HTTP 200 with `User-agent: *` / `Disallow: /`.
@@ -151,3 +153,17 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
 ### D-025 Pillar A test seasons
 - **Decision:** 2024/25 is the primary held-out test season for Pillar A (Pinnacle complete). 2025/26 is a secondary out-of-sample check using market average (`Avg*`) closing only, because Pinnacle columns stop after 2026-01-08. Tuning uses 2019/20 to 2023/24.
 - **Status:** Locked (lead)
+
+### D-026 StatsBomb retrieval method: per-file raw fetch with cache
+- **Decision:** Retrieve the in-scope StatsBomb files (events and lineups for the 1,517 matches of D-022, plus the five `matches` files and `competitions.json`) one file at a time from `raw.githubusercontent.com` through the existing throttled (1 request/second), cached, resumable `CachedFetcher`. Run in Phase 1, not before.
+- **Why (numbers from `data_audit_statsbomb.json`):** in-scope events are 4.57 GB and lineups 29.1 MB over 3,034 requests; the whole repository is 16.13 GB, so a per-file fetch avoids the other ~11.5 GB. Throttle floor 50.6 minutes; measured transfer (3 samples, 2.10 MB/s) 36.4 minutes; modelled sequential time about 1 hour. Per-file caching reuses the existing code, resumes after interruption and keeps the request rate explicit.
+- **Rejected:** sparse partial `git clone` of the repository. Not tested, transfer volume unmeasured; would add a second retrieval path and a different on-disk layout.
+- **Risks:** GitHub raw rate limiting over about 3,000 requests is unknown (retry is cheap because of the cache); disk is 96% used with 24 GB free, so 4.6 GB raw leaves about 19 GB.
+- **Status:** Proposed (implementing engineer, 2026-10-04)
+
+### D-027 Team-model history range (scores only)
+- **Decision:** The Dixon-Coles team model for E0, SP1, I1 and F1 is trained on football-data results from 2005/06 to 2014/15 (10 seasons, 40 CSV files, 380 matches each), then updated through 2015/16 walk-forward. Requested in Phase 0b: 30 new CSVs (SP1, I1, F1) plus 3 for 2015/16; the 10 E0 files and E0 2015/16 were already cached.
+- **Why:** all 40 files have 380 rows, 0 ragged rows and the five fields needed (`Date, HomeTeam, AwayTeam, FTHG, FTAG`), per `data_audit_footballdata.json`. Ten seasons give a burn-in plus a pre-2015/16 tuning window for the time-decay hyperparameter, so tuning never touches the 2015/16 evaluation season. The known ragged-row seasons (1993/94, 1994/95, 2003/04, 2004/05; E0) are avoided.
+- **Limits:** the history covers only these four top flights, so relegated-from or promoted-to-lower-division strength is not observable (relevant to the cold-start fix in Phase 3; the D1/second-tier files are not fetched). Bundesliga is not in the player-data scope and is used for Pillar A only.
+- **Rejected:** going back to 1993/94 (parsing hazards, four decades of rule and style drift); fewer than 10 seasons (no clean tuning window).
+- **Status:** Proposed (implementing engineer, 2026-10-04)
