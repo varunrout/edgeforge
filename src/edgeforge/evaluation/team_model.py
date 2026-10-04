@@ -21,7 +21,7 @@ from edgeforge.evaluation.baselines_team import (
     outcomes,
     poisson_lambdas,
 )
-from edgeforge.evaluation.calibration import calibrate_1x2, calibrate_binary
+from edgeforge.evaluation.calibration import calibrate_1x2, calibrate_binary, platt_parameters
 from edgeforge.evaluation.common import (
     binary_metrics,
     class_metrics,
@@ -40,7 +40,7 @@ from edgeforge.pricing.markets import OU_LINES, market_probs
 log = logging.getLogger(__name__)
 WINDOW_DAYS = 1825  # five years of history, then exponential decay on top
 HALF_LIVES: tuple[int | None, ...] = (90, 180, 270, 365, 540, 730, None)  # days; None = no decay
-KAPPAS = (0.0, 2.0, 5.0, 10.0, 20.0, 40.0)
+KAPPAS = (0.0, 2.0, 5.0, 10.0, 20.0, 40.0, 80.0, 160.0)  # widened after a grid-edge optimum
 MIN_TRAIN = 150
 N_BOOT = 1000
 MARKETS = ["1x2"] + [f"over_{x}" for x in OU_LINES] + ["btts"]
@@ -418,6 +418,7 @@ def run_team_model(cfg: dict[str, Any] | None = None) -> Path:
     blocks: dict[str, dict[str, Any]] = {
         "pillar_a": {
             "tune": a_ids["burn_in_tune_2019_23"],
+            "primary": "primary_2024_25",
             "tests": {
                 "primary_2024_25": a_ids["test_primary_2024_25"],
                 "secondary_2025_26": a_ids["test_secondary_2025_26"],
@@ -425,6 +426,7 @@ def run_team_model(cfg: dict[str, Any] | None = None) -> Path:
         },
         "team_2015_16": {
             "tune": t_ids["decay_tuning_2013_14"],
+            "primary": "mw20_38",
             "tests": {
                 "mw20_38": t_ids["test_2015_16_mw20_38"],
                 "all_2015_16": t_ids["eval_2015_16_all"],
@@ -548,6 +550,27 @@ def run_team_model(cfg: dict[str, Any] | None = None) -> Path:
                     **M.paired_bootstrap(la, lb, np.flatnonzero(ok), N_BOOT, seed),
                 }
             block_res["tests"][tname] = tres
+            if tname == spec["primary"]:
+                adopted = [c for c in tres["calibration"] if c["keep"]]
+                platt = {}
+                for c in adopted:
+                    if c["method"] == "platt":
+                        pt = dc_tune_probs[c["market"]]
+                        okt = ~(np.isnan(pt).any(axis=1) if pt.ndim == 2 else np.isnan(pt))
+                        if c["market"] != "1x2":
+                            platt[c["market"]] = platt_parameters(pt[okt], y_tune[c["market"]][okt])
+                block_res["calibration_decision"] = {
+                    "rule": "adopt a calibrator for a market only if, on the block's primary test window, "
+                    "held-out log loss improves with a paired-bootstrap CI that excludes zero; other windows "
+                    "are supporting checks. 56 market x method x window tests were run, so isolated hits "
+                    "are expected by chance and the verdicts differ across windows.",
+                    "primary_window": tname,
+                    "adopted": [f"{c['market']}:{c['method']}" for c in adopted],
+                    "platt_parameters_fitted_on_tuning_window": platt,
+                    "1x2_calibration_helps": any(
+                        c["keep"] for c in tres["calibration"] if c["market"] == "1x2"
+                    ),
+                }
             for mname in ("dixon_coles", "dixon_coles_coldstart_fix"):
                 if mname == "dixon_coles_coldstart_fix" and kappa == 0:
                     continue

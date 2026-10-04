@@ -181,3 +181,17 @@ def team_model_run() -> None:
     from edgeforge.evaluation.team_model import run_team_model
 
     typer.echo(str(run_team_model()))
+
+
+pillar_app = typer.Typer(
+    help="Pillar A: market efficiency and model vs market.", no_args_is_help=True
+)
+app.add_typer(pillar_app, name="pillar-a")
+
+
+@pillar_app.command("run")
+def pillar_a_run() -> None:
+    """Efficiency map (D-037), model vs market, encompassing, line movement, cold start."""
+    from edgeforge.evaluation.pillar_a import run_pillar_a
+
+    typer.echo(str(run_pillar_a()))

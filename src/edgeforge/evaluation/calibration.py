@@ -63,3 +63,9 @@ def calibrate_1x2(
         )
     out: FloatArray = np.stack(cols, axis=1)
     return out / out.sum(axis=1, keepdims=True)
+
+
+def platt_parameters(p_tune: FloatArray, y_tune: FloatArray) -> dict[str, float]:
+    """Intercept and slope of the Platt map on logit(p), fitted on the tuning window."""
+    m = LogisticRegression(C=1e6, max_iter=1000).fit(_logit(p_tune).reshape(-1, 1), y_tune)
+    return {"intercept": float(m.intercept_[0]), "slope": float(m.coef_[0, 0])}
