@@ -57,6 +57,7 @@ class CachedFetcher:
         self._last_request = time.monotonic()
         self.request_count += 1
         log.info("GET %s", url)
+        t0 = time.monotonic()
         resp = self._session.get(
             url, headers={"User-Agent": self.user_agent}, timeout=self.timeout_s
         )
@@ -70,6 +71,7 @@ class CachedFetcher:
                     "content_type": resp.headers.get("Content-Type"),
                     "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                     "bytes": len(resp.content),
+                    "elapsed_s": round(time.monotonic() - t0, 3),
                 }
             )
         )

@@ -54,3 +54,36 @@ def fetch_footballdata(
         for season in seasons.split(","):
             res = fetch_league_season(fetcher, base, season, lg)
             typer.echo(f"{lg} {season} HTTP {res.status} cache={res.from_cache}")
+
+
+@data_app.command("fetch-statsbomb-scope")
+def fetch_statsbomb_scope() -> None:
+    """Cache competitions.json and the matches file of each in-scope competition-season."""
+    from edgeforge.config import load_config
+    from edgeforge.data import statsbomb
+
+    cfg = load_config("data")
+    fetcher = statsbomb.make_fetcher(cfg)
+    comps = statsbomb.fetch_competitions(fetcher, cfg)
+    for c in statsbomb.scope_competitions(comps, cfg):
+        matches = statsbomb.fetch_matches(fetcher, cfg, c["competition_id"], c["season_id"])
+        typer.echo(f"{c['competition_name']} {c['season_name']}: {len(matches)} matches")
+
+
+@data_app.command("fetch-statsbomb-match")
+def fetch_statsbomb_match(match_id: int) -> None:
+    """Cache events and lineups for one match."""
+    from edgeforge.config import load_config
+    from edgeforge.data import statsbomb
+
+    cfg = load_config("data")
+    ev, lu = statsbomb.fetch_match_files(statsbomb.make_fetcher(cfg), cfg, match_id)
+    typer.echo(f"{ev}\n{lu}")
+
+
+@data_app.command("audit-statsbomb")
+def audit_statsbomb() -> None:
+    """Audit cached StatsBomb payloads and write artifacts/metrics/data_audit_statsbomb.json."""
+    from edgeforge.data.statsbomb_audit import run_statsbomb_audit
+
+    typer.echo(str(run_statsbomb_audit()))

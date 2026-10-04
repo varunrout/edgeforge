@@ -17,16 +17,16 @@
 
 ## Phase 0: Setup and data verification (Day 1)
 - Repo skeleton (`src/edgeforge/{data,features,models,simulation,pricing,sga,inplay,efficiency,lineup,evaluation,api}`, `apps/trader/`, `configs/`, `tests/`, `experiments/`, `artifacts/`, `reports/`), pyproject with uv/ruff/mypy/pytest, typer CLI stub, `.gitignore`, `.env.example`, GitHub Actions on synthetic fixtures.
-- Proof of access: one league-season from Understat and from football-data.co.uk.
+- Proof of access: StatsBomb Open Data (one match, licence terms) and football-data.co.uk (one league-season). Understat dropped (D-022).
 - `docs/DATA.md`, verified against real payloads:
-  - Understat: starter vs sub flag, minutes, substitution timing, shot minutes, own goals, **card flags and whether red-card minutes are recoverable** (D-017).
+  - StatsBomb Open Data (replaces Understat, D-022): starter flag, minutes, substitution timing, shot outcome and xG, own goals, **card flags and whether red-card minutes are recoverable** (D-017), from a real event payload.
   - football-data: which seasons and leagues have **opening and closing** odds for 1X2, O/U 2.5 and AH, and which bookmakers (Pinnacle especially).
   - Season range and leagues chosen, request count, expected scrape time.
 
 **Gate 0:** CLI and CI run; one real season per source cached; DATA.md verified; season range and red-card data route logged as decisions.
 
 ## Phase 1: Ingestion and warehouse (Days 1 to 2)
-- Resumable, throttled (1 req/s), cached Understat scraper; football-data downloader.
+- Resumable, cached StatsBomb Open Data fetcher (method per Phase 0b decision); football-data downloader.
 - DuckDB tables: `matches`, `team_match`, `player_match`, `shots`, `events_timeline` (goals, dismissals with minute), `odds` (opening and closing, long format by bookmaker and market), `team_name_map`, `team_season` (promoted flag, manager-change flag if derivable; otherwise document as unavailable).
 - `edgeforge validate` writes checks to metrics JSON.
 
