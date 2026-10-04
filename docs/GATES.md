@@ -142,3 +142,9 @@ football-data: 33 new CSV requests (30 history + 3 for 2015/16; E0 files were ca
 - 22 player-matches have a lineup-positions starter flag that disagrees with the `Starting XI` event; the event is used (D-031).
 - Football-data odds timing is still unknown (D-024).
 - CI has not run on GitHub (no remote; pushing needs Varun's say-so).
+
+### Lead audit of Gate 1 (2026-10-04): PASSED
+- All 15 criteria accepted. 100% goal reconciliation, zero invariant violations and the event-versus-positions finding (D-031) are exactly the standard wanted.
+- Locked: D-031. New: D-032 (thresholds), D-033 (validation design per data block), D-034 (scrub player rows from history before first push).
+- Still open: GitHub CI has never run. It is a hard criterion at Gate 2.
+- Phase 2 may start.

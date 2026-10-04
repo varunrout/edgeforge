@@ -194,4 +194,20 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
   - The lineup-based starter flag disagrees with the `Starting XI` event for 22 player-matches and leaves two teams with no starters.
 - **Consequences:** a team can play short without a dismissal (a player leaves with `Player Off (Permanent)` after substitutions are used up, or a replacement arrives late). The Gate 1 identity is therefore `sum of minutes = 11 x match length - sum of vacancy`, where vacancy is derived from events. Unused bench players can receive cards (10 player-matches: 4 red, 6 yellow); they are in `player_match` with `minutes = 0` and are not on-pitch dismissals.
 - **Rejected:** keeping positions as the source and clamping minutes to the match length (hides the error); using only positions after reordering spans (the half-time restart case cannot be repaired from positions alone).
-- **Status:** Proposed (implementing engineer, 2026-10-04); awaiting lead confirmation.
+- **Status:** Locked (lead, Gate 1 audit, 2026-10-04). Good catch; the Bale half-time example goes in the technical report as a data-quality finding.
+
+### D-032 Gate 1 validation thresholds
+- **Decision:** The implementer's thresholds are confirmed as standing data-quality checks, re-run whenever the warehouse is rebuilt: overround outliers under 1% outside [1.00, 1.20] (Max aggregates excluded); AH line test under 1% of matches differing by more than 0.10 in de-vigged probability with line-sign agreement at least 95%; team minutes identity within 2 seconds.
+- **Status:** Locked (lead, 2026-10-04)
+
+### D-033 Validation design per data block
+- **Pillar A (football-data, five leagues):** walk-forward by date. Burn-in and tuning 2019/20 to 2023/24 (the team model may also use earlier scores as history), primary test 2024/25, secondary check 2025/26 per D-025. Refit cadence: weekly (each Monday cutoff) unless timing shows it is impractical, then monthly, logged.
+- **Team model for the 2015/16 block:** trained on 2005/06 to 2014/15 scores (D-027), time-decay tuned on 2013/14 to 2014/15 only, then walk-forward through 2015/16 with weekly refits.
+- **Player models, Pillars B and C (StatsBomb 2015/16, four leagues):** split by `match_week`. Matchweeks 1 to 9 are burn-in only (features accumulate, nothing scored). Matchweeks 10 to 19 are the tuning window. **Matchweeks 20 to 38 are the untouched test window.** Walk-forward: a prediction for matchweek k uses only matches with kickoff before that match. Player history before 2015/16 does not exist in this data; early-season thinness is handled by shrinkage, and matchweek-1-to-9 predictions are never reported.
+- **In-play (Pillar B):** same matchweek split; the in-play models are fitted on matchweeks 1 to 19 and evaluated on 20 to 38.
+- **Leakage guard:** the splitter writes the exact train/tune/test match_id sets to `artifacts/splits/*.json` (committed: ids only, no data), and a test asserts no tuning or fitting code reads a test-window match.
+- **Status:** Locked (lead, 2026-10-04)
+
+### D-034 Scrub StatsBomb player rows from git history before the first push
+- **Decision:** Commit `562d584` contains a version of `artifacts/metrics/data_audit_statsbomb.json` with per-player rows for 7 matches. Nothing has been pushed yet, so rewrite history before the first push so that no commit contains player-level StatsBomb rows (for example `git filter-repo` on that path, then re-add the current clean version), and verify with a search of all commits. Player names inside failure/example lists in current metrics files are acceptable (tens of rows, audit purpose).
+- **Status:** Locked (lead, 2026-10-04)
