@@ -1,0 +1,283 @@
+{
+ "provenance": {
+  "git_sha": "a5d00c50154724333e526bffd8e9ab26438e1bca",
+  "data_version": "137781cbbd858114",
+  "command": "edgeforge phase4 run",
+  "config_hash": "39f96c7271994bec",
+  "created_at": "2026-10-05T07:51:11Z",
+  "seed": 20261004
+ },
+ "team_shots": {
+  "mapping_note": "football-data HS/AS ratings mapped to StatsBomb shot definition by log-linear Poisson regression, refitted weekly",
+  "tuning_window_log_lik": {
+   "poisson": -2.85104054484797,
+   "negative_binomial": -2.8168192129964194,
+   "chosen": "negative_binomial"
+  },
+  "median_alpha_tune": 0.042059682408482256,
+  "n_test_team_rows": 1516,
+  "test_mean_log_lik": {
+   "chosen_model": -2.843812792064539,
+   "poisson": -2.8840103467261966,
+   "negative_binomial": -2.843812792064539,
+   "league_mean_baseline_poisson": -3.159730066182964
+  },
+  "paired_chosen_minus_baseline_log_lik": {
+   "estimate": 0.31591727411842485,
+   "ci_low": 0.26586390788743286,
+   "ci_high": 0.3708092987305223,
+   "p": 0.001998001998001998,
+   "n_rows": 1516.0,
+   "n_clusters": 758.0
+  },
+  "paired_nb_minus_poisson_log_lik": {
+   "estimate": 0.040197554661657,
+   "ci_low": 0.023052557340188018,
+   "ci_high": 0.05713890924268131,
+   "p": 0.001998001998001998,
+   "n_rows": 1516.0,
+   "n_clusters": 758.0
+  },
+  "pit_histogram_10": [
+   0.10026385224274406,
+   0.09564643799472296,
+   0.09366754617414248,
+   0.10224274406332454,
+   0.09630606860158311,
+   0.09960422163588391,
+   0.11213720316622691,
+   0.08905013192612138,
+   0.10949868073878628,
+   0.10158311345646438
+  ],
+  "mean_pred": 12.368083399370166,
+  "mean_obs": 12.444591029023746,
+  "mae": 3.3755888649259465,
+  "mae_baseline": 3.983935458959432,
+  "mapping_slope_b": null
+ },
+ "team_shots_half_life_tuning": {
+  "name": "shot_rating_half_life_days",
+  "value": 180.0,
+  "interior": true,
+  "at_natural_bound": false,
+  "n_widenings": 0,
+  "grid_initial": [
+   90.0,
+   180.0,
+   365.0,
+   730.0
+  ],
+  "evaluated": [
+   {
+    "value": 90.0,
+    "score": 2.873475493322276
+   },
+   {
+    "value": 180.0,
+    "score": 2.8656501916668287
+   },
+   {
+    "value": 365.0,
+    "score": 2.871704064768075
+   },
+   {
+    "value": 730.0,
+    "score": 2.8838688476535013
+   }
+  ]
+ },
+ "player_parameters": {
+  "k": {
+   "name": "shot_share_k",
+   "value": 2.0,
+   "interior": true,
+   "at_natural_bound": false,
+   "n_widenings": 0,
+   "grid_initial": [
+    0.5,
+    1.0,
+    2.0,
+    4.0,
+    8.0
+   ],
+   "evaluated": [
+    {
+     "value": 0.5,
+     "score": 0.4029168868778818
+    },
+    {
+     "value": 1.0,
+     "score": 0.40011495843841755
+    },
+    {
+     "value": 2.0,
+     "score": 0.3993378372048066
+    },
+    {
+     "value": 4.0,
+     "score": 0.40177364413476035
+    },
+    {
+     "value": 8.0,
+     "score": 0.4084904626352431
+    }
+   ]
+  },
+  "alpha": {
+   "name": "shot_overdispersion_alpha",
+   "value": 0.1,
+   "interior": true,
+   "at_natural_bound": false,
+   "n_widenings": 0,
+   "grid_initial": [
+    0.0,
+    0.05,
+    0.1,
+    0.2,
+    0.4
+   ],
+   "evaluated": [
+    {
+     "value": 0.0,
+     "score": 0.3993378372048066
+    },
+    {
+     "value": 0.05,
+     "score": 0.39876870749690996
+    },
+    {
+     "value": 0.1,
+     "score": 0.3984892193208969
+    },
+    {
+     "value": 0.2,
+     "score": 0.39855440011647264
+    },
+    {
+     "value": 0.4,
+     "score": 0.400221019867721
+    }
+   ]
+  },
+  "a_sot": {
+   "name": "sot_prior_strength_a",
+   "value": 100.0,
+   "interior": true,
+   "at_natural_bound": false,
+   "n_widenings": 1,
+   "grid_initial": [
+    1.0,
+    3.0,
+    10.0,
+    30.0,
+    100.0
+   ],
+   "evaluated": [
+    {
+     "value": 1.0,
+     "score": 0.31679803013689867
+    },
+    {
+     "value": 3.0,
+     "score": 0.30940354847750906
+    },
+    {
+     "value": 10.0,
+     "score": 0.3044085025413691
+    },
+    {
+     "value": 30.0,
+     "score": 0.3026210509087728
+    },
+    {
+     "value": 100.0,
+     "score": 0.30240923093981625
+    },
+    {
+     "value": 300.0,
+     "score": 0.30259572846513577
+    }
+   ]
+  },
+  "b_xg": {
+   "name": "xg_per_shot_shrinkage_b",
+   "value": 10.0,
+   "interior": true,
+   "at_natural_bound": false,
+   "n_widenings": 0,
+   "grid_initial": [
+    1.0,
+    3.0,
+    10.0,
+    30.0,
+    100.0
+   ],
+   "evaluated": [
+    {
+     "value": 1.0,
+     "score": 0.23195793308434579
+    },
+    {
+     "value": 3.0,
+     "score": 0.23076058646978354
+    },
+    {
+     "value": 10.0,
+     "score": 0.2298620636408531
+    },
+    {
+     "value": 30.0,
+     "score": 0.229946227684119
+    },
+    {
+     "value": 100.0,
+     "score": 0.23064319655390042
+    }
+   ]
+  },
+  "c_fin": {
+   "name": "finishing_shrinkage_c",
+   "value": 30.0,
+   "interior": true,
+   "at_natural_bound": false,
+   "n_widenings": 0,
+   "grid_initial": [
+    3.0,
+    10.0,
+    30.0,
+    100.0,
+    300.0
+   ],
+   "evaluated": [
+    {
+     "value": 3.0,
+     "score": 0.23098518897303888
+    },
+    {
+     "value": 10.0,
+     "score": 0.22996009269691456
+    },
+    {
+     "value": 30.0,
+     "score": 0.22984970549520564
+    },
+    {
+     "value": 100.0,
+     "score": 0.22988445012637715
+    },
+    {
+     "value": 300.0,
+     "score": 0.22990728360458756
+    }
+   ]
+  }
+ },
+ "chosen_player_parameters": {
+  "k": 2.0,
+  "alpha": 0.1,
+  "a_sot": 100.0,
+  "b_xg": 10.0,
+  "c_fin": 30.0
+ }
+}
