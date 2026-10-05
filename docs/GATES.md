@@ -317,3 +317,5 @@ Everything else in the efficiency map is **not distinguishable from zero**: no l
 - Player parameters are tuned coordinate-wise (D-042), so the joint optimum is not guaranteed.
 - Metrics hold StatsBomb ids only; no player names are committed (D-041, enforced by `tests/test_no_player_names.py`).
 - StatsBomb logo: still a README placeholder; the file is not in the repo.
+
+**CI:** run 37281304072 (public repo, commit after `a5d00c5`) failed before starting any step: "The job was not started because your account is locked due to a billing issue." Not attributable to the code. Gate 4 criterion 12 is therefore **FAIL (blocked)**; owner action: resolve the account billing lock, then `gh run rerun 37281304072`. Local CI-equivalent checks pass (criterion 11).
