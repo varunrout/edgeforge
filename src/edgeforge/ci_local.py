@@ -22,6 +22,18 @@ log = logging.getLogger(__name__)
 OUT = PROJECT_ROOT / "artifacts" / "metrics" / "ci_local.json"
 
 
+def _rm(path: Path) -> None:
+    """rmtree that also removes read-only git objects on Windows."""
+    import os
+    import stat
+
+    def onerror(func: Any, p: str, _exc: Any) -> None:
+        os.chmod(p, stat.S_IWRITE)
+        func(p)
+
+    shutil.rmtree(path, onerror=onerror)
+
+
 def _uv() -> list[str]:
     """Find a working uv: the executable on PATH, else `python -m uv` from any interpreter."""
     candidates = [[p] for p in [shutil.which("uv")] if p]
@@ -57,7 +69,7 @@ def run_ci_local(clone_dir: Path | None = None) -> Path:
         log.warning("working tree has uncommitted code changes; the check tests HEAD only")
     base = clone_dir or Path(tempfile.gettempdir()) / "efc"
     if base.exists():
-        shutil.rmtree(base, ignore_errors=True)
+        _rm(base)
     subprocess.run(["git", "clone", "-q", str(PROJECT_ROOT), str(base)], check=True)
     uv = _uv()
     steps: list[tuple[str, list[str]]] = [
@@ -94,7 +106,7 @@ def run_ci_local(clone_dir: Path | None = None) -> Path:
         "note": "Replaces the GitHub Actions run (D-046): the account is billing-locked.",
     }
     write_json(OUT, payload)
-    shutil.rmtree(base, ignore_errors=True)
+    _rm(base)
     if not payload["all_passed"]:
         raise SystemExit("ci-local failed: see " + str(OUT))
     return OUT
