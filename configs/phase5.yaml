@@ -1,0 +1,6 @@
+# Phase 5 simulator settings. n_sims is set after the convergence study and logged in D-048.
+n_sims: 20000
+convergence_grid: [500, 1000, 2000, 5000, 10000, 20000, 50000]
+convergence_reference_n: 200000
+convergence_matches: 8
+demo_matches: 5

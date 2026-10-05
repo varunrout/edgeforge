@@ -47,6 +47,9 @@ select = ["E", "F", "I", "UP", "B"]
 "src/edgeforge/evaluation/phase4.py" = ["E501"]
 "src/edgeforge/evaluation/phase4_props.py" = ["E501"]
 "src/edgeforge/evaluation/phase4_run.py" = ["E501"]
+"src/edgeforge/evaluation/phase5.py" = ["E501"]
+"src/edgeforge/evaluation/phase5_run.py" = ["E501"]
+"src/edgeforge/evaluation/phase5_inputs.py" = ["E501"]
 
 [tool.mypy]
 python_version = "3.12"

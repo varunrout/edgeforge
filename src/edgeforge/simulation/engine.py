@@ -110,7 +110,7 @@ class MatchInputs:
     wb: FloatArray
     gb: FloatArray
     sampled_roles: bool
-    meta: dict[str, object] = field(default_factory=dict)
+    row_index: NDArray[np.int64] = field(default_factory=lambda: np.zeros(0, dtype=np.int64))
 
     @property
     def n_players(self) -> int:

@@ -215,3 +215,33 @@ def ci_local() -> None:
     from edgeforge.ci_local import run_ci_local
 
     typer.echo(str(run_ci_local()))
+
+
+phase5_app = typer.Typer(help="Phase 5: simulator and SGA engine.", no_args_is_help=True)
+app.add_typer(phase5_app, name="phase5")
+
+
+@phase5_app.command("convergence")
+def phase5_convergence() -> None:
+    """Monte Carlo error vs number of simulations for team, prop and SGA probabilities."""
+    from edgeforge.evaluation.phase5_run import run_convergence
+
+    typer.echo(str(run_convergence()))
+
+
+@phase5_app.command("run")
+def phase5_run() -> None:
+    """Simulate every test match in both states; invariants, Comparison B, SGA joint validation."""
+    from edgeforge.evaluation.phase5_run import run_phase5
+
+    typer.echo(str(run_phase5()))
+
+
+@phase5_app.command("example")
+def phase5_example(match_id: int, state: str = "lineups") -> None:
+    """Re-simulate one match from its seed and print every pre-registered SGA instance."""
+    import json
+
+    from edgeforge.evaluation.phase5_run import run_example
+
+    typer.echo(json.dumps(run_example(match_id, state), indent=1))
