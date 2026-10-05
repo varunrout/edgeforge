@@ -294,3 +294,29 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
   - The brief's definition-of-done item "CI passes" is reported as replaced, with this reason.
 - **Effect on gates:** Gates 3 and 4 close on a committed `ci_local.json` showing all checks passing at their gate commits (or at current HEAD if the gate code is unchanged).
 - **Status:** Locked (owner and lead, 2026-10-05)
+
+### D-047 Pre-registered SGA joint validation (D-012), written before any Phase 5 test result
+- **Status of this entry:** written and committed before the Phase 5 evaluation code was run on the test window (matchweeks 20-38, 2015/16). Nothing below may change after results are seen; additions go in a new decision.
+- **Who is named (mechanical, no discretion).** For each match, state (`lineups`, `opening`) and team, rank the team's players by the unconditional anytime-scorer probability s = P(appears) x P(scores | appears), taken from the **Phase 4 standalone model** (not from the simulator, to avoid circularity). Lineups: P(appears) = 1 for starters, 1 - P(never enters) for bench players. Opening: P(start) + P(bench) x P(appears | bench). `top1` is the highest s, `top2` the second (ties broken by lower StatsBomb player id). A team with fewer than two candidates yields no instance for templates that need `top2`.
+- **Templates** (own = the team whose player is named; H/A = home/away; an instance is built for each side where the text says "per side"):
+  | id | legs | definition | relationship tag |
+  |---|---|---|---|
+  | T01 | 2 | own win + own top1 AGS (per side) | player vs team result, same side |
+  | T02 | 2 | win + opponent top1 AGS (per side) | player vs team result, opposing |
+  | T03 | 2 | top1 AGS + Over 2.5 goals (per side) | player vs total |
+  | T04 | 3 | BTTS yes + H top1 AGS + A top1 AGS | opponents + BTTS |
+  | T05 | 2 | top1 AGS + top2 AGS, same team (per side) | teammates |
+  | T06 | 2 | top1 SoT 2+ + same player AGS (per side) | same player |
+  | T07 | 2 | Under 2.5 goals + top1 AGS (per side) | player vs total |
+  | T08 | 3 | own win + Over 2.5 + own top1 AGS (per side) | mixed |
+  | T09 | 4 | BTTS yes + Over 2.5 + H top1 AGS + A top1 AGS | mixed |
+  | T10 | 5 | own win + Over 1.5 + own top1 AGS + own top1 SoT 2+ + own top2 shots 1+ (per side) | mixed |
+  | T11 | 4 | own win + own top1 AGS + own top2 AGS + Over 2.5 (per side) | mixed, teammates |
+  | T12 | 2 | own win + own top1 shots 3+ (per side) | player vs team result, same side |
+  | T13 | 2 | H top1 AGS + A top1 AGS | opponents |
+- **Settlement (D-030 void rule).** An instance is priced conditional on every named player appearing and evaluated only on matches where every named player appeared. Naive price = product of the standalone leg probabilities (each conditional on its own player appearing, from the same simulation). Simulated price = joint frequency over simulations in which all named players are on the pitch.
+- **Competing prices.** (a) naive product of the simulator's standalone legs, (b) simulated joint. Both come from the same simulation, so they have identical marginals; the comparison isolates the dependence. The Phase 4 standalone models are not used as legs, so a gain cannot be attributed to better marginals.
+- **Tests.** Per template and state: log loss and Brier of simulated minus naive on realised joint outcomes, paired match-cluster bootstrap (1000 draws), 26 tests (13 templates x 2 states) in one Benjamini-Hochberg family at 10% FDR. Reported also: pooled and by leg count joint reliability diagrams for both prices; the dependence ratio (joint / naive) distribution by template, leg count and relationship tag; ECE.
+- **Possible outcomes we commit to reporting:** the simulated joint is better, equal or worse than naive. A template where the simulated joint is worse is reported as such and the dependence structure is called unvalidated for that template.
+- **Curated examples:** the three largest positive, three largest negative and three nearest-to-one dependence ratios among instances with joint probability above 1% in the lineups state, listed by match id, template and StatsBomb player ids, with the command that regenerates them (`edgeforge phase5 example`).
+- **Status:** Locked (implementer, pre-registered before test evaluation; lead to audit)

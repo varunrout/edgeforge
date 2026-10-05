@@ -6,6 +6,7 @@ Every tuning step goes through `tune_interior` (D-040) before any test-window me
 """
 
 import logging
+import pickle
 from pathlib import Path
 from typing import Any
 
@@ -31,6 +32,7 @@ from edgeforge.evaluation.phase4_props import (
     opening_inputs,
     tune_player_params,
 )
+from edgeforge.evaluation.phase4_recal import recalibrate_participation
 from edgeforge.evaluation.plots import hist_plot, pit_plot, reliability_plot
 from edgeforge.evaluation.registry import append_records, make_record
 from edgeforge.evaluation.splits import load_guard
@@ -139,6 +141,22 @@ def run_phase4(cfg: dict[str, Any] | None = None) -> Path:
     mp = minutes_predictions(
         d, ctx["starters"], ctx["bench"], ctx["c_start"], ctx["c_bench"], guard
     )
+    mp, recal = recalibrate_participation(ctx["starters"], ctx["bench"], mp, seed)
+    for nm, rp in recal.items():
+        records.append(
+            make_record(
+                f"phase4::recalibration_d044::{nm}", cfg, version, CMD,
+                feature_set="level Platt recalibration of the hazard-model event probability",
+                model="platt_level", hyperparameters={"rule": rp["rule"]},
+                validation_window=TEST_WINDOW,
+                metrics={"choose": rp["choose_window_log_loss_diff_recal_minus_raw"],
+                         "test": rp["test_log_loss_diff_recal_minus_raw"]},
+                calibration={"ece_raw": rp["test_raw"]["ece"],
+                             "ece_recal": rp["test_recalibrated"]["ece"]},
+                notes="D-044: adopted only if chosen inside the tuning window; test reported either way.",
+                status="promoted" if rp["adopted"] else "rejected",
+            )
+        )  # fmt: skip
     tr_ids = d.ids["burn"] + d.ids["tune"]
     l_bar = float(d.l_bar_by_match.loc[tr_ids].mean())
     r_min = evaluate_minutes(d, ctx["starters"], ctx["bench"], mp, l_bar, guard, seed)
@@ -253,7 +271,7 @@ def run_phase4(cfg: dict[str, Any] | None = None) -> Path:
 
     write_json(metrics_dir / "phase4_participation.json",
                {"provenance": prov, "starter_model": r_start, "minutes_model": r_min,
-                "minutes_tuning": rec_min})  # fmt: skip
+                "minutes_tuning": rec_min, "recalibration_d044": recal})  # fmt: skip
     write_json(metrics_dir / "phase4_shots.json",
                {"provenance": prov, "team_shots": r_ts, "team_shots_half_life_tuning": tuned_hl,
                 "player_parameters": {k: v.as_record() for k, v in tuned.items()},
@@ -262,6 +280,10 @@ def run_phase4(cfg: dict[str, Any] | None = None) -> Path:
                {"provenance": prov, "lineups_state": r_line, "opening_state": r_open,
                 "coherence": coh, "phase2_baseline_config":
                 {"window_matches": base[0], "shrink_minutes": base[1]}, "markets": MARKETS})  # fmt: skip
+    cache = {"start_pred": start_pred, "mp": mp, "shots": shots, "params": params, "l_bar": l_bar,
+             "base_cfg": base, "version": version, "git_sha": prov["git_sha"]}  # fmt: skip
+    with (resolve_path(cfg, "processed_dir") / "phase4_cache.pkl").open("wb") as fh:
+        pickle.dump(cache, fh)
     n = append_records(records)
     log.info("registry: %d new records", n)
     return metrics_dir / "phase4_markets.json"
