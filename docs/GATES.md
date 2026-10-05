@@ -319,3 +319,14 @@ Everything else in the efficiency map is **not distinguishable from zero**: no l
 - StatsBomb logo: still a README placeholder; the file is not in the repo.
 
 **CI:** run 37281304072 (public repo, commit after `a5d00c5`) failed before starting any step: "The job was not started because your account is locked due to a billing issue." Not attributable to the code. Gate 4 criterion 12 is therefore **FAIL (blocked)**; owner action: resolve the account billing lock, then `gh run rerun 37281304072`. Local CI-equivalent checks pass (criterion 11).
+
+### Lead audit of Gate 4 (2026-10-05): analytical criteria PASSED; CI still blocked
+- Criteria 1 to 11 accepted. Strong points: starter model -0.077 log loss vs "started last match"; five of six prop markets beat the rolling baseline after BH, with lower ECE in all six; the null on shots 1+ and the weak-baseline caveat on opening props are reported honestly.
+- Issues carried forward: (1) **D-043**: calibrator adoption in D-039 used the test window for selection; re-run under a tuning-window-only rule. (2) **D-044**: bench appearance and early exits are mis-calibrated and feed the simulator; test a recalibration first. (3) Coherence ratio home 0.984 vs away 1.060 suggests player-level goals under-weight home advantage; the D-014 simulator (goals from the Dixon-Coles scoreline) should absorb this, verify in Phase 5.
+- D-031 text and the Gate 1 audit line now use a match id instead of a player name (D-041).
+- Locked: D-042. New: D-043, D-044, D-045.
+- **CI: Gates 3 and 4 both remain formally open.** The lock is on the GitHub account (public repo did not clear it). Owner action at github.com/settings/billing.
+- Phase 5 may start.
+
+### Lead note (2026-10-05): CI criterion replaced (D-046)
+- GitHub Actions will not be available. Gates 3 and 4 close when `artifacts/metrics/ci_local.json` from `edgeforge ci-local` is committed with all checks passing. From Gate 5 on, the CI criterion is "ci_local.json committed and green".

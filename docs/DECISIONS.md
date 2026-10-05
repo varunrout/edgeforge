@@ -188,13 +188,13 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
 ### D-031 Minutes, substitution times and starter flag come from the event stream (supersedes the minutes source in D-030)
 - **Decision:** `player_match.minutes`, `sub_on_s`, `sub_off_s`, `gap_minutes`, `vacancy_s` and `started` are derived from the StatsBomb **event stream** (`Starting XI`, `Substitution`, `Player Off`, `Player On`, and `Red Card` / `Second Yellow` card events, processed in event `index` order) on the period-aware elapsed clock. Lineup `positions` are kept for the player's position and as a cross-check (`minutes_positions`, `started_lineup`). The clock, the dismissal cap and all other D-030 conventions (shots on target, goals, penalties, own goals) are unchanged. D-030 said "minutes computed ... from `positions`"; only that source is superseded.
 - **Why (full corpus, `statsbomb_profile.json`, `gate1_validation.json`):**
-  - Lineup `positions` spans are ordered by `mm:ss` ignoring the period, so a span can run backwards (for example from 45:12 of period 2 to 47:40 of period 1) and a player substituted at half-time can be "restarted" by a period-1 stoppage-time tactical shift. Positions-based minutes exceed the match length for 7 player-matches and differ from the event-based figure by more than 1 second for 40 of 57,665 player-matches (36 of them higher). Example: Bale, match 3825739, 91.6 minutes from positions versus 44.6 from events (Player Off 44:35, Player On 46:01, half-time substitution).
+  - Lineup `positions` spans are ordered by `mm:ss` ignoring the period, so a span can run backwards (for example from 45:12 of period 2 to 47:40 of period 1) and a player substituted at half-time can be "restarted" by a period-1 stoppage-time tactical shift. Positions-based minutes exceed the match length for 7 player-matches and differ from the event-based figure by more than 1 second for 40 of 57,665 player-matches (36 of them higher). Example: a player in match 3825739, 91.6 minutes from positions versus 44.6 from events (Player Off 44:35, Player On 46:01, half-time substitution).
   - `positions` almost never close at a dismissal: of 413 dismissals (196 `Red Card`, 217 `Second Yellow`), the final position closes at the card in 2; 406 stay open until the final whistle, 1 closes elsewhere and 4 players have no positions (unused bench players sent off). This corrects the D-020 text, which implied a `Second Yellow` closes correctly (true for one match in the Phase 0b sample, not in general).
   - No dismissed player has any event after the card (413 of 413), so the event stream is consistent with the cap.
   - The lineup-based starter flag disagrees with the `Starting XI` event for 22 player-matches and leaves two teams with no starters.
 - **Consequences:** a team can play short without a dismissal (a player leaves with `Player Off (Permanent)` after substitutions are used up, or a replacement arrives late). The Gate 1 identity is therefore `sum of minutes = 11 x match length - sum of vacancy`, where vacancy is derived from events. Unused bench players can receive cards (10 player-matches: 4 red, 6 yellow); they are in `player_match` with `minutes = 0` and are not on-pitch dismissals.
 - **Rejected:** keeping positions as the source and clamping minutes to the match length (hides the error); using only positions after reordering spans (the half-time restart case cannot be repaired from positions alone).
-- **Status:** Locked (lead, Gate 1 audit, 2026-10-04). Good catch; the Bale half-time example goes in the technical report as a data-quality finding.
+- **Status:** Locked (lead, Gate 1 audit, 2026-10-04). Good catch; the half-time example (match 3825739) goes in the technical report as a data-quality finding.
 
 ### D-032 Gate 1 validation thresholds
 - **Decision:** The implementer's thresholds are confirmed as standing data-quality checks, re-run whenever the warehouse is rebuilt: overround outliers under 1% outside [1.00, 1.20] (Max aggregates excluded); AH line test under 1% of matches differing by more than 0.10 in de-vigged probability with line-sign agreement at least 95%; team minutes identity within 2 seconds.
@@ -271,4 +271,26 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
 - **Settlement.** D-030: markets are priced conditional on appearance and evaluated on players who appeared (void otherwise). Lineups state uses actual starters/bench with the minutes mixture. Opening state uses the mixture over start/bench/out, conditional on appearance.
 - **Baselines.** Lineups: the Phase 2 rolling per-90 baseline in its chosen configuration (Comparison E). Opening: the same rolling rate times mean minutes per past appearance, with no participation model. The opening baseline is weak by construction, so opening gains overstate the value of the participation model against a stronger baseline.
 - **Statistics.** Paired match-cluster bootstrap (1000 draws) on log-loss differences; BH at 10% FDR across the six markets within each comparison.
-- **Status:** Locked (implementer, Gate 4, pending lead audit)
+- **Status:** Locked (lead, Gate 4 audit, 2026-10-05)
+
+### D-043 Calibrator selection must not use the test window (fix to D-039)
+- **Problem found in the Gate 4 audit:** D-039 adopts a post-hoc calibrator for a market only if it improves log loss **on the primary test window**. That uses the test window for model selection, so the reported test improvement of an adopted calibrator (BTTS for Pillar A, over 2.5 for 2015/16) is optimistically biased.
+- **Decision:** Calibrator adoption is decided inside the tuning window only: fit on its first part and choose on its last part (e.g. Pillar A: fit 2019/20 to 2022/23, choose on 2023/24; 2015/16 team block: fit 2013/14, choose on 2014/15; 2015/16 player block: fit matchweeks 10 to 14, choose on 15 to 19). The adopted set is then evaluated once on the test window and reported whatever the result. Re-run the Phase 3 calibration study under this rule, update `team_model.json` and the Gate 3 numbers that depend on it, and record both the old (biased) and new adoptions. Apply the same rule to any calibration in Phase 4 onwards.
+- **Status:** Locked (lead, 2026-10-05)
+
+### D-044 Participation recalibration before simulation
+- **Decision:** Bench appearance is worse calibrated than its baseline (ECE 0.0383 vs 0.0195) and early starter exits are under-predicted (24.9% predicted vs 27.1% actual leave early). Both feed every simulated prop and SGA. Before the simulator consumes them, test a post-hoc recalibration of bench P(appear) and of the starter exit hazard level under the D-043 rule (fit and choose inside matchweeks 10 to 19). Adopt only if chosen inside the tuning window; report test results either way.
+- **Status:** Locked (lead, 2026-10-05)
+
+### D-045 Simulation storage
+- **Decision:** Do not persist full simulation arrays for all test matches (758 matches x tens of thousands of sims x about 36 players would be several GB on a nearly full disk). Simulations are regenerated deterministically from (match_id, state, seed, model version). Cache only summary tensors needed for evaluation (per-leg indicator matrices for the pre-registered SGA templates) and full arrays for a small demo fixture set used by the API and app.
+- **Status:** Locked (lead, 2026-10-05)
+
+### D-046 GitHub Actions unavailable: scripted local CI replaces it
+- **Decision:** The owner's GitHub account is billing-locked and will not be fixed during this project, so GitHub Actions cannot run. The hard "green GitHub Actions run" criterion is replaced by a scripted local check:
+  - `uv run edgeforge ci-local` clones the repo at HEAD into a short temporary path, runs `uv sync --locked`, `ruff check`, `ruff format --check`, `mypy`, `pytest -q`, and writes `artifacts/metrics/ci_local.json` (commit sha, each command, exit code, test counts, timestamp). That file is committed at every gate and is the CI evidence.
+  - The workflow file stays in the repo (it is correct and documents the intended CI), but its triggers change to `workflow_dispatch` only, so the public repo does not show a red failure on every push.
+  - README and every claim say "tests and lint run via a scripted fresh-clone check; GitHub Actions workflow included but not executed (account limitation)". Never write "CI passes" or show a CI badge.
+  - The brief's definition-of-done item "CI passes" is reported as replaced, with this reason.
+- **Effect on gates:** Gates 3 and 4 close on a committed `ci_local.json` showing all checks passing at their gate commits (or at current HEAD if the gate code is unchanged).
+- **Status:** Locked (owner and lead, 2026-10-05)
