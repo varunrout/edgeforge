@@ -207,3 +207,11 @@ def phase4_run() -> None:
     from edgeforge.evaluation.phase4_run import run_phase4
 
     typer.echo(str(run_phase4()))
+
+
+@app.command("ci-local")
+def ci_local() -> None:
+    """Fresh-clone lint, type and test check; writes artifacts/metrics/ci_local.json (D-046)."""
+    from edgeforge.ci_local import run_ci_local
+
+    typer.echo(str(run_ci_local()))

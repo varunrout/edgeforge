@@ -8,6 +8,10 @@ states (opening, lineups, in-play). See `docs/PLAN.md` for the plan and `docs/GA
 audited phase reports. No result is reported unless it was produced by code into
 `artifacts/metrics/` with provenance (git SHA, data version, command, config hash, seed).
 
+Tests and lint run via a scripted fresh-clone check (`uv run edgeforge ci-local`, evidence in
+`artifacts/metrics/ci_local.json`); the GitHub Actions workflow is included but not executed
+(account limitation).
+
 ```
 uv sync
 uv run edgeforge --help
