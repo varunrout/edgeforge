@@ -22,7 +22,7 @@ from edgeforge.evaluation.phase4 import (
     stage_starters,
     stage_team_shots,
 )
-from edgeforge.evaluation.phase4_data import load_p4
+from edgeforge.evaluation.phase4_data import frame_fingerprint, load_p4
 from edgeforge.evaluation.phase4_props import (
     MARKETS,
     coherence,
@@ -281,7 +281,7 @@ def run_phase4(cfg: dict[str, Any] | None = None) -> Path:
                 "coherence": coh, "phase2_baseline_config":
                 {"window_matches": base[0], "shrink_minutes": base[1]}, "markets": MARKETS})  # fmt: skip
     cache = {"start_pred": start_pred, "mp": mp, "shots": shots, "params": params, "l_bar": l_bar,
-             "base_cfg": base, "version": version, "git_sha": prov["git_sha"]}  # fmt: skip
+             "base_cfg": base, "version": version, "squad_fp": frame_fingerprint(d.squad), "cand_fp": frame_fingerprint(d.cand), "git_sha": prov["git_sha"]}  # fmt: skip
     with (resolve_path(cfg, "processed_dir") / "phase4_cache.pkl").open("wb") as fh:
         pickle.dump(cache, fh)
     n = append_records(records)

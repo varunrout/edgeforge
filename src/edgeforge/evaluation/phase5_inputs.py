@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 
 from edgeforge.config import resolve_path
-from edgeforge.evaluation.phase4_data import P4Data, load_p4
+from edgeforge.evaluation.phase4_data import P4Data, frame_fingerprint, load_p4
 from edgeforge.evaluation.phase4_props import (
     lineup_inputs,
     opening_inputs,
@@ -49,6 +49,12 @@ def load_context(cfg: dict[str, Any]) -> Phase5Context:
     with path.open("rb") as fh:
         cache = pickle.load(fh)
     d = load_p4(cfg)
+    if cache.get("squad_fp") != frame_fingerprint(d.squad) or cache.get(
+        "cand_fp"
+    ) != frame_fingerprint(d.cand):
+        raise RuntimeError(
+            "phase4_cache.pkl does not match the current data row order: rerun phase4"
+        )
     params: ShotParams = cache["params"]
     l_bar = float(cache["l_bar"])
     lineups = lineup_inputs(d, cache["mp"], cache["shots"], "test", l_bar)

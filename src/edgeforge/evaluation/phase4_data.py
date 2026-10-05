@@ -131,5 +131,18 @@ def load_p4(cfg: dict[str, Any]) -> P4Data:
     ).df()
     ts = _add_meta(ts, clock, split_of)
     l_bar = sbm.set_index("sb_match_id")["match_length_s"] / 60.0
+    # DuckDB returns rows in a run-dependent order; fixed keys make row positions (which the
+    # prediction frames are indexed by) identical in every process.
+    key = ["sb_match_id", "team_id", "player_id"]
+    sq = sq.sort_values(key, kind="stable").reset_index(drop=True)
+    cand = cand.sort_values(key, kind="stable").reset_index(drop=True)
     log.info("squad rows %d, candidate rows %d", len(sq), len(cand))
     return P4Data(con, clock, ids, sq, cand, gr_l, gr_o, ts, l_bar)
+
+
+def frame_fingerprint(df: pd.DataFrame) -> str:
+    """Hash of the row keys; a cache indexed by row position is valid only if this matches."""
+    import hashlib
+
+    cols = df[["sb_match_id", "team_id", "player_id"]].to_numpy(np.int64)
+    return hashlib.sha256(cols.tobytes()).hexdigest()[:16]
