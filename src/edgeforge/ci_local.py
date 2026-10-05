@@ -90,7 +90,10 @@ def run_ci_local(clone_dir: Path | None = None) -> Path:
             "seconds": round(time.time() - t0, 1),
         }
         if name.endswith("pytest -q"):
-            rec["test_counts"] = _counts(text.strip().splitlines()[-1] if text.strip() else "")
+            summary = [
+                ln for ln in text.splitlines() if re.search(r"\d+ (passed|failed|error)", ln)
+            ]
+            rec["test_counts"] = _counts(summary[-1] if summary else "")
         results.append(rec)
         log.info("%s -> exit %d", name, p.returncode)
         if p.returncode != 0:
