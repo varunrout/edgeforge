@@ -364,7 +364,10 @@ def calibration_study(
     test_probs: dict[str, np.ndarray],
     test_y: dict[str, Any],
     seed: int,
+    adopted: set[tuple[str, str]],
 ) -> list[dict[str, Any]]:
+    """Held-out evaluation of every calibrator. Adoption (`keep`) comes from `adopted`, which was
+    decided inside the tuning window (D-043); `keep_d039_biased` is the old test-window rule."""
     out = []
     for mk in MARKETS:
         pt, pe = tune_probs[mk], test_probs[mk]
@@ -390,7 +393,50 @@ def calibration_study(
                     "raw_log_loss": float(lb.mean()),
                     "calibrated_log_loss": float(la.mean()),
                     **b,
-                    "keep": bool(b["mean_diff"] < 0 and b["ci_high"] < 0),
+                    "keep": (mk, method) in adopted,
+                    "keep_d039_biased": bool(b["mean_diff"] < 0 and b["ci_high"] < 0),
+                }
+            )
+    return out
+
+
+def choose_calibrators(
+    ev_tune: pd.DataFrame,
+    tune_probs: dict[str, np.ndarray],
+    tune_y: dict[str, Any],
+    seed: int,
+) -> list[dict[str, Any]]:
+    """D-043: fit each calibrator on the earlier seasons of the tuning window and choose on its
+    last season (paired bootstrap, CI must exclude zero). The test window is not touched."""
+    season = ev_tune["season_start_year"].to_numpy()
+    last = season.max()
+    fit_m, cho_m = season < last, season == last
+    out = []
+    for mk in MARKETS:
+        pt = tune_probs[mk]
+        ok = ~(np.isnan(pt).any(axis=1) if pt.ndim == 2 else np.isnan(pt))
+        f, c = ok & fit_m, ok & cho_m
+        for method in ("platt", "isotonic"):
+            if mk == "1x2":
+                cal = calibrate_1x2(pt[f], tune_y["1x2"][f], pt[c], method)
+                la = M.log_loss_multiclass(cal, tune_y["1x2"][c])
+                lb = M.log_loss_multiclass(pt[c], tune_y["1x2"][c])
+            else:
+                cal = calibrate_binary(pt[f], tune_y[mk][f], pt[c], method)
+                la = M.log_loss_binary(cal, tune_y[mk][c])
+                lb = M.log_loss_binary(pt[c], tune_y[mk][c])
+            b = M.paired_bootstrap(la, lb, np.flatnonzero(c), N_BOOT, seed)
+            out.append(
+                {
+                    "market": mk,
+                    "method": method,
+                    "n_fit": int(f.sum()),
+                    "n_choose": int(c.sum()),
+                    "choose_season_start_year": int(last),
+                    "raw_log_loss": float(lb.mean()),
+                    "calibrated_log_loss": float(la.mean()),
+                    **b,
+                    "adopt": bool(b["mean_diff"] < 0 and b["ci_high"] < 0),
                 }
             )
     return out
@@ -501,6 +547,36 @@ def run_team_model(cfg: dict[str, Any] | None = None) -> Path:
                 )
             )
         tune_cal_probs = dc_tune_probs
+        choose = choose_calibrators(ev_tune, dc_tune_probs, y_tune, seed)
+        adopted_set = {(c["market"], c["method"]) for c in choose if c["adopt"]}
+        block_res["calibration_choice_inside_tuning_window"] = choose
+        for c in choose:
+            records.append(
+                make_record(
+                    f"team_model::{bname}::choose_d043::{c['market']}_{c['method']}",
+                    cfg,
+                    version,
+                    "edgeforge team-model run",
+                    feature_set="Dixon-Coles probabilities",
+                    model=f"{c['method']}_calibration",
+                    hyperparameters={"market": c["market"], "fit": "earlier tuning seasons"},
+                    validation_window=f"{bname} last tuning season ({c['choose_season_start_year']})",
+                    metrics={
+                        k: c[k]
+                        for k in (
+                            "raw_log_loss",
+                            "calibrated_log_loss",
+                            "mean_diff",
+                            "ci_low",
+                            "ci_high",
+                        )
+                    },
+                    calibration={},
+                    notes="D-043 adoption decision inside the tuning window.",
+                    status="promoted" if c["adopt"] else "rejected",
+                )
+            )
+        log.info("%s D-043 adopted calibrators: %s", bname, sorted(adopted_set))
         for tname, ids in spec["tests"].items():
             ev = ev_frame(fd_all, ids)
             y = outcomes(ev)
@@ -533,7 +609,7 @@ def run_team_model(cfg: dict[str, Any] | None = None) -> Path:
                     ),
                 },
                 "calibration": calibration_study(
-                    tune_cal_probs, y_tune, models["dixon_coles"], y, seed
+                    tune_cal_probs, y_tune, models["dixon_coles"], y, seed, adopted_set
                 ),
             }
             tres["calibration_kept"] = [
@@ -562,12 +638,29 @@ def run_team_model(cfg: dict[str, Any] | None = None) -> Path:
                         if c["market"] != "1x2":
                             platt[c["market"]] = platt_parameters(pt[okt], y_tune[c["market"]][okt])
                 block_res["calibration_decision"] = {
-                    "rule": "adopt a calibrator for a market only if, on the block's primary test window, "
-                    "held-out log loss improves with a paired-bootstrap CI that excludes zero; other windows "
-                    "are supporting checks. 56 market x method x window tests were run, so isolated hits "
-                    "are expected by chance and the verdicts differ across windows.",
+                    "rule": "D-043: adoption is decided inside the tuning window (fit on its earlier "
+                    "seasons, choose on its last season, paired-bootstrap CI excluding zero); the "
+                    "adopted set is then evaluated once on the test window and reported whatever the result.",
                     "primary_window": tname,
                     "adopted": [f"{c['market']}:{c['method']}" for c in adopted],
+                    "adopted_test_results": {
+                        f"{c['market']}:{c['method']}": {
+                            k: c[k]
+                            for k in (
+                                "raw_log_loss",
+                                "calibrated_log_loss",
+                                "mean_diff",
+                                "ci_low",
+                                "ci_high",
+                            )
+                        }
+                        for c in adopted
+                    },
+                    "superseded_d039_adopted_using_test_window": [
+                        f"{c['market']}:{c['method']}"
+                        for c in tres["calibration"]
+                        if c["keep_d039_biased"]
+                    ],
                     "platt_parameters_fitted_on_tuning_window": platt,
                     "1x2_calibration_helps": any(
                         c["keep"] for c in tres["calibration"] if c["market"] == "1x2"
@@ -601,7 +694,7 @@ def run_team_model(cfg: dict[str, Any] | None = None) -> Path:
             for c in tres["calibration"]:
                 records.append(
                     make_record(
-                        f"team_model::{bname}::{tname}::calib_{c['market']}_{c['method']}",
+                        f"team_model::{bname}::{tname}::calib_d043_{c['market']}_{c['method']}",
                         cfg,
                         version,
                         "edgeforge team-model run",
@@ -623,7 +716,7 @@ def run_team_model(cfg: dict[str, Any] | None = None) -> Path:
                             )
                         },
                         calibration={},
-                        notes="Kept only if held-out log loss improves with CI excluding zero.",
+                        notes="D-043: adopted only if chosen inside the tuning window; test result reported either way.",
                         status="promoted" if c["keep"] else "rejected",
                     )
                 )
