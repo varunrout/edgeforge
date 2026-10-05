@@ -327,7 +327,7 @@ def check_minutes(con: duckdb.DuckDBPyConnection) -> list[dict[str, Any]]:
         {"player_matches": len(pm), "violations": len(over)},
         {
             "violations_listed": _records(
-                over[["sb_match_id", "team", "player_name", "minutes", "length_min"]]
+                over[["sb_match_id", "team", "player_id", "minutes", "length_min"]]
             )
         },
     )
@@ -349,7 +349,7 @@ def check_minutes(con: duckdb.DuckDBPyConnection) -> list[dict[str, Any]]:
             "starter_count_violations_listed": _records(starters_bad),
             "full_match_starter_violations_listed": _records(
                 full_bad[
-                    ["sb_match_id", "team", "player_name", "minutes", "length_min", "gap_minutes"]
+                    ["sb_match_id", "team", "player_id", "minutes", "length_min", "gap_minutes"]
                 ]
             ),
         },
@@ -372,12 +372,10 @@ def check_minutes(con: duckdb.DuckDBPyConnection) -> list[dict[str, Any]]:
         },
         {
             "disagreements_listed": _records(
-                disagree[["sb_match_id", "team", "player_name", "minutes", "minutes_positions"]]
+                disagree[["sb_match_id", "team", "player_id", "minutes", "minutes_positions"]]
             ),
             "started_mismatch_listed": _records(
-                started_mismatch[
-                    ["sb_match_id", "team", "player_name", "started", "started_lineup"]
-                ]
+                started_mismatch[["sb_match_id", "team", "player_id", "started", "started_lineup"]]
             ),
         },
     )

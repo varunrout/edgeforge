@@ -108,7 +108,7 @@ def profile_payloads(payloads: Iterable[Payload]) -> dict[str, Any]:
                             closure_examples.append(
                                 {
                                     "match_id": m["match_id"],
-                                    "player": p["player_name"],
+                                    "player_id": p["player_id"],
                                     "card_type": card["card_type"],
                                     "card_time": card["time"],
                                     "card_period": card["period"],

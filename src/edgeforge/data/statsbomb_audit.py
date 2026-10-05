@@ -64,7 +64,7 @@ def audit_match(
                         "source_event": e["type"]["name"],
                         "card": e[k]["card"]["name"],
                         "team": e["team"]["name"],
-                        "player": e["player"]["name"],
+                        "player_id": e["player"]["id"],
                         "period": e["period"],
                         "minute": e["minute"],
                         "second": e["second"],
@@ -73,8 +73,8 @@ def audit_match(
     subs = [
         {
             "team": e["team"]["name"],
-            "off": e["player"]["name"],
-            "on": e["substitution"]["replacement"]["name"],
+            "off_player_id": e["player"]["id"],
+            "on_player_id": e["substitution"]["replacement"]["id"],
             "period": e["period"],
             "minute": e["minute"],
             "second": e["second"],
@@ -95,7 +95,7 @@ def audit_match(
                     dismissals.append(
                         {
                             "team": team["team_name"],
-                            "player": p["player_name"],
+                            "player_id": p["player_id"],
                             "card_type": c["card_type"],
                             "card_clock": c["time"],
                             "card_period": c["period"],
@@ -128,7 +128,7 @@ def audit_match(
             players.append(
                 {
                     "team": team["team_name"],
-                    "player": p["player_name"],
+                    "player_id": p["player_id"],
                     "starter": bool(pos) and pos[0]["start_reason"] == "Starting XI",
                     "appeared": bool(pos),
                     "n_spans": len(pos),
@@ -164,7 +164,7 @@ def audit_match(
         "goal_shots": [
             {
                 "team": e["team"]["name"],
-                "player": e["player"]["name"],
+                "player_id": e["player"]["id"],
                 "period": e["period"],
                 "minute": e["minute"],
                 "second": e["second"],
@@ -178,7 +178,7 @@ def audit_match(
             {
                 "type": e["type"]["name"],
                 "team": e["team"]["name"],
-                "player": e.get("player", {}).get("name"),
+                "player_id": e.get("player", {}).get("id"),
                 "period": e["period"],
                 "minute": e["minute"],
                 "second": e["second"],
@@ -191,7 +191,7 @@ def audit_match(
         "player_off_on_events": [
             {
                 "type": e["type"]["name"],
-                "player": e["player"]["name"],
+                "player_id": e["player"]["id"],
                 "period": e["period"],
                 "clock": f"{e['minute']}:{e['second']:02d}",
             }
