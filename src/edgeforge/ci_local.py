@@ -23,8 +23,16 @@ OUT = PROJECT_ROOT / "artifacts" / "metrics" / "ci_local.json"
 
 
 def _uv() -> list[str]:
-    found = shutil.which("uv")
-    return [found] if found else [sys.executable, "-m", "uv"]
+    """Find a working uv: the executable on PATH, else `python -m uv` from any interpreter."""
+    candidates = [[p] for p in [shutil.which("uv")] if p]
+    candidates += [[sys.executable, "-m", "uv"], ["python", "-m", "uv"], ["py", "-m", "uv"]]
+    for cmd in candidates:
+        try:
+            if subprocess.run([*cmd, "--version"], capture_output=True).returncode == 0:
+                return cmd
+        except OSError:
+            continue
+    raise RuntimeError("uv not found: install it (https://docs.astral.sh/uv/)")
 
 
 def _git(*args: str, cwd: Path = PROJECT_ROOT) -> str:
