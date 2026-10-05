@@ -67,6 +67,12 @@ def load_context(cfg: dict[str, Any]) -> Phase5Context:
     )  # fmt: skip
 
 
+def canonical_order(idx: np.ndarray, pid: np.ndarray) -> np.ndarray:
+    """Players in a fixed order (by StatsBomb id) so a simulation is reproducible bit for bit
+    whatever order the database returns rows in."""
+    return idx[np.argsort(pid[idx], kind="stable")]
+
+
 def _dummy_minutes(n: int, l_bar: float) -> tuple[np.ndarray, np.ndarray]:
     w = np.zeros((n, N_MIN_COLS))
     w[:, 0] = 1.0
@@ -134,7 +140,7 @@ def build_inputs(
     is_home = rows["is_home"].astype(bool).to_numpy()
     pid = rows["player_id"].to_numpy(np.int64)
     for m in np.unique(mid):
-        idx = np.flatnonzero((mid == m) & finite)
+        idx = canonical_order(np.flatnonzero((mid == m) & finite), pid)
         m = int(m)
         if m not in dcd or (m, True) not in mu or (m, False) not in mu:
             continue

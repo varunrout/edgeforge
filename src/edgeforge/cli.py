@@ -238,7 +238,9 @@ def phase5_run() -> None:
 
 
 @phase5_app.command("example")
-def phase5_example(match_id: int, state: str = "lineups") -> None:
+def phase5_example(
+    match_id: int = typer.Option(..., help="StatsBomb match id"), state: str = "lineups"
+) -> None:
     """Re-simulate one match from its seed and print every pre-registered SGA instance."""
     import json
 
