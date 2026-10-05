@@ -1,0 +1,36 @@
+{
+ "commit_sha": "c97d0d19bc5902c5a82ec6c8bbe4e7b36ebcaaf9",
+ "tested_tree": "fresh git clone at HEAD",
+ "uncommitted_code_changes_ignored": false,
+ "created_at": "2026-10-05T12:17:06Z",
+ "all_passed": true,
+ "steps": [
+  {
+   "command": "uv sync --locked",
+   "exit_code": 0,
+   "seconds": 11.2
+  },
+  {
+   "command": "uv run ruff check .",
+   "exit_code": 0,
+   "seconds": 2.1
+  },
+  {
+   "command": "uv run ruff format --check .",
+   "exit_code": 0,
+   "seconds": 0.4
+  },
+  {
+   "command": "uv run mypy",
+   "exit_code": 0,
+   "seconds": 26.4
+  },
+  {
+   "command": "uv run pytest -q",
+   "exit_code": 0,
+   "seconds": 98.2,
+   "test_counts": {}
+  }
+ ],
+ "note": "Replaces the GitHub Actions run (D-046): the account is billing-locked."
+}
