@@ -73,6 +73,10 @@ def _player_rows(n: int = 6, seed: int = 0) -> pd.DataFrame:
                     "second_yellow": 0,
                     "sub_on_s": None,
                     "sub_off_s": None,
+                    "penalties_taken": 0,
+                    "exit_kind": "substitution"
+                    if (appeared and started and rng.random() < 0.4)
+                    else None,
                     "xg": float(rng.random()),
                 }
             )

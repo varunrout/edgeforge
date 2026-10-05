@@ -18,6 +18,7 @@ targets; they never appear as features in the opening or lineups state.
 from typing import Any
 
 import duckdb
+import numpy as np
 import pandas as pd
 
 STATES = ("opening", "lineups", "inplay")
@@ -101,9 +102,13 @@ def sb_clock(sb_matches: pd.DataFrame) -> pd.DataFrame:
     out["done_ts"] = out["kickoff_late"] + RESULT_DELAY
     out["asof_opening"] = out["kickoff_early"] - OPENING_OFFSET
     out["asof_lineups"] = out["kickoff_early"] - LINEUPS_OFFSET
+    out["match_length_s"] = (
+        sb_matches["match_length_s"] if "match_length_s" in sb_matches else np.nan
+    )
     keep = [
         "sb_match_id",
         "league",
+        "match_length_s",
         "match_week",
         "kickoff_early",
         "kickoff_late",
@@ -217,6 +222,11 @@ def _agg_columns() -> str:
             f" AS mins_bench_app_{n}",
             f"count(j.rn) FILTER (WHERE j.rn <= {n} AND NOT j.started AND j.appeared)"
             f" AS n_bench_app_{n}",
+            f"coalesce(sum(j.xg) {f}, 0) AS xg_{n}",
+            f"coalesce(sum(j.pen) {f}, 0) AS pen_{n}",
+            f"coalesce(sum(j.expo) {f}, 0) AS expo_{n}",
+            f"count(j.rn) FILTER (WHERE j.rn <= {n} AND j.started AND j.exit_kind = 'substitution')"
+            f" AS n_subbed_off_{n}",
         ]
     return ",\n           ".join(cols)
 
@@ -275,7 +285,9 @@ def player_features(
     hist AS (
       SELECT p.player_id, p.sb_match_id AS h_match, c.kickoff_late AS h_ko, c.done_ts AS h_done,
              p.started, p.appeared, p.minutes, p.shots, p.shots_on_target AS sot, p.goals,
-             p.position_group
+             p.position_group, p.xg, p.penalties_taken AS pen, p.exit_kind,
+             sum(p.shots) OVER (PARTITION BY p.sb_match_id, p.team_id) * p.minutes
+               / (11.0 * c.match_length_s / 60.0) AS expo
       FROM player_match p JOIN sb_clock c USING (sb_match_id)
       WHERE p.sb_match_id NOT IN (SELECT id FROM exc_ids)
     ),
@@ -290,6 +302,72 @@ def player_features(
            mode(j.position_group) FILTER (WHERE j.appeared) AS position_group,
            {_agg_columns()}
     FROM tgt t LEFT JOIN j ON j.sb_match_id = t.sb_match_id AND j.player_id = t.player_id
+    GROUP BY ALL
+    """
+    return con.execute(sql).df()
+
+
+def starter_features(
+    con: duckdb.DuckDBPyConnection,
+    target_match_ids: list[int],
+    exclude_match_ids: list[int] | None = None,
+) -> pd.DataFrame:
+    """Opening-state recency and congestion features for start/bench/out candidates.
+
+    Candidates are players who appeared in the team's previous five matches. For each of those
+    five team matches (t1 = most recent) the frame carries whether the candidate was in the squad,
+    started, and his minutes (0 when absent), plus the team's days since its last match and its
+    match count over the last 14 and 28 days. Everything is as of `asof_opening`; the target match
+    and anything completing after `asof_ts` is never read.
+    """
+    con.register("tgt_ids", pd.DataFrame({"id": target_match_ids}))
+    con.register("exc_ids", pd.DataFrame({"id": list(exclude_match_ids or [])}, dtype="int64"))
+    per = []
+    for k in range(1, 6):
+        per += [
+            f"max(CASE WHEN l.rn = {k} THEN pm.player_id IS NOT NULL END)::INT AS squad_t{k}",
+            f"coalesce(max(CASE WHEN l.rn = {k} THEN pm.started::INT END), 0) AS started_t{k}",
+            f"coalesce(max(CASE WHEN l.rn = {k} THEN pm.minutes END), 0) AS mins_t{k}",
+        ]
+    sql = f"""
+    WITH tm AS (
+      SELECT DISTINCT p.team_id, p.sb_match_id, c.kickoff_late, c.done_ts
+      FROM player_match p JOIN sb_clock c USING (sb_match_id)
+      WHERE p.sb_match_id NOT IN (SELECT id FROM exc_ids)
+    ), tt AS (
+      SELECT p.team_id, p.sb_match_id, bool_or(p.is_home) AS is_home, c.league,
+             c.asof_opening AS asof_ts
+      FROM player_match p JOIN sb_clock c USING (sb_match_id)
+      WHERE p.sb_match_id IN (SELECT id FROM tgt_ids)
+      GROUP BY p.team_id, p.sb_match_id, c.league, c.asof_opening
+    ), l AS (
+      SELECT tt.sb_match_id, tt.team_id, tt.asof_ts, tm.sb_match_id AS prev,
+             tm.kickoff_late AS prev_ko,
+             row_number() OVER (PARTITION BY tt.sb_match_id, tt.team_id
+                                ORDER BY tm.kickoff_late DESC) AS rn
+      FROM tt JOIN tm ON tm.team_id = tt.team_id AND tm.done_ts <= tt.asof_ts
+    ), ctx AS (
+      SELECT sb_match_id, team_id,
+             date_diff('minute', max(prev_ko), any_value(asof_ts)) / 1440.0 AS days_since_team_last,
+             count(*) FILTER (WHERE prev_ko >= asof_ts - INTERVAL 14 DAY) AS team_matches_14d,
+             count(*) FILTER (WHERE prev_ko >= asof_ts - INTERVAL 28 DAY) AS team_matches_28d,
+             least(count(*), 5) AS n_team_prior
+      FROM l GROUP BY sb_match_id, team_id
+    ), cand AS (
+      SELECT DISTINCT l.sb_match_id, l.team_id, p.player_id
+      FROM l JOIN player_match p
+        ON p.sb_match_id = l.prev AND p.team_id = l.team_id AND p.appeared
+      WHERE l.rn <= 5
+    )
+    SELECT c.sb_match_id, c.player_id, c.team_id, tt.asof_ts, 'opening' AS state, tt.is_home,
+           ctx.days_since_team_last, ctx.team_matches_14d, ctx.team_matches_28d, ctx.n_team_prior,
+           {", ".join(per)}
+    FROM cand c
+    JOIN tt ON tt.sb_match_id = c.sb_match_id AND tt.team_id = c.team_id
+    JOIN ctx ON ctx.sb_match_id = c.sb_match_id AND ctx.team_id = c.team_id
+    JOIN l ON l.sb_match_id = c.sb_match_id AND l.team_id = c.team_id AND l.rn <= 5
+    LEFT JOIN player_match pm
+      ON pm.sb_match_id = l.prev AND pm.team_id = l.team_id AND pm.player_id = c.player_id
     GROUP BY ALL
     """
     return con.execute(sql).df()
@@ -313,8 +391,14 @@ def position_group_rates(
              sum(p.minutes) FILTER (WHERE p.started) AS mins_started,
              count(*) FILTER (WHERE p.started) AS n_started,
              sum(p.minutes) FILTER (WHERE NOT p.started) AS mins_bench_app,
-             count(*) FILTER (WHERE NOT p.started) AS n_bench_app
+             count(*) FILTER (WHERE NOT p.started) AS n_bench_app,
+             sum(p.xg) AS xg, sum(p.penalties_taken) AS pen,
+             sum(tsh.tshots * p.minutes / (11.0 * c.match_length_s / 60.0)) AS expo,
+             count(*) FILTER (WHERE p.started AND p.exit_kind = 'substitution') AS n_subbed
       FROM player_match p JOIN sb_clock c USING (sb_match_id)
+      JOIN (SELECT sb_match_id, team_id, sum(shots) AS tshots FROM player_match
+            GROUP BY sb_match_id, team_id) tsh
+        ON tsh.sb_match_id = p.sb_match_id AND tsh.team_id = p.team_id
       WHERE p.appeared AND p.position_group IS NOT NULL
         AND p.sb_match_id NOT IN (SELECT id FROM exc_ids)
       GROUP BY ALL
@@ -327,7 +411,9 @@ def position_group_rates(
            sum(g.goals) AS g_goals, coalesce(sum(g.mins_started), 0) AS g_mins_started,
            coalesce(sum(g.n_started), 0) AS g_n_started,
            coalesce(sum(g.mins_bench_app), 0) AS g_mins_bench_app,
-           coalesce(sum(g.n_bench_app), 0) AS g_n_bench_app
+           coalesce(sum(g.n_bench_app), 0) AS g_n_bench_app,
+           coalesce(sum(g.xg), 0) AS g_xg, coalesce(sum(g.pen), 0) AS g_pen,
+           coalesce(sum(g.expo), 0) AS g_expo, coalesce(sum(g.n_subbed), 0) AS g_n_subbed
     FROM t JOIN g ON g.league = t.league AND g.done_ts <= t.asof_ts
     GROUP BY t.sb_match_id, t.asof_ts, g.position_group
     """

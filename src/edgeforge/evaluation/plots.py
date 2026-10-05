@@ -88,3 +88,17 @@ def forest_plot(
     fig.tight_layout()
     fig.savefig(path, dpi=110)
     plt.close(fig)
+
+
+def hist_plot(values: Any, path: Path, title: str, xlabel: str, ref: float | None = None) -> None:
+    fig, ax = plt.subplots(figsize=(5.2, 3.4))
+    ax.hist(values, bins=40, edgecolor="white")
+    if ref is not None:
+        ax.axvline(ref, color="red", linewidth=1)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel("matches")
+    ax.set_title(title, fontsize=9)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fig.tight_layout()
+    fig.savefig(path, dpi=110)
+    plt.close(fig)

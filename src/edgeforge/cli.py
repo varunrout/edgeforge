@@ -195,3 +195,15 @@ def pillar_a_run() -> None:
     from edgeforge.evaluation.pillar_a import run_pillar_a
 
     typer.echo(str(run_pillar_a()))
+
+
+phase4_app = typer.Typer(help="Phase 4: participation and player models.", no_args_is_help=True)
+app.add_typer(phase4_app, name="phase4")
+
+
+@phase4_app.command("run")
+def phase4_run() -> None:
+    """Starter, minutes, team-shot and player-market models with evaluation and figures."""
+    from edgeforge.evaluation.phase4_run import run_phase4
+
+    typer.echo(str(run_phase4()))

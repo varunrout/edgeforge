@@ -130,6 +130,7 @@ def walk_forward(
     prior: PromotedPrior | None = None,
     kappa: float = 0.0,
     params: list[dict[str, Any]] | None = None,
+    fit_rho: bool = True,
 ) -> pd.DataFrame:
     """Weekly-refit Dixon-Coles predictions for every match in `ev` (needs model_cutoff, season)."""
     xi = xi_of(half_life)
@@ -175,6 +176,7 @@ def walk_forward(
             xi,
             prior_mean=pm,
             prior_strength=kappa,
+            fit_rho=fit_rho,
         )
         lam_h, lam_a = m.lambdas(g["home"], g["away"])
         rows.append(
