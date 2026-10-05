@@ -1,10 +1,10 @@
 {
  "provenance": {
-  "git_sha": "1095de4e68a10e96176c0877838933c9c7305795",
-  "data_version": "bb8a6be5d1deece1",
+  "git_sha": "380e13c0c9e922c8f78319b77aff7b4996ef3d5d",
+  "data_version": "137781cbbd858114",
   "command": "edgeforge validate",
   "config_hash": "39f96c7271994bec",
-  "created_at": "2026-10-04T08:42:59Z",
+  "created_at": "2026-10-05T06:45:12Z",
   "seed": 20261004
  },
  "gate1_pass": true,
@@ -1617,280 +1617,280 @@
      {
       "sb_match_id": 3825739,
       "team": "Real Madrid",
-      "player_name": "Gareth Frank Bale",
+      "player_id": 6399,
       "minutes": 44.5666666667,
       "minutes_positions": 91.6
      },
      {
       "sb_match_id": 3825707,
       "team": "Las Palmas",
-      "player_name": "Willian Jos\u00e9 da Silva",
+      "player_id": 6721,
       "minutes": 33.45,
       "minutes_positions": 91.55
      },
      {
       "sb_match_id": 3825699,
       "team": "Real Betis",
-      "player_name": "Francisco Jos\u00e9 Molinero Calder\u00f3n",
+      "player_id": 6865,
       "minutes": 82.75,
       "minutes_positions": 93.3166666667
      },
      {
       "sb_match_id": 3825684,
       "team": "Villarreal",
-      "player_name": "Jaume Vicent Costa Jord\u00e1",
+      "player_id": 6828,
       "minutes": 46.1166666667,
       "minutes_positions": 96.1166666667
      },
      {
       "sb_match_id": 3825667,
       "team": "Villarreal",
-      "player_name": "Eric Bertrand Bailly",
+      "player_id": 3324,
       "minutes": 32.6833333333,
       "minutes_positions": 96.7
      },
      {
       "sb_match_id": 3825901,
       "team": "Valencia",
-      "player_name": "Aymen Abdennour",
+      "player_id": 4406,
       "minutes": 44.0166666667,
       "minutes_positions": 92.1166666667
      },
      {
       "sb_match_id": 3825729,
       "team": "Sporting Gij\u00f3n",
-      "player_name": "Bernardo Jos\u00e9 Espinosa Z\u00fa\u00f1iga",
+      "player_id": 6573,
       "minutes": 37.2833333333,
       "minutes_positions": 92.5666666667
      },
      {
       "sb_match_id": 3825565,
       "team": "Espanyol",
-      "player_name": "\u00c1lvaro Gonz\u00e1lez Sober\u00f3n",
+      "player_id": 6762,
       "minutes": 76.45,
       "minutes_positions": 93.6833333333
      },
      {
       "sb_match_id": 3901259,
       "team": "Troyes",
-      "player_name": "Matthieu Saunier",
+      "player_id": 13730,
       "minutes": 75.95,
       "minutes_positions": 94.55
      },
      {
       "sb_match_id": 3901165,
       "team": "Bordeaux",
-      "player_name": "Fr\u00e9d\u00e9ric Guilbert",
+      "player_id": 2946,
       "minutes": 94.3166666667,
       "minutes_positions": 95.15
      },
      {
       "sb_match_id": 3901163,
       "team": "Troyes",
-      "player_name": "Mouhamadou Dabo",
+      "player_id": 26752,
       "minutes": 47.3666666667,
       "minutes_positions": 92.2
      },
      {
       "sb_match_id": 3901155,
       "team": "Lille",
-      "player_name": "Sofiane Boufal",
+      "player_id": 3625,
       "minutes": 81.8333333333,
       "minutes_positions": 96.2
      },
      {
       "sb_match_id": 3901151,
       "team": "Lille",
-      "player_name": "Florent Balmont",
+      "player_id": 3211,
       "minutes": 31.9166666667,
       "minutes_positions": 40.5666666667
      },
      {
       "sb_match_id": 3900628,
       "team": "Lille",
-      "player_name": "\u00c9derzito Ant\u00f3nio Macedo Lopes",
+      "player_id": 15996,
       "minutes": 46.95,
       "minutes_positions": 97.9833333333
      },
      {
       "sb_match_id": 3900588,
       "team": "AS Monaco",
-      "player_name": "J\u00e9r\u00e9my Toulalan",
+      "player_id": 3406,
       "minutes": 68.4,
       "minutes_positions": 93.5166666667
      },
      {
       "sb_match_id": 3900539,
       "team": "Rennes",
-      "player_name": "Edson Andr\u00e9 Sitoe",
+      "player_id": 3250,
       "minutes": 62.25,
       "minutes_positions": 93.4833333333
      },
      {
       "sb_match_id": 3900529,
       "team": "Saint-\u00c9tienne",
-      "player_name": "Rona\u00ebl Pierre-Gabriel",
+      "player_id": 4258,
       "minutes": 61.9,
       "minutes_positions": 97.7166666667
      },
      {
       "sb_match_id": 3900519,
       "team": "Rennes",
-      "player_name": "Benjamin Andr\u00e9",
+      "player_id": 2990,
       "minutes": 48.3333333333,
       "minutes_positions": 103.4833333333
      },
      {
       "sb_match_id": 3829420,
       "team": "Bordeaux",
-      "player_name": "Gr\u00e9gory Sertic",
+      "player_id": 3544,
       "minutes": 22.8333333333,
       "minutes_positions": 95.85
      },
      {
       "sb_match_id": 3754217,
       "team": "Arsenal",
-      "player_name": "Francis Joseph Coquelin",
+      "player_id": 3437,
       "minutes": 48.25,
       "minutes_positions": 99.85
      },
      {
       "sb_match_id": 3754339,
       "team": "Stoke City",
-      "player_name": "Xherdan Shaqiri",
+      "player_id": 3533,
       "minutes": 52.25,
       "minutes_positions": 103.5833333333
      },
      {
       "sb_match_id": 3754023,
       "team": "AFC Bournemouth",
-      "player_name": "Tyrone Mings",
+      "player_id": 3323,
       "minutes": 11.25,
       "minutes_positions": 11.2166666667
      },
      {
       "sb_match_id": 3754099,
       "team": "West Bromwich Albion",
-      "player_name": "Saido Berahino",
+      "player_id": 4630,
       "minutes": 47.2166666667,
       "minutes_positions": 96.2666666667
      },
      {
       "sb_match_id": 3754148,
       "team": "Tottenham Hotspur",
-      "player_name": "Ryan Mason",
+      "player_id": 40127,
       "minutes": 85.1,
       "minutes_positions": 95.5833333333
      },
      {
       "sb_match_id": 3754336,
       "team": "Everton",
-      "player_name": "S\u00e9amus Coleman",
+      "player_id": 4589,
       "minutes": 77.7166666667,
       "minutes_positions": 95.35
      },
      {
       "sb_match_id": 3754274,
       "team": "Stoke City",
-      "player_name": "Marc Muniesa Mart\u00ednez",
+      "player_id": 6560,
       "minutes": 47.0833333333,
       "minutes_positions": 98.1666666667
      },
      {
       "sb_match_id": 3879863,
       "team": "Udinese",
-      "player_name": "Molla Wagu\u00e9",
+      "player_id": 3577,
       "minutes": 17.0833333333,
       "minutes_positions": 93.5166666667
      },
      {
       "sb_match_id": 3879772,
       "team": "Torino",
-      "player_name": "Giuseppe Vives",
+      "player_id": 40430,
       "minutes": 86.4166666667,
       "minutes_positions": 94.3833333333
      },
      {
       "sb_match_id": 3879622,
       "team": "Carpi",
-      "player_name": "Lorenzo Pasciuti",
+      "player_id": 387472,
       "minutes": 47.05,
       "minutes_positions": 98.7333333333
      },
      {
       "sb_match_id": 3878610,
       "team": "Hellas Verona",
-      "player_name": "Rafael M\u00e1rquez \u00c1lvarez",
+      "player_id": 5558,
       "minutes": 72.15,
       "minutes_positions": 100.15
      },
      {
       "sb_match_id": 3879874,
       "team": "Fiorentina",
-      "player_name": "Marcos Alonso Mendoza",
+      "player_id": 3964,
       "minutes": 26.3,
       "minutes_positions": 92.85
      },
      {
       "sb_match_id": 3879831,
       "team": "Sassuolo",
-      "player_name": "Gregoire Defrel",
+      "player_id": 7457,
       "minutes": 27.85,
       "minutes_positions": 93.8833333333
      },
      {
       "sb_match_id": 3879796,
       "team": "Genoa",
-      "player_name": "Alessio Cerci",
+      "player_id": 7702,
       "minutes": 26.9,
       "minutes_positions": 33.05
      },
      {
       "sb_match_id": 3879731,
       "team": "Carpi",
-      "player_name": "Lorenzo Pasciuti",
+      "player_id": 387472,
       "minutes": 10.4333333333,
       "minutes_positions": 94.1
      },
      {
       "sb_match_id": 3879690,
       "team": "Fiorentina",
-      "player_name": "Marcos Alonso Mendoza",
+      "player_id": 3964,
       "minutes": 73.5166666667,
       "minutes_positions": 94.0
      },
      {
       "sb_match_id": 3879639,
       "team": "AS Roma",
-      "player_name": "Gervais Lombe Yao Kouassi",
+      "player_id": 15818,
       "minutes": 23.5166666667,
       "minutes_positions": 94.7
      },
      {
       "sb_match_id": 3879637,
       "team": "Lazio",
-      "player_name": "Sergej Milinkovi\u0107-Savi\u0107",
+      "player_id": 5589,
       "minutes": 71.1666666667,
       "minutes_positions": 67.65
      },
      {
       "sb_match_id": 3879549,
       "team": "AC Milan",
-      "player_name": "Rodrigo Ely",
+      "player_id": 6636,
       "minutes": 52.15,
       "minutes_positions": 50.6
      },
      {
       "sb_match_id": 3879547,
       "team": "AS Roma",
-      "player_name": "Francesco Totti",
+      "player_id": 15780,
       "minutes": 6.75,
       "minutes_positions": 44.0666666667
      },
      {
       "sb_match_id": 3879541,
       "team": "Bologna",
-      "player_name": "Amadou Diawara",
+      "player_id": 8284,
       "minutes": 94.4833333333,
       "minutes_positions": 93.8666666667
      }
@@ -1899,154 +1899,154 @@
      {
       "sb_match_id": 3825596,
       "team": "Sporting Gij\u00f3n",
-      "player_name": "Luis Hern\u00e1ndez Rodr\u00edguez",
+      "player_id": 6561,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3825596,
       "team": "Sporting Gij\u00f3n",
-      "player_name": "Bernardo Jos\u00e9 Espinosa Z\u00fa\u00f1iga",
+      "player_id": 6573,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3825596,
       "team": "Sporting Gij\u00f3n",
-      "player_name": "Miguel \u00c1ngel Guerrero Mart\u00edn",
+      "player_id": 6602,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3825596,
       "team": "Sporting Gij\u00f3n",
-      "player_name": "Arnaldo Antonio Sanabria Ayala",
+      "player_id": 6880,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3825596,
       "team": "Sporting Gij\u00f3n",
-      "player_name": "Alen Halilovi\u0107",
+      "player_id": 6926,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3825596,
       "team": "Sporting Gij\u00f3n",
-      "player_name": "Alberto Garc\u00eda Cabrera",
+      "player_id": 11537,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3825596,
       "team": "Sporting Gij\u00f3n",
-      "player_name": "Sergio \u00c1lvarez D\u00edaz",
+      "player_id": 13107,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3825596,
       "team": "Sporting Gij\u00f3n",
-      "player_name": "Ignacio Cases Mora",
+      "player_id": 18925,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3825596,
       "team": "Sporting Gij\u00f3n",
-      "player_name": "Alejandro Men\u00e9ndez D\u00edez",
+      "player_id": 23994,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3825596,
       "team": "Sporting Gij\u00f3n",
-      "player_name": "Roberto Canella Su\u00e1rez",
+      "player_id": 24686,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3825596,
       "team": "Sporting Gij\u00f3n",
-      "player_name": "Alberto Lora Ramos",
+      "player_id": 26633,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3754047,
       "team": "Swansea City",
-      "player_name": "\u0141ukasz Fabia\u0144ski",
+      "player_id": 3262,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3754047,
       "team": "Swansea City",
-      "player_name": "Kyle Naughton",
+      "player_id": 3340,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3754047,
       "team": "Swansea City",
-      "player_name": "Andr\u00e9 Ayew Pel\u00e9",
+      "player_id": 3347,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3754047,
       "team": "Swansea City",
-      "player_name": "Wayne Routledge",
+      "player_id": 3449,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3754047,
       "team": "Swansea City",
-      "player_name": "Sung-Yeung Ki",
+      "player_id": 3605,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3754047,
       "team": "Swansea City",
-      "player_name": "Ashley Williams",
+      "player_id": 3644,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3754047,
       "team": "Swansea City",
-      "player_name": "Gylfi \u00de\u00f3r Sigur\u00f0sson",
+      "player_id": 3944,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3754047,
       "team": "Swansea City",
-      "player_name": "Leon Britton",
+      "player_id": 4631,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3754047,
       "team": "Swansea City",
-      "player_name": "Kyle Bartley",
+      "player_id": 4726,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3754047,
       "team": "Swansea City",
-      "player_name": "Neil Taylor",
+      "player_id": 9627,
       "started": true,
       "started_lineup": false
      },
      {
       "sb_match_id": 3754047,
       "team": "Swansea City",
-      "player_name": "\u00c9derzito Ant\u00f3nio Macedo Lopes",
+      "player_id": 15996,
       "started": true,
       "started_lineup": false
      }
@@ -2328,7 +2328,7 @@
       "snapshot": "early",
       "versus": "Avg",
       "n": 11597,
-      "mean_abs_diff": 0.004426610975731939,
+      "mean_abs_diff": 0.00442661097573194,
       "p95_abs_diff": 0.009882241552754556,
       "max_abs_diff": 0.2556022408963585,
       "share_over_0_10": 0.0031904802966284383

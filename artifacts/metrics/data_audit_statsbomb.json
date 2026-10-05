@@ -1,10 +1,10 @@
 {
  "provenance": {
-  "git_sha": "1095de4e68a10e96176c0877838933c9c7305795",
+  "git_sha": "380e13c0c9e922c8f78319b77aff7b4996ef3d5d",
   "data_version": "d4172f0fb0213f64",
   "command": "edgeforge data audit-statsbomb",
   "config_hash": "39f96c7271994bec",
-  "created_at": "2026-10-04T08:36:17Z",
+  "created_at": "2026-10-05T06:42:27Z",
   "seed": 20261004
  },
  "scope": [
@@ -344,7 +344,7 @@
     {
      "type": "Own Goal For",
      "team": "Manchester United",
-     "player": null,
+     "player_id": null,
      "period": 1,
      "minute": 21,
      "second": 36
@@ -352,7 +352,7 @@
     {
      "type": "Own Goal Against",
      "team": "Tottenham Hotspur",
-     "player": "Kyle Walker",
+     "player_id": 3205,
      "period": 1,
      "minute": 21,
      "second": 36
@@ -363,7 +363,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Tottenham Hotspur",
-     "player": "Jan Vertonghen",
+     "player_id": 3077,
      "period": 1,
      "minute": 26,
      "second": 32
@@ -372,7 +372,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Manchester United",
-     "player": "Bastian Schweinsteiger",
+     "player_id": 18414,
      "period": 2,
      "minute": 68,
      "second": 23
@@ -381,7 +381,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Tottenham Hotspur",
-     "player": "Eric Dier",
+     "player_id": 10956,
      "period": 2,
      "minute": 75,
      "second": 7
@@ -390,7 +390,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Manchester United",
-     "player": "Juan Manuel Mata García",
+     "player_id": 3294,
      "period": 2,
      "minute": 89,
      "second": 44
@@ -399,7 +399,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Tottenham Hotspur",
-     "player": "Bamidele Alli",
+     "player_id": 3094,
      "period": 2,
      "minute": 90,
      "second": 24
@@ -408,8 +408,8 @@
    "substitutions": [
     {
      "team": "Tottenham Hotspur",
-     "off": "Nabil Bentaleb",
-     "on": "Ryan Mason",
+     "off_player_id": 8520,
+     "on_player_id": 40127,
      "period": 2,
      "minute": 52,
      "second": 45,
@@ -417,8 +417,8 @@
     },
     {
      "team": "Manchester United",
-     "off": "Michael Carrick",
-     "on": "Bastian Schweinsteiger",
+     "off_player_id": 4751,
+     "on_player_id": 18414,
      "period": 2,
      "minute": 59,
      "second": 44,
@@ -426,8 +426,8 @@
     },
     {
      "team": "Manchester United",
-     "off": "Memphis Depay",
-     "on": "Ander Herrera Agüera",
+     "off_player_id": 2988,
+     "on_player_id": 3606,
      "period": 2,
      "minute": 67,
      "second": 54,
@@ -435,8 +435,8 @@
     },
     {
      "team": "Tottenham Hotspur",
-     "off": "Mousa Sidi Yaya Dembélé",
-     "on": "Erik Lamela",
+     "off_player_id": 3037,
+     "on_player_id": 3585,
      "period": 2,
      "minute": 67,
      "second": 58,
@@ -444,8 +444,8 @@
     },
     {
      "team": "Tottenham Hotspur",
-     "off": "Eric Dier",
-     "on": "Bamidele Alli",
+     "off_player_id": 10956,
+     "on_player_id": 3094,
      "period": 2,
      "minute": 76,
      "second": 34,
@@ -453,8 +453,8 @@
     },
     {
      "team": "Manchester United",
-     "off": "Matteo Darmian",
-     "on": "Luis Antonio Valencia Mosquera",
+     "off_player_id": 4587,
+     "on_player_id": 3267,
      "period": 2,
      "minute": 80,
      "second": 2,
@@ -630,7 +630,7 @@
    "goal_shots": [
     {
      "team": "Crystal Palace",
-     "player": "Wilfried Zaha",
+     "player_id": 3507,
      "period": 1,
      "minute": 37,
      "second": 58,
@@ -639,7 +639,7 @@
     },
     {
      "team": "Crystal Palace",
-     "player": "Damien Delaney",
+     "player_id": 3693,
      "period": 2,
      "minute": 48,
      "second": 57,
@@ -648,7 +648,7 @@
     },
     {
      "team": "Norwich City",
-     "player": "Nathan Redmond",
+     "player_id": 3286,
      "period": 2,
      "minute": 68,
      "second": 8,
@@ -657,7 +657,7 @@
     },
     {
      "team": "Crystal Palace",
-     "player": "Yohan Cabaye",
+     "player_id": 3277,
      "period": 2,
      "minute": 93,
      "second": 37,
@@ -671,7 +671,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Norwich City",
-     "player": "Alexander Banor Tettey",
+     "player_id": 9463,
      "period": 1,
      "minute": 22,
      "second": 24
@@ -680,8 +680,8 @@
    "substitutions": [
     {
      "team": "Norwich City",
-     "off": "Lewis Grabban",
-     "on": "Cameron Jerome",
+     "off_player_id": 9593,
+     "on_player_id": 4807,
      "period": 2,
      "minute": 53,
      "second": 7,
@@ -689,8 +689,8 @@
     },
     {
      "team": "Norwich City",
-     "off": "Alexander Banor Tettey",
-     "on": "Nathan Redmond",
+     "off_player_id": 9463,
+     "on_player_id": 3286,
      "period": 2,
      "minute": 53,
      "second": 9,
@@ -698,8 +698,8 @@
     },
     {
      "team": "Crystal Palace",
-     "off": "Wilfried Zaha",
-     "on": "Yannick Bolasie Yala",
+     "off_player_id": 3507,
+     "on_player_id": 3589,
      "period": 2,
      "minute": 71,
      "second": 30,
@@ -707,8 +707,8 @@
     },
     {
      "team": "Crystal Palace",
-     "off": "Jordon Mutch",
-     "on": "Mile Jedinak",
+     "off_player_id": 15892,
+     "on_player_id": 5489,
      "period": 2,
      "minute": 72,
      "second": 0,
@@ -716,8 +716,8 @@
     },
     {
      "team": "Norwich City",
-     "off": "Graham Dorrans",
-     "on": "Gary Hooper",
+     "off_player_id": 16334,
+     "on_player_id": 24743,
      "period": 2,
      "minute": 79,
      "second": 20,
@@ -725,8 +725,8 @@
     },
     {
      "team": "Crystal Palace",
-     "off": "Glenn Murray",
-     "on": "Connor Wickham",
+     "off_player_id": 3085,
+     "on_player_id": 20641,
      "period": 2,
      "minute": 81,
      "second": 49,
@@ -736,13 +736,13 @@
    "player_off_on_events": [
     {
      "type": "Player Off",
-     "player": "Damien Delaney",
+     "player_id": 3693,
      "period": 2,
      "clock": "64:02"
     },
     {
      "type": "Player On",
-     "player": "Damien Delaney",
+     "player_id": 3693,
      "period": 2,
      "clock": "64:20"
     }
@@ -920,7 +920,7 @@
    "goal_shots": [
     {
      "team": "Chelsea",
-     "player": "Kurt Happy Zouma",
+     "player_id": 3456,
      "period": 2,
      "minute": 52,
      "second": 11,
@@ -932,7 +932,7 @@
     {
      "type": "Own Goal For",
      "team": "Chelsea",
-     "player": null,
+     "player_id": null,
      "period": 2,
      "minute": 90,
      "second": 5
@@ -940,7 +940,7 @@
     {
      "type": "Own Goal Against",
      "team": "Arsenal",
-     "player": "Calum Chambers",
+     "player_id": 3713,
      "period": 2,
      "minute": 90,
      "second": 5
@@ -951,7 +951,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Arsenal",
-     "player": "Santiago Cazorla González",
+     "player_id": 11386,
      "period": 1,
      "minute": 30,
      "second": 50
@@ -960,7 +960,7 @@
      "source_event": "Bad Behaviour",
      "card": "Yellow Card",
      "team": "Arsenal",
-     "player": "Gabriel Armando de Abreu",
+     "player_id": 6746,
      "period": 1,
      "minute": 44,
      "second": 54
@@ -969,7 +969,7 @@
      "source_event": "Bad Behaviour",
      "card": "Yellow Card",
      "team": "Chelsea",
-     "player": "Diego da Silva Costa",
+     "player_id": 5198,
      "period": 1,
      "minute": 44,
      "second": 54
@@ -978,7 +978,7 @@
      "source_event": "Bad Behaviour",
      "card": "Red Card",
      "team": "Arsenal",
-     "player": "Gabriel Armando de Abreu",
+     "player_id": 6746,
      "period": 1,
      "minute": 45,
      "second": 44
@@ -987,7 +987,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Chelsea",
-     "player": "Branislav Ivanović",
+     "player_id": 5594,
      "period": 2,
      "minute": 48,
      "second": 9
@@ -996,7 +996,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Chelsea",
-     "player": "Oscar dos Santos Emboaba Júnior",
+     "player_id": 40122,
      "period": 2,
      "minute": 62,
      "second": 53
@@ -1005,7 +1005,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Arsenal",
-     "player": "Calum Chambers",
+     "player_id": 3713,
      "period": 2,
      "minute": 70,
      "second": 54
@@ -1014,7 +1014,7 @@
      "source_event": "Foul Committed",
      "card": "Second Yellow",
      "team": "Arsenal",
-     "player": "Santiago Cazorla González",
+     "player_id": 11386,
      "period": 2,
      "minute": 78,
      "second": 23
@@ -1023,8 +1023,8 @@
    "substitutions": [
     {
      "team": "Arsenal",
-     "off": "Francis Joseph Coquelin",
-     "on": "Calum Chambers",
+     "off_player_id": 3437,
+     "on_player_id": 3713,
      "period": 2,
      "minute": 45,
      "second": 0,
@@ -1032,8 +1032,8 @@
     },
     {
      "team": "Chelsea",
-     "off": "Oscar dos Santos Emboaba Júnior",
-     "on": "Ramires Santos do Nascimento",
+     "off_player_id": 40122,
+     "on_player_id": 28100,
      "period": 2,
      "minute": 68,
      "second": 38,
@@ -1041,8 +1041,8 @@
     },
     {
      "team": "Arsenal",
-     "off": "Alexis Alejandro Sánchez Sánchez",
-     "on": "Alex Oxlade-Chamberlain",
+     "off_player_id": 3385,
+     "on_player_id": 3525,
      "period": 2,
      "minute": 74,
      "second": 32,
@@ -1050,8 +1050,8 @@
     },
     {
      "team": "Arsenal",
-     "off": "Mesut Özil",
-     "on": "Olivier Giroud",
+     "off_player_id": 3496,
+     "on_player_id": 3604,
      "period": 2,
      "minute": 74,
      "second": 33,
@@ -1059,8 +1059,8 @@
     },
     {
      "team": "Chelsea",
-     "off": "Diego da Silva Costa",
-     "on": "Loïc Rémy",
+     "off_player_id": 5198,
+     "on_player_id": 6623,
      "period": 2,
      "minute": 81,
      "second": 31,
@@ -1068,8 +1068,8 @@
     },
     {
      "team": "Chelsea",
-     "off": "Francesc Fàbregas i Soler",
-     "on": "John Michael Nchekwube Obinna",
+     "off_player_id": 3478,
+     "on_player_id": 5475,
      "period": 2,
      "minute": 91,
      "second": 5,
@@ -1079,13 +1079,13 @@
    "player_off_on_events": [
     {
      "type": "Player Off",
-     "player": "Francis Joseph Coquelin",
+     "player_id": 3437,
      "period": 1,
      "clock": "21:41"
     },
     {
      "type": "Player On",
-     "player": "Francis Joseph Coquelin",
+     "player_id": 3437,
      "period": 1,
      "clock": "22:04"
     }
@@ -1124,7 +1124,7 @@
    "dismissals": [
     {
      "team": "Arsenal",
-     "player": "Gabriel Armando de Abreu",
+     "player_id": 6746,
      "card_type": "Red Card",
      "card_clock": "45:44",
      "card_period": 1,
@@ -1138,7 +1138,7 @@
     },
     {
      "team": "Arsenal",
-     "player": "Santiago Cazorla González",
+     "player_id": 11386,
      "card_type": "Second Yellow",
      "card_clock": "78:23",
      "card_period": 2,
@@ -1305,7 +1305,7 @@
    "goal_shots": [
     {
      "team": "Leicester City",
-     "player": "Jamie Vardy",
+     "player_id": 10960,
      "period": 1,
      "minute": 10,
      "second": 17,
@@ -1314,7 +1314,7 @@
     },
     {
      "team": "Leicester City",
-     "player": "Riyad Mahrez",
+     "player_id": 3814,
      "period": 1,
      "minute": 17,
      "second": 42,
@@ -1323,7 +1323,7 @@
     },
     {
      "team": "Leicester City",
-     "player": "Riyad Mahrez",
+     "player_id": 3814,
      "period": 1,
      "minute": 24,
      "second": 29,
@@ -1332,7 +1332,7 @@
     },
     {
      "team": "Sunderland",
-     "player": "Jermain Defoe",
+     "player_id": 3337,
      "period": 2,
      "minute": 59,
      "second": 57,
@@ -1341,7 +1341,7 @@
     },
     {
      "team": "Leicester City",
-     "player": "Marc Albrighton",
+     "player_id": 3307,
      "period": 2,
      "minute": 65,
      "second": 25,
@@ -1350,7 +1350,7 @@
     },
     {
      "team": "Sunderland",
-     "player": "Steven Fletcher",
+     "player_id": 9554,
      "period": 2,
      "minute": 70,
      "second": 18,
@@ -1364,7 +1364,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Sunderland",
-     "player": "Jack Rodwell",
+     "player_id": 18751,
      "period": 1,
      "minute": 15,
      "second": 49
@@ -1373,7 +1373,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Sunderland",
-     "player": "Billy Jones",
+     "player_id": 10503,
      "period": 1,
      "minute": 41,
      "second": 13
@@ -1382,7 +1382,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Leicester City",
-     "player": "Jamie Vardy",
+     "player_id": 10960,
      "period": 2,
      "minute": 48,
      "second": 7
@@ -1391,7 +1391,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Sunderland",
-     "player": "Younes Kaboul",
+     "player_id": 4746,
      "period": 2,
      "minute": 72,
      "second": 47
@@ -1400,7 +1400,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Sunderland",
-     "player": "Sebastián Coates Nión",
+     "player_id": 6300,
      "period": 2,
      "minute": 84,
      "second": 15
@@ -1409,7 +1409,7 @@
      "source_event": "Bad Behaviour",
      "card": "Yellow Card",
      "team": "Leicester City",
-     "player": "Jeffrey Schlupp",
+     "player_id": 3520,
      "period": 2,
      "minute": 90,
      "second": 34
@@ -1418,8 +1418,8 @@
    "substitutions": [
     {
      "team": "Sunderland",
-     "off": "Lee Cattermole",
-     "on": "Steven Fletcher",
+     "off_player_id": 10783,
+     "on_player_id": 9554,
      "period": 1,
      "minute": 29,
      "second": 18,
@@ -1427,8 +1427,8 @@
     },
     {
      "team": "Sunderland",
-     "off": "Billy Jones",
-     "on": "Adam Matthews",
+     "off_player_id": 10503,
+     "on_player_id": 10770,
      "period": 2,
      "minute": 53,
      "second": 11,
@@ -1436,8 +1436,8 @@
     },
     {
      "team": "Leicester City",
-     "off": "Ritchie De Laet",
-     "on": "Yohan Benalouane",
+     "off_player_id": 28782,
+     "on_player_id": 4826,
      "period": 2,
      "minute": 74,
      "second": 33,
@@ -1445,8 +1445,8 @@
     },
     {
      "team": "Leicester City",
-     "off": "Riyad Mahrez",
-     "on": "Christian Fuchs",
+     "off_player_id": 3814,
+     "on_player_id": 3812,
      "period": 2,
      "minute": 76,
      "second": 34,
@@ -1454,8 +1454,8 @@
     },
     {
      "team": "Leicester City",
-     "off": "Jamie Vardy",
-     "on": "N''Golo Kanté",
+     "off_player_id": 10960,
+     "on_player_id": 3961,
      "period": 2,
      "minute": 81,
      "second": 20,
@@ -1628,7 +1628,7 @@
    "goal_shots": [
     {
      "team": "Watford",
-     "player": "Miguel Arturo Layún Prado",
+     "player_id": 5556,
      "period": 1,
      "minute": 12,
      "second": 58,
@@ -1637,7 +1637,7 @@
     },
     {
      "team": "Everton",
-     "player": "Ross Barkley",
+     "player_id": 4275,
      "period": 2,
      "minute": 75,
      "second": 12,
@@ -1646,7 +1646,7 @@
     },
     {
      "team": "Watford",
-     "player": "Odion Jude Ighalo",
+     "player_id": 5458,
      "period": 2,
      "minute": 82,
      "second": 40,
@@ -1655,7 +1655,7 @@
     },
     {
      "team": "Everton",
-     "player": "Arouna Koné",
+     "player_id": 26696,
      "period": 2,
      "minute": 85,
      "second": 41,
@@ -1669,7 +1669,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Watford",
-     "player": "Troy Deeney",
+     "player_id": 3454,
      "period": 1,
      "minute": 41,
      "second": 37
@@ -1678,7 +1678,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Everton",
-     "player": "Séamus Coleman",
+     "player_id": 4589,
      "period": 2,
      "minute": 53,
      "second": 23
@@ -1687,7 +1687,7 @@
      "source_event": "Bad Behaviour",
      "card": "Yellow Card",
      "team": "Watford",
-     "player": "José Holebas",
+     "player_id": 3725,
      "period": 2,
      "minute": 65,
      "second": 18
@@ -1696,8 +1696,8 @@
    "substitutions": [
     {
      "team": "Watford",
-     "off": "Miguel Arturo Layún Prado",
-     "on": "Juan Carlos Paredes Reasco",
+     "off_player_id": 5556,
+     "on_player_id": 36983,
      "period": 2,
      "minute": 58,
      "second": 50,
@@ -1705,8 +1705,8 @@
     },
     {
      "team": "Everton",
-     "off": "Brendan Joel Zibusiso Galloway",
-     "on": "Arouna Koné",
+     "off_player_id": 30702,
+     "on_player_id": 26696,
      "period": 2,
      "minute": 62,
      "second": 0,
@@ -1714,8 +1714,8 @@
     },
     {
      "team": "Watford",
-     "off": "José Manuel Jurado Marín",
-     "on": "Odion Jude Ighalo",
+     "off_player_id": 6870,
+     "on_player_id": 5458,
      "period": 2,
      "minute": 73,
      "second": 15,
@@ -1723,8 +1723,8 @@
     },
     {
      "team": "Everton",
-     "off": "Kevin Mirallas",
-     "on": "Bryan Oviedo",
+     "off_player_id": 4317,
+     "on_player_id": 5836,
      "period": 2,
      "minute": 76,
      "second": 1,
@@ -1732,8 +1732,8 @@
     },
     {
      "team": "Watford",
-     "off": "Valon Behrami",
-     "on": "Ben Watson",
+     "off_player_id": 5540,
+     "on_player_id": 3626,
      "period": 2,
      "minute": 78,
      "second": 30,
@@ -1741,8 +1741,8 @@
     },
     {
      "team": "Everton",
-     "off": "Romelu Lukaku Menama",
-     "on": "Steven Naismith",
+     "off_player_id": 3289,
+     "on_player_id": 9528,
      "period": 2,
      "minute": 90,
      "second": 11,
@@ -1930,7 +1930,7 @@
    "goal_shots": [
     {
      "team": "Las Palmas",
-     "player": "Jonathan Viera Ramos",
+     "player_id": 10755,
      "period": 1,
      "minute": 27,
      "second": 39,
@@ -1939,7 +1939,7 @@
     },
     {
      "team": "Las Palmas",
-     "player": "Sergio Ezequiel Araújo",
+     "player_id": 8167,
      "period": 2,
      "minute": 50,
      "second": 22,
@@ -1953,7 +1953,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Las Palmas",
-     "player": "Pedro Bigas Rigo",
+     "player_id": 7907,
      "period": 1,
      "minute": 7,
      "second": 32
@@ -1962,7 +1962,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Real Sociedad",
-     "player": "Asier Illarramendi Andonegi",
+     "player_id": 6671,
      "period": 1,
      "minute": 35,
      "second": 1
@@ -1971,7 +1971,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Real Sociedad",
-     "player": "Carlos Alberto Vela Garrido",
+     "player_id": 5560,
      "period": 1,
      "minute": 38,
      "second": 8
@@ -1980,7 +1980,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Real Sociedad",
-     "player": "Íñigo Martínez Berridi",
+     "player_id": 6665,
      "period": 2,
      "minute": 67,
      "second": 55
@@ -1989,7 +1989,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Real Sociedad",
-     "player": "Yuri Berchiche Izeta",
+     "player_id": 3023,
      "period": 2,
      "minute": 84,
      "second": 10
@@ -1998,8 +1998,8 @@
    "substitutions": [
     {
      "team": "Real Sociedad",
-     "off": "Carlos Alberto Vela Garrido",
-     "on": "Armindo Tué Na Bangna",
+     "off_player_id": 5560,
+     "on_player_id": 8522,
      "period": 2,
      "minute": 45,
      "second": 0,
@@ -2007,8 +2007,8 @@
     },
     {
      "team": "Real Sociedad",
-     "off": "Gonzalo Castro Irizábal",
-     "on": "Sergio Canales Madrazo",
+     "off_player_id": 6740,
+     "on_player_id": 6673,
      "period": 2,
      "minute": 56,
      "second": 52,
@@ -2016,8 +2016,8 @@
     },
     {
      "team": "Las Palmas",
-     "off": "Jonathan Viera Ramos",
-     "on": "Jerónimo Figueroa Cabrera",
+     "off_player_id": 10755,
+     "on_player_id": 6934,
      "period": 2,
      "minute": 66,
      "second": 48,
@@ -2025,8 +2025,8 @@
     },
     {
      "team": "Real Sociedad",
-     "off": "Asier Illarramendi Andonegi",
-     "on": "Rubén Pardo Gutiérrez",
+     "off_player_id": 6671,
+     "on_player_id": 6899,
      "period": 2,
      "minute": 69,
      "second": 53,
@@ -2034,8 +2034,8 @@
     },
     {
      "team": "Las Palmas",
-     "off": "Sergio Ezequiel Araújo",
-     "on": "Willian José da Silva",
+     "off_player_id": 8167,
+     "on_player_id": 6721,
      "period": 2,
      "minute": 74,
      "second": 35,
@@ -2043,8 +2043,8 @@
     },
     {
      "team": "Las Palmas",
-     "off": "Nabil El Zhar",
-     "on": "Juan Carlos Valerón Santana",
+     "off_player_id": 6608,
+     "on_player_id": 15602,
      "period": 2,
      "minute": 83,
      "second": 20,
@@ -2054,13 +2054,13 @@
    "player_off_on_events": [
     {
      "type": "Player Off",
-     "player": "José Vicente Gómez Umpiérrez",
+     "player_id": 6929,
      "period": 1,
      "clock": "41:19"
     },
     {
      "type": "Player On",
-     "player": "José Vicente Gómez Umpiérrez",
+     "player_id": 6929,
      "period": 1,
      "clock": "41:59"
     }
@@ -2243,7 +2243,7 @@
    "goal_shots": [
     {
      "team": "Nantes",
-     "player": "Yacine Bammou",
+     "player_id": 3319,
      "period": 1,
      "minute": 22,
      "second": 30,
@@ -2252,7 +2252,7 @@
     },
     {
      "team": "Nantes",
-     "player": "Adrien Thomasson",
+     "player_id": 3375,
      "period": 2,
      "minute": 60,
      "second": 14,
@@ -2266,7 +2266,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Stade Malherbe Caen",
-     "player": "Dennis Appiah",
+     "player_id": 22111,
      "period": 1,
      "minute": 35,
      "second": 28
@@ -2275,7 +2275,7 @@
      "source_event": "Foul Committed",
      "card": "Yellow Card",
      "team": "Nantes",
-     "player": "Wilfried Moimbé",
+     "player_id": 4249,
      "period": 2,
      "minute": 72,
      "second": 35
@@ -2284,7 +2284,7 @@
      "source_event": "Bad Behaviour",
      "card": "Yellow Card",
      "team": "Nantes",
-     "player": "Rémy Riou",
+     "player_id": 25377,
      "period": 2,
      "minute": 82,
      "second": 19
@@ -2293,8 +2293,8 @@
    "substitutions": [
     {
      "team": "Nantes",
-     "off": "Valentin Rongier",
-     "on": "Lucas Deaux",
+     "off_player_id": 3365,
+     "on_player_id": 2943,
      "period": 2,
      "minute": 64,
      "second": 43,
@@ -2302,8 +2302,8 @@
     },
     {
      "team": "Stade Malherbe Caen",
-     "off": "Vincent Bessat",
-     "on": "Michaël Jordan Nkololo",
+     "off_player_id": 2992,
+     "on_player_id": 4539,
      "period": 2,
      "minute": 65,
      "second": 36,
@@ -2311,8 +2311,8 @@
     },
     {
      "team": "Stade Malherbe Caen",
-     "off": "Jeff Louis",
-     "on": "Saïdi Ntibazonkiza",
+     "off_player_id": 7726,
+     "on_player_id": 106683,
      "period": 2,
      "minute": 70,
      "second": 57,
@@ -2320,8 +2320,8 @@
     },
     {
      "team": "Stade Malherbe Caen",
-     "off": "Nicolas Seube",
-     "on": "Jordan Adéoti",
+     "off_player_id": 40698,
+     "on_player_id": 7344,
      "period": 2,
      "minute": 76,
      "second": 13,
@@ -2329,8 +2329,8 @@
     },
     {
      "team": "Nantes",
-     "off": "Johan Audel",
-     "on": "Ermir Lenjani",
+     "off_player_id": 401477,
+     "on_player_id": 10746,
      "period": 2,
      "minute": 76,
      "second": 58,
@@ -2338,8 +2338,8 @@
     },
     {
      "team": "Nantes",
-     "off": "Adrien Thomasson",
-     "on": "Jules Iloki",
+     "off_player_id": 3375,
+     "on_player_id": 3151,
      "period": 2,
      "minute": 86,
      "second": 56,
@@ -2349,25 +2349,25 @@
    "player_off_on_events": [
     {
      "type": "Player Off",
-     "player": "Damien Da Silva",
+     "player_id": 4386,
      "period": 1,
      "clock": "25:50"
     },
     {
      "type": "Player On",
-     "player": "Damien Da Silva",
+     "player_id": 4386,
      "period": 1,
      "clock": "26:18"
     },
     {
      "type": "Player Off",
-     "player": "Emiliano Sala",
+     "player_id": 3114,
      "period": 1,
      "clock": "35:22"
     },
     {
      "type": "Player On",
-     "player": "Emiliano Sala",
+     "player_id": 3114,
      "period": 1,
      "clock": "36:14"
     }
