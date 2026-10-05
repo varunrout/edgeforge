@@ -1,0 +1,120 @@
+{
+ "provenance": {
+  "git_sha": "811070b4b08bc7afc34e31d25dff3c69f36211cd",
+  "data_version": "ab7850c097da4492",
+  "command": "edgeforge phase5 run",
+  "config_hash": "39f96c7271994bec",
+  "created_at": "2026-10-05T12:10:35Z",
+  "seed": 20261004,
+  "phase4_cache_git_sha": "811070b4b08bc7afc34e31d25dff3c69f36211cd"
+ },
+ "n_sims": 20000,
+ "shots_given_goals": {
+  "a": -0.48571806580288246,
+  "b": 1.1470998359452258,
+  "c": -0.044337910214237004,
+  "d": 0.02106416328989671,
+  "alpha": 0.047340562229709816,
+  "pi_og": 0.03169734151329243
+ },
+ "states": {
+  "lineups": {
+   "n_matches": 758,
+   "seconds_total": 5863.717126500036,
+   "seconds_per_match": 7.735774573219045,
+   "invariant_violations_matches": {
+    "goal_accounting": 0,
+    "goals_le_sot_le_shots": 0,
+    "off_pitch_records": 0,
+    "team_shot_sum": 0
+   },
+   "invalid_sga_instances_rejected": 0,
+   "team_marginal_z": {
+    "home_win": {
+     "mean": 0.014220995932326494,
+     "sd": 0.9967489447425779,
+     "share_abs_gt_3": 0.0
+    },
+    "draw": {
+     "mean": 0.0091618044145468,
+     "sd": 1.0028078710548587,
+     "share_abs_gt_3": 0.0013192612137203166
+    },
+    "away_win": {
+     "mean": -0.017558292376883406,
+     "sd": 0.9470840821318562,
+     "share_abs_gt_3": 0.0
+    },
+    "btts": {
+     "mean": -0.010629952227701966,
+     "sd": 1.0117815333300662,
+     "share_abs_gt_3": 0.0013192612137203166
+    },
+    "over_2.5": {
+     "mean": 0.00443822261116516,
+     "sd": 1.0298769316142717,
+     "share_abs_gt_3": 0.005277044854881266
+    },
+    "over_1.5": {
+     "mean": 0.045042334106631034,
+     "sd": 0.9844993250707593,
+     "share_abs_gt_3": 0.0
+    }
+   },
+   "player_goals_over_dixon_coles": {
+    "home_mean": 0.9682837894682449,
+    "away_mean": 0.9680208269732575,
+    "phase4_standalone_reference": "see phase4_markets.json coherence (home 0.984, away 1.060 before D-043/D-044 reruns)"
+   }
+  },
+  "opening": {
+   "n_matches": 758,
+   "seconds_total": 523.9629610999837,
+   "seconds_per_match": 0.6912440120052555,
+   "invariant_violations_matches": {
+    "goal_accounting": 0,
+    "goals_le_sot_le_shots": 0,
+    "off_pitch_records": 0,
+    "team_shot_sum": 0
+   },
+   "invalid_sga_instances_rejected": 0,
+   "team_marginal_z": {
+    "home_win": {
+     "mean": -0.016378929487768833,
+     "sd": 0.9929341188016744,
+     "share_abs_gt_3": 0.006596306068601583
+    },
+    "draw": {
+     "mean": 0.02246259930937039,
+     "sd": 1.020959656766262,
+     "share_abs_gt_3": 0.0013192612137203166
+    },
+    "away_win": {
+     "mean": -0.0054795011517523645,
+     "sd": 0.9941029880346955,
+     "share_abs_gt_3": 0.0013192612137203166
+    },
+    "btts": {
+     "mean": 0.03383582344269968,
+     "sd": 0.9787240922475262,
+     "share_abs_gt_3": 0.002638522427440633
+    },
+    "over_2.5": {
+     "mean": 0.01992708043959342,
+     "sd": 0.9744499864234373,
+     "share_abs_gt_3": 0.00395778364116095
+    },
+    "over_1.5": {
+     "mean": 0.04525006416998341,
+     "sd": 1.0110822404780953,
+     "share_abs_gt_3": 0.00395778364116095
+    }
+   },
+   "player_goals_over_dixon_coles": {
+    "home_mean": 0.9684200612020868,
+    "away_mean": 0.9684323250186226,
+    "phase4_standalone_reference": "see phase4_markets.json coherence (home 0.984, away 1.060 before D-043/D-044 reruns)"
+   }
+  }
+ }
+}
