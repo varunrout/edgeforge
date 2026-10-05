@@ -1,0 +1,236 @@
+{
+ "provenance": {
+  "git_sha": "9de3d25a2adb4802c141983b161ae0cf4f4d411d",
+  "data_version": "137781cbbd858114",
+  "command": "edgeforge phase5 convergence",
+  "config_hash": "39f96c7271994bec",
+  "created_at": "2026-10-05T09:41:14Z",
+  "seed": 20261004
+ },
+ "shots_given_goals": {
+  "a": -0.48571806580288107,
+  "b": 1.1470998359452251,
+  "c": -0.044337910214236935,
+  "d": 0.02106416328989667,
+  "alpha": 0.047340562216058084,
+  "pi_og": 0.03169734151329243
+ },
+ "reference_n_sims": 200000,
+ "n_matches": 8,
+ "summary": {
+  "team_home_win": [
+   {
+    "n_sims": 500,
+    "mean_p": 0.5625,
+    "mean_mc_se": 0.020375566472577974,
+    "mean_relative_se": 0.04244418041347521,
+    "mean_abs_error_vs_reference": 0.02068
+   },
+   {
+    "n_sims": 1000,
+    "mean_p": 0.5586249999999999,
+    "mean_mc_se": 0.01448415070495307,
+    "mean_relative_se": 0.030262219537301464,
+    "mean_abs_error_vs_reference": 0.012284999999999987
+   },
+   {
+    "n_sims": 2000,
+    "mean_p": 0.55175,
+    "mean_mc_se": 0.010292228550983648,
+    "mean_relative_se": 0.021661539255968917,
+    "mean_abs_error_vs_reference": 0.008594999999999995
+   },
+   {
+    "n_sims": 5000,
+    "mean_p": 0.5528,
+    "mean_mc_se": 0.006497189780992268,
+    "mean_relative_se": 0.013763638735968139,
+    "mean_abs_error_vs_reference": 0.0058474999999999985
+   },
+   {
+    "n_sims": 10000,
+    "mean_p": 0.5513874999999999,
+    "mean_mc_se": 0.004592805974596678,
+    "mean_relative_se": 0.009765065463523879,
+    "mean_abs_error_vs_reference": 0.003367499999999999
+   },
+   {
+    "n_sims": 20000,
+    "mean_p": 0.5522125,
+    "mean_mc_se": 0.0032453751546115727,
+    "mean_relative_se": 0.0068964681725311935,
+    "mean_abs_error_vs_reference": 0.0031137499999999776
+   },
+   {
+    "n_sims": 50000,
+    "mean_p": 0.55233,
+    "mean_mc_se": 0.002052230315012246,
+    "mean_relative_se": 0.004358174018526368,
+    "mean_abs_error_vs_reference": 0.0014987499999999931
+   }
+  ],
+  "prop_top1_ags": [
+   {
+    "n_sims": 500,
+    "mean_p": 0.356,
+    "mean_mc_se": 0.020800675047697066,
+    "mean_relative_se": 0.06259493107160358,
+    "mean_abs_error_vs_reference": 0.010640624999999997
+   },
+   {
+    "n_sims": 1000,
+    "mean_p": 0.35750000000000004,
+    "mean_mc_se": 0.01475773795016816,
+    "mean_relative_se": 0.0439968007501588,
+    "mean_abs_error_vs_reference": 0.012680624999999994
+   },
+   {
+    "n_sims": 2000,
+    "mean_p": 0.36075,
+    "mean_mc_se": 0.010447626426694978,
+    "mean_relative_se": 0.03091550206946788,
+    "mean_abs_error_vs_reference": 0.01009187499999999
+   },
+   {
+    "n_sims": 5000,
+    "mean_p": 0.36029999999999995,
+    "mean_mc_se": 0.006580220817803265,
+    "mean_relative_se": 0.019675872434160115,
+    "mean_abs_error_vs_reference": 0.005185624999999996
+   },
+   {
+    "n_sims": 10000,
+    "mean_p": 0.3607125,
+    "mean_mc_se": 0.004660554131382309,
+    "mean_relative_se": 0.013863870514631633,
+    "mean_abs_error_vs_reference": 0.004360624999999993
+   },
+   {
+    "n_sims": 20000,
+    "mean_p": 0.3582375,
+    "mean_mc_se": 0.003288117746092378,
+    "mean_relative_se": 0.009874357342610869,
+    "mean_abs_error_vs_reference": 0.0031993749999999835
+   },
+   {
+    "n_sims": 50000,
+    "mean_p": 0.3578825,
+    "mean_mc_se": 0.002078328757648221,
+    "mean_relative_se": 0.006250761791559208,
+    "mean_abs_error_vs_reference": 0.0013568750000000109
+   }
+  ],
+  "sga_3leg_T08": [
+   {
+    "n_sims": 500,
+    "mean_p": 0.203,
+    "mean_mc_se": 0.016907756506144216,
+    "mean_relative_se": 0.10015030764684298,
+    "mean_abs_error_vs_reference": 0.011915
+   },
+   {
+    "n_sims": 1000,
+    "mean_p": 0.20174999999999998,
+    "mean_mc_se": 0.011905870806876459,
+    "mean_relative_se": 0.07199528976211281,
+    "mean_abs_error_vs_reference": 0.006336250000000005
+   },
+   {
+    "n_sims": 2000,
+    "mean_p": 0.19918750000000002,
+    "mean_mc_se": 0.008339288692364433,
+    "mean_relative_se": 0.05161295030993087,
+    "mean_abs_error_vs_reference": 0.005056249999999991
+   },
+   {
+    "n_sims": 5000,
+    "mean_p": 0.2009,
+    "mean_mc_se": 0.005283520065799721,
+    "mean_relative_se": 0.03265392063783514,
+    "mean_abs_error_vs_reference": 0.00440624999999999
+   },
+   {
+    "n_sims": 10000,
+    "mean_p": 0.20093750000000002,
+    "mean_mc_se": 0.00373941790842875,
+    "mean_relative_se": 0.02301630894554795,
+    "mean_abs_error_vs_reference": 0.0035749999999999983
+   },
+   {
+    "n_sims": 20000,
+    "mean_p": 0.20021250000000002,
+    "mean_mc_se": 0.0026396806876198076,
+    "mean_relative_se": 0.016361475142505993,
+    "mean_abs_error_vs_reference": 0.0014174999999999986
+   },
+   {
+    "n_sims": 50000,
+    "mean_p": 0.2012925,
+    "mean_mc_se": 0.0016713761127309164,
+    "mean_relative_se": 0.01030976292300962,
+    "mean_abs_error_vs_reference": 0.0015449999999999943
+   }
+  ],
+  "sga_5leg_T10": [
+   {
+    "n_sims": 500,
+    "mean_p": 0.15250000000000002,
+    "mean_mc_se": 0.014467227509148778,
+    "mean_relative_se": 0.13170486479696725,
+    "mean_abs_error_vs_reference": 0.00992625
+   },
+   {
+    "n_sims": 1000,
+    "mean_p": 0.159,
+    "mean_mc_se": 0.010496163281024297,
+    "mean_relative_se": 0.08978618080831972,
+    "mean_abs_error_vs_reference": 0.0065074999999999985
+   },
+   {
+    "n_sims": 2000,
+    "mean_p": 0.154625,
+    "mean_mc_se": 0.0072632521276639155,
+    "mean_relative_se": 0.06639173261531531,
+    "mean_abs_error_vs_reference": 0.005007499999999998
+   },
+   {
+    "n_sims": 5000,
+    "mean_p": 0.159025,
+    "mean_mc_se": 0.004643514438675691,
+    "mean_relative_se": 0.041330300707894146,
+    "mean_abs_error_vs_reference": 0.0026225
+   },
+   {
+    "n_sims": 10000,
+    "mean_p": 0.155625,
+    "mean_mc_se": 0.003246169233008478,
+    "mean_relative_se": 0.02981954432480058,
+    "mean_abs_error_vs_reference": 0.0030700000000000024
+   },
+   {
+    "n_sims": 20000,
+    "mean_p": 0.15775625,
+    "mean_mc_se": 0.002310352506913455,
+    "mean_relative_se": 0.020831309227628082,
+    "mean_abs_error_vs_reference": 0.0012849999999999997
+   },
+   {
+    "n_sims": 50000,
+    "mean_p": 0.15822999999999998,
+    "mean_mc_se": 0.0014613028356359197,
+    "mean_relative_se": 0.013206933773255134,
+    "mean_abs_error_vs_reference": 0.0006062499999999957
+   }
+  ]
+ },
+ "seconds_per_match_by_n": {
+  "500": 0.02498455000022659,
+  "1000": 0.03833493751153583,
+  "2000": 0.08139905000280123,
+  "5000": 0.22262357498402707,
+  "10000": 0.449979050004913,
+  "20000": 0.8757366500067292,
+  "50000": 2.1890555874997517,
+  "200000": 8.073833124995872
+ }
+}

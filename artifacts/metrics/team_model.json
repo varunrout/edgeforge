@@ -1,10 +1,10 @@
 {
  "provenance": {
-  "git_sha": "fddfc09b5ab31eeccde6b94408ff286eff5a012b",
+  "git_sha": "9de3d25a2adb4802c141983b161ae0cf4f4d411d",
   "data_version": "137781cbbd858114",
   "command": "edgeforge team-model run",
   "config_hash": "39f96c7271994bec",
-  "created_at": "2026-10-04T18:54:49Z",
+  "created_at": "2026-10-05T09:40:49Z",
   "seed": 20261004
  },
  "window_days": 1825,
@@ -676,7 +676,8 @@
        "prob_a_better": 0.268,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "1x2",
@@ -690,7 +691,8 @@
        "prob_a_better": 0.052,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_0.5",
@@ -704,7 +706,8 @@
        "prob_a_better": 0.953,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_0.5",
@@ -718,7 +721,8 @@
        "prob_a_better": 0.947,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_1.5",
@@ -732,7 +736,8 @@
        "prob_a_better": 0.958,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_1.5",
@@ -746,7 +751,8 @@
        "prob_a_better": 0.958,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_2.5",
@@ -760,7 +766,8 @@
        "prob_a_better": 0.773,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_2.5",
@@ -774,7 +781,8 @@
        "prob_a_better": 0.743,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_3.5",
@@ -788,7 +796,8 @@
        "prob_a_better": 0.44,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_3.5",
@@ -802,7 +811,8 @@
        "prob_a_better": 0.454,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_4.5",
@@ -816,7 +826,8 @@
        "prob_a_better": 0.646,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_4.5",
@@ -830,7 +841,8 @@
        "prob_a_better": 0.239,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "btts",
@@ -844,7 +856,8 @@
        "prob_a_better": 0.991,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": true
+       "keep": false,
+       "keep_d039_biased": true
       },
       {
        "market": "btts",
@@ -858,13 +871,11 @@
        "prob_a_better": 0.993,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": true
+       "keep": false,
+       "keep_d039_biased": true
       }
      ],
-     "calibration_kept": [
-      "btts:platt",
-      "btts:isotonic"
-     ],
+     "calibration_kept": [],
      "coldstart_fix_vs_none_promoted_first10": {
       "n": 132,
       "kappa": 80.0,
@@ -1369,7 +1380,8 @@
        "prob_a_better": 0.621,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "1x2",
@@ -1383,7 +1395,8 @@
        "prob_a_better": 0.132,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_0.5",
@@ -1397,7 +1410,8 @@
        "prob_a_better": 0.829,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_0.5",
@@ -1411,7 +1425,8 @@
        "prob_a_better": 0.825,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_1.5",
@@ -1425,7 +1440,8 @@
        "prob_a_better": 0.968,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_1.5",
@@ -1439,7 +1455,8 @@
        "prob_a_better": 0.96,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_2.5",
@@ -1453,7 +1470,8 @@
        "prob_a_better": 0.996,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": true
+       "keep": false,
+       "keep_d039_biased": true
       },
       {
        "market": "over_2.5",
@@ -1467,7 +1485,8 @@
        "prob_a_better": 0.999,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": true
+       "keep": false,
+       "keep_d039_biased": true
       },
       {
        "market": "over_3.5",
@@ -1481,7 +1500,8 @@
        "prob_a_better": 0.968,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_3.5",
@@ -1495,7 +1515,8 @@
        "prob_a_better": 0.979,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": true
+       "keep": false,
+       "keep_d039_biased": true
       },
       {
        "market": "over_4.5",
@@ -1509,7 +1530,8 @@
        "prob_a_better": 0.986,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": true
+       "keep": false,
+       "keep_d039_biased": true
       },
       {
        "market": "over_4.5",
@@ -1523,7 +1545,8 @@
        "prob_a_better": 0.999,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": true
+       "keep": false,
+       "keep_d039_biased": true
       },
       {
        "market": "btts",
@@ -1537,7 +1560,8 @@
        "prob_a_better": 0.972,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "btts",
@@ -1551,16 +1575,11 @@
        "prob_a_better": 0.97,
        "n_samples": 1752,
        "n_groups": 1752,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       }
      ],
-     "calibration_kept": [
-      "over_2.5:platt",
-      "over_2.5:isotonic",
-      "over_3.5:isotonic",
-      "over_4.5:platt",
-      "over_4.5:isotonic"
-     ],
+     "calibration_kept": [],
      "coldstart_fix_vs_none_promoted_first10": {
       "n": 131,
       "kappa": 80.0,
@@ -1573,19 +1592,242 @@
      }
     }
    },
+   "calibration_choice_inside_tuning_window": [
+    {
+     "market": "1x2",
+     "method": "platt",
+     "n_fit": 7203,
+     "n_choose": 1752,
+     "choose_season_start_year": 2023,
+     "raw_log_loss": 0.9764068056877336,
+     "calibrated_log_loss": 0.9785970226124614,
+     "mean_diff": 0.0021902169247277905,
+     "ci_low": 0.0005760340426474238,
+     "ci_high": 0.0037482863464693055,
+     "prob_a_better": 0.005,
+     "n_samples": 1752,
+     "n_groups": 1752,
+     "adopt": false
+    },
+    {
+     "market": "1x2",
+     "method": "isotonic",
+     "n_fit": 7203,
+     "n_choose": 1752,
+     "choose_season_start_year": 2023,
+     "raw_log_loss": 0.9764068056877336,
+     "calibrated_log_loss": 0.9853833072155522,
+     "mean_diff": 0.008976501527818545,
+     "ci_low": 0.000707621871138229,
+     "ci_high": 0.02512409519302971,
+     "prob_a_better": 0.007,
+     "n_samples": 1752,
+     "n_groups": 1752,
+     "adopt": false
+    },
+    {
+     "market": "over_0.5",
+     "method": "platt",
+     "n_fit": 7203,
+     "n_choose": 1752,
+     "choose_season_start_year": 2023,
+     "raw_log_loss": 0.2334436355697166,
+     "calibrated_log_loss": 0.23307458504021442,
+     "mean_diff": -0.0003690505295021855,
+     "ci_low": -0.0038286656611147747,
+     "ci_high": 0.0031479103643580683,
+     "prob_a_better": 0.613,
+     "n_samples": 1752,
+     "n_groups": 1752,
+     "adopt": false
+    },
+    {
+     "market": "over_0.5",
+     "method": "isotonic",
+     "n_fit": 7203,
+     "n_choose": 1752,
+     "choose_season_start_year": 2023,
+     "raw_log_loss": 0.2334436355697166,
+     "calibrated_log_loss": 0.2317792568164127,
+     "mean_diff": -0.0016643787533038921,
+     "ci_low": -0.004952144079614259,
+     "ci_high": 0.001722844876438138,
+     "prob_a_better": 0.833,
+     "n_samples": 1752,
+     "n_groups": 1752,
+     "adopt": false
+    },
+    {
+     "market": "over_1.5",
+     "method": "platt",
+     "n_fit": 7203,
+     "n_choose": 1752,
+     "choose_season_start_year": 2023,
+     "raw_log_loss": 0.5113646367192712,
+     "calibrated_log_loss": 0.5102040628809865,
+     "mean_diff": -0.0011605738382846455,
+     "ci_low": -0.005606647620857726,
+     "ci_high": 0.0036486654387901233,
+     "prob_a_better": 0.697,
+     "n_samples": 1752,
+     "n_groups": 1752,
+     "adopt": false
+    },
+    {
+     "market": "over_1.5",
+     "method": "isotonic",
+     "n_fit": 7203,
+     "n_choose": 1752,
+     "choose_season_start_year": 2023,
+     "raw_log_loss": 0.5113646367192712,
+     "calibrated_log_loss": 0.5102233048205506,
+     "mean_diff": -0.0011413318987206673,
+     "ci_low": -0.005662175665265922,
+     "ci_high": 0.0037854933231685787,
+     "prob_a_better": 0.677,
+     "n_samples": 1752,
+     "n_groups": 1752,
+     "adopt": false
+    },
+    {
+     "market": "over_2.5",
+     "method": "platt",
+     "n_fit": 7203,
+     "n_choose": 1752,
+     "choose_season_start_year": 2023,
+     "raw_log_loss": 0.6704825227075831,
+     "calibrated_log_loss": 0.6701610581520463,
+     "mean_diff": -0.00032146455553677667,
+     "ci_low": -0.0045542655757900355,
+     "ci_high": 0.004200523199612698,
+     "prob_a_better": 0.56,
+     "n_samples": 1752,
+     "n_groups": 1752,
+     "adopt": false
+    },
+    {
+     "market": "over_2.5",
+     "method": "isotonic",
+     "n_fit": 7203,
+     "n_choose": 1752,
+     "choose_season_start_year": 2023,
+     "raw_log_loss": 0.6704825227075831,
+     "calibrated_log_loss": 0.6707204182648308,
+     "mean_diff": 0.00023789555724769624,
+     "ci_low": -0.003976138644801883,
+     "ci_high": 0.004654080280542956,
+     "prob_a_better": 0.463,
+     "n_samples": 1752,
+     "n_groups": 1752,
+     "adopt": false
+    },
+    {
+     "market": "over_3.5",
+     "method": "platt",
+     "n_fit": 7203,
+     "n_choose": 1752,
+     "choose_season_start_year": 2023,
+     "raw_log_loss": 0.6184232370542626,
+     "calibrated_log_loss": 0.6187348688019146,
+     "mean_diff": 0.00031163174765200507,
+     "ci_low": -0.004386300588270979,
+     "ci_high": 0.004592518320102891,
+     "prob_a_better": 0.448,
+     "n_samples": 1752,
+     "n_groups": 1752,
+     "adopt": false
+    },
+    {
+     "market": "over_3.5",
+     "method": "isotonic",
+     "n_fit": 7203,
+     "n_choose": 1752,
+     "choose_season_start_year": 2023,
+     "raw_log_loss": 0.6184232370542626,
+     "calibrated_log_loss": 0.6201809522623083,
+     "mean_diff": 0.0017577152080456523,
+     "ci_low": -0.0028848273382163663,
+     "ci_high": 0.006414756602652398,
+     "prob_a_better": 0.233,
+     "n_samples": 1752,
+     "n_groups": 1752,
+     "adopt": false
+    },
+    {
+     "market": "over_4.5",
+     "method": "platt",
+     "n_fit": 7203,
+     "n_choose": 1752,
+     "choose_season_start_year": 2023,
+     "raw_log_loss": 0.44745510364638214,
+     "calibrated_log_loss": 0.44530304651526437,
+     "mean_diff": -0.0021520571311176603,
+     "ci_low": -0.006051945047342724,
+     "ci_high": 0.001741158516289272,
+     "prob_a_better": 0.849,
+     "n_samples": 1752,
+     "n_groups": 1752,
+     "adopt": false
+    },
+    {
+     "market": "over_4.5",
+     "method": "isotonic",
+     "n_fit": 7203,
+     "n_choose": 1752,
+     "choose_season_start_year": 2023,
+     "raw_log_loss": 0.44745510364638214,
+     "calibrated_log_loss": 0.4520432885479724,
+     "mean_diff": 0.004588184901590268,
+     "ci_low": -0.003524684956686464,
+     "ci_high": 0.01728167123678487,
+     "prob_a_better": 0.227,
+     "n_samples": 1752,
+     "n_groups": 1752,
+     "adopt": false
+    },
+    {
+     "market": "btts",
+     "method": "platt",
+     "n_fit": 7203,
+     "n_choose": 1752,
+     "choose_season_start_year": 2023,
+     "raw_log_loss": 0.6843085576524188,
+     "calibrated_log_loss": 0.6807775411083469,
+     "mean_diff": -0.003531016544071948,
+     "ci_low": -0.008626040822627218,
+     "ci_high": 0.0010685494542766686,
+     "prob_a_better": 0.934,
+     "n_samples": 1752,
+     "n_groups": 1752,
+     "adopt": false
+    },
+    {
+     "market": "btts",
+     "method": "isotonic",
+     "n_fit": 7203,
+     "n_choose": 1752,
+     "choose_season_start_year": 2023,
+     "raw_log_loss": 0.6843085576524188,
+     "calibrated_log_loss": 0.6813261492884983,
+     "mean_diff": -0.0029824083639204734,
+     "ci_low": -0.007824428683067151,
+     "ci_high": 0.0014432032900561014,
+     "prob_a_better": 0.902,
+     "n_samples": 1752,
+     "n_groups": 1752,
+     "adopt": false
+    }
+   ],
    "calibration_decision": {
-    "rule": "adopt a calibrator for a market only if, on the block's primary test window, held-out log loss improves with a paired-bootstrap CI that excludes zero; other windows are supporting checks. 56 market x method x window tests were run, so isolated hits are expected by chance and the verdicts differ across windows.",
+    "rule": "D-043: adoption is decided inside the tuning window (fit on its earlier seasons, choose on its last season, paired-bootstrap CI excluding zero); the adopted set is then evaluated once on the test window and reported whatever the result.",
     "primary_window": "primary_2024_25",
-    "adopted": [
+    "adopted": [],
+    "adopted_test_results": {},
+    "superseded_d039_adopted_using_test_window": [
      "btts:platt",
      "btts:isotonic"
     ],
-    "platt_parameters_fitted_on_tuning_window": {
-     "btts": {
-      "intercept": 0.13846134481164668,
-      "slope": 0.5221730468969532
-     }
-    },
+    "platt_parameters_fitted_on_tuning_window": {},
     "1x2_calibration_helps": false
    }
   },
@@ -2254,7 +2496,8 @@
        "prob_a_better": 0.048,
        "n_samples": 758,
        "n_groups": 758,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "1x2",
@@ -2268,7 +2511,8 @@
        "prob_a_better": 0.242,
        "n_samples": 758,
        "n_groups": 758,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_0.5",
@@ -2282,7 +2526,8 @@
        "prob_a_better": 0.579,
        "n_samples": 758,
        "n_groups": 758,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_0.5",
@@ -2296,7 +2541,8 @@
        "prob_a_better": 0.127,
        "n_samples": 758,
        "n_groups": 758,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_1.5",
@@ -2310,7 +2556,8 @@
        "prob_a_better": 0.663,
        "n_samples": 758,
        "n_groups": 758,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_1.5",
@@ -2324,7 +2571,8 @@
        "prob_a_better": 0.917,
        "n_samples": 758,
        "n_groups": 758,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_2.5",
@@ -2338,7 +2586,8 @@
        "prob_a_better": 0.993,
        "n_samples": 758,
        "n_groups": 758,
-       "keep": true
+       "keep": true,
+       "keep_d039_biased": true
       },
       {
        "market": "over_2.5",
@@ -2352,7 +2601,8 @@
        "prob_a_better": 0.993,
        "n_samples": 758,
        "n_groups": 758,
-       "keep": true
+       "keep": false,
+       "keep_d039_biased": true
       },
       {
        "market": "over_3.5",
@@ -2366,7 +2616,8 @@
        "prob_a_better": 0.959,
        "n_samples": 758,
        "n_groups": 758,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_3.5",
@@ -2380,7 +2631,8 @@
        "prob_a_better": 0.984,
        "n_samples": 758,
        "n_groups": 758,
-       "keep": true
+       "keep": false,
+       "keep_d039_biased": true
       },
       {
        "market": "over_4.5",
@@ -2394,7 +2646,8 @@
        "prob_a_better": 0.934,
        "n_samples": 758,
        "n_groups": 758,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_4.5",
@@ -2408,7 +2661,8 @@
        "prob_a_better": 0.965,
        "n_samples": 758,
        "n_groups": 758,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "btts",
@@ -2422,7 +2676,8 @@
        "prob_a_better": 0.331,
        "n_samples": 758,
        "n_groups": 758,
-       "keep": false
+       "keep": true,
+       "keep_d039_biased": false
       },
       {
        "market": "btts",
@@ -2436,13 +2691,13 @@
        "prob_a_better": 0.576,
        "n_samples": 758,
        "n_groups": 758,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       }
      ],
      "calibration_kept": [
       "over_2.5:platt",
-      "over_2.5:isotonic",
-      "over_3.5:isotonic"
+      "btts:platt"
      ]
     },
     "all_2015_16": {
@@ -2938,7 +3193,8 @@
        "prob_a_better": 0.05,
        "n_samples": 1520,
        "n_groups": 1520,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "1x2",
@@ -2952,7 +3208,8 @@
        "prob_a_better": 0.107,
        "n_samples": 1520,
        "n_groups": 1520,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_0.5",
@@ -2966,7 +3223,8 @@
        "prob_a_better": 1.0,
        "n_samples": 1520,
        "n_groups": 1520,
-       "keep": true
+       "keep": false,
+       "keep_d039_biased": true
       },
       {
        "market": "over_0.5",
@@ -2980,7 +3238,8 @@
        "prob_a_better": 0.006,
        "n_samples": 1520,
        "n_groups": 1520,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_1.5",
@@ -2994,7 +3253,8 @@
        "prob_a_better": 1.0,
        "n_samples": 1520,
        "n_groups": 1520,
-       "keep": true
+       "keep": false,
+       "keep_d039_biased": true
       },
       {
        "market": "over_1.5",
@@ -3008,7 +3268,8 @@
        "prob_a_better": 0.151,
        "n_samples": 1520,
        "n_groups": 1520,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_2.5",
@@ -3022,7 +3283,8 @@
        "prob_a_better": 0.999,
        "n_samples": 1520,
        "n_groups": 1520,
-       "keep": true
+       "keep": true,
+       "keep_d039_biased": true
       },
       {
        "market": "over_2.5",
@@ -3036,7 +3298,8 @@
        "prob_a_better": 0.977,
        "n_samples": 1520,
        "n_groups": 1520,
-       "keep": true
+       "keep": false,
+       "keep_d039_biased": true
       },
       {
        "market": "over_3.5",
@@ -3050,7 +3313,8 @@
        "prob_a_better": 0.985,
        "n_samples": 1520,
        "n_groups": 1520,
-       "keep": true
+       "keep": false,
+       "keep_d039_biased": true
       },
       {
        "market": "over_3.5",
@@ -3064,7 +3328,8 @@
        "prob_a_better": 0.966,
        "n_samples": 1520,
        "n_groups": 1520,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_4.5",
@@ -3078,7 +3343,8 @@
        "prob_a_better": 0.962,
        "n_samples": 1520,
        "n_groups": 1520,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "over_4.5",
@@ -3092,7 +3358,8 @@
        "prob_a_better": 0.45,
        "n_samples": 1520,
        "n_groups": 1520,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       },
       {
        "market": "btts",
@@ -3106,7 +3373,8 @@
        "prob_a_better": 0.913,
        "n_samples": 1520,
        "n_groups": 1520,
-       "keep": false
+       "keep": true,
+       "keep_d039_biased": false
       },
       {
        "market": "btts",
@@ -3120,15 +3388,13 @@
        "prob_a_better": 0.163,
        "n_samples": 1520,
        "n_groups": 1520,
-       "keep": false
+       "keep": false,
+       "keep_d039_biased": false
       }
      ],
      "calibration_kept": [
-      "over_0.5:platt",
-      "over_1.5:platt",
       "over_2.5:platt",
-      "over_2.5:isotonic",
-      "over_3.5:platt"
+      "btts:platt"
      ],
      "coldstart_fix_vs_none_promoted_first10": {
       "n": 111,
@@ -3142,10 +3408,256 @@
      }
     }
    },
+   "calibration_choice_inside_tuning_window": [
+    {
+     "market": "1x2",
+     "method": "platt",
+     "n_fit": 1520,
+     "n_choose": 1520,
+     "choose_season_start_year": 2014,
+     "raw_log_loss": 0.984187910444568,
+     "calibrated_log_loss": 0.9858625859543712,
+     "mean_diff": 0.0016746755098033185,
+     "ci_low": -0.0005633410532421,
+     "ci_high": 0.003923484597485277,
+     "prob_a_better": 0.077,
+     "n_samples": 1520,
+     "n_groups": 1520,
+     "adopt": false
+    },
+    {
+     "market": "1x2",
+     "method": "isotonic",
+     "n_fit": 1520,
+     "n_choose": 1520,
+     "choose_season_start_year": 2014,
+     "raw_log_loss": 0.984187910444568,
+     "calibrated_log_loss": 1.0024180561152138,
+     "mean_diff": 0.018230145670645872,
+     "ci_low": 0.0024465985914184675,
+     "ci_high": 0.04150752561413862,
+     "prob_a_better": 0.005,
+     "n_samples": 1520,
+     "n_groups": 1520,
+     "adopt": false
+    },
+    {
+     "market": "over_0.5",
+     "method": "platt",
+     "n_fit": 1520,
+     "n_choose": 1520,
+     "choose_season_start_year": 2014,
+     "raw_log_loss": 0.2826681891304072,
+     "calibrated_log_loss": 0.281615384994012,
+     "mean_diff": -0.0010528041363951763,
+     "ci_low": -0.003984217155644414,
+     "ci_high": 0.0021624203957267096,
+     "prob_a_better": 0.736,
+     "n_samples": 1520,
+     "n_groups": 1520,
+     "adopt": false
+    },
+    {
+     "market": "over_0.5",
+     "method": "isotonic",
+     "n_fit": 1520,
+     "n_choose": 1520,
+     "choose_season_start_year": 2014,
+     "raw_log_loss": 0.2826681891304072,
+     "calibrated_log_loss": 0.29434892874590074,
+     "mean_diff": 0.011680739615493504,
+     "ci_low": -0.00389848298099704,
+     "ci_high": 0.03284906694223267,
+     "prob_a_better": 0.117,
+     "n_samples": 1520,
+     "n_groups": 1520,
+     "adopt": false
+    },
+    {
+     "market": "over_1.5",
+     "method": "platt",
+     "n_fit": 1520,
+     "n_choose": 1520,
+     "choose_season_start_year": 2014,
+     "raw_log_loss": 0.5804814721763686,
+     "calibrated_log_loss": 0.5776388826932924,
+     "mean_diff": -0.0028425894830762287,
+     "ci_low": -0.005976480066913335,
+     "ci_high": 0.0004317950068962883,
+     "prob_a_better": 0.948,
+     "n_samples": 1520,
+     "n_groups": 1520,
+     "adopt": false
+    },
+    {
+     "market": "over_1.5",
+     "method": "isotonic",
+     "n_fit": 1520,
+     "n_choose": 1520,
+     "choose_season_start_year": 2014,
+     "raw_log_loss": 0.5804814721763686,
+     "calibrated_log_loss": 0.6306947697253787,
+     "mean_diff": 0.0502132975490102,
+     "ci_low": 0.015156983740201739,
+     "ci_high": 0.09246684713242857,
+     "prob_a_better": 0.0,
+     "n_samples": 1520,
+     "n_groups": 1520,
+     "adopt": false
+    },
+    {
+     "market": "over_2.5",
+     "method": "platt",
+     "n_fit": 1520,
+     "n_choose": 1520,
+     "choose_season_start_year": 2014,
+     "raw_log_loss": 0.6893071654483406,
+     "calibrated_log_loss": 0.6847556075069361,
+     "mean_diff": -0.004551557941404454,
+     "ci_low": -0.007927194723865428,
+     "ci_high": -0.0009885119100826712,
+     "prob_a_better": 0.996,
+     "n_samples": 1520,
+     "n_groups": 1520,
+     "adopt": true
+    },
+    {
+     "market": "over_2.5",
+     "method": "isotonic",
+     "n_fit": 1520,
+     "n_choose": 1520,
+     "choose_season_start_year": 2014,
+     "raw_log_loss": 0.6893071654483406,
+     "calibrated_log_loss": 0.7133536584327047,
+     "mean_diff": 0.02404649298436418,
+     "ci_low": 0.0012832186799227676,
+     "ci_high": 0.05501968178893765,
+     "prob_a_better": 0.016,
+     "n_samples": 1520,
+     "n_groups": 1520,
+     "adopt": false
+    },
+    {
+     "market": "over_3.5",
+     "method": "platt",
+     "n_fit": 1520,
+     "n_choose": 1520,
+     "choose_season_start_year": 2014,
+     "raw_log_loss": 0.5729348164373181,
+     "calibrated_log_loss": 0.5703326882034244,
+     "mean_diff": -0.0026021282338937277,
+     "ci_low": -0.005742855814696025,
+     "ci_high": 0.0001740884162283243,
+     "prob_a_better": 0.962,
+     "n_samples": 1520,
+     "n_groups": 1520,
+     "adopt": false
+    },
+    {
+     "market": "over_3.5",
+     "method": "isotonic",
+     "n_fit": 1520,
+     "n_choose": 1520,
+     "choose_season_start_year": 2014,
+     "raw_log_loss": 0.5729348164373181,
+     "calibrated_log_loss": 0.5966046036854032,
+     "mean_diff": 0.02366978724808518,
+     "ci_low": 0.002854925666986909,
+     "ci_high": 0.05243450133025178,
+     "prob_a_better": 0.005,
+     "n_samples": 1520,
+     "n_groups": 1520,
+     "adopt": false
+    },
+    {
+     "market": "over_4.5",
+     "method": "platt",
+     "n_fit": 1520,
+     "n_choose": 1520,
+     "choose_season_start_year": 2014,
+     "raw_log_loss": 0.36882072096017976,
+     "calibrated_log_loss": 0.3666851127923643,
+     "mean_diff": -0.0021356081678154497,
+     "ci_low": -0.006045650906226819,
+     "ci_high": 0.0015088958393027609,
+     "prob_a_better": 0.853,
+     "n_samples": 1520,
+     "n_groups": 1520,
+     "adopt": false
+    },
+    {
+     "market": "over_4.5",
+     "method": "isotonic",
+     "n_fit": 1520,
+     "n_choose": 1520,
+     "choose_season_start_year": 2014,
+     "raw_log_loss": 0.36882072096017976,
+     "calibrated_log_loss": 0.37119468665086836,
+     "mean_diff": 0.0023739656906885437,
+     "ci_low": -0.0071466990411361165,
+     "ci_high": 0.017513982383289044,
+     "prob_a_better": 0.412,
+     "n_samples": 1520,
+     "n_groups": 1520,
+     "adopt": false
+    },
+    {
+     "market": "btts",
+     "method": "platt",
+     "n_fit": 1520,
+     "n_choose": 1520,
+     "choose_season_start_year": 2014,
+     "raw_log_loss": 0.699683674786794,
+     "calibrated_log_loss": 0.6933015505225363,
+     "mean_diff": -0.006382124264257812,
+     "ci_low": -0.012281327764016806,
+     "ci_high": -0.0006675153800470602,
+     "prob_a_better": 0.984,
+     "n_samples": 1520,
+     "n_groups": 1520,
+     "adopt": true
+    },
+    {
+     "market": "btts",
+     "method": "isotonic",
+     "n_fit": 1520,
+     "n_choose": 1520,
+     "choose_season_start_year": 2014,
+     "raw_log_loss": 0.699683674786794,
+     "calibrated_log_loss": 0.6952948133473545,
+     "mean_diff": -0.004388861439439427,
+     "ci_low": -0.009234994688899127,
+     "ci_high": 0.0004996295525987834,
+     "prob_a_better": 0.959,
+     "n_samples": 1520,
+     "n_groups": 1520,
+     "adopt": false
+    }
+   ],
    "calibration_decision": {
-    "rule": "adopt a calibrator for a market only if, on the block's primary test window, held-out log loss improves with a paired-bootstrap CI that excludes zero; other windows are supporting checks. 56 market x method x window tests were run, so isolated hits are expected by chance and the verdicts differ across windows.",
+    "rule": "D-043: adoption is decided inside the tuning window (fit on its earlier seasons, choose on its last season, paired-bootstrap CI excluding zero); the adopted set is then evaluated once on the test window and reported whatever the result.",
     "primary_window": "mw20_38",
     "adopted": [
+     "over_2.5:platt",
+     "btts:platt"
+    ],
+    "adopted_test_results": {
+     "over_2.5:platt": {
+      "raw_log_loss": 0.6960501246570977,
+      "calibrated_log_loss": 0.6892286973648454,
+      "mean_diff": -0.006821427292252449,
+      "ci_low": -0.01315796564716338,
+      "ci_high": -0.0013381009800869498
+     },
+     "btts:platt": {
+      "raw_log_loss": 0.6890197959143604,
+      "calibrated_log_loss": 0.6905679597360131,
+      "mean_diff": 0.0015481638216528176,
+      "ci_low": -0.005874743015810273,
+      "ci_high": 0.009184406273158191
+     }
+    },
+    "superseded_d039_adopted_using_test_window": [
      "over_2.5:platt",
      "over_2.5:isotonic",
      "over_3.5:isotonic"
@@ -3154,6 +3666,10 @@
      "over_2.5": {
       "intercept": -0.0015081616421418476,
       "slope": 0.6278013556717973
+     },
+     "btts": {
+      "intercept": -0.022010495635819655,
+      "slope": 0.26890645071819147
      }
     },
     "1x2_calibration_helps": false
