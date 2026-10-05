@@ -240,7 +240,7 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
 
 ### D-038 Repository visibility
 - **Decision:** The repo was created public. Switch it to private until Phase 10 (owner approves going public after the final audit). Work in progress, interim numbers and sample-match event lists should not be public before the evidence pack exists.
-- **Status:** Locked (lead, 2026-10-04); owner to confirm
+- **Status:** Superseded by D-041 (owner keeps the repo public, 2026-10-05)
 
 ### D-039 Phase 3 team model: specification, selection rules and decisions
 - **Model.** Dixon-Coles per league: independent Poisson goals with a low-score correlation parameter (rho, bounded to +-0.3), home advantage, attack and defence effects, weekly Monday refits under the D-035 eligibility rule, five years of history with exponential time decay, and a fixed weak ridge of 0.5 log-likelihood units. Fitted by weighted maximum likelihood with analytic gradients (verified against a Poisson GLM and by recovering a planted rho in tests).
@@ -250,4 +250,16 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
 - **Persistence.** `data/processed/team_model_preds.parquet` (git-ignored: per-match intensities, rho, tuning and test windows) and `artifacts/models/team_dc_params.parquet` (committed fitted parameters per league, cutoff and team for the Pillar A test seasons and the whole of 2015/16, 13,901 rows). Phases 4-7 take the 2015/16 intensities from the former.
 - **Pillar A analysis design (D-036, D-037).** Four analysis blocks, each with its own BH family at 10% FDR over its estimable claims: F1 2024/25 with Pinnacle closing (confirmatory), F2 2025/26 with market-average closing (replication), F3 2019/20-2023/24 with Pinnacle (exploratory: the model was tuned on this window), F4 the whole of 2015/16 with Pinnacle (team block; the team model was not tuned on it). Claims are enumerated in `build_claims` (efficiency segments, model-vs-market by segment, encompassing, line movement toward the model, cold-start fix) and every one is reported, including null and non-estimable results (a claim with no matches in a block is marked not estimable and left out of the family). Proportional de-vig is the test statistic; power and Shin estimates are shown alongside. A BH survivor in F1 counts as replicated only if F2 shows the same sign with p < 0.05. Everything using the early snapshot carries the D-024 label. The encompassing claim compares the model+market combination with the **recalibrated market alone**, so that the market's own sharpening is not credited to the model.
 - **Correction record.** A first complete Pillar A run compared the combination with the raw market; its encompassing claim survived BH purely because the fitted market exponent exceeded 1 (the closing market is mildly under-confident), while the model weight was about zero. That definition was corrected before any result was reported or committed, its registry lines were discarded, and a regression test now checks that an under-confident market with an uninformative model is not credited with model information.
-- **Status:** Proposed (implementing engineer, 2026-10-04)
+- **Status:** Locked (lead, Gate 3 audit, 2026-10-05). Calibration adoptions stay provisional; the cold-start fix stays a labelled variant, not the default.
+
+### D-040 Grid-edge rule (process fix)
+- **Decision:** It happened twice (player rolling grid, cold-start kappa grid): the first grid put the optimum on its edge and test numbers were seen before widening. From Phase 4 on, every tuning routine must assert the chosen value is interior to its grid **before** any test-window metric is computed; if it is on the edge, the code widens the grid and re-tunes automatically, and the pipeline only then computes test metrics. A test enforces the order. Both past cases stay disclosed in the technical report.
+- **Status:** Locked (lead, 2026-10-05)
+
+### D-041 Repository stays public (owner decision)
+- **Decision:** The owner keeps `varunrout/edgeforge` public from now on. Consequences, all binding:
+  - README gets a short "work in progress, numbers are interim until the final audit" banner until Phase 10.
+  - D-028 applies in full to everything public: from now on no committed file contains StatsBomb player names, event lists or player-match rows. Failure and example lists in metrics files use StatsBomb ids only. Replace the existing name lists in `data_audit_statsbomb.json`, `gate1_validation.json` and `statsbomb_profile.json` with ids. A history rewrite for these small lists is not required (D-034 already removed the player-row tables).
+  - The StatsBomb logo and credit go into the README now, not at Phase 10.
+  - Public repositories get GitHub Actions without the private-repo billing requirement, which should also clear the CI blocker.
+- **Status:** Locked (owner, 2026-10-05)

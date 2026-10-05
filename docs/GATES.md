@@ -272,3 +272,9 @@ Everything else in the efficiency map is **not distinguishable from zero**: no l
 - **GitHub Actions has never executed a job** (hard criterion).
 - Cold-start fix: suggestive but not demonstrated; revisit with more seasons or pooled evidence before relying on it.
 - The football-data early snapshot remains untimestamped (D-024).
+
+### Lead audit of Gate 3 (2026-10-05): analytical criteria PASSED; gate closes on a green CI run
+- Criteria 1 to 16 accepted. The pre-registered, BH-controlled efficiency audit with a replication rule, the self-caught encompassing error and the planted-distortion test are exactly what a hostile reviewer looks for. The null results (no replicated inefficiency; model adds no information beyond the close; close does not move toward the model) are the honest headline and stay in.
+- Criterion 17 (green GitHub Actions) is still required. With the repo public (D-041) it should run; Gate 3 is formally closed when the first green run is recorded below.
+- Locked: D-039. New: D-040 (grid-edge rule), D-041 (repo public, supersedes D-038).
+- Phase 4 may start in parallel with the CI fix.
