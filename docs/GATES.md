@@ -384,3 +384,11 @@ Everything else in the efficiency map is **not distinguishable from zero**: no l
 - Joint estimates are clipped to [1/(2n), 1 - 1/(2n)] before log loss.
 - Convergence study uses 8 matches.
 - The simulator does not model dismissals as events (above); own goals are not attributed to a player.
+
+### Lead audit of Gate 5 (2026-10-06): PASSED
+- All 13 criteria accepted. This is the project's headline: on 758 held-out matches, with templates pre-registered in D-047 before any test result, the simulated joint beats the naive product in 21 of 26 template x state tests after BH and loses in none; pooled lineups log loss 0.3301 vs 0.3572, ECE 0.015 vs 0.036; 3+ leg combinations improve most. Where the simulator finds no dependence (teammates, opponents), the data agree.
+- The implementer's own caveats are correct and stay in every write-up: the comparison isolates dependence (both prices share the simulator's marginals); Comparison B is a tie; multi-player templates are still under-predicted in absolute terms.
+- The Phase 4 cache-ordering bug, caught through a determinism check and disclosed, is exactly the right behaviour.
+- D-043 outcome accepted: the Pillar A BTTS calibration claim is withdrawn.
+- Locked: D-047, D-048. New: D-049 (frailty experiment for the under-prediction), D-050 (Pillar C pre-registration).
+- Phase 6 may start.
