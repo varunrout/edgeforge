@@ -1,0 +1,12 @@
+# Phase 6 settings (D-049, D-051). Values fixed before any Pillar C result.
+frailty:
+  theta_grid: [0.0, 0.05, 0.1, 0.2, 0.4]
+  fit_weeks: [10, 14]
+  choose_weeks: [15, 19]
+pillar_c:
+  margin_step: 0.01
+  margin_max: 0.60
+  reference_margins: [0.05, 0.10, 0.20]
+  epsilon: 0.001
+  stake_limit_loss_per_match: 0.5
+  bands: [0.5, 0.85]

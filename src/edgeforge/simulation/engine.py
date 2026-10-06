@@ -228,9 +228,44 @@ def _team_counts(
     return shots, sot, goals
 
 
-def simulate(inp: MatchInputs, model: ShotsGivenGoals, n_sims: int, seed: int) -> SimResult:
+FRAILTY_BINS = 40
+
+
+def frailty_multipliers(theta: float) -> FloatArray:
+    """Equal-probability gamma(1/theta, theta) quantile midpoints, rescaled to mean exactly 1."""
+    from scipy.stats import gamma
+
+    q = (np.arange(FRAILTY_BINS) + 0.5) / FRAILTY_BINS
+    m: FloatArray = gamma.ppf(q, a=1.0 / theta, scale=theta)
+    return m / m.mean()
+
+
+def _frailty_scoreline(
+    rng: np.random.Generator, inp: MatchInputs, mult: FloatArray, bins: NDArray[np.int64]
+) -> NDArray[np.int16]:
+    grids = dc_grid(inp.lam_h * mult, inp.lam_a * mult, inp.rho, MAX_GOALS).reshape(len(mult), -1)
+    cdf = np.cumsum(grids, axis=1)
+    cdf /= cdf[:, -1:]
+    u = rng.random(len(bins))
+    idx = np.minimum((u[:, None] > cdf[bins]).sum(axis=1), cdf.shape[1] - 1)
+    out = np.stack([idx // (MAX_GOALS + 1), idx % (MAX_GOALS + 1)], axis=1)
+    return out.astype(np.int16)
+
+
+def simulate(
+    inp: MatchInputs, model: ShotsGivenGoals, n_sims: int, seed: int, theta: float = 0.0
+) -> SimResult:
+    """theta > 0 adds a shared match-level gamma frailty (mean 1, variance theta) on both teams'
+    goal and shot-excess intensities (D-049); theta = 0 is the Phase 5 simulator unchanged."""
     rng = make_rng(seed, inp.match_id, inp.state)
-    tg = sample_scoreline(rng, inp.lam_h, inp.lam_a, inp.rho, n_sims)
+    if theta > 0:
+        mult = frailty_multipliers(theta)
+        bins = rng.integers(0, FRAILTY_BINS, n_sims)
+        f = mult[bins]
+        tg = _frailty_scoreline(rng, inp, mult, bins)
+    else:
+        f = np.ones(n_sims)
+        tg = sample_scoreline(rng, inp.lam_h, inp.lam_a, inp.rho, n_sims)
     og = rng.binomial(tg.astype(np.int64), model.pi_og).astype(np.int16)  # own goals credited
     ng = (tg - og).astype(np.int64)
     started, on_pitch, minutes = sample_roles_and_minutes(rng, inp, n_sims)
@@ -243,7 +278,7 @@ def simulate(inp: MatchInputs, model: ShotsGivenGoals, n_sims: int, seed: int) -
         idx = np.flatnonzero(inp.team == t)
         if len(idx) == 0:
             continue
-        m = model.mean_excess(mu, tg[:, t].astype(float), tg[:, 1 - t].astype(float))
+        m = f * model.mean_excess(mu, tg[:, t].astype(float), tg[:, 1 - t].astype(float))
         if model.alpha < 1e-6:
             x = rng.poisson(m)
         else:

@@ -183,3 +183,25 @@ def test_sga_validation_rejects_impossible_and_contradictory() -> None:
     validate_sga(ok, team)
     with pytest.raises(ValueError):
         Total(line=2.0, side="over")  # integer lines are not supported
+
+
+def test_frailty_keeps_mean_goals_raises_variance_and_zero_theta_is_unchanged() -> None:
+    inp = _inputs(False)
+    base = simulate(inp, MODEL, 20000, 11)
+    same = simulate(inp, MODEL, 20000, 11, theta=0.0)
+    assert (base.goals == same.goals).all()
+    fr = simulate(inp, MODEL, 20000, 11, theta=0.3)
+    tot0, tot1 = base.team_goals.sum(axis=1), fr.team_goals.sum(axis=1)
+    assert abs(tot1.mean() - tot0.mean()) < 0.06  # mean goals preserved (up to MC error)
+    assert tot1.var() > tot0.var() * 1.1  # extra match-level variance
+    assert (fr.goals <= fr.sot).all() and (fr.sot <= fr.shots).all()
+    pid_a, pid_b = int(inp.player_id[0]), int(inp.player_id[20])  # opponents' scorers
+
+    def ratio(r) -> float:  # type: ignore[no-untyped-def]
+        a = r.goals[:, r.player_index(pid_a)] >= 1
+        b = r.goals[:, r.player_index(pid_b)] >= 1
+        return float((a & b).mean() / (a.mean() * b.mean()))
+
+    assert ratio(fr) > ratio(
+        base
+    )  # a shared "open game" factor makes both teams' scorers move together
