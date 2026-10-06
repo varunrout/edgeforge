@@ -7,7 +7,7 @@ Everything here is built from the Phase 4 cache (`data/processed/phase4_cache.pk
 
 import logging
 import pickle
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 import numpy as np
@@ -40,6 +40,20 @@ class Phase5Context:
     dc: pd.DataFrame  # per sb_match_id: lam_h, lam_a, rho
     scores: pd.DataFrame  # sb_match_id, home_score, away_score
     cache_sha: str
+    mp: dict[str, pd.DataFrame]
+    start_pred: pd.DataFrame
+    _rows: dict[tuple[str, str], pd.DataFrame] = field(default_factory=dict)
+
+    def rows(self, state: str, split: str) -> pd.DataFrame:
+        """Phase 4 pricing rows for a state ('lineups' or 'opening') and split ('tune' or 'test')."""
+        key = (state, split)
+        if key not in self._rows:
+            if state == "lineups":
+                r = lineup_inputs(self.d, self.mp, self.shots, split, self.l_bar)
+            else:
+                r = opening_inputs(self.d, self.mp, self.start_pred, self.shots, split, self.l_bar)
+            self._rows[key] = r
+        return self._rows[key]
 
 
 def load_context(cfg: dict[str, Any]) -> Phase5Context:
@@ -69,7 +83,7 @@ def load_context(cfg: dict[str, Any]) -> Phase5Context:
     scores = d.con.execute("SELECT sb_match_id, home_score, away_score FROM sb_matches").df()
     return Phase5Context(
         d, params, l_bar, cache["base_cfg"], cache["version"], lineups, opening, cache["shots"],
-        dc, scores, cache["git_sha"],
+        dc, scores, cache["git_sha"], cache["mp"], cache["start_pred"],
     )  # fmt: skip
 
 
@@ -94,10 +108,10 @@ def _team_mu(shots: pd.DataFrame) -> dict[tuple[int, bool], float]:
 
 
 def build_inputs(
-    ctx: Phase5Context, state: str
+    ctx: Phase5Context, state: str, split: str = "test"
 ) -> tuple[dict[int, MatchInputs], pd.DataFrame, dict[str, np.ndarray]]:
     """Per-match simulator inputs for one state, the aligned player rows and standalone prices."""
-    rows = ctx.lineups if state == "lineups" else ctx.opening
+    rows = ctx.rows(state, split)
     q = player_quantities(rows, ctx.params)
     rho_sot = (q["bb_alpha"] / (q["bb_alpha"] + q["bb_beta"])).to_numpy(float)
     g = q["g_shot"].to_numpy(float)

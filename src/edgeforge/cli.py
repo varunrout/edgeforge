@@ -247,3 +247,16 @@ def phase5_example(
     from edgeforge.evaluation.phase5_run import run_example
 
     typer.echo(json.dumps(run_example(match_id, state), indent=1))
+
+
+phase6_app = typer.Typer(help="Phase 6: frailty experiment and Pillar C.", no_args_is_help=True)
+app.add_typer(phase6_app, name="phase6")
+
+
+@phase6_app.command("frailty")
+def phase6_frailty() -> None:
+    """D-049: tune a shared match-level gamma frailty on the tuning window, evaluate once."""
+    from edgeforge.evaluation.phase6_frailty import run_frailty
+
+    run_frailty()
+    typer.echo("artifacts/metrics/phase6_frailty.json")
