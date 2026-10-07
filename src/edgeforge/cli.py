@@ -272,3 +272,15 @@ def phase6_run(
     from edgeforge.evaluation.phase6_pillar_c import run_pillar_c
 
     typer.echo(str(run_pillar_c(reuse=reuse_collected)))
+
+
+@app.command("phase6b")
+def phase6b_run(
+    reuse_collected: bool = typer.Option(
+        False, help="reuse cached simulation output (analysis-only change)"
+    ),
+) -> None:
+    """Phase 6b: settlement, margin allocation, offer rule and odds cap vs the informed bettor."""
+    from edgeforge.evaluation.phase6b import run_phase6b
+
+    typer.echo(str(run_phase6b(reuse=reuse_collected)))
