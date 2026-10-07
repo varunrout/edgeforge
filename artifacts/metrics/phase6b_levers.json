@@ -1,0 +1,2273 @@
+{
+ "provenance": {
+  "git_sha": "7d80c2b2ed4a330b8a4d1e3c8ccb054241614b95",
+  "data_version": "588d4619e62984b7",
+  "command": "edgeforge phase6b run",
+  "config_hash": "39f96c7271994bec",
+  "created_at": "2026-10-07T23:46:23Z",
+  "seed": 20261004,
+  "collected_at_git_sha": {
+   "tune": "7d80c2b2ed4a330b8a4d1e3c8ccb054241614b95",
+   "test": "7d80c2b2ed4a330b8a4d1e3c8ccb054241614b95"
+  }
+ },
+ "labels": [
+  "SIMULATION",
+  "UPPER BOUND"
+ ],
+ "tuning_window": {
+  "settlement_rule_informed_expected_per_offered_at_10pct": {
+   "appear": 0.09230483653209016,
+   "start": 0.012440955830748458
+  },
+  "chosen_settlement_rule": "start",
+  "odds_cap": {
+   "name": "odds_cap",
+   "value": 200.0,
+   "interior": true,
+   "at_natural_bound": false,
+   "n_widenings": 1,
+   "grid_initial": [
+    3.0,
+    5.0,
+    7.5,
+    10.0,
+    15.0,
+    25.0,
+    40.0,
+    60.0,
+    100.0,
+    200.0
+   ],
+   "evaluated": [
+    {
+     "value": 3.0,
+     "score": 0.01991058387850993
+    },
+    {
+     "value": 5.0,
+     "score": 0.01637228942599169
+    },
+    {
+     "value": 7.5,
+     "score": 0.01405416380241041
+    },
+    {
+     "value": 10.0,
+     "score": 0.012757224316090552
+    },
+    {
+     "value": 15.0,
+     "score": 0.011283000465818612
+    },
+    {
+     "value": 25.0,
+     "score": 0.009774919013454945
+    },
+    {
+     "value": 40.0,
+     "score": 0.008909165603992637
+    },
+    {
+     "value": 60.0,
+     "score": 0.008358257421947124
+    },
+    {
+     "value": 100.0,
+     "score": 0.008012305175101618
+    },
+    {
+     "value": 200.0,
+     "score": 0.007916251735126851
+    },
+    {
+     "value": 400.0,
+     "score": 0.008052538524042105
+    }
+   ]
+  },
+  "chosen_cap_odds": 200.0,
+  "lambda": 0.05,
+  "cap_sensitivity_to_lambda": {
+   "lambda_0.02": 40.0,
+   "lambda_0.1": 800.0
+  },
+  "policy_loss_by_config_10pct": {
+   "base": 0.09230483653209016,
+   "power": 0.038080876130733625,
+   "odds_ratio": 0.03996984593845325,
+   "start": 0.012440955830748458,
+   "start+power": 0.000683706702871673,
+   "start+odds_ratio": 0.0006372704693459497,
+   "offer": 0.06363880294241028,
+   "cap": 0.08567992772612129,
+   "start+offer": 0.03524623974293619,
+   "start+cap": 0.007916251735126851,
+   "offer+cap": 0.057154969974454725,
+   "start+offer+cap": 0.029116931639330053,
+   "start+power+offer+cap": 0.020413726492994656
+  },
+  "recommended_combination": "start+odds_ratio"
+ },
+ "test": {
+  "base|0.05": {
+   "config": {
+    "name": "base",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.05,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 60097.0,
+   "informed_expected_per_offered": 0.12290080456137337,
+   "informed_realised_per_offered": 0.15181022394025548,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.12290080456137337,
+    "ci_low": 0.11801666133336285,
+    "ci_high": 0.12796882841913745,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.15181022394025548,
+    "ci_low": 0.09512751150325573,
+    "ci_high": 0.2271007639098346,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 15801.0,
+    "informed_expected_per_offered": 0.015432188446894162,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.015432188446894163,
+     "ci_low": 0.014563424676402583,
+     "ci_high": 0.016316945251974222,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "power|0.05": {
+   "config": {
+    "name": "power",
+    "rule": "appear",
+    "alloc": "power",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.05,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 49448.0,
+   "informed_expected_per_offered": 0.061399224552274874,
+   "informed_realised_per_offered": 0.05170005092575435,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.061399224552274874,
+    "ci_low": 0.059336009082403725,
+    "ci_high": 0.06378013493539872,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.05170005092575435,
+    "ci_low": 0.04587061132042456,
+    "ci_high": 0.05741883405907047,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 483.0,
+    "informed_expected_per_offered": 4.7390491930553594e-06,
+    "informed_expected_per_offered_ci": {
+     "estimate": 4.7390491930553594e-06,
+     "ci_low": 3.341485856209199e-06,
+     "ci_high": 6.5544491437631305e-06,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "odds_ratio|0.05": {
+   "config": {
+    "name": "odds_ratio",
+    "rule": "appear",
+    "alloc": "odds_ratio",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.05,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 45833.0,
+   "informed_expected_per_offered": 0.06575168969077436,
+   "informed_realised_per_offered": 0.05631453577312499,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.06575168969077436,
+    "ci_low": 0.06342094521043264,
+    "ci_high": 0.06841262121409278,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.056314535773125,
+    "ci_low": 0.04947584848219324,
+    "ci_high": 0.06294655263445725,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 35.0,
+    "informed_expected_per_offered": 1.798053989564115e-06,
+    "informed_expected_per_offered_ci": {
+     "estimate": 1.798053989564115e-06,
+     "ci_low": 7.752766061007426e-07,
+     "ci_high": 3.0953016059547277e-06,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start|0.05": {
+   "config": {
+    "name": "start",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.05,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 26962.0,
+   "informed_expected_per_offered": 0.02178017463054092,
+   "informed_realised_per_offered": 0.03875937307617257,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.021780174630540917,
+    "ci_low": 0.020021791131547343,
+    "ci_high": 0.023561543966751412,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.03875937307617259,
+    "ci_low": -0.010475790250016019,
+    "ci_high": 0.1115408448523535,
+    "p": 0.2177822177822178
+   },
+   "null_control": {
+    "bets": 13720.0,
+    "informed_expected_per_offered": 0.013745802719730985,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.013745802719730983,
+     "ci_low": 0.013005465909569885,
+     "ci_high": 0.014510039652643117,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+power|0.05": {
+   "config": {
+    "name": "start+power",
+    "rule": "start",
+    "alloc": "power",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.05,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 19562.0,
+   "informed_expected_per_offered": 0.0034531860182122273,
+   "informed_realised_per_offered": -0.0011798029491105254,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.003453186018212227,
+    "ci_low": 0.003130268845337798,
+    "ci_high": 0.0038127401672557863,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.0011798029491105254,
+    "ci_low": -0.0034301191992332737,
+    "ci_high": 0.001006124511096788,
+    "p": 0.2857142857142857
+   },
+   "null_control": {
+    "bets": 951.0,
+    "informed_expected_per_offered": 4.357660163215144e-05,
+    "informed_expected_per_offered_ci": {
+     "estimate": 4.357660163215144e-05,
+     "ci_low": 3.627741961797662e-05,
+     "ci_high": 5.238335390266194e-05,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+odds_ratio|0.05": {
+   "config": {
+    "name": "start+odds_ratio",
+    "rule": "start",
+    "alloc": "odds_ratio",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.05,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 14175.0,
+   "informed_expected_per_offered": 0.003576895429572657,
+   "informed_realised_per_offered": -0.0006946236414414217,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.003576895429572657,
+    "ci_low": 0.0032080785203510882,
+    "ci_high": 0.003983574588732515,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.0006946236414414215,
+    "ci_low": -0.003133584573011456,
+    "ci_high": 0.0017243749916445973,
+    "p": 0.5574425574425574
+   },
+   "null_control": {
+    "bets": 343.0,
+    "informed_expected_per_offered": 4.146483936624711e-05,
+    "informed_expected_per_offered_ci": {
+     "estimate": 4.146483936624711e-05,
+     "ci_low": 3.3563325028254864e-05,
+     "ci_high": 5.0901859824679154e-05,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "offer|0.05": {
+   "config": {
+    "name": "offer",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": false
+   },
+   "overround": 0.05,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 33022.0,
+   "informed_expected_per_offered": 0.06783895241538239,
+   "informed_realised_per_offered": 0.10285932252015008,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.06783895241538239,
+    "ci_low": 0.06425412817835865,
+    "ci_high": 0.07131516373152823,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.10285932252015008,
+    "ci_low": 0.02106728125234212,
+    "ci_high": 0.22730794506502353,
+    "p": 0.003996003996003996
+   },
+   "null_control": {
+    "bets": 9833.0,
+    "informed_expected_per_offered": 0.015107335403818006,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.015107335403818006,
+     "ci_low": 0.014364605233976408,
+     "ci_high": 0.015778622885385046,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "cap|0.05": {
+   "config": {
+    "name": "cap",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": true
+   },
+   "overround": 0.05,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 0.9583604005954798,
+   "share_selections_shortened": 0.041639599404520236,
+   "bets": 56903.0,
+   "informed_expected_per_offered": 0.11109418333694085,
+   "informed_realised_per_offered": 0.1170127663129588,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.11109418333694085,
+    "ci_low": 0.10660574005654842,
+    "ci_high": 0.11584093118109536,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.1170127663129588,
+    "ci_low": 0.09507497203924387,
+    "ci_high": 0.1386910274916706,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 12074.0,
+    "informed_expected_per_offered": 0.0045680013281163626,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.0045680013281163626,
+     "ci_low": 0.004414863283843135,
+     "ci_high": 0.004723962827776207,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+offer|0.05": {
+   "config": {
+    "name": "start+offer",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": false
+   },
+   "overround": 0.05,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 20325.0,
+   "informed_expected_per_offered": 0.02651390679708366,
+   "informed_realised_per_offered": 0.05210418496043723,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.02651390679708366,
+    "ci_low": 0.02450704320032178,
+    "ci_high": 0.0285339916438053,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.05210418496043722,
+    "ci_low": -0.022933775583857147,
+    "ci_high": 0.1731867198386755,
+    "p": 0.4355644355644356
+   },
+   "null_control": {
+    "bets": 9452.0,
+    "informed_expected_per_offered": 0.01483783157101833,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.01483783157101833,
+     "ci_low": 0.014084538362185988,
+     "ci_high": 0.015505058160155129,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+cap|0.05": {
+   "config": {
+    "name": "start+cap",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": true
+   },
+   "overround": 0.05,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 0.9619468128298823,
+   "share_selections_shortened": 0.03805318717011774,
+   "bets": 24171.0,
+   "informed_expected_per_offered": 0.013180163766553583,
+   "informed_realised_per_offered": 0.007203680766306442,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.013180163766553581,
+    "ci_low": 0.011961012111273909,
+    "ci_high": 0.014552206169713243,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.007203680766306443,
+    "ci_low": -0.005166674420998288,
+    "ci_high": 0.018961324958467567,
+    "p": 0.2837162837162837
+   },
+   "null_control": {
+    "bets": 10414.0,
+    "informed_expected_per_offered": 0.004206289897044643,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.004206289897044643,
+     "ci_low": 0.004038829063018489,
+     "ci_high": 0.004362170757073106,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "offer+cap|0.05": {
+   "config": {
+    "name": "offer+cap",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": true
+   },
+   "overround": 0.05,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 0.950885507052908,
+   "share_selections_shortened": 0.04911449294709207,
+   "bets": 30493.0,
+   "informed_expected_per_offered": 0.0561064152591504,
+   "informed_realised_per_offered": 0.05232638849860395,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.05610641525915039,
+    "ci_low": 0.0529345578293205,
+    "ci_high": 0.05925254842900375,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.05232638849860395,
+    "ci_low": 0.031319781281766684,
+    "ci_high": 0.07235361161069317,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 6863.0,
+    "informed_expected_per_offered": 0.0035136682422009595,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.0035136682422009595,
+     "ci_low": 0.003388878988225682,
+     "ci_high": 0.0036435928748838617,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+offer+cap|0.05": {
+   "config": {
+    "name": "start+offer+cap",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": true
+   },
+   "overround": 0.05,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 0.9515640991411917,
+   "share_selections_shortened": 0.04843590085880835,
+   "bets": 17908.0,
+   "informed_expected_per_offered": 0.015297878264524148,
+   "informed_realised_per_offered": 0.005227607399796485,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.015297878264524147,
+    "ci_low": 0.013917212446102311,
+    "ci_high": 0.01672562236489894,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.005227607399796485,
+    "ci_low": -0.01211028370550054,
+    "ci_high": 0.021107819185247293,
+    "p": 0.6033966033966034
+   },
+   "null_control": {
+    "bets": 6563.0,
+    "informed_expected_per_offered": 0.0033817414120784874,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.0033817414120784874,
+     "ci_low": 0.0032583421266932098,
+     "ci_high": 0.0035047849334799274,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+power+offer+cap|0.05": {
+   "config": {
+    "name": "start+power+offer+cap",
+    "rule": "start",
+    "alloc": "power",
+    "offer": true,
+    "cap": true
+   },
+   "overround": 0.05,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 13753.0,
+   "informed_expected_per_offered": 0.003903649530749261,
+   "informed_realised_per_offered": -0.0025284721936085445,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.003903649530749261,
+    "ci_low": 0.003545657706264874,
+    "ci_high": 0.00429982250257837,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.0025284721936085445,
+    "ci_low": -0.005764204402779516,
+    "ci_high": 0.0005918844275277067,
+    "p": 0.12987012987012986
+   },
+   "null_control": {
+    "bets": 125.0,
+    "informed_expected_per_offered": 1.4156874265251528e-07,
+    "informed_expected_per_offered_ci": {
+     "estimate": 1.4156874265251528e-07,
+     "ci_low": 6.367087048035537e-08,
+     "ci_high": 2.56487126664675e-07,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "base|0.1": {
+   "config": {
+    "name": "base",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.1,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 44596.0,
+   "informed_expected_per_offered": 0.10146113921636876,
+   "informed_realised_per_offered": 0.1206476573264061,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.10146113921636876,
+    "ci_low": 0.09710544933978504,
+    "ci_high": 0.1060344393218917,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.12064765732640614,
+    "ci_low": 0.0698178164299354,
+    "ci_high": 0.19113508274762747,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 7805.0,
+    "informed_expected_per_offered": 0.011346000149277603,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.011346000149277603,
+     "ci_low": 0.010543924070329452,
+     "ci_high": 0.012157696180332567,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "power|0.1": {
+   "config": {
+    "name": "power",
+    "rule": "appear",
+    "alloc": "power",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.1,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 35870.0,
+   "informed_expected_per_offered": 0.04019975406621151,
+   "informed_realised_per_offered": 0.03181620360460695,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.04019975406621151,
+    "ci_low": 0.03879169495244907,
+    "ci_high": 0.04183813950725497,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.031816203604606956,
+    "ci_low": 0.028118274095034923,
+    "ci_high": 0.03554014083030339,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 151.0,
+    "informed_expected_per_offered": 4.255776359567325e-07,
+    "informed_expected_per_offered_ci": {
+     "estimate": 4.255776359567325e-07,
+     "ci_low": 1.3976078952877753e-07,
+     "ci_high": 9.250663561939723e-07,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "odds_ratio|0.1": {
+   "config": {
+    "name": "odds_ratio",
+    "rule": "appear",
+    "alloc": "odds_ratio",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.1,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 31814.0,
+   "informed_expected_per_offered": 0.042380168645078625,
+   "informed_realised_per_offered": 0.03410374770011067,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.042380168645078625,
+    "ci_low": 0.04083502407596652,
+    "ci_high": 0.04421003657878689,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.03410374770011067,
+    "ci_low": 0.02989937949482751,
+    "ci_high": 0.038334703435813855,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 0.0,
+    "informed_expected_per_offered": 0.0,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "p": 1.0
+    }
+   }
+  },
+  "start|0.1": {
+   "config": {
+    "name": "start",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.1,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 14496.0,
+   "informed_expected_per_offered": 0.014716468109127493,
+   "informed_realised_per_offered": 0.025772855184091264,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.014716468109127493,
+    "ci_low": 0.013328019695634127,
+    "ci_high": 0.01617985831823585,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.02577285518409125,
+    "ci_low": -0.01892463158869956,
+    "ci_high": 0.0944953337972574,
+    "p": 0.5714285714285714
+   },
+   "null_control": {
+    "bets": 6860.0,
+    "informed_expected_per_offered": 0.010168026117818824,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.010168026117818824,
+     "ci_low": 0.009506680467740154,
+     "ci_high": 0.010878462841176828,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+power|0.1": {
+   "config": {
+    "name": "start+power",
+    "rule": "start",
+    "alloc": "power",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.1,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 4876.0,
+   "informed_expected_per_offered": 0.0007400929964848295,
+   "informed_realised_per_offered": -0.0006461010269601785,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.0007400929964848295,
+    "ci_low": 0.0006242831829300822,
+    "ci_high": 0.0008786873295562438,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.0006461010269601786,
+    "ci_low": -0.0016327019955076577,
+    "ci_high": 0.0003290913547601494,
+    "p": 0.1958041958041958
+   },
+   "null_control": {
+    "bets": 195.0,
+    "informed_expected_per_offered": 2.9035603429188e-06,
+    "informed_expected_per_offered_ci": {
+     "estimate": 2.9035603429188e-06,
+     "ci_low": 1.8561807025676226e-06,
+     "ci_high": 4.354576585983422e-06,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+odds_ratio|0.1": {
+   "config": {
+    "name": "start+odds_ratio",
+    "rule": "start",
+    "alloc": "odds_ratio",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.1,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 3112.0,
+   "informed_expected_per_offered": 0.0007152298377191461,
+   "informed_realised_per_offered": -0.0005270566017407156,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.0007152298377191461,
+    "ci_low": 0.0005855450451947942,
+    "ci_high": 0.0008712590351396895,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.0005270566017407153,
+    "ci_low": -0.0016414942432577634,
+    "ci_high": 0.0005191263460868718,
+    "p": 0.3276723276723277
+   },
+   "null_control": {
+    "bets": 18.0,
+    "informed_expected_per_offered": 8.805623140187247e-07,
+    "informed_expected_per_offered_ci": {
+     "estimate": 8.805623140187247e-07,
+     "ci_low": 3.242268618601396e-07,
+     "ci_high": 1.7283394165620145e-06,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "offer|0.1": {
+   "config": {
+    "name": "offer",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": false
+   },
+   "overround": 0.1,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 21726.0,
+   "informed_expected_per_offered": 0.05122691010715628,
+   "informed_realised_per_offered": 0.07125671096961665,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.05122691010715628,
+    "ci_low": 0.04819017863996706,
+    "ci_high": 0.054190711672519765,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.07125671096961667,
+    "ci_low": -0.001811200464762997,
+    "ci_high": 0.18574852820916782,
+    "p": 0.07192807192807193
+   },
+   "null_control": {
+    "bets": 4804.0,
+    "informed_expected_per_offered": 0.010986512979311875,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.010986512979311875,
+     "ci_low": 0.010326098770528027,
+     "ci_high": 0.011564063090254876,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "cap|0.1": {
+   "config": {
+    "name": "cap",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": true
+   },
+   "overround": 0.1,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 0.9595987278386792,
+   "share_selections_shortened": 0.04040127216132088,
+   "bets": 41793.0,
+   "informed_expected_per_offered": 0.09129414754535065,
+   "informed_realised_per_offered": 0.09016702267813104,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.09129414754535066,
+    "ci_low": 0.08725576984387066,
+    "ci_high": 0.09566592718380668,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.09016702267813104,
+    "ci_low": 0.07098350339668805,
+    "ci_high": 0.10935572169463076,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 4635.0,
+    "informed_expected_per_offered": 0.002119031288631664,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.0021190312886316637,
+     "ci_low": 0.0020136083128612075,
+     "ci_high": 0.002229034876162836,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+offer|0.1": {
+   "config": {
+    "name": "start+offer",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": false
+   },
+   "overround": 0.1,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 10902.0,
+   "informed_expected_per_offered": 0.017800389027316624,
+   "informed_realised_per_offered": 0.03812851392295694,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.017800389027316624,
+    "ci_low": 0.01626522403363374,
+    "ci_high": 0.019382690143022577,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.03812851392295693,
+    "ci_low": -0.030896452973476665,
+    "ci_high": 0.15308255922572536,
+    "p": 0.6393606393606394
+   },
+   "null_control": {
+    "bets": 4635.0,
+    "informed_expected_per_offered": 0.010851550239876431,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.010851550239876433,
+     "ci_low": 0.010174251144858686,
+     "ci_high": 0.01142705532308597,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+cap|0.1": {
+   "config": {
+    "name": "start+cap",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": true
+   },
+   "overround": 0.1,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 0.9629686019759102,
+   "share_selections_shortened": 0.03703139802408986,
+   "bets": 12081.0,
+   "informed_expected_per_offered": 0.0073754529105221475,
+   "informed_realised_per_offered": 0.00042953297717637594,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.007375452910522146,
+    "ci_low": 0.006464646413992208,
+    "ci_high": 0.008435147465060243,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.0004295329771763752,
+    "ci_low": -0.008789575489834703,
+    "ci_high": 0.009111768585578274,
+    "p": 0.981018981018981
+   },
+   "null_control": {
+    "bets": 4056.0,
+    "informed_expected_per_offered": 0.002069221549631468,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.002069221549631468,
+     "ci_low": 0.0019459298502778155,
+     "ci_high": 0.002185601762495499,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "offer+cap|0.1": {
+   "config": {
+    "name": "offer+cap",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": true
+   },
+   "overround": 0.1,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 0.9521981933876207,
+   "share_selections_shortened": 0.0478018066123793,
+   "bets": 19539.0,
+   "informed_expected_per_offered": 0.04132199571535116,
+   "informed_realised_per_offered": 0.02716776226041422,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.04132199571535116,
+    "ci_low": 0.038680025517135466,
+    "ci_high": 0.04399377270657212,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.02716776226041422,
+    "ci_low": 0.011773157854809932,
+    "ci_high": 0.04144374809618909,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 2320.0,
+    "informed_expected_per_offered": 0.0013669917063504349,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.001366991706350435,
+     "ci_low": 0.0012880698040433345,
+     "ci_high": 0.0014472633850798763,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+offer+cap|0.1": {
+   "config": {
+    "name": "start+offer+cap",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": true
+   },
+   "overround": 0.1,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 0.9528322876340497,
+   "share_selections_shortened": 0.04716771236595025,
+   "bets": 8815.0,
+   "informed_expected_per_offered": 0.008316652124795218,
+   "informed_realised_per_offered": -0.0034835282063918,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.008316652124795218,
+    "ci_low": 0.007367566860258244,
+    "ci_high": 0.009400411766691036,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.0034835282063917995,
+    "ci_low": -0.01592113229817829,
+    "ci_high": 0.008698798253837218,
+    "p": 0.5434565434565435
+   },
+   "null_control": {
+    "bets": 2209.0,
+    "informed_expected_per_offered": 0.001324866418689241,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.001324866418689241,
+     "ci_low": 0.0012487873511014813,
+     "ci_high": 0.0014051567106749625,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+power+offer+cap|0.1": {
+   "config": {
+    "name": "start+power+offer+cap",
+    "rule": "start",
+    "alloc": "power",
+    "offer": true,
+    "cap": true
+   },
+   "overround": 0.1,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 3304.0,
+   "informed_expected_per_offered": 0.0008113855904529232,
+   "informed_realised_per_offered": -0.0004929050593790384,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.0008113855904529234,
+    "ci_low": 0.0006809481385857963,
+    "ci_high": 0.0009623421645434943,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.0004929050593790384,
+    "ci_low": -0.0018755053547223836,
+    "ci_high": 0.0009601483818995172,
+    "p": 0.4595404595404595
+   },
+   "null_control": {
+    "bets": 54.0,
+    "informed_expected_per_offered": 1.4310749634864352e-08,
+    "informed_expected_per_offered_ci": {
+     "estimate": 1.4310749634864352e-08,
+     "ci_low": 8.885329488138882e-09,
+     "ci_high": 2.075810904401986e-08,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "base|0.15": {
+   "config": {
+    "name": "base",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.15,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 35242.0,
+   "informed_expected_per_offered": 0.08539407889609313,
+   "informed_realised_per_offered": 0.10632190407259842,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.08539407889609313,
+    "ci_low": 0.08145671703406768,
+    "ci_high": 0.08951881110685588,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.10632190407259841,
+    "ci_low": 0.05931666507541377,
+    "ci_high": 0.1730201368817976,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 4961.0,
+    "informed_expected_per_offered": 0.00902720665159579,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.00902720665159579,
+     "ci_low": 0.008282767850783301,
+     "ci_high": 0.00978572347773329,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "power|0.15": {
+   "config": {
+    "name": "power",
+    "rule": "appear",
+    "alloc": "power",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.15,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 29772.0,
+   "informed_expected_per_offered": 0.028456555473021252,
+   "informed_realised_per_offered": 0.02142151758017013,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.028456555473021252,
+    "ci_low": 0.027386987174164337,
+    "ci_high": 0.029657151293202056,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.021421517580170128,
+    "ci_low": 0.018807807848621978,
+    "ci_high": 0.023964458938670843,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 73.0,
+    "informed_expected_per_offered": 1.0629734801100197e-07,
+    "informed_expected_per_offered_ci": {
+     "estimate": 1.0629734801100197e-07,
+     "ci_low": 3.995703782625997e-08,
+     "ci_high": 2.367292471779648e-07,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "odds_ratio|0.15": {
+   "config": {
+    "name": "odds_ratio",
+    "rule": "appear",
+    "alloc": "odds_ratio",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.15,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 24530.0,
+   "informed_expected_per_offered": 0.029322272774475994,
+   "informed_realised_per_offered": 0.021735798256506223,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.029322272774475994,
+    "ci_low": 0.028132944139324836,
+    "ci_high": 0.030654181939861355,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.021735798256506223,
+    "ci_low": 0.018910259006474025,
+    "ci_high": 0.024593490348470026,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 0.0,
+    "informed_expected_per_offered": 0.0,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "p": 1.0
+    }
+   }
+  },
+  "start|0.15": {
+   "config": {
+    "name": "start",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.15,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 8836.0,
+   "informed_expected_per_offered": 0.010743164370446708,
+   "informed_realised_per_offered": 0.022187728167932866,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.010743164370446708,
+    "ci_low": 0.009609868863334313,
+    "ci_high": 0.011962102300868114,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.02218772816793287,
+    "ci_low": -0.017926350215530674,
+    "ci_high": 0.08627462915882862,
+    "p": 0.6233766233766234
+   },
+   "null_control": {
+    "bets": 4420.0,
+    "informed_expected_per_offered": 0.00811532892013854,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.008115328920138538,
+     "ci_low": 0.007509748611255072,
+     "ci_high": 0.008788759334733637,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+power|0.15": {
+   "config": {
+    "name": "start+power",
+    "rule": "start",
+    "alloc": "power",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.15,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 1150.0,
+   "informed_expected_per_offered": 0.0001737717516353076,
+   "informed_realised_per_offered": -0.00036934250422028693,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.0001737717516353076,
+    "ci_low": 0.00012851714961043835,
+    "ci_high": 0.00023163389285029326,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.0003693425042202868,
+    "ci_low": -0.000772501227787638,
+    "ci_high": 1.76807810238774e-05,
+    "p": 0.057942057942057944
+   },
+   "null_control": {
+    "bets": 81.0,
+    "informed_expected_per_offered": 3.173727811155425e-07,
+    "informed_expected_per_offered_ci": {
+     "estimate": 3.173727811155425e-07,
+     "ci_low": 1.1816955960878391e-07,
+     "ci_high": 6.175787701308242e-07,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+odds_ratio|0.15": {
+   "config": {
+    "name": "start+odds_ratio",
+    "rule": "start",
+    "alloc": "odds_ratio",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.15,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 680.0,
+   "informed_expected_per_offered": 0.0001619312602011609,
+   "informed_realised_per_offered": -0.0003449325646434334,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.0001619312602011609,
+    "ci_low": 0.00011066281753226841,
+    "ci_high": 0.0002251175189632497,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.0003449325646434335,
+    "ci_low": -0.0008025792611586726,
+    "ci_high": 5.5897744411409736e-05,
+    "p": 0.08591408591408592
+   },
+   "null_control": {
+    "bets": 1.0,
+    "informed_expected_per_offered": 1.3828526879099855e-10,
+    "informed_expected_per_offered_ci": {
+     "estimate": 1.3828526879099855e-10,
+     "ci_low": 0.0,
+     "ci_high": 4.166000977017822e-10,
+     "p": 0.7232767232767233
+    }
+   }
+  },
+  "offer|0.15": {
+   "config": {
+    "name": "offer",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": false
+   },
+   "overround": 0.15,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 15311.0,
+   "informed_expected_per_offered": 0.04016200654022692,
+   "informed_realised_per_offered": 0.06274802566953065,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.04016200654022692,
+    "ci_low": 0.037589325472912716,
+    "ci_high": 0.04272495686124602,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.06274802566953065,
+    "ci_low": -0.004052951560992085,
+    "ci_high": 0.1713441025850223,
+    "p": 0.0979020979020979
+   },
+   "null_control": {
+    "bets": 3078.0,
+    "informed_expected_per_offered": 0.008662706209361236,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.008662706209361236,
+     "ci_low": 0.008074641633204139,
+     "ci_high": 0.00918526266768402,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "cap|0.15": {
+   "config": {
+    "name": "cap",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": true
+   },
+   "overround": 0.15,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 0.9607017187711463,
+   "share_selections_shortened": 0.039298281228853704,
+   "bets": 32782.0,
+   "informed_expected_per_offered": 0.07657811889027778,
+   "informed_realised_per_offered": 0.07738283184917404,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.07657811889027778,
+    "ci_low": 0.07297211353327447,
+    "ci_high": 0.08054651035893814,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.07738283184917405,
+    "ci_low": 0.06133931124411225,
+    "ci_high": 0.09438808997020684,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 2253.0,
+    "informed_expected_per_offered": 0.001119182568333695,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.0011191825683336952,
+     "ci_low": 0.0010404008573441457,
+     "ci_high": 0.0012020602565963445,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+offer|0.15": {
+   "config": {
+    "name": "start+offer",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": false
+   },
+   "overround": 0.15,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 6654.0,
+   "informed_expected_per_offered": 0.012907141514015834,
+   "informed_realised_per_offered": 0.03897974413491253,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.012907141514015834,
+    "ci_low": 0.01170803923965491,
+    "ci_high": 0.014132440943075909,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.03897974413491251,
+    "ci_low": -0.025970851659790944,
+    "ci_high": 0.1447501896065733,
+    "p": 0.5934065934065934
+   },
+   "null_control": {
+    "bets": 2995.0,
+    "informed_expected_per_offered": 0.00858995452719254,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.00858995452719254,
+     "ci_low": 0.008008192571164446,
+     "ci_high": 0.00912489550415501,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+cap|0.15": {
+   "config": {
+    "name": "start+cap",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": true
+   },
+   "overround": 0.15,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 0.9639193395588036,
+   "share_selections_shortened": 0.03608066044119637,
+   "bets": 6722.0,
+   "informed_expected_per_offered": 0.004428172608474962,
+   "informed_realised_per_offered": -0.0013739304022871972,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.004428172608474962,
+    "ci_low": 0.003737154869814711,
+    "ci_high": 0.0052495440775022625,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.0013739304022871955,
+    "ci_low": -0.0076461442369142926,
+    "ci_high": 0.0058153162920037684,
+    "p": 0.6573426573426573
+   },
+   "null_control": {
+    "bets": 2033.0,
+    "informed_expected_per_offered": 0.0011774077245917738,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.0011774077245917738,
+     "ci_low": 0.0010813672194366001,
+     "ci_high": 0.001272857557911654,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "offer+cap|0.15": {
+   "config": {
+    "name": "offer+cap",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": true
+   },
+   "overround": 0.15,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 0.9533829484270013,
+   "share_selections_shortened": 0.04661705157299871,
+   "bets": 13414.0,
+   "informed_expected_per_offered": 0.031735339569656074,
+   "informed_realised_per_offered": 0.020836324332231315,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.03173533956965607,
+    "ci_low": 0.02947368036953196,
+    "ci_high": 0.03401899936811165,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.020836324332231315,
+    "ci_low": 0.008556508800784953,
+    "ci_high": 0.03316547447383511,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 1005.0,
+    "informed_expected_per_offered": 0.0006007713302342827,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.0006007713302342828,
+     "ci_low": 0.0005542822709126728,
+     "ci_high": 0.0006527521538283962,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+offer+cap|0.15": {
+   "config": {
+    "name": "start+offer+cap",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": true
+   },
+   "overround": 0.15,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 0.953928046989721,
+   "share_selections_shortened": 0.046071953010279,
+   "bets": 4835.0,
+   "informed_expected_per_offered": 0.0048270685904812614,
+   "informed_realised_per_offered": -0.002716398269035781,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.0048270685904812614,
+    "ci_low": 0.004151379082914495,
+    "ci_high": 0.005594098053188953,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.0027163982690357824,
+    "ci_low": -0.011547703055417025,
+    "ci_high": 0.007156950677654296,
+    "p": 0.5154845154845155
+   },
+   "null_control": {
+    "bets": 963.0,
+    "informed_expected_per_offered": 0.0005907848084754319,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.0005907848084754319,
+     "ci_low": 0.000542379520997126,
+     "ci_high": 0.0006410769660785112,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+power+offer+cap|0.15": {
+   "config": {
+    "name": "start+power+offer+cap",
+    "rule": "start",
+    "alloc": "power",
+    "offer": true,
+    "cap": true
+   },
+   "overround": 0.15,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 771.0,
+   "informed_expected_per_offered": 0.00018369357252951305,
+   "informed_realised_per_offered": -0.00028509126769327137,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.000183693572529513,
+    "ci_low": 0.0001348637109850489,
+    "ci_high": 0.00024269069849824272,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.00028509126769327137,
+    "ci_low": -0.0008473089629588631,
+    "ci_high": 0.00027135339049677646,
+    "p": 0.2817182817182817
+   },
+   "null_control": {
+    "bets": 15.0,
+    "informed_expected_per_offered": 5.074527263499604e-09,
+    "informed_expected_per_offered_ci": {
+     "estimate": 5.074527263499604e-09,
+     "ci_low": 2.169773694674354e-09,
+     "ci_high": 8.660656307907116e-09,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "base|0.2": {
+   "config": {
+    "name": "base",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.2,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 28930.0,
+   "informed_expected_per_offered": 0.07283417508749629,
+   "informed_realised_per_offered": 0.09547820220816729,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.07283417508749629,
+    "ci_low": 0.06925899313173459,
+    "ci_high": 0.07659756701024206,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.09547820220816729,
+    "ci_low": 0.05068727654452599,
+    "ci_high": 0.1591679024671254,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 3501.0,
+    "informed_expected_per_offered": 0.0074789016477372836,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.0074789016477372836,
+     "ci_low": 0.006775325608653863,
+     "ci_high": 0.008186849120089865,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "power|0.2": {
+   "config": {
+    "name": "power",
+    "rule": "appear",
+    "alloc": "power",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.2,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 25675.0,
+   "informed_expected_per_offered": 0.020786487328719214,
+   "informed_realised_per_offered": 0.013951256811400609,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.020786487328719214,
+    "ci_low": 0.01996867043369287,
+    "ci_high": 0.021684021845986237,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.013951256811400609,
+    "ci_low": 0.011953206984895605,
+    "ci_high": 0.015989627886224697,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 49.0,
+    "informed_expected_per_offered": 4.1100708267267533e-08,
+    "informed_expected_per_offered_ci": {
+     "estimate": 4.1100708267267533e-08,
+     "ci_low": 2.0523752383330798e-08,
+     "ci_high": 7.308400819650234e-08,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "odds_ratio|0.2": {
+   "config": {
+    "name": "odds_ratio",
+    "rule": "appear",
+    "alloc": "odds_ratio",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.2,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 19530.0,
+   "informed_expected_per_offered": 0.02087301475351932,
+   "informed_realised_per_offered": 0.013945521333687346,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.02087301475351932,
+    "ci_low": 0.019972910729424784,
+    "ci_high": 0.02188263192955067,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.013945521333687342,
+    "ci_low": 0.011716274797783827,
+    "ci_high": 0.01621693698364753,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 0.0,
+    "informed_expected_per_offered": 0.0,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "p": 1.0
+    }
+   }
+  },
+  "start|0.2": {
+   "config": {
+    "name": "start",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.2,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 5885.0,
+   "informed_expected_per_offered": 0.008257390866082471,
+   "informed_realised_per_offered": 0.02191136113022506,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.008257390866082468,
+    "ci_low": 0.0073252364152029195,
+    "ci_high": 0.009315234507323035,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.021911361130225057,
+    "ci_low": -0.015548208947278737,
+    "ci_high": 0.08375627466462118,
+    "p": 0.6053946053946054
+   },
+   "null_control": {
+    "bets": 3178.0,
+    "informed_expected_per_offered": 0.006723401181834673,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.006723401181834673,
+     "ci_low": 0.006176072116460399,
+     "ci_high": 0.007344097291134285,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+power|0.2": {
+   "config": {
+    "name": "start+power",
+    "rule": "start",
+    "alloc": "power",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.2,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 322.0,
+   "informed_expected_per_offered": 4.573407102549243e-05,
+   "informed_realised_per_offered": -0.00021670301691856792,
+   "informed_expected_per_offered_ci": {
+    "estimate": 4.573407102549243e-05,
+    "ci_low": 2.5913289850243868e-05,
+    "ci_high": 7.04089081029927e-05,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.00021670301691856792,
+    "ci_low": -0.00041286740866235686,
+    "ci_high": -3.151079976254537e-05,
+    "p": 0.02197802197802198
+   },
+   "null_control": {
+    "bets": 54.0,
+    "informed_expected_per_offered": 1.1954856924247605e-07,
+    "informed_expected_per_offered_ci": {
+     "estimate": 1.1954856924247605e-07,
+     "ci_low": 4.4997976029586394e-08,
+     "ci_high": 2.615099967419682e-07,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+odds_ratio|0.2": {
+   "config": {
+    "name": "start+odds_ratio",
+    "rule": "start",
+    "alloc": "odds_ratio",
+    "offer": false,
+    "cap": false
+   },
+   "overround": 0.2,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 166.0,
+   "informed_expected_per_offered": 4.2401903301429976e-05,
+   "informed_realised_per_offered": -0.00027153697510770304,
+   "informed_expected_per_offered_ci": {
+    "estimate": 4.2401903301429976e-05,
+    "ci_low": 2.270483916838385e-05,
+    "ci_high": 6.735987853507793e-05,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.000271536975107703,
+    "ci_low": -0.000474901578594873,
+    "ci_high": -9.052561664166994e-05,
+    "p": 0.005994005994005994
+   },
+   "null_control": {
+    "bets": 0.0,
+    "informed_expected_per_offered": 0.0,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.0,
+     "ci_low": 0.0,
+     "ci_high": 0.0,
+     "p": 1.0
+    }
+   }
+  },
+  "offer|0.2": {
+   "config": {
+    "name": "offer",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": false
+   },
+   "overround": 0.2,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 11283.0,
+   "informed_expected_per_offered": 0.03238901853227141,
+   "informed_realised_per_offered": 0.05700368978463444,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.03238901853227141,
+    "ci_low": 0.03019480453645246,
+    "ci_high": 0.034612758193069214,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.05700368978463443,
+    "ci_low": -0.00537200637442657,
+    "ci_high": 0.16016524180906752,
+    "p": 0.14985014985014986
+   },
+   "null_control": {
+    "bets": 2218.0,
+    "informed_expected_per_offered": 0.007093389445353048,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.007093389445353047,
+     "ci_low": 0.006576637934868105,
+     "ci_high": 0.0075802008416461595,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "cap|0.2": {
+   "config": {
+    "name": "cap",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": true
+   },
+   "overround": 0.2,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 0.9617471917715523,
+   "share_selections_shortened": 0.03825280822844769,
+   "bets": 26756.0,
+   "informed_expected_per_offered": 0.06514952896064066,
+   "informed_realised_per_offered": 0.06670668244526924,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.06514952896064068,
+    "ci_low": 0.06189680297802234,
+    "ci_high": 0.06871594956441693,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.06670668244526924,
+    "ci_low": 0.05227078544171833,
+    "ci_high": 0.081726970290171,
+    "p": 0.001998001998001998
+   },
+   "null_control": {
+    "bets": 1185.0,
+    "informed_expected_per_offered": 0.0006446121179205958,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.0006446121179205958,
+     "ci_low": 0.0005823764117791386,
+     "ci_high": 0.0007124907158585871,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+offer|0.2": {
+   "config": {
+    "name": "start+offer",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": false
+   },
+   "overround": 0.2,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 4429.0,
+   "informed_expected_per_offered": 0.009844503345232113,
+   "informed_realised_per_offered": 0.03897092217084514,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.009844503345232113,
+    "ci_low": 0.008878966498243594,
+    "ci_high": 0.010828888927038377,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.03897092217084515,
+    "ci_low": -0.02218380894854653,
+    "ci_high": 0.14276748064067527,
+    "p": 0.5674325674325674
+   },
+   "null_control": {
+    "bets": 2180.0,
+    "informed_expected_per_offered": 0.007049808213285965,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.007049808213285965,
+     "ci_low": 0.006519804755249737,
+     "ci_high": 0.007540476674523786,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+cap|0.2": {
+   "config": {
+    "name": "start+cap",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": false,
+    "cap": true
+   },
+   "overround": 0.2,
+   "offered": 147780,
+   "offer_retained": 1.0,
+   "selections_left_at_original_quote": 0.9647482744620381,
+   "share_selections_shortened": 0.03525172553796183,
+   "bets": 4036.0,
+   "informed_expected_per_offered": 0.0027961224206598857,
+   "informed_realised_per_offered": -0.0018093339854490834,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.0027961224206598857,
+    "ci_low": 0.002281420186685297,
+    "ci_high": 0.003412129562910422,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.001809333985449083,
+    "ci_low": -0.006764426780096536,
+    "ci_high": 0.004092751744614418,
+    "p": 0.4915084915084915
+   },
+   "null_control": {
+    "bets": 1128.0,
+    "informed_expected_per_offered": 0.0007294489277543442,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.0007294489277543442,
+     "ci_low": 0.0006500722075833447,
+     "ci_high": 0.000810966767608665,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "offer+cap|0.2": {
+   "config": {
+    "name": "offer+cap",
+    "rule": "appear",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": true
+   },
+   "overround": 0.2,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 0.9544508966315134,
+   "share_selections_shortened": 0.04554910336848663,
+   "bets": 9633.0,
+   "informed_expected_per_offered": 0.025180973207662608,
+   "informed_realised_per_offered": 0.014993802210069235,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.025180973207662608,
+    "ci_low": 0.023178860339232745,
+    "ci_high": 0.027180343716190925,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": 0.014993802210069239,
+    "ci_low": 0.0056689197194399,
+    "ci_high": 0.02472816206047335,
+    "p": 0.003996003996003996
+   },
+   "null_control": {
+    "bets": 458.0,
+    "informed_expected_per_offered": 0.0002793348468385211,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.000279334846838521,
+     "ci_low": 0.0002489939638175994,
+     "ci_high": 0.0003134280485092924,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+offer+cap|0.2": {
+   "config": {
+    "name": "start+offer+cap",
+    "rule": "start",
+    "alloc": "proportional",
+    "offer": true,
+    "cap": true
+   },
+   "overround": 0.2,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 0.9549403728919147,
+   "share_selections_shortened": 0.04505962710808526,
+   "bets": 2843.0,
+   "informed_expected_per_offered": 0.002927574734689317,
+   "informed_realised_per_offered": -0.002736738854997696,
+   "informed_expected_per_offered_ci": {
+    "estimate": 0.002927574734689317,
+    "ci_low": 0.0024366979039177764,
+    "ci_high": 0.0034780729952059615,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.0027367388549976966,
+    "ci_low": -0.009031687330697674,
+    "ci_high": 0.004826526095575828,
+    "p": 0.4035964035964036
+   },
+   "null_control": {
+    "bets": 450.0,
+    "informed_expected_per_offered": 0.00027488554501621157,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.00027488554501621157,
+     "ci_low": 0.0002432399089434393,
+     "ci_high": 0.0003102601033795627,
+     "p": 0.001998001998001998
+    }
+   }
+  },
+  "start+power+offer+cap|0.2": {
+   "config": {
+    "name": "start+power+offer+cap",
+    "rule": "start",
+    "alloc": "power",
+    "offer": true,
+    "cap": true
+   },
+   "overround": 0.2,
+   "offered": 89892,
+   "offer_retained": 0.6082825822168088,
+   "selections_left_at_original_quote": 1.0,
+   "share_selections_shortened": 0.0,
+   "bets": 206.0,
+   "informed_expected_per_offered": 4.261010684228949e-05,
+   "informed_realised_per_offered": -0.00028728760517995677,
+   "informed_expected_per_offered_ci": {
+    "estimate": 4.261010684228949e-05,
+    "ci_low": 2.5429539323885742e-05,
+    "ci_high": 6.707618524788832e-05,
+    "p": 0.001998001998001998
+   },
+   "informed_realised_per_offered_ci": {
+    "estimate": -0.0002872876051799568,
+    "ci_low": -0.0005655514636626302,
+    "ci_high": -3.383990209813356e-05,
+    "p": 0.03796203796203796
+   },
+   "null_control": {
+    "bets": 7.0,
+    "informed_expected_per_offered": 2.0993556224523035e-09,
+    "informed_expected_per_offered_ci": {
+     "estimate": 2.0993556224523035e-09,
+     "ci_low": 3.528019649755781e-10,
+     "ci_high": 4.486658578830125e-09,
+     "p": 0.007992007992007992
+    }
+   }
+  }
+ },
+ "stake_limits": {
+  "loss_limit_per_match": 0.5,
+  "overround": 0.1,
+  "alloc": "proportional",
+  "rules": {
+   "appear": {
+    "pooled": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 18.06953927781578,
+     "max_stake": 0.02767087706623803,
+     "test_expected_per_match_at_unit_stake": 19.780906534821867,
+     "test_expected_per_match_at_max_stake": 0.5473550329838004
+    },
+    "band:rotation": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 12.852501329888259,
+     "max_stake": 0.03890293314634864,
+     "test_expected_per_match_at_unit_stake": 13.705854551507235,
+     "test_expected_per_match_at_max_stake": 0.5331979433308642
+    },
+    "band:likely": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 3.74921551196428,
+     "max_stake": 0.13336123207759834,
+     "test_expected_per_match_at_unit_stake": 4.27206670275096,
+     "test_expected_per_match_at_max_stake": 0.5697280789965511
+    },
+    "band:nailed": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 1.4789423029023632,
+     "max_stake": 0.33807944976539694,
+     "test_expected_per_match_at_unit_stake": 1.802985280563673,
+     "test_expected_per_match_at_max_stake": 0.6095522715880765
+    },
+    "market:shots_1plus": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 3.1455840888149273,
+     "max_stake": 0.1589529912037325,
+     "test_expected_per_match_at_unit_stake": 3.441744717968689,
+     "test_expected_per_match_at_max_stake": 0.5470756178807697
+    },
+    "market:shots_2plus": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 3.2539426548809534,
+     "max_stake": 0.15365974543220481,
+     "test_expected_per_match_at_unit_stake": 3.602893301272576,
+     "test_expected_per_match_at_max_stake": 0.55361966749294
+    },
+    "market:shots_3plus": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 4.391104688320482,
+     "max_stake": 0.11386656331148437,
+     "test_expected_per_match_at_unit_stake": 4.556288434679782,
+     "test_expected_per_match_at_max_stake": 0.5188089055128494
+    },
+    "market:sot_1plus": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 1.9112992435562115,
+     "max_stake": 0.2616021544955396,
+     "test_expected_per_match_at_unit_stake": 2.1097807097024,
+     "test_expected_per_match_at_max_stake": 0.5519231791712764
+    },
+    "market:sot_2plus": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 3.5847273727911833,
+     "max_stake": 0.13948062097974387,
+     "test_expected_per_match_at_unit_stake": 4.083598180448259,
+     "test_expected_per_match_at_max_stake": 0.5695828100406753
+    },
+    "market:anytime_scorer": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 1.7828812294520278,
+     "max_stake": 0.28044492910707014,
+     "test_expected_per_match_at_unit_stake": 1.9866011907501615,
+     "test_expected_per_match_at_max_stake": 0.5571322301039502
+    }
+   },
+   "start": {
+    "pooled": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 2.435434030145615,
+     "max_stake": 0.2053022146406096,
+     "test_expected_per_match_at_unit_stake": 2.8691288353124813,
+     "test_expected_per_match_at_max_stake": 0.5890385039788852
+    },
+    "band:rotation": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 0.5883585082849906,
+     "max_stake": 0.8498219928143008,
+     "test_expected_per_match_at_unit_stake": 0.7581623835399931,
+     "test_expected_per_match_at_max_stake": 0.6443030676567972
+    },
+    "band:likely": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 0.6769027515654403,
+     "max_stake": 0.7386585426690527,
+     "test_expected_per_match_at_unit_stake": 0.8082825126307539,
+     "test_expected_per_match_at_max_stake": 0.5970447828447129
+    },
+    "band:nailed": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 1.1790377155246936,
+     "max_stake": 0.42407464444637444,
+     "test_expected_per_match_at_unit_stake": 1.3026839391417346,
+     "test_expected_per_match_at_max_stake": 0.5524352283175336
+    },
+    "market:shots_1plus": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 0.20354067929544534,
+     "max_stake": 2.456511404652606,
+     "test_expected_per_match_at_unit_stake": 0.19368550179731442,
+     "test_expected_per_match_at_max_stake": 0.47579064408096566
+    },
+    "market:shots_2plus": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 0.26538814061540894,
+     "max_stake": 1.884032944503659,
+     "test_expected_per_match_at_unit_stake": 0.34839776671061184,
+     "test_expected_per_match_at_max_stake": 0.6563928702742929
+    },
+    "market:shots_3plus": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 1.0034442598489721,
+     "max_stake": 0.49828378117909083,
+     "test_expected_per_match_at_unit_stake": 0.9759543415318933,
+     "test_expected_per_match_at_max_stake": 0.4863022195566616
+    },
+    "market:sot_1plus": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 0.06479299465337701,
+     "max_stake": 7.7168836334058835,
+     "test_expected_per_match_at_unit_stake": 0.08665278755292731,
+     "test_expected_per_match_at_max_stake": 0.6686894780561818
+    },
+    "market:sot_2plus": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 0.7544134985141333,
+     "max_stake": 0.6627665080022861,
+     "test_expected_per_match_at_unit_stake": 1.0521292809324052,
+     "test_expected_per_match_at_max_stake": 0.6973160494905265
+    },
+    "market:anytime_scorer": {
+     "expected_informed_profit_per_match_tune_at_unit_stake": 0.14385445721827905,
+     "max_stake": 3.47573519561733,
+     "test_expected_per_match_at_unit_stake": 0.21230915678732926,
+     "test_expected_per_match_at_max_stake": 0.7379304085975583
+    }
+   }
+  }
+ }
+}
