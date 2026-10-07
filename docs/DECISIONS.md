@@ -353,4 +353,19 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
 ### D-052 Post-hoc additions to Pillar C (labelled; D-051 otherwise followed as written)
 - **Why:** the first complete Pillar C run showed that no pooled prop cell reaches the D-051 neutralising threshold inside the pre-registered margin grid (0 to 60%), because lineup shocks for rotation-risk players are far larger than any plausible proportional margin; a "not reached" result is reported as such, but alone it gives no policy comparison.
 - **Additions, all labelled post-hoc in the metrics and the gate report:** (1) an extended search grid for the neutralising margin, 0 to 500% in steps of 5% (`configs/phase6.yaml`), used for the illustrative policy; cells unreached even at 500% are capped; the pre-registered grid results are kept next to them; (2) a null control: the lineups probabilities replaced by an independent re-simulation of the opening state, to size the profit that Monte Carlo noise alone creates; (3) SGA propositions need at least 200 effective simulations in both states; (4) the stake-limit rule is evaluated at the 5% reference margin. No result was selected among alternatives.
-- **Status:** Locked (implementer, pending lead audit)
+- **Status:** Locked (lead, Gate 6 audit, 2026-10-07) as a record of what was run. Its policy output is superseded for all reporting by D-053.
+
+### D-053 Pillar C policy analysis redone with realistic levers (Phase 6b)
+- **Problem found in the Gate 6 audit:** the "neutralising margin" policy (260% pooled, 330% rotation, 165% nailed) is not an economically meaningful quantity. A proportional margin above about 100% pushes quoted odds below 1.0 for most selections; what remains bettable is the long-shot tail, so the search is driven by tail selections and Monte Carlo noise. It also contradicts the value-of-information result (nailed starters show no measurable information gain yet "need" 165%). These numbers must not appear in the README, report, evidence pack or CV, except as a one-line diagnostic: "no realistic proportional margin neutralises an informed pre-lineup bettor; the edge is concentrated in rotation-risk players and long-shot selections".
+- **Decision:** replace the policy section with a comparison of the levers books actually use, each evaluated against the same informed bettor, fitted or chosen on matchweeks 10 to 19 only and evaluated once on 20 to 38:
+  1. **Settlement rule:** void-on-appearance (current, D-030) vs **void-if-not-starting** (props priced conditional on starting; opening price uses P(start)-conditional minutes). Measure how much of the informed edge each rule leaves.
+  2. **Margin allocation** within a realistic overround (5%, 10%, 15%, 20% only): proportional vs power vs odds-ratio, which load more margin on long shots.
+  3. **Offer rule:** do not offer pre-lineup props for the rotation band (opening P(start) < 0.5); report the share of propositions removed and the edge removed.
+  4. **Odds cap:** a maximum quoted price for pre-lineup props (grid chosen on tuning window, D-040).
+  5. **Stake limits:** keep the existing stake-limit result, recomputed under the chosen settlement rule.
+- **Reporting:** for each lever and combination, informed expected and realised profit per offered proposition with CIs, plus the share of the book's offer that survives (a lever that removes everything is not a policy). Null-control noise floor shown on every chart. All labelled SIMULATION and UPPER BOUND.
+- **Status:** Locked (lead, 2026-10-07)
+
+### D-054 Pillar B pre-registration (must be committed before any in-play test result)
+- **Decision:** before evaluating Pillar B on matchweeks 20 to 38, the implementer commits a decision fixing: markets (final 1X2, final total over 0.5 to 4.5 given the current score, BTTS); checkpoints (elapsed real minutes 15, 30, 45 first-half end, 60, 75, 85); state strata (level, one-goal margin, two-plus, after a dismissal); the model family and its parameters; the comparison (model vs Phase 2 naive in-play baseline) with paired bootstrap and BH families.
+- **Status:** Locked (lead, 2026-10-07)

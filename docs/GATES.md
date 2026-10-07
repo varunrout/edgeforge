@@ -430,3 +430,11 @@ Everything else in the efficiency map is **not distinguishable from zero**: no l
 - The opening state prices only candidates; 4.9% of appearing players (2.5% of shots) are outside it and cannot be bet.
 - The informed bettor's profit is computed with the same model for both prices; model error in the opening state (for example the Phase 4 P(start) calibration) is part of the "shock".
 - A first Pillar C run failed before producing any result (the tuning window had no opening-state start probabilities); the fix is in `a75bef4`. No result from it was used.
+
+### Lead audit of Gate 6 (2026-10-07): measurement PASSED; policy section REJECTED and redone (D-053); CI criterion not met
+- **Accepted (criteria 1 to 5, 7 to 9):** pre-registration verified (`00c6500`); the shock measurement and value of information are solid and are Pillar C's headline. Knowing lineups moves a rotation-risk player's prop price by more than 25% in about 4 of 5 cases vs about 1 in 6 for nailed starters, and improves log loss in all six prop markets, driven by rotation and likely players. The null control is a good addition.
+- **Rejected (criterion 6):** neutralising proportional margins of 165 to 485% are not economic prices (quoted odds fall below 1.0 for most selections; the residual edge sits in long shots and noise) and contradict the nailed-starter value-of-information null. Redo with realistic levers per D-053 (settlement rule, long-shot-weighted margin allocation within 5 to 20%, offer rule, odds cap, stake limits).
+- **Criterion 10 not met:** the report says "green at `<CI_SHA>`" (placeholder), and `ci_local.json` is from 2026-10-05 at `07419b9`, before any Phase 6 code. Re-run `edgeforge ci-local` at the current HEAD.
+- Frailty experiment (D-049): not adopted (theta chosen as 0 on the fit window; no joint gain). Accepted; the absolute under-prediction of multi-player templates stays a documented limitation.
+- Locked: D-052 (record only). New: D-053 (policy redo), D-054 (Pillar B pre-registration).
+- Phase 6b, then Phase 7, may proceed.
