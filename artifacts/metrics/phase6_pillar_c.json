@@ -1,12 +1,16 @@
 {
  "provenance": {
-  "git_sha": "a75bef41b631e94f98f15f5d1521a3c734d9fc2e",
+  "git_sha": "ec1d218a96637cb597421caa806660a5fc6210e0",
   "data_version": "588d4619e62984b7",
   "command": "edgeforge phase6 run",
   "config_hash": "39f96c7271994bec",
-  "created_at": "2026-10-07T18:13:44Z",
+  "created_at": "2026-10-07T19:00:22Z",
   "seed": 20261004,
-  "frailty_theta": 0.0
+  "frailty_theta": 0.0,
+  "collected_at_git_sha": {
+   "tune": "ec1d218a96637cb597421caa806660a5fc6210e0",
+   "test": "ec1d218a96637cb597421caa806660a5fc6210e0"
+  }
  },
  "shock": {
   "label": "UPPER BOUND (D-016, D-029)",
@@ -115381,7 +115385,7 @@
   "label": "ILLUSTRATIVE",
   "fitted_on": "tuning window mw10-19",
   "epsilon": 0.001,
-  "neutralising_margins_tune": {
+  "neutralising_margins_tune_preregistered_grid": {
    "props|all": null,
    "props|shots_1plus": null,
    "props|shots_2plus": null,
@@ -115432,9 +115436,114 @@
    "sga|band:likely": 0.43,
    "sga|band:nailed": 0.15
   },
-  "flat_pooled_props": null,
-  "flat_worst_cell_props": 0.41,
-  "flat_pooled_sga": null,
+  "neutralising_margins_tune": {
+   "props|all": 2.6,
+   "props|shots_1plus": 2.65,
+   "props|shots_2plus": 2.0,
+   "props|shots_3plus": 3.75,
+   "props|sot_1plus": 1.1,
+   "props|sot_2plus": 2.85,
+   "props|anytime_scorer": 1.25,
+   "props|band:rotation": 3.3,
+   "props|band:likely": 1.95,
+   "props|band:nailed": 1.65,
+   "props|shots_1plus|rotation": 1.1,
+   "props|shots_1plus|likely": 3.35,
+   "props|shots_1plus|nailed": 2.2,
+   "props|shots_2plus|rotation": 2.45,
+   "props|shots_2plus|likely": 1.5,
+   "props|shots_2plus|nailed": 0.8,
+   "props|shots_3plus|rotation": 4.85,
+   "props|shots_3plus|likely": 1.35,
+   "props|shots_3plus|nailed": 2.45,
+   "props|sot_1plus|rotation": 1.25,
+   "props|sot_1plus|likely": 0.75,
+   "props|sot_1plus|nailed": 0.45,
+   "props|sot_2plus|rotation": 3.5,
+   "props|sot_2plus|likely": 0.85,
+   "props|sot_2plus|nailed": 1.8,
+   "props|anytime_scorer|rotation": 1.5,
+   "props|anytime_scorer|likely": 0.4,
+   "props|anytime_scorer|nailed": 0.25,
+   "sga|all": 0.7,
+   "sga|T01": 0.5,
+   "sga|T02": 0.45,
+   "sga|T03": 0.45,
+   "sga|T04": 0.6,
+   "sga|T05": 0.75,
+   "sga|T06": 0.9,
+   "sga|T07": 0.6,
+   "sga|T08": 0.5,
+   "sga|T09": 0.6,
+   "sga|T10": 1.0,
+   "sga|T11": 0.8,
+   "sga|T12": 1.0,
+   "sga|T13": 0.6,
+   "sga|legs:2": 0.7,
+   "sga|legs:3": 0.5,
+   "sga|legs:4": 0.75,
+   "sga|legs:5": 1.0,
+   "sga|band:rotation": 1.35,
+   "sga|band:likely": 0.45,
+   "sga|band:nailed": 0.15
+  },
+  "neutralising_margins_test_extended_grid": {
+   "props|all": 2.8,
+   "props|shots_1plus": 3.2,
+   "props|shots_2plus": 2.1,
+   "props|shots_3plus": 3.6,
+   "props|sot_1plus": 1.1,
+   "props|sot_2plus": 3.25,
+   "props|anytime_scorer": 1.3,
+   "props|band:rotation": 3.45,
+   "props|band:likely": 2.05,
+   "props|band:nailed": 2.2,
+   "props|shots_1plus|rotation": 1.15,
+   "props|shots_1plus|likely": 3.45,
+   "props|shots_1plus|nailed": 3.85,
+   "props|shots_2plus|rotation": 2.5,
+   "props|shots_2plus|likely": 1.55,
+   "props|shots_2plus|nailed": 1.45,
+   "props|shots_3plus|rotation": 4.75,
+   "props|shots_3plus|likely": 1.45,
+   "props|shots_3plus|nailed": 2.1,
+   "props|sot_1plus|rotation": 1.25,
+   "props|sot_1plus|likely": 0.85,
+   "props|sot_1plus|nailed": 0.7,
+   "props|sot_2plus|rotation": 4.75,
+   "props|sot_2plus|likely": 1.15,
+   "props|sot_2plus|nailed": 2.25,
+   "props|anytime_scorer|rotation": 1.6,
+   "props|anytime_scorer|likely": 0.45,
+   "props|anytime_scorer|nailed": 0.35,
+   "sga|all": 0.85,
+   "sga|T01": 0.95,
+   "sga|T02": 0.45,
+   "sga|T03": 0.45,
+   "sga|T04": 0.9,
+   "sga|T05": 0.8,
+   "sga|T06": 0.95,
+   "sga|T07": 0.5,
+   "sga|T08": 0.6,
+   "sga|T09": 0.7,
+   "sga|T10": 2.9,
+   "sga|T11": 0.95,
+   "sga|T12": 0.95,
+   "sga|T13": 0.65,
+   "sga|legs:2": 0.7,
+   "sga|legs:3": 0.65,
+   "sga|legs:4": 0.9,
+   "sga|legs:5": 2.9,
+   "sga|band:rotation": 1.15,
+   "sga|band:likely": 0.9,
+   "sga|band:nailed": 0.2
+  },
+  "extended_grid_note": "POST-HOC: the D-051 grid (0-60%) is too short for most cells; margins above 60% come from the extended grid; a cell still unreached at the cap is set to the cap",
+  "extended_grid_cap": 5.0,
+  "preregistered_grid_ceiling": 0.6,
+  "flat_pooled_props": 2.6,
+  "flat_worst_cell_props": 4.85,
+  "flat_pooled_sga": 0.7,
   "evaluation_on_test": {
    "props_no_margin": {
     "offered": 119970,
@@ -115476,76 +115585,114 @@
    },
    "props_flat_pooled": {
     "offered": 119970,
-    "bets": 0.0,
-    "informed_expected_per_offered": 0.0,
+    "bets": 504.0,
+    "informed_expected_per_offered": 0.0012246979813115796,
     "informed_expected_per_offered_ci": {
-     "estimate": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.0,
-     "p": 1.0
+     "estimate": 0.0012246979813115798,
+     "ci_low": 0.0009852946407821206,
+     "ci_high": 0.0014896856618300672,
+     "p": 0.001998001998001998
     },
-    "informed_realised_per_offered": 0.0,
+    "informed_realised_per_offered": -0.0012160485204545095,
     "informed_realised_per_offered_ci": {
-     "estimate": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.0,
-     "p": 1.0
+     "estimate": -0.0012160485204545095,
+     "ci_low": -0.002113345495839913,
+     "ci_high": -0.00016283294300842839,
+     "p": 0.01998001998001998
     },
-    "mean_margin_charged": null
+    "mean_margin_charged": 2.6000000000000005
    },
    "props_flat_worst_cell": {
     "offered": 119970,
-    "bets": 15534.0,
-    "informed_expected_per_offered": 0.05014591681125671,
+    "bets": 55.0,
+    "informed_expected_per_offered": 0.00014969283853706296,
     "informed_expected_per_offered_ci": {
-     "estimate": 0.05014591681125671,
-     "ci_low": 0.047074791926689626,
-     "ci_high": 0.05331169406041791,
+     "estimate": 0.00014969283853706294,
+     "ci_low": 8.026926610092058e-05,
+     "ci_high": 0.00023472896164684833,
      "p": 0.001998001998001998
     },
-    "informed_realised_per_offered": 0.06665446547223233,
+    "informed_realised_per_offered": -0.0002924615157974543,
     "informed_realised_per_offered_ci": {
-     "estimate": 0.06665446547223233,
-     "ci_low": 0.02770196183986846,
-     "ci_high": 0.1309001970281604,
+     "estimate": -0.0002924615157974543,
+     "ci_low": -0.00044199851325688245,
+     "ci_high": -0.00015396221157934942,
      "p": 0.001998001998001998
     },
-    "mean_margin_charged": 0.4100000000000001
+    "mean_margin_charged": 4.85
    },
    "props_differentiated": {
     "offered": 119970,
-    "bets": 372.0,
-    "informed_expected_per_offered": 0.00034074557115292106,
+    "bets": 999.0,
+    "informed_expected_per_offered": 0.0015746098642195163,
     "informed_expected_per_offered_ci": {
-     "estimate": 0.00034074557115292106,
-     "ci_low": 0.0002637647083160501,
-     "ci_high": 0.00042755005553855196,
+     "estimate": 0.0015746098642195163,
+     "ci_low": 0.0012822140826460524,
+     "ci_high": 0.0019149584998979187,
      "p": 0.001998001998001998
     },
-    "informed_realised_per_offered": -0.0012078156042365754,
+    "informed_realised_per_offered": -0.002754516036971402,
     "informed_realised_per_offered_ci": {
-     "estimate": -0.0012078156042365754,
-     "ci_low": -0.0017803781511379036,
-     "ci_high": -0.0005383893754975629,
+     "estimate": -0.0027545160369714023,
+     "ci_low": -0.0039562816607354775,
+     "ci_high": -0.0014694929229483037,
      "p": 0.001998001998001998
     },
-    "mean_margin_charged": null
+    "mean_margin_charged": 1.682554805368009
+   },
+   "props_differentiated_capped_at_60pct": {
+    "offered": 119970,
+    "bets": 10296.0,
+    "informed_expected_per_offered": 0.032010578161646264,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.03201057816164627,
+     "ci_low": 0.029787556309504568,
+     "ci_high": 0.034260690755363296,
+     "p": 0.001998001998001998
+    },
+    "informed_realised_per_offered": 0.021324346528303922,
+    "informed_realised_per_offered_ci": {
+     "estimate": 0.021324346528303922,
+     "ci_low": 0.010214550682273033,
+     "ci_high": 0.03270111414582892,
+     "p": 0.001998001998001998
+    },
+    "mean_margin_charged": 0.5612219721597065
+   },
+   "props_flat_60pct": {
+    "offered": 119970,
+    "bets": 10037.0,
+    "informed_expected_per_offered": 0.03180531045824438,
+    "informed_expected_per_offered_ci": {
+     "estimate": 0.03180531045824438,
+     "ci_low": 0.02960381142419187,
+     "ci_high": 0.0340404052525874,
+     "p": 0.001998001998001998
+    },
+    "informed_realised_per_offered": 0.022334593776883592,
+    "informed_realised_per_offered_ci": {
+     "estimate": 0.022334593776883592,
+     "ci_low": 0.011344474380359126,
+     "ci_high": 0.033875827896182216,
+     "p": 0.001998001998001998
+    },
+    "mean_margin_charged": 0.5999999999999999
    },
    "props_margin_charged_by_band": {
     "differentiated": {
-     "rotation": null,
-     "likely": null,
-     "nailed": null
+     "rotation": 2.441666666666667,
+     "likely": 1.366666666666667,
+     "nailed": 1.3250000000000002
     },
     "flat_pooled": {
-     "rotation": null,
-     "likely": null,
-     "nailed": null
+     "rotation": 2.6000000000000005,
+     "likely": 2.6,
+     "nailed": 2.6
     },
     "flat_worst_cell": {
-     "rotation": 0.4100000000000001,
-     "likely": 0.4100000000000001,
-     "nailed": 0.41000000000000003
+     "rotation": 4.8500000000000005,
+     "likely": 4.8500000000000005,
+     "nailed": 4.8500000000000005
     }
    },
    "sga_flat_5pct": {
@@ -115569,41 +115716,41 @@
    },
    "sga_flat_pooled": {
     "offered": 14842,
-    "bets": 0.0,
-    "informed_expected_per_offered": 0.0,
+    "bets": 83.0,
+    "informed_expected_per_offered": 0.0013618505426424878,
     "informed_expected_per_offered_ci": {
-     "estimate": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.0,
-     "p": 1.0
+     "estimate": 0.0013618505426424878,
+     "ci_low": 0.00037501170104475585,
+     "ci_high": 0.0030629139607117628,
+     "p": 0.001998001998001998
     },
-    "informed_realised_per_offered": 0.0,
+    "informed_realised_per_offered": -0.0004035641154639664,
     "informed_realised_per_offered_ci": {
-     "estimate": 0.0,
-     "ci_low": 0.0,
-     "ci_high": 0.0,
-     "p": 1.0
+     "estimate": -0.0004035641154639664,
+     "ci_low": -0.005888955244226548,
+     "ci_high": 0.007113890839910774,
+     "p": 0.8271728271728271
     },
-    "mean_margin_charged": null
+    "mean_margin_charged": 0.6999999999999998
    },
    "sga_differentiated_by_template": {
     "offered": 14842,
-    "bets": 55.0,
-    "informed_expected_per_offered": 0.000659746994930955,
+    "bets": 88.0,
+    "informed_expected_per_offered": 0.0011927537689941487,
     "informed_expected_per_offered_ci": {
-     "estimate": 0.0006597469949309551,
-     "ci_low": 8.692521752785715e-05,
-     "ci_high": 0.001642681951085576,
+     "estimate": 0.0011927537689941487,
+     "ci_low": 0.00023635555183249674,
+     "ci_high": 0.0028563106685829424,
      "p": 0.001998001998001998
     },
-    "informed_realised_per_offered": -0.0013287904322418728,
+    "informed_realised_per_offered": -0.0042945236675364425,
     "informed_realised_per_offered_ci": {
-     "estimate": -0.0013287904322418728,
-     "ci_low": -0.004741014806772335,
-     "ci_high": 0.003206690846523326,
-     "p": 0.5154845154845155
+     "estimate": -0.0042945236675364425,
+     "ci_low": -0.007310540889477297,
+     "ci_high": -0.00172517426169328,
+     "p": 0.001998001998001998
     },
-    "mean_margin_charged": null
+    "mean_margin_charged": 0.6770448726586714
    }
   },
   "stake_limit": {
