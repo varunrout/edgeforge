@@ -109,6 +109,17 @@ def stage_starters(d: P4Data, guard: SplitGuard, seed: int) -> tuple[dict[str, A
         widen_high=lambda x: x * 3,
     )
     c_best = require_tuned(tuned)
+    # tuning-window predictions at the chosen C (walk-forward, no test match involved); the
+    # Pillar C policy is fitted on the tuning window and needs opening-state prices there
+    p_tune = walk_forward(
+        tv,
+        tune,
+        fit_c(c_best),
+        lambda m, g: m.predict_proba(g),
+        guard,
+        width=3,
+        context="start-tune",
+    )
     # ---- test window: only now do test rows get scored
     te = d.cand[d.cand["split"] == "test"].reset_index(drop=True)
     pool = d.cand.reset_index(drop=True)
@@ -169,7 +180,10 @@ def stage_starters(d: P4Data, guard: SplitGuard, seed: int) -> tuple[dict[str, A
     }
     pred = te2[["sb_match_id", "player_id", "team_id", "p_out", "p_bench", "p_start"]].copy()
     pred["p_start_baseline"] = base
-    return res, pred
+    tune_pred = tune[["sb_match_id", "player_id", "team_id"]].copy().reset_index(drop=True)
+    tune_pred[["p_out", "p_bench", "p_start"]] = p_tune
+    tune_pred["p_start_baseline"] = np.nan
+    return res, pd.concat([tune_pred, pred], ignore_index=True)
 
 
 # ------------------------------------------------------------------------------- minutes
