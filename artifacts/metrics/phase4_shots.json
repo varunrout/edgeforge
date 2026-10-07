@@ -1,58 +1,58 @@
 {
  "provenance": {
-  "git_sha": "811070b4b08bc7afc34e31d25dff3c69f36211cd",
-  "data_version": "ab7850c097da4492",
+  "git_sha": "a75bef41b631e94f98f15f5d1521a3c734d9fc2e",
+  "data_version": "588d4619e62984b7",
   "command": "edgeforge phase4 run",
   "config_hash": "39f96c7271994bec",
-  "created_at": "2026-10-05T10:19:13Z",
+  "created_at": "2026-10-07T06:17:14Z",
   "seed": 20261004
  },
  "team_shots": {
   "mapping_note": "football-data HS/AS ratings mapped to StatsBomb shot definition by log-linear Poisson regression, refitted weekly",
   "tuning_window_log_lik": {
    "poisson": -2.85104054484797,
-   "negative_binomial": -2.816819213003021,
+   "negative_binomial": -2.8168192129944867,
    "chosen": "negative_binomial"
   },
-  "median_alpha_tune": 0.04205968243496187,
+  "median_alpha_tune": 0.04205968240081138,
   "n_test_team_rows": 1516,
   "test_mean_log_lik": {
-   "chosen_model": -2.843812789994752,
+   "chosen_model": -2.843812789990213,
    "poisson": -2.884010346726196,
-   "negative_binomial": -2.843812789994752,
-   "league_mean_baseline_poisson": -3.159730066182964
+   "negative_binomial": -2.843812789990213,
+   "league_mean_baseline_poisson": -3.1597300661829646
   },
   "paired_chosen_minus_baseline_log_lik": {
-   "estimate": 0.31591727618821225,
-   "ci_low": 0.26586391354096706,
-   "ci_high": 0.37080929568767823,
+   "estimate": 0.315917276192751,
+   "ci_low": 0.2658639135531942,
+   "ci_high": 0.37080929569213134,
    "p": 0.001998001998001998,
    "n_rows": 1516.0,
    "n_clusters": 758.0
   },
   "paired_nb_minus_poisson_log_lik": {
-   "estimate": 0.040197556731444435,
-   "ci_low": 0.023052562136870267,
-   "ci_high": 0.057138907077519153,
+   "estimate": 0.04019755673598316,
+   "ci_low": 0.02305256214758799,
+   "ci_high": 0.05713890707790749,
    "p": 0.001998001998001998,
    "n_rows": 1516.0,
    "n_clusters": 758.0
   },
   "pit_histogram_10": [
-   0.09960422163588391,
-   0.09630606860158311,
-   0.09762532981530343,
-   0.09564643799472296,
-   0.10290237467018469,
-   0.08575197889182058,
-   0.12137203166226913,
+   0.10356200527704486,
+   0.09828496042216359,
+   0.09696569920844327,
    0.09498680738786279,
-   0.10686015831134564,
-   0.09894459102902374
+   0.09300791556728233,
+   0.09894459102902374,
+   0.11609498680738786,
+   0.09102902374670185,
+   0.10356200527704486,
+   0.10356200527704486
   ],
-  "mean_pred": 12.36808339937017,
+  "mean_pred": 12.368083399370166,
   "mean_obs": 12.444591029023746,
-  "mae": 3.375588864925946,
+  "mae": 3.3755888649259465,
   "mae_baseline": 3.983935458959431,
   "mapping_slope_b": null
  },
@@ -104,7 +104,7 @@
    "evaluated": [
     {
      "value": 0.5,
-     "score": 0.40260249348729027
+     "score": 0.4026024934872902
     },
     {
      "value": 1.0,
@@ -144,7 +144,7 @@
     },
     {
      "value": 0.05,
-     "score": 0.3985233740598482
+     "score": 0.39852337405984817
     },
     {
      "value": 0.1,
@@ -252,7 +252,7 @@
    "evaluated": [
     {
      "value": 3.0,
-     "score": 0.23090107491600445
+     "score": 0.2309010749160044
     },
     {
      "value": 10.0,

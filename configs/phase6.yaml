@@ -10,3 +10,6 @@ pillar_c:
   epsilon: 0.001
   stake_limit_loss_per_match: 0.5
   bands: [0.5, 0.85]
+  # POST-HOC addition (after the first Pillar C run showed no cell neutralised within 60%): extended search grid
+  extended_margin_max: 5.0
+  extended_step: 0.05

@@ -263,8 +263,12 @@ def phase6_frailty() -> None:
 
 
 @phase6_app.command("run")
-def phase6_run() -> None:
+def phase6_run(
+    reuse_collected: bool = typer.Option(
+        False, help="reuse cached simulation output (analysis-only change)"
+    ),
+) -> None:
     """Pillar C: lineup information shock, informed-bettor simulation and margin policy."""
     from edgeforge.evaluation.phase6_pillar_c import run_pillar_c
 
-    typer.echo(str(run_pillar_c()))
+    typer.echo(str(run_pillar_c(reuse=reuse_collected)))

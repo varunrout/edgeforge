@@ -50,6 +50,7 @@ N_BOOT = 1000
 BANDS = ("rotation", "likely", "nailed")
 MIN_EFF = 200
 CLIP = 1e-4
+COLLECT_SHA: dict[str, str] = {}
 
 
 def _num(d: dict[str, object], key: str) -> float:
@@ -386,6 +387,39 @@ def per_match_expected(d: pd.DataFrame, m: float, two_way: bool) -> tuple[float,
     return float(g["e"].mean()), float(g["r"].mean())
 
 
+def _collect_cached(
+    cfg: dict[str, Any],
+    ctx: Phase5Context,
+    split: str,
+    theta: float,
+    n_sims: int,
+    seed: int,
+    model: ShotsGivenGoals,
+    edges: list[float],
+    reuse: bool,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """collect() with an on-disk cache (git-ignored) so analysis changes need no re-simulation.
+    The cache records the git sha of the collection code and is only read when `reuse` is set."""
+    import pickle
+
+    path = resolve_path(cfg, "processed_dir") / f"phase6_collected_{split}.pkl"
+    key = {"theta": theta, "n_sims": n_sims, "seed": seed, "phase4_cache": ctx.cache_sha}
+    if reuse and path.exists():
+        with path.open("rb") as fh:
+            saved = pickle.load(fh)
+        if saved["key"] == key:
+            log.info("reusing collected %s frames made at git sha %s", split, saved["git_sha"])
+            COLLECT_SHA[split] = saved["git_sha"]
+            return saved["props"], saved["sga"]
+    props, sga = collect(ctx, split, theta, n_sims, seed, model, edges, control_seed=seed + 1)
+    from edgeforge.provenance import git_sha
+
+    COLLECT_SHA[split] = git_sha()
+    with path.open("wb") as fh:
+        pickle.dump({"key": key, "git_sha": COLLECT_SHA[split], "props": props, "sga": sga}, fh)
+    return props, sga
+
+
 def shock_set(raw: pd.DataFrame, kind: str) -> pd.DataFrame:
     d = raw.copy()
     for c in ("p_o", "p_l"):
@@ -396,7 +430,7 @@ def shock_set(raw: pd.DataFrame, kind: str) -> pd.DataFrame:
     return d
 
 
-def run_pillar_c(cfg: dict[str, Any] | None = None) -> Path:
+def run_pillar_c(cfg: dict[str, Any] | None = None, reuse: bool = False) -> Path:
     import json
 
     cfg = cfg or load_config("data")
@@ -418,9 +452,9 @@ def run_pillar_c(cfg: dict[str, Any] | None = None) -> Path:
     cache: dict[int, Boot] = {}
 
     log.info("collecting tuning window (theta=%s)", theta)
-    pt_raw, gt_raw = collect(ctx, "tune", theta, n_sims, seed, model, edges, control_seed=seed + 1)
+    pt_raw, gt_raw = _collect_cached(cfg, ctx, "tune", theta, n_sims, seed, model, edges, reuse)
     log.info("collecting test window")
-    pe_raw, ge_raw = collect(ctx, "test", theta, n_sims, seed, model, edges, control_seed=seed + 1)
+    pe_raw, ge_raw = _collect_cached(cfg, ctx, "test", theta, n_sims, seed, model, edges, reuse)
     P_t, G_t = usable(pt_raw, "props"), usable(gt_raw, "sga")
     P, G = usable(pe_raw, "props"), usable(ge_raw, "sga")
     P["mb"] = P["market"] + "|" + P["band"]
@@ -534,26 +568,60 @@ def run_pillar_c(cfg: dict[str, Any] | None = None) -> Path:
         }
 
     # ---- policy fitted on the tuning window, evaluated once on test
+    # D-051 grid first (0 to 60%); when no margin on it reaches epsilon the cell is reported as
+    # "not reached" and a labelled POST-HOC extended grid (configs/phase6.yaml) searches further.
+    ext = [
+        round(i * float(pc["extended_step"]), 6)
+        for i in range(
+            int(round(float(pc["extended_margin_max"]) / float(pc["extended_step"]))) + 1
+        )
+    ]
+    cap = ext[-1]
     mstar: dict[str, float] = {}
+    mstar_ext: dict[str, float] = {}
     tune_cells = {**_cells_props(P_t), **_cells_sga(G_t)}
     for name, sub in tune_cells.items():
         if len(sub) < 30:
             continue
+        two = name.startswith("props")
         mstar[name] = neutralising_margin(
-            informed_curve(sub, margins, name.startswith("props"), seed, cache, full_ci=False), eps
+            informed_curve(sub, margins, two, seed, cache, full_ci=False), eps
         )
-    prop_cells = [f"props|{mk}|{b}" for mk in MARKETS for b in BANDS if f"props|{mk}|{b}" in mstar]
-    flat_pooled = mstar["props|all"]
-    flat_worst = float(np.nanmax([mstar[c] for c in prop_cells]))
-    sga_flat = mstar["sga|all"]
+        mstar_ext[name] = neutralising_margin(
+            informed_curve(sub, ext, two, seed, cache, full_ci=False), eps
+        )
+    prop_cells = [
+        f"props|{mk}|{b}" for mk in MARKETS for b in BANDS if f"props|{mk}|{b}" in mstar_ext
+    ]
+
+    def _m(d: dict[str, float], key: str, default: float) -> float:
+        v = d.get(key, np.nan)
+        return default if not np.isfinite(v) else v  # unreached even on the extended grid: cap
+
+    flat_pooled = _m(mstar_ext, "props|all", cap)
+    flat_worst = float(max(_m(mstar_ext, c, cap) for c in prop_cells))
+    sga_flat = _m(mstar_ext, "sga|all", cap)
+    # realised-profit checks of the margin-capped variants use the pre-registered 60% ceiling
+    margin_ceiling = margins[-1]
+    ext_test = {
+        name: neutralising_margin(
+            informed_curve(sub, ext, name.startswith("props"), seed, cache, full_ci=False), eps
+        )
+        for name, sub in test_cells.items()
+        if len(sub) >= 30
+    }
     policies: dict[str, Any] = {
         "label": "ILLUSTRATIVE", "fitted_on": "tuning window mw10-19", "epsilon": eps,
-        "neutralising_margins_tune": mstar, "flat_pooled_props": flat_pooled,
-        "flat_worst_cell_props": flat_worst, "flat_pooled_sga": sga_flat,
+        "neutralising_margins_tune_preregistered_grid": mstar,
+        "neutralising_margins_tune": mstar_ext,
+        "neutralising_margins_test_extended_grid": ext_test,
+        "extended_grid_note": "POST-HOC: the D-051 grid (0-60%) is too short for most cells; margins above 60% come from the extended grid; a cell still unreached at the cap is set to the cap",
+        "extended_grid_cap": cap, "preregistered_grid_ceiling": margin_ceiling,
+        "flat_pooled_props": flat_pooled, "flat_worst_cell_props": flat_worst, "flat_pooled_sga": sga_flat,
     }  # fmt: skip
     diff_margin = np.array(
         [
-            mstar.get(f"props|{mk}|{b}", flat_pooled)
+            _m(mstar_ext, f"props|{mk}|{b}", flat_pooled)
             for mk, b in zip(P["market"], P["band"], strict=True)
         ],
         dtype=float,
@@ -564,6 +632,10 @@ def run_pillar_c(cfg: dict[str, Any] | None = None) -> Path:
         "props_flat_pooled": policy_eval(P, np.full(len(P), flat_pooled), True, seed, cache),
         "props_flat_worst_cell": policy_eval(P, np.full(len(P), flat_worst), True, seed, cache),
         "props_differentiated": policy_eval(P, diff_margin, True, seed, cache),
+        "props_differentiated_capped_at_60pct": policy_eval(
+            P, np.minimum(diff_margin, margin_ceiling), True, seed, cache
+        ),
+        "props_flat_60pct": policy_eval(P, np.full(len(P), margin_ceiling), True, seed, cache),
     }
     band_arr = P["band"].to_numpy()
     ev["props_margin_charged_by_band"] = {
@@ -574,7 +646,7 @@ def run_pillar_c(cfg: dict[str, Any] | None = None) -> Path:
             ("flat_worst_cell", np.full(len(P), flat_worst)),
         )
     }
-    sdiff = np.array([mstar.get(f"sga|{t}", sga_flat) for t in G["template"]], dtype=float)
+    sdiff = np.array([_m(mstar_ext, f"sga|{t}", sga_flat) for t in G["template"]], dtype=float)
     ev["sga_flat_5pct"] = policy_eval(G, np.full(len(G), 0.05), False, seed, cache)
     ev["sga_flat_pooled"] = policy_eval(G, np.full(len(G), sga_flat), False, seed, cache)
     ev["sga_differentiated_by_template"] = policy_eval(G, sdiff, False, seed, cache)
@@ -598,6 +670,7 @@ def run_pillar_c(cfg: dict[str, Any] | None = None) -> Path:
 
     prov = provenance(CMD, cfg, version)
     prov["frailty_theta"] = theta
+    prov["collected_at_git_sha"] = dict(COLLECT_SHA)
     out = {
         "provenance": prov,
         "shock": shock,

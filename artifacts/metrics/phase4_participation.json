@@ -1,10 +1,10 @@
 {
  "provenance": {
-  "git_sha": "811070b4b08bc7afc34e31d25dff3c69f36211cd",
-  "data_version": "ab7850c097da4492",
+  "git_sha": "a75bef41b631e94f98f15f5d1521a3c734d9fc2e",
+  "data_version": "588d4619e62984b7",
   "command": "edgeforge phase4 run",
   "config_hash": "39f96c7271994bec",
-  "created_at": "2026-10-05T10:19:13Z",
+  "created_at": "2026-10-07T06:17:14Z",
   "seed": 20261004
  },
  "starter_model": {
