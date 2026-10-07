@@ -260,3 +260,11 @@ def phase6_frailty() -> None:
 
     run_frailty()
     typer.echo("artifacts/metrics/phase6_frailty.json")
+
+
+@phase6_app.command("run")
+def phase6_run() -> None:
+    """Pillar C: lineup information shock, informed-bettor simulation and margin policy."""
+    from edgeforge.evaluation.phase6_pillar_c import run_pillar_c
+
+    typer.echo(str(run_pillar_c()))
