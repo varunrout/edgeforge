@@ -438,3 +438,74 @@ Everything else in the efficiency map is **not distinguishable from zero**: no l
 - Frailty experiment (D-049): not adopted (theta chosen as 0 on the fit window; no joint gain). Accepted; the absolute under-prediction of multi-player templates stays a documented limitation.
 - Locked: D-052 (record only). New: D-053 (policy redo), D-054 (Pillar B pre-registration).
 - Phase 6b, then Phase 7, may proceed.
+
+### Step 0 and the Gate 6 correction (implementer, 2026-10-08)
+- Lead edits committed. The neutralising-margin figures and the policy paragraph are withdrawn from the Gate 6 criterion 6 row and "Honest summary" and marked superseded by Phase 6b; they appear nowhere outside D-053's one-line diagnostic and the lead's audit note. The raw numbers stay in `phase6_pillar_c.json` as a record only.
+- **Gate 6 CI criterion:** the earlier `<CI_SHA>` placeholder is replaced by a real run: `artifacts/metrics/ci_local.json` is green at `114429c` (ruff, ruff format, mypy and pytest all exit 0; 134 tests passed, 1 skipped). That file is regenerated at the final HEAD of this session and is the CI evidence for Gates 6, 6b and 7.
+
+## Gate 6b: realistic levers against the informed pre-lineup bettor (D-053, D-055)
+
+**Report date:** 2026-10-08. Metrics: `phase6b_levers.json` (collected and analysed at commit `7d80c2b`, clean tree, theta 0, 20,000 simulations per match and state). Labels: **SIMULATION, UPPER BOUND** (lineups assumed known with certainty at T-60 minutes, no limits, no customer flow). Fitted or chosen on matchweeks 10-19 only; every configuration evaluated once on matchweeks 20-38. D-055 (implementation choices) was committed before any Phase 6b result. Props only: SGAs have a single price, so the levers do not apply and the Gate 6 SGA measurements carry no policy claim. The denominator is now all in-squad propositions offered (void ones count zero), so these numbers are **not comparable** with Gate 6's per-settled-proposition figures.
+
+| Lever (10% overround, test window) | Informed expected profit per offered proposition [95% CI] | Realised [95% CI] | Offer retained | Null-control noise floor |
+|---|---|---|---|---|
+| Base (void on appearance, proportional) | 0.1015 [0.0971, 0.1060] | 0.1206 [0.0698, 0.1911] | 100% | 0.0113 |
+| Power allocation | 0.0402 [0.0388, 0.0418] | 0.0318 [0.0281, 0.0355] | 100% | 0.0000 |
+| Odds-ratio allocation | 0.0424 [0.0408, 0.0442] | 0.0341 [0.0299, 0.0383] | 100% | 0.0000 |
+| **Void if not starting** | 0.0147 [0.0133, 0.0162] | 0.0258 [-0.0189, 0.0945] | 100% | 0.0102 |
+| Offer rule (no rotation-band props) | 0.0512 [0.0482, 0.0542] | 0.0713 [-0.0018, 0.1857] | 60.8% | 0.0110 |
+| Odds cap (chosen cap 200) | 0.0913 [0.0873, 0.0957] | 0.0902 [0.0710, 0.1094] | 100% (96.0% of selections at their original quote) | 0.0021 |
+| Void-if-not-starting + power | 0.0007 [0.0006, 0.0009] | -0.0006 [-0.0016, 0.0003] | 100% | 0.0000 |
+| **Void-if-not-starting + odds ratio (recommended on the tuning window)** | 0.0007 [0.0006, 0.0009] | -0.0005 [-0.0016, 0.0005] | 100% | 0.0000 |
+| Void-if-not-starting + offer rule | 0.0178 [0.0163, 0.0194] | 0.0381 [-0.0309, 0.1531] | 60.8% | 0.0109 |
+| Void-if-not-starting + odds cap | 0.0074 [0.0065, 0.0084] | 0.0004 [-0.0088, 0.0091] | 100% | 0.0021 |
+| All four levers (start + power + offer + cap) | 0.0008 [0.0007, 0.0010] | -0.0005 [-0.0019, 0.0010] | 60.8% | 0.0000 |
+
+- **Choices from the tuning window.** Settlement rule: informed expected profit per offered proposition 0.0923 under void-on-appearance and 0.0124 under void-if-not-starting, so `start` is chosen. Odds cap: on the grid 3 to 200 the loss L(C) = I(C) + 0.05 S(C) falls with C and the optimum was on the edge, so the grid was widened once (D-040) and the interior optimum is C = 200 (0.00792; 100 gives 0.00801, 400 gives 0.00805); the cap shortens 4% of selections and removes little edge, so it is nearly irrelevant as a lever (lambda sensitivity: 40 at lambda 0.02, 800 at lambda 0.10). Recommended combination by tuning-window loss: void-if-not-starting + odds-ratio allocation (0.00064; void-if-not-starting + power 0.00068).
+- **Other overrounds (test, base -> void-if-not-starting + odds ratio):** 5% 0.1229 -> 0.0036 [0.0032, 0.0040] (null control 0.0000); 15% 0.0854 -> 0.0002; 20% 0.0728 -> 0.0000. At 5% the residual edge is above the noise floor but is 3% of the base figure.
+- **Reading.** The settlement rule is by far the largest lever (an 86% cut at 10% from 0.1015 to 0.0147), because most of the informed edge is the knowledge of who starts; margin allocation that loads more margin on long shots cuts the base edge by about 60% by itself, and the two together leave 0.0007 per offered proposition with nothing offered away. The offer rule halves the edge but gives up 39% of the offer; the odds cap does almost nothing. Realised profits under the combined levers are not distinguishable from zero. The residual under void-if-not-starting with proportional margin (0.0147) is largely Monte Carlo noise (null control 0.0102).
+- **Stake limits (0.5 stake units per match at a proportional 10% overround; D-053 item 5).** Unit-stake informed expected profit per match on the tuning window: void-on-appearance 18.07 pooled (rotation 12.85, likely 3.75, nailed 1.48), giving maximum stakes of 0.028 (pooled), 0.039, 0.133 and 0.338 per bet; void-if-not-starting 2.44 pooled (rotation 0.59, likely 0.68, nailed 1.18), giving 0.205 (pooled), 0.85, 0.74 and 0.42. Under the chosen rule the stake limits are therefore about seven times looser; on the test window the expected informed profit at those stakes is 0.53 to 0.64 per match against the 0.5 target (these include the Monte Carlo noise floor).
+- **Registry:** 52 `phase6b::` records (4 promoted: the recommended combination at each overround; 48 rejected). Figure: `phase6b_levers.png` (lever vs residual edge vs share of offer retained, one panel per overround, null control marked).
+- **Caveats.** Props only; the settlement variant changes what customers are offered (a stake on a bench player is void) and no customer demand model exists, so only edge and offer retained are reported; margin points charged are not summarised as revenue. The informed bettor's profit is computed with the same model for both prices (model error is part of the "shock"). Nothing here uses or repeats a neutralising-margin figure.
+
+### Gate 6b criteria
+| # | Criterion | Result | Proving command | Observed |
+|---|---|---|---|---|
+| 1 | Void-if-not-starting settlement variant, informed bettor re-run | **PASS** | `uv run edgeforge phase6b` | table above; edge falls from 0.1015 to 0.0147 at 10% |
+| 2 | Margin allocation within 5-20% overrounds (proportional, power, odds ratio) | **PASS** | same | table above and `test` for 5, 15, 20% |
+| 3 | Offer rule (no rotation-band props) | **PASS** | same | retained 60.8%; edge 0.0512 |
+| 4 | Odds cap chosen on mw10-19 (D-040) | **PASS** | same | cap 200 after one widening, interior |
+| 5 | Stake limits recomputed under the chosen settlement rule | **PASS** | same | `stake_limits` |
+| 6 | CIs, share of offer retained, null-control floor, labels, single figure, registry | **PASS** | same | 52 records; `phase6b_levers.png` |
+| 7 | CI criterion (D-046) | **PASS** | `uv run edgeforge ci-local` | `artifacts/metrics/ci_local.json` green at `114429c` (134 passed, 1 skipped) |
+
+## Gate 7: Pillar B, in-play team markets (2015/16 player block)
+
+**Report date:** 2026-10-08. Metrics: `phase7_inplay.json` (commit `def7c9c`, clean tree). Specification D-056, committed in `7d80c2b` before any in-play test-window result. Fitting on matchweeks 1-19 only; evaluation on the 758 test matches (matchweeks 20-38) at 4,548 match-checkpoints; comparison against the Phase 2 naive in-play baseline recomputed on the same propositions.
+
+### What was built
+- `evaluation/inplay_model.py` (exposure segments, penalised Poisson fit, discrete-time Markov pricing with the fitted match-length distribution), `evaluation/phase7_run.py` (`edgeforge phase7`), 5 new tests (segment exposure and goal counts, parameter recovery, flat-model Poisson agreement, dismissal effect, strict-before-t state and no use of the raw `minute` field).
+- Model: Dixon-Coles pre-match expected goals x a seven-bin time profile on the elapsed-seconds clock x a team goal-margin multiplier x own and opponent dismissal multipliers, per D-056. Fitted multipliers (matchweeks 1-19, kappa 10): time profile 0.73 (first 15 minutes), 0.97, 0.88, 0.98, 0.98, 1.04, 1.10 (after 90 minutes); trailing by two or more 1.12, trailing by one 1.08, leading by one 1.03, leading by two or more 0.92; own dismissal 0.70, opponent dismissal 1.69. kappa chosen by held-out Poisson log likelihood (fit mw1-9, choose mw10-19) from 0, 1, 10, 100, 1000, 10000: 10 (0.47058; 0 gives 0.47070, 100 gives 0.47091), interior, no widening needed (D-040).
+
+### Gate criteria
+| # | Criterion | Result | Proving command | Observed (from `phase7_inplay.json`) |
+|---|---|---|---|---|
+| 1 | D-056 pre-registration committed before any test result | **PASS** | `git show 7d80c2b -- docs/DECISIONS.md` | markets, checkpoints 15/30/45/60/75/85, strata, model, comparison and three BH families fixed |
+| 2 | Model fitted on matchweeks 1-19 only, grid via D-040, remaining length from a fitted distribution | **PASS** | `uv run edgeforge phase7` | as above; the match-length distribution is the 759 fitted lengths |
+| 3 | Replay of every test match; final 1X2, totals 0.5-4.5 given the score, BTTS | **PASS** | same | 4,548 match-checkpoints; propositions already decided are excluded for both models |
+| 4 | Evaluation at checkpoints and strata vs the naive baseline, paired bootstrap, BH 10% | **PASS (14 of 42 better, none worse)** | same, `family_I/II/III` | Family I (checkpoint x market, 42 tests): the model beats the baseline in **14** tests and loses in none. Final 1X2 at 45 / 60 / 75 minutes: -0.0089 (q 0.056), -0.0154 (q 0.028), -0.0132 (q 0.050) log loss; BTTS at 45 / 60 / 75: -0.0095, -0.0155, -0.0124; over 3.5 at 15 / 30 / 45 / 60 / 75: -0.0061, -0.0075, -0.0108, -0.0098, -0.0072; over 4.5 at 30 / 45 / 60: -0.0073, -0.0078, -0.0074. **Not distinguishable:** 1X2 at 15, 30 and 85 minutes, over 0.5, 1.5 and 2.5 at every checkpoint, and everything at 85 minutes (over 0.5 is slightly worse, not significantly: +0.0006 to +0.0049). Family II (stratum x market, 25 estimable tests): better in 6, worse in none: after a dismissal 1X2 -0.0792 [n 340], one-goal margin 1X2 -0.0113, BTTS -0.0140, over 3.5 and over 4.5, two-plus margin 1X2 -0.0094; level-score strata are not distinguishable. Family III (checkpoint x stratum, 1X2, 21 estimable tests): better in 6: after a dismissal at 45 / 60 / 75 minutes (-0.1547 [n 36], -0.1485 [n 61], -0.0708 [n 92]), one-goal margin at 60 and 75 minutes (-0.0174, -0.0138), two-plus margin at 30 minutes (-0.0249 [n 61]) |
+| 5 | Calibration including predicted vs observed remaining goals | **PASS (with a remaining bias)** | same, `remaining_goals_calibration`, `ece_pooled`, `phase7_reliability_1x2_min*.png` | pooled mean remaining goals: observed 1.347, model 1.238, baseline 1.194, so **both under-predict**; the model closes about 30% of the baseline's gap. By state: after a dismissal at 75 minutes observed 0.75, model 0.73, baseline 0.54 (60 minutes: 1.30, 1.23, 0.96; 45 minutes: 1.81, 1.80, 1.40), so the dismissal multipliers remove the baseline's bias in that state. **Not fixed:** when a team leads by two or more the model still under-predicts (45 minutes: observed 1.83, model 1.49, baseline 1.43; 75 minutes: 0.74, 0.64, 0.57). Pooled expected calibration error: 1X2 0.0120 vs 0.0174, BTTS 0.0327 vs 0.0562, over 1.5 0.0280 vs 0.0489, over 2.5 0.0392 vs 0.0511, over 3.5 0.0379 vs 0.0494 |
+| 6 | Showcase figure with goal and dismissal events marked, ids only | **PASS** | same, `phase7_price_path_showcase.png` | test match 3901183 (the pre-registered mechanical choice: the most events among matches with a dismissal and three goals; it ended 0-9, so the path is a blowout with the 1X2 and over 2.5 prices collapsing within 20 minutes); no player names in the figure or the metrics |
+| 7 | Candidates registered, metrics with provenance | **PASS** | `experiments/registry.jsonl` | 51 `phase7::` records (16 promoted, 35 rejected): the kappa grid, three model variants, 42 checkpoint x market tests |
+| 8 | CI criterion (D-046) | **PASS** | `uv run edgeforge ci-local` | `artifacts/metrics/ci_local.json` green at `114429c` (134 passed, 1 skipped) |
+
+### Honest summary for the technical report
+- The in-play model beats the naive baseline where the information it adds matters: final 1X2 and BTTS from the break to the last quarter hour, high-total lines, and above all after a dismissal (log loss -0.08 pooled, -0.15 at 45 and 60 minutes) and one-goal and two-goal margins. It is not distinguishable from the baseline for low total lines (over 0.5, 1.5, 2.5) or at 85 minutes, where little remains to be priced.
+- Ablation (descriptive): the time profile alone is already close to the full model for totals; for 1X2 the gain comes from the score-state and dismissal multipliers (e.g. at 60 minutes 0.6976 time profile only, 0.6960 plus score state, 0.6847 full).
+- Both models under-predict remaining goals in aggregate; the model's remaining shortfall is concentrated in matches with a two-goal lead.
+
+### Deviations, decisions and caveats
+- Future dismissals are not modelled (dismissal status is frozen at the checkpoint, as in the baseline); first-half stoppage falls into the 45-60 minute bin; the remaining-goal count is capped at eight per team; the pricing step is 30 seconds.
+- The pre-registered showcase rule picked an extreme match (0-9); the figure is kept as pre-registered.
+- Family II has 25 and Family III 21 estimable tests (cells with fewer than 30 propositions are not estimable), fewer than the 28 and 24 named in D-056.
+- Before the final in-play run the model code was checked on the matchweeks 1-19 fit window only (segment exposure equals match length exactly; goals counted equal the events); no test-window result was seen before the specification and code were fixed.
