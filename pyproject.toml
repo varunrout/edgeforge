@@ -53,6 +53,8 @@ select = ["E", "F", "I", "UP", "B"]
 "src/edgeforge/evaluation/phase6_frailty.py" = ["E501"]
 "src/edgeforge/evaluation/phase6_pillar_c.py" = ["E501"]
 "src/edgeforge/evaluation/phase6b.py" = ["E501"]
+"src/edgeforge/evaluation/phase7_run.py" = ["E501"]
+"src/edgeforge/evaluation/inplay_model.py" = ["E501"]
 
 [tool.mypy]
 python_version = "3.12"

@@ -284,3 +284,11 @@ def phase6b_run(
     from edgeforge.evaluation.phase6b import run_phase6b
 
     typer.echo(str(run_phase6b(reuse=reuse_collected)))
+
+
+@app.command("phase7")
+def phase7_run() -> None:
+    """Pillar B: in-play team markets vs the Phase 2 naive baseline at the checkpoints."""
+    from edgeforge.evaluation.phase7_run import run_phase7
+
+    typer.echo(str(run_phase7()))
