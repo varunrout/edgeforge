@@ -519,7 +519,7 @@ Everything else in the efficiency map is **not distinguishable from zero**: no l
 - `api/bundle.py` + `edgeforge serve build`: derived serving bundle in `data/serving/` (git-ignored; player ids only, no player names, no raw data); 16 demo matches from the 2015/16 test window (the first four with a dismissal plus evenly spaced others, chosen mechanically).
 - `api/service.py` (shared by API and app) and `api/app.py`: `GET /events`, `GET /events/{id}/markets?state=opening|lineups|inplay&minute=&overround=&method=&settlement=`, `GET /events/{id}/path`, `GET /events/{id}/shock`, `POST /sga/price`, `GET /model-health`, `GET /healthz`. Team markets: Dixon-Coles grid (opening, lineups) or the Pillar B model (in-play, state from events strictly before the minute). Props and SGAs: the seeded Phase 5 simulator (20,000 simulations, regenerated per request, cached). Margin on props: Phase 6b recommendation by default (void if not starting, odds-ratio allocation); the stake limits and offer rule of Phase 6b are not exposed in the API (illustrative levers, not product features).
 - `apps/trader/app.py` (`edgeforge serve app`): lifecycle app (match, information state opening / lineups / in-play minute, margin method and overround, prop settlement), four tabs: prices with the price path through the match, players and lineup shock (UPPER BOUND label), SGA builder (standalone, naive product, simulated joint with Monte Carlo SE, naive and adjusted fair odds, ratio, validation errors shown), evidence (the findings including the nulls, every claim with its source file and git sha, figures).
-- `evidence.py`: one registry of 49 claims, each a path into a metrics file; used by `/model-health`, the app and (Phase 10) the document renderer.
+- `evidence.py`: one registry of 46 claims, each a path into a metrics file; used by `/model-health`, the app and (Phase 10) the document renderer.
 
 ### Gate criteria
 | # | Criterion | Result | Proving command | Observed |
@@ -536,3 +536,25 @@ Everything else in the efficiency map is **not distinguishable from zero**: no l
 - **In-play vs the market:** the owner brief says the in-play model "beats the naive baseline but not the market". The data contain no in-play market prices (D-017), so the metrics do not support any statement about the market in play; the app and API say that no comparison is possible. Only the pre-match model was compared with the market (Pillar A).
 - The serving bundle is built from the local StatsBomb-derived inputs and is git-ignored; a cloud image therefore contains derived probabilities for 16 matches and is kept private by default (see Gate 9).
 - Prop prices in the replay are for the 2015/16 test window; no prop odds exist to compare with (D-013).
+
+## Gate 9: Containerise, deploy preparation, CI-equivalent (2026-11-05)
+
+**Report date:** 2026-11-05. **Nothing was deployed and no cloud resource was created** (owner instruction). Deployment needs the owner's GCP project, billing account and decision on public or private access.
+
+### What was built
+- `Dockerfile` (python 3.12 slim, `uv sync --locked --no-dev`, derived artefacts only: configs, apps, `artifacts/metrics`, `artifacts/figures`, `artifacts/shadow`, `data/serving`; no raw data, no warehouse), `deploy/entrypoint.sh` (`SERVICE=api` runs uvicorn, `SERVICE=app` runs Streamlit; both on `$PORT`), `.dockerignore`, `docker-compose.yml` (API on 8000, app on 8501), `.gitattributes` (LF for shell scripts).
+- `deploy/deploy_cloud_run.sh` and `deploy/deploy_cloud_run.ps1`: **dry run by default** (they print every `gcloud` command; `EXECUTE=1` or `-Execute` runs them); enable services, create an Artifact Registry repo, build, deploy two Cloud Run services (max one instance, 1 GiB, private unless `PUBLIC=1` / `-Public`) and create a budget alert at 50 / 90 / 100% of `BUDGET_USD` when a billing account is given.
+- The GitHub Actions workflow stays `workflow_dispatch` only (D-046); CI evidence is `edgeforge ci-local`.
+
+### Gate criteria
+| # | Criterion | Result | Proving command | Observed |
+|---|---|---|---|---|
+| 1 | Dockerfile and deploy scripts, derived artefacts only | **PASS (prepared, not built)** | `cat Dockerfile deploy/*` | files above |
+| 2 | Image builds | **NOT VERIFIED** | `docker build -t edgeforge .` | the Docker daemon was not running; Docker Desktop was launched but the engine did not come up within four minutes (the pipe `dockerDesktopLinuxEngine` stayed absent), so the image was **not built** |
+| 3 | Container-equivalent check | **PASS** | fresh `git clone`, `uv sync --locked --no-dev`, copy `data/serving`, `uvicorn edgeforge.api.app:app_factory --factory` | in a fresh clone with the production-only dependency set, `/healthz` returned `{"status":"ok"}`, `/events` listed the replay events and `/model-health` returned the findings; this reproduces the Dockerfile's install and start steps without Docker |
+| 4 | Public URL health check or documented fallback | **PASS (fallback)** | `docker compose up --build` or `uv run edgeforge serve api` | documented local run; no public URL exists because no deployment was made |
+| 5 | CI green | **PASS** | `uv run edgeforge ci-local` | recorded in the Gate 10 section at the final HEAD |
+
+### Open items for the owner
+- Run `docker build -t edgeforge .` once Docker Desktop is up; I could not verify the build.
+- To deploy: choose a GCP project and billing account, run the script without `EXECUTE` to review the commands, then with it; decide `PUBLIC`.
