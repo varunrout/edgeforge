@@ -1,0 +1,10 @@
+# Local run of both services from one image:  docker compose up --build
+services:
+  api:
+    build: .
+    environment: {SERVICE: api, PORT: "8000"}
+    ports: ["8000:8000"]
+  app:
+    build: .
+    environment: {SERVICE: app, PORT: "8501", EDGEFORGE_BUNDLE: /app/data/serving}
+    ports: ["8501:8501"]
