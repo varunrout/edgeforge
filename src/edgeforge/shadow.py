@@ -246,6 +246,10 @@ def run_predict(
         "skipped": skipped,
         "commit": None,
     }
+    if git_sha().endswith("-dirty"):
+        out["warning"] = (
+            "uncommitted code changes: the logged git_sha ends in -dirty; commit the code first"
+        )
     if recs:
         append_jsonl(log_path, recs)
         if commit:
