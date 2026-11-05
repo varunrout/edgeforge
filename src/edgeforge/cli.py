@@ -292,3 +292,39 @@ def phase7_run() -> None:
     from edgeforge.evaluation.phase7_run import run_phase7
 
     typer.echo(str(run_phase7()))
+
+
+serve_app = typer.Typer(help="Serving bundle, API and trader app (Phase 8).", no_args_is_help=True)
+app.add_typer(serve_app, name="serve")
+
+
+@serve_app.command("build")
+def serve_build() -> None:
+    """Build data/serving/ (derived artefacts for the API and the app) from the local warehouse."""
+    from edgeforge.api.bundle import build_bundle
+
+    typer.echo(str(build_bundle()))
+
+
+@serve_app.command("api")
+def serve_api(host: str = "127.0.0.1", port: int = 8000) -> None:
+    """Run the FastAPI service (docs at /docs)."""
+    import uvicorn
+
+    uvicorn.run("edgeforge.api.app:app_factory", host=host, port=port, factory=True)
+
+
+@serve_app.command("app")
+def serve_trader_app(port: int = 8501) -> None:
+    """Run the Streamlit trader app."""
+    import subprocess
+    import sys
+
+    from edgeforge.config import PROJECT_ROOT
+
+    target = PROJECT_ROOT / "apps" / "trader" / "app.py"
+    raise SystemExit(
+        subprocess.call(
+            [sys.executable, "-m", "streamlit", "run", str(target), "--server.port", str(port)]
+        )
+    )
