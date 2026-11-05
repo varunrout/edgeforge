@@ -45,14 +45,14 @@ The metrics files are committed. Re-running a phase needs the local data warehou
 
 ## 5. Engineering evidence
 
-A scripted fresh-clone check last passed at commit `fe53bcd626328b53813118fdcd996d8fb173123d` with 210 tests; it covers the code at that commit and later commits change documents only. GitHub Actions is not used (account limitation, D-046). The container image was not built (no Docker engine); a fresh-clone run with production-only dependencies serving the API was checked instead.
+A scripted fresh-clone check last passed at commit `f50f8b22dc3376bbeec2e0d3f63460903582a42f` with 211 tests; it covers the code at that commit and later commits change documents only. GitHub Actions is not used (account limitation, D-046). The container image was not built (no Docker engine); a fresh-clone run with production-only dependencies serving the API was checked instead.
 
 ## 6. Provenance of every metrics file used
 
 | metrics file | produced by | git sha | created (UTC) | data version |
 |---|---|---|---|---|
 | `baseline_team.json` | `edgeforge baselines team` | `0e54107` | 2026-10-04T11:22:49Z | 4ff27cd91bb05d85 |
-| `ci_local.json` | `edgeforge ci-local` | `fe53bcd` | 2026-11-05T11:37:43Z |  |
+| `ci_local.json` | `edgeforge ci-local` | `f50f8b2` | 2026-11-05T16:46:31Z |  |
 | `phase4_markets.json` | `edgeforge phase4 run` | `a75bef4` | 2026-10-07T06:17:14Z | 588d4619e62984b7 |
 | `phase4_participation.json` | `edgeforge phase4 run` | `a75bef4` | 2026-10-07T06:17:14Z | 588d4619e62984b7 |
 | `phase5_comparison_b.json` | `edgeforge phase5 run` | `811070b` | 2026-10-05T12:10:35Z | ab7850c097da4492 |
@@ -114,8 +114,8 @@ A scripted fresh-clone check last passed at commit `fe53bcd626328b53813118fdcd99
 | Model mean predicted remaining goals | 1.238 | `phase7_inplay.json` | `remaining_goals_calibration / pooled / model` |
 | Baseline mean predicted remaining goals | 1.194 | `phase7_inplay.json` | `remaining_goals_calibration / pooled / baseline` |
 | In-play test matches | 758 | `phase7_inplay.json` | `n_test_matches` |
-| Commit tested by the scripted fresh-clone check | fe53bcd626328b53813118fdcd996d8fb173123d | `ci_local.json` | `commit_sha` |
-| Tests passed in the scripted check | 210 | `ci_local.json` | `steps / 4 / test_counts / passed` |
+| Commit tested by the scripted fresh-clone check | f50f8b22dc3376bbeec2e0d3f63460903582a42f | `ci_local.json` | `commit_sha` |
+| Tests passed in the scripted check | 211 | `ci_local.json` | `steps / 4 / test_counts / passed` |
 | Dixon-Coles minus static Poisson 1X2 log loss, 2024/25 | -0.0046 | `team_model.json` | `blocks / pillar_a / tests / primary_2024_25 / comparison_A / dc_vs_static_poisson / 0 / mean_diff` |
 | Same, 95% CI low | -0.0084 | `team_model.json` | `blocks / pillar_a / tests / primary_2024_25 / comparison_A / dc_vs_static_poisson / 0 / ci_low` |
 | Same, 95% CI high | -0.0004 | `team_model.json` | `blocks / pillar_a / tests / primary_2024_25 / comparison_A / dc_vs_static_poisson / 0 / ci_high` |

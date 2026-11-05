@@ -8,6 +8,6 @@ Independent, non-commercial portfolio project: a football sportsbook pricing eng
 - Showed on held-out matches that simulated same-game-accumulator joint probabilities are better calibrated than the product of the legs (better in 21 of 26 pre-registered tests, worse in 0; calibration error 0.0152 against 0.0364; both prices share the simulator's marginals, so the test isolates dependence), while documenting where the simulator still under-predicts.
 - Measured lineup-information risk for player props (an upper bound) and compared the levers a book can pull in simulation: settlement rule, margin allocation, offer rule, odds cap.
 - Built an in-play model that beats a naive baseline in 14 of 42 checkpoint tests (none worse) and states plainly that no in-play market data exist to compare against.
-- Engineering: Python, DuckDB, pandas, scikit-learn, FastAPI, Streamlit; typed (mypy), linted (ruff), tested (210 tests in a scripted fresh-clone check), container and Cloud Run scripts prepared; a pre-match shadow log built to the same standard (one weekend of Premier League fixtures logged before kick-off so far; no result yet).
+- Engineering: Python, DuckDB, pandas, scikit-learn, FastAPI, Streamlit; typed (mypy), linted (ruff), tested (211 tests in a scripted fresh-clone check), container and Cloud Run scripts prepared; a pre-match shadow log built to the same standard (one weekend of Premier League fixtures logged before kick-off so far; no result yet).
 
 Data: football-data.co.uk and StatsBomb Open Data (used under their terms; raw data not redistributed).

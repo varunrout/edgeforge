@@ -49,7 +49,7 @@
 
 - **API and app.** `uv run edgeforge serve api` and `serve app` replay 16 test matches through the lifecycle with margins (proportional, power, odds ratio) and SGA pricing; the evidence tab and `/model-health` show the findings above with their source files.
 - **Shadow log (D-058, pre-match only, no betting).** Frozen Dixon-Coles predictions are appended to `artifacts/shadow/log.jsonl` before kick-off and committed; `shadow settle` compares them with the closing market: Pinnacle where the file has it, otherwise the market average, which is what the current football-data files will give (D-059). The first batch (the Premier League weekend of 6 to 8 November 2026) was committed and pushed before kick-off; the commit and push timestamps are the timing evidence. Status: 10 logged, 0 settled. inconclusive: no settled fixtures with closing prices yet. The expectation recorded in advance is that the market is better.
-- **Engineering.** A scripted fresh-clone check (ruff, mypy, pytest) last passed at commit `fe53bcd626328b53813118fdcd996d8fb173123d` with 210 tests (GitHub Actions is unavailable; D-046). A Dockerfile and Cloud Run scripts exist; the image was not built here (no Docker engine) and nothing is deployed.
+- **Engineering.** A scripted fresh-clone check (ruff, mypy, pytest) last passed at commit `f50f8b22dc3376bbeec2e0d3f63460903582a42f` with 211 tests (GitHub Actions is unavailable; D-046). A Dockerfile and Cloud Run scripts exist; the image was not built here (no Docker engine) and nothing is deployed.
 
 ## 7. Limitations
 
@@ -63,7 +63,7 @@
 | metrics file | produced by | git sha | created (UTC) | data version |
 |---|---|---|---|---|
 | `baseline_team.json` | `edgeforge baselines team` | `0e54107` | 2026-10-04T11:22:49Z | 4ff27cd91bb05d85 |
-| `ci_local.json` | `edgeforge ci-local` | `fe53bcd` | 2026-11-05T11:37:43Z |  |
+| `ci_local.json` | `edgeforge ci-local` | `f50f8b2` | 2026-11-05T16:46:31Z |  |
 | `phase4_markets.json` | `edgeforge phase4 run` | `a75bef4` | 2026-10-07T06:17:14Z | 588d4619e62984b7 |
 | `phase4_participation.json` | `edgeforge phase4 run` | `a75bef4` | 2026-10-07T06:17:14Z | 588d4619e62984b7 |
 | `phase5_comparison_b.json` | `edgeforge phase5 run` | `811070b` | 2026-10-05T12:10:35Z | ab7850c097da4492 |
