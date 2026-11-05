@@ -41,6 +41,7 @@ LEAGUES = ("E0", "D1", "SP1", "I1", "F1")
 HALF_LIFE_DAYS = 365
 WINDOW_DAYS = 1825
 MIN_TRAIN = 150
+COLD_START_MATCHES = 20  # fewer matches than this in the window: flagged, still predicted (D-060)
 MIN_SETTLED_FOR_VERDICT = 200
 BASE_URL = "https://www.football-data.co.uk"
 CLOSE_1X2 = (("PSCH", "PSCD", "PSCA"),)  # PP* is Paddy Power, not Pinnacle (D-059)
@@ -164,6 +165,9 @@ def predict_records(
                 "kickoff_utc": ko.strftime("%Y-%m-%dT%H:%M:%SZ"), "as_of_utc": as_of.strftime("%Y-%m-%dT%H:%M:%SZ"),
                 "model_version": MODEL_VERSION, "git_sha": git_sha(), "config_hash": config_hash(cfg),
                 "data_fingerprint": fp, "n_train": int(len(win)),
+                "home_n_matches": int(((win["home"] == r.HomeTeam) | (win["away"] == r.HomeTeam)).sum()),
+                "away_n_matches": int(((win["home"] == r.AwayTeam) | (win["away"] == r.AwayTeam)).sum()),
+                "cold_start_teams": [t for t in (str(r.HomeTeam), str(r.AwayTeam)) if int(((win["home"] == t) | (win["away"] == t)).sum()) < COLD_START_MATCHES],
                 "lam_h": float(lam_h[i]), "lam_a": float(lam_a[i]), "rho": float(m.rho),
                 "p_home": float(p1[0]), "p_draw": float(p1[1]), "p_away": float(p1[2]),
                 "p_over_2_5": po, "p_under_2_5": 1.0 - po,

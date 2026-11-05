@@ -207,3 +207,25 @@ def test_paddy_power_columns_are_never_mistaken_for_pinnacle() -> None:
     s = settle_records(log, {"E0": df}, set(), pd.Timestamp("2027-01-01"))
     assert s[0]["close_1x2_source"].startswith("market-average closing")
     assert s[0]["close_1x2_columns"] == ["AvgCH", "AvgCD", "AvgCA"]
+
+
+def test_teams_with_little_history_are_flagged_cold_start_not_skipped(
+    history: pd.DataFrame,
+) -> None:
+    fx = pd.DataFrame(
+        {
+            "Div": ["E0"],
+            "Date": ["20/12/2026"],
+            "Time": ["15:00"],
+            "HomeTeam": ["Newcomer"],
+            "AwayTeam": ["Team01"],
+        }
+    )
+    recs, skipped = predict_records(fx, history, pd.Timestamp("2026-12-18 09:00"), CFG, set())
+    assert (
+        len(recs) == 1
+        and recs[0]["cold_start_teams"] == ["Newcomer"]
+        and recs[0]["home_n_matches"] == 0
+    )
+    assert recs[0]["p_home"] + recs[0]["p_draw"] + recs[0]["p_away"] == pytest.approx(1.0)
+    assert not skipped
