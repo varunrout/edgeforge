@@ -360,3 +360,29 @@ def shadow_settle() -> None:
     from edgeforge.shadow import run_settle
 
     typer.echo(json.dumps(run_settle(), indent=1))
+
+
+docs_app = typer.Typer(
+    help="Render and check the documents from the metrics files.", no_args_is_help=True
+)
+app.add_typer(docs_app, name="docs")
+
+
+@docs_app.command("render")
+def docs_render() -> None:
+    """Render README.md and reports/*.md from configs/doc_templates and artifacts/metrics."""
+    from edgeforge.docs_render import render_all
+
+    for target in render_all():
+        typer.echo(target)
+
+
+@docs_app.command("check")
+def docs_check() -> None:
+    """Fail if a template has a bare number or a document differs from a fresh render."""
+    from edgeforge.docs_render import check_all
+
+    problems = check_all()
+    for p in problems:
+        typer.echo(p)
+    raise SystemExit(1 if problems else 0)

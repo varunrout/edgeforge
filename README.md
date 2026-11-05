@@ -1,21 +1,46 @@
 # EdgeForge
 
-> **Work in progress. All numbers in this repository are interim until the final audit (Phase 10).**
-> Nothing here is a claim of commercial use; this is an independent, non-commercial portfolio project.
+> **Work in progress. All numbers in this repository are interim until the final audit by the lead.**
+> Independent, non-commercial portfolio project. Nothing here is a claim of commercial use, of a betting edge, or of a deployed product.
 
-Football sportsbook pricing engine: the lifecycle of a football price across three information
-states (opening, lineups, in-play). See `docs/PLAN.md` for the plan and `docs/GATES.md` for the
-audited phase reports. No result is reported unless it was produced by code into
-`artifacts/metrics/` with provenance (git SHA, data version, command, config hash, seed).
+A football sportsbook pricing engine built as the lifecycle of a price across three information states: **opening** (about two days before kick-off, no lineups), **lineups** (confirmed XI and bench, one hour before) and **in-play** (score and dismissals up to the minute). Football only.
 
-Tests and lint run via a scripted fresh-clone check (`uv run edgeforge ci-local`, evidence in
-`artifacts/metrics/ci_local.json`); the GitHub Actions workflow is included but not executed
-(account limitation).
+Every number on this page is rendered from `artifacts/metrics/` by `uv run edgeforge docs render`; `uv run edgeforge docs check` and the test suite fail if a document disagrees with its metrics file. Each metrics file carries its git sha, data version, command, config hash and seed.
+
+## What was found (the negative results come first)
+
+- **The pre-match model does not beat the market.** On 1752 Premier League, Bundesliga, La Liga, Serie A and Ligue 1 matches (2024/25) the Dixon-Coles model has a 1X2 log loss of 0.9853 against 0.9606 for the Pinnacle closing line (de-vigged proportionally). Its weight in a log-linear pool with the market is -0.072 (95% CI -0.172 to 0.046): no information beyond the market.
+- **The closing line does not move toward the model**: slope -0.0035 (95% CI -0.0259 to 0.0184).
+- **No market inefficiency replicates.** Of 12 pre-registered findings that survived the multiple-testing control in the confirmatory season, 5 reproduce in the replication season, and those are model-versus-market gaps (the market is better); the Bundesliga home-win bias does not replicate (p = 0.81). The favourite-longshot slope at the close is 1.069 (95% CI 0.965 to 1.180), compatible with a calibrated market.
+- **Player props:** 5 of six markets beat a rolling per-90 baseline after multiple-testing control (anytime scorer: log-loss difference -0.0090, negative is better); shots 1+ is a null (+0.0000). No historical prop odds exist, so props are evaluated on probability quality only.
+- **Same-game accumulators:** with templates fixed before any test result, the simulated joint beats the naive product of the legs in 21 of 26 template-by-state tests and loses in 0; pooled log loss 0.3301 against 0.3572 on 17434 settled instances, and calibration error 0.0152 against 0.0364. The simulator still under-predicts some multi-player templates (the five-leg template T10: 0.080 predicted, 0.102 realised). A match-level frailty meant to fix this was tested and not adopted.
+- **Lineup information (Pillar C, an upper bound):** 81.7% of rotation-risk players' prop prices move by more than a quarter once the lineups are known, against 16.3% for nailed starters. In a simulation, a bettor who knows the lineups earns an expected 0.151 units per offered proposition at a five per cent margin (noise floor 0.019); settling props void-if-not-starting with odds-ratio margin allocation cuts the residual to 0.0007 per offered proposition at a ten per cent overround, from 0.1015. These are simulations, not observed betting.
+- **In-play:** the model beats the naive in-play baseline in 14 of 42 checkpoint-by-market tests and loses in 0 (the final-1X2 log-loss difference after a dismissal is -0.0792; negative means the model is better). Both still under-predict remaining goals (1.238 model, 1.194 baseline, 1.347 observed). **No in-play market prices exist in the data, so the in-play model cannot be compared with a market.**
+- **Forward shadow log (pre-match only):** 0 fixtures logged, 0 settled. Verdict: inconclusive: no settled fixtures with closing prices yet.
+
+## What is not claimed
+
+No betting edge, no profit, no deployed or commercial use, no live feed, no in-play player props. Props and SGAs are validated on realised outcomes, never against prop odds. All backtests are on the 2015/16 StatsBomb season (props, SGAs, lineup shock, in-play) or the 2024/25 football-data season (pre-match market comparison).
+
+## Quick start
 
 ```
 uv sync
 uv run edgeforge --help
+uv run edgeforge serve build     # derived serving bundle from the local warehouse
+uv run edgeforge serve api       # FastAPI on http://127.0.0.1:8000/docs
+uv run edgeforge serve app       # Streamlit trader app on http://localhost:8501
+uv run edgeforge shadow predict --fixtures fixtures.csv --commit   # pre-match shadow log
+uv run edgeforge shadow settle
+uv run edgeforge docs render && uv run edgeforge docs check
+uv run edgeforge ci-local        # fresh-clone lint, types and tests
 ```
+
+Tests and lint run via a scripted fresh-clone check (`uv run edgeforge ci-local`, evidence in `artifacts/metrics/ci_local.json`; last run at commit `114429c3e8c59633b81e8ee829dfa8a88cbccead`, 134 tests passed); the GitHub Actions workflow is included but not executed (account limitation). Container files and Cloud Run scripts are prepared in `Dockerfile` and `deploy/` but nothing is deployed.
+
+## Where things are
+
+`docs/DECISIONS.md` (every locked decision and pre-registration), `docs/GATES.md` (audited phase reports), `reports/technical_report.md`, `reports/evidence_pack.md` (what a sceptic can verify, and how), `experiments/registry.jsonl` (every experiment including the rejected ones), `artifacts/metrics/` (all numbers, with provenance).
 
 ## Data credits
 

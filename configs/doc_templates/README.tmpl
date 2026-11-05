@@ -1,0 +1,56 @@
+# EdgeForge
+
+> **Work in progress. All numbers in this repository are interim until the final audit by the lead.**
+> Independent, non-commercial portfolio project. Nothing here is a claim of commercial use, of a betting edge, or of a deployed product.
+
+A football sportsbook pricing engine built as the lifecycle of a price across three information states: **opening** (about two days before kick-off, no lineups), **lineups** (confirmed XI and bench, one hour before) and **in-play** (score and dismissals up to the minute). Football only.
+
+Every number on this page is rendered from `artifacts/metrics/` by `uv run edgeforge docs render`; `uv run edgeforge docs check` and the test suite fail if a document disagrees with its metrics file. Each metrics file carries its git sha, data version, command, config hash and seed.
+
+## What was found (the negative results come first)
+
+- **The pre-match model does not beat the market.** On {{a_n_matches}} Premier League, Bundesliga, La Liga, Serie A and Ligue 1 matches (2024/25) the Dixon-Coles model has a 1X2 log loss of {{a_model_ll}} against {{a_market_ll}} for the Pinnacle closing line (de-vigged proportionally). Its weight in a log-linear pool with the market is {{a_enc_weight}} (95% CI {{a_enc_lo}} to {{a_enc_hi}}): no information beyond the market.
+- **The closing line does not move toward the model**: slope {{a_move_slope}} (95% CI {{a_move_lo}} to {{a_move_hi}}).
+- **No market inefficiency replicates.** Of {{a_repl_total}} pre-registered findings that survived the multiple-testing control in the confirmatory season, {{a_repl_n}} reproduce in the replication season, and those are model-versus-market gaps (the market is better); the Bundesliga home-win bias does not replicate (p = {{a_d1_repl_p}}). The favourite-longshot slope at the close is {{a_flb_slope}} (95% CI {{a_flb_lo}} to {{a_flb_hi}}), compatible with a calibrated market.
+- **Player props:** {{p4_props_better}} of six markets beat a rolling per-90 baseline after multiple-testing control (anytime scorer: log-loss difference {{p4_anytime_diff}}, negative is better); shots 1+ is a null ({{p4_shots1_diff}}). No historical prop odds exist, so props are evaluated on probability quality only.
+- **Same-game accumulators:** with templates fixed before any test result, the simulated joint beats the naive product of the legs in {{j_better}} of {{j_n_tests}} template-by-state tests and loses in {{j_worse}}; pooled log loss {{j_sim_ll}} against {{j_naive_ll}} on {{j_n_instances}} settled instances, and calibration error {{j_sim_ece}} against {{j_naive_ece}}. The simulator still under-predicts some multi-player templates (the five-leg template T10: {{j_t10_sim}} predicted, {{j_t10_rate}} realised). A match-level frailty meant to fix this was tested and not adopted.
+- **Lineup information (Pillar C, an upper bound):** {{c_shock_rot}} of rotation-risk players' prop prices move by more than a quarter once the lineups are known, against {{c_shock_nailed}} for nailed starters. In a simulation, a bettor who knows the lineups earns an expected {{c_inf5}} units per offered proposition at a five per cent margin (noise floor {{c_ctrl5}}); settling props void-if-not-starting with odds-ratio margin allocation cuts the residual to {{b_reco}} per offered proposition at a ten per cent overround, from {{b_base}}. These are simulations, not observed betting.
+- **In-play:** the model beats the naive in-play baseline in {{i_better}} of {{i_n_tests}} checkpoint-by-market tests and loses in {{i_worse}} (the final-1X2 log-loss difference after a dismissal is {{i_dismiss}}; negative means the model is better). Both still under-predict remaining goals ({{i_rem_model}} model, {{i_rem_base}} baseline, {{i_rem_obs}} observed). **No in-play market prices exist in the data, so the in-play model cannot be compared with a market.**
+- **Forward shadow log (pre-match only):** {{sh_logged}} fixtures logged, {{sh_settled}} settled. Verdict: {{sh_verdict}}.
+
+## What is not claimed
+
+No betting edge, no profit, no deployed or commercial use, no live feed, no in-play player props. Props and SGAs are validated on realised outcomes, never against prop odds. All backtests are on the 2015/16 StatsBomb season (props, SGAs, lineup shock, in-play) or the 2024/25 football-data season (pre-match market comparison).
+
+## Quick start
+
+```
+uv sync
+uv run edgeforge --help
+uv run edgeforge serve build     # derived serving bundle from the local warehouse
+uv run edgeforge serve api       # FastAPI on http://127.0.0.1:8000/docs
+uv run edgeforge serve app       # Streamlit trader app on http://localhost:8501
+uv run edgeforge shadow predict --fixtures fixtures.csv --commit   # pre-match shadow log
+uv run edgeforge shadow settle
+uv run edgeforge docs render && uv run edgeforge docs check
+uv run edgeforge ci-local        # fresh-clone lint, types and tests
+```
+
+Tests and lint run via a scripted fresh-clone check (`uv run edgeforge ci-local`, evidence in `artifacts/metrics/ci_local.json`; last run at commit `{{ci_sha}}`, {{ci_passed}} tests passed); the GitHub Actions workflow is included but not executed (account limitation). Container files and Cloud Run scripts are prepared in `Dockerfile` and `deploy/` but nothing is deployed.
+
+## Where things are
+
+`docs/DECISIONS.md` (every locked decision and pre-registration), `docs/GATES.md` (audited phase reports), `reports/technical_report.md`, `reports/evidence_pack.md` (what a sceptic can verify, and how), `experiments/registry.jsonl` (every experiment including the rejected ones), `artifacts/metrics/` (all numbers, with provenance).
+
+## Data credits
+
+- Match results and bookmaker odds: [football-data.co.uk](https://www.football-data.co.uk). Raw files are not redistributed.
+- Player, lineup and event data: **StatsBomb Open Data**, used under the
+  [StatsBomb Public Data User Agreement](https://github.com/statsbomb/open-data/blob/master/LICENSE.pdf).
+  Analysis in this repository is based on StatsBomb data. Raw data, event-level tables and player
+  names are not redistributed or committed; metrics files identify players by StatsBomb id only.
+
+<!-- TODO(owner): StatsBomb requires its logo wherever analysis is published (user agreement 1.4).
+     Add the logo from the StatsBomb media pack as assets/statsbomb/logo.png and replace this
+     comment with: <img src="assets/statsbomb/logo.png" alt="StatsBomb" width="160"> -->
+**StatsBomb logo: placeholder, to be added by the owner** (file not yet in the repository).
