@@ -17,13 +17,24 @@ dependencies = [
     "requests",
     "typer",
     "matplotlib",
+    "fastapi>=0.162.0",
+    "uvicorn>=0.54.0",
+    "streamlit>=1.66.1",
 ]
 
 [project.scripts]
 edgeforge = "edgeforge.cli:app"
 
 [dependency-groups]
-dev = ["pytest", "ruff", "mypy", "types-requests", "types-PyYAML", "pandas-stubs"]
+dev = [
+    "pytest",
+    "ruff",
+    "mypy",
+    "types-requests",
+    "types-PyYAML",
+    "pandas-stubs",
+    "httpx>=0.28.1",
+]
 
 [build-system]
 requires = ["hatchling"]
