@@ -48,7 +48,7 @@
 ## 6. Product, shadow log and engineering evidence
 
 - **API and app.** `uv run edgeforge serve api` and `serve app` replay 16 test matches through the lifecycle with margins (proportional, power, odds ratio) and SGA pricing; the evidence tab and `/model-health` show the findings above with their source files.
-- **Shadow log (D-058, pre-match only, no betting).** Frozen Dixon-Coles predictions are appended to `artifacts/shadow/log.jsonl` before kick-off and committed; `shadow settle` compares them with the closing market: Pinnacle where the file has it, otherwise the market average, which is what the current football-data files will give (D-059). The log is empty so far and its commits are only external proof once pushed. Status: 0 logged, 0 settled. inconclusive: no settled fixtures with closing prices yet. The expectation recorded in advance is that the market is better.
+- **Shadow log (D-058, pre-match only, no betting).** Frozen Dixon-Coles predictions are appended to `artifacts/shadow/log.jsonl` before kick-off and committed; `shadow settle` compares them with the closing market: Pinnacle where the file has it, otherwise the market average, which is what the current football-data files will give (D-059). The first batch (the Premier League weekend of 6 to 8 November 2026) was committed and pushed before kick-off; the commit and push timestamps are the timing evidence. Status: 10 logged, 0 settled. inconclusive: no settled fixtures with closing prices yet. The expectation recorded in advance is that the market is better.
 - **Engineering.** A scripted fresh-clone check (ruff, mypy, pytest) last passed at commit `fe53bcd626328b53813118fdcd996d8fb173123d` with 210 tests (GitHub Actions is unavailable; D-046). A Dockerfile and Cloud Run scripts exist; the image was not built here (no Docker engine) and nothing is deployed.
 
 ## 7. Limitations
@@ -74,5 +74,5 @@
 | `phase6b_levers.json` | `edgeforge phase6b run` | `7d80c2b` | 2026-10-07T23:46:23Z | 588d4619e62984b7 |
 | `phase7_inplay.json` | `edgeforge phase7 run` | `def7c9c` | 2026-10-08T02:55:05Z | 588d4619e62984b7 |
 | `pillar_a.json` | `edgeforge pillar-a run` | `42bf956` | 2026-10-04T20:41:08Z | 137781cbbd858114 |
-| `shadow_report.json` | `edgeforge shadow settle` | `44cacf2` | 2026-11-05T11:08:28Z | dc_opening_v1 |
+| `shadow_report.json` | `edgeforge shadow settle` | `c14d2da` | 2026-11-05T16:29:54Z | dc_opening_v1 |
 | `team_model.json` | `edgeforge team-model run` | `9de3d25` | 2026-10-05T09:40:49Z | 137781cbbd858114 |
