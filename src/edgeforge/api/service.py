@@ -32,7 +32,9 @@ from edgeforge.simulation.engine import SimResult, simulate
 DISCLAIMER = (
     "Historical replay of 2015/16 test matches, not a live feed. Fair prices are model "
     "probabilities; quoted prices add a margin. Nothing here claims an edge or commercial use: "
-    "the pre-match model does not beat the Pinnacle closing market (see /model-health)."
+    "the pre-match model does not beat the Pinnacle closing market (see /model-health). Props and "
+    "SGAs are simulated and validated on realised outcomes only; lineup shock and informed-bettor "
+    "results are UPPER BOUNDS or simulations; no in-play market prices exist."
 )
 STATES = ("opening", "lineups", "inplay")
 SETTLEMENTS = ("start", "appear")
@@ -268,7 +270,9 @@ def price_sga(
     pr["quoted_odds_joint_with_margin"] = 1.0 / max(min(joint * (1 + overround), 0.9999), 1e-9)
     pr["overround"] = overround
     pr["label"] = (
-        "SIMULATION: joint from the seeded Phase 5 simulator; naive = product of standalone legs"
+        "SIMULATION: joint from the seeded Phase 5 simulator; naive = product of standalone legs. "
+        "Both use the same simulated marginals, so the difference isolates dependence; "
+        "multi-player combinations are still under-predicted in absolute terms (see /model-health)"
     )
     pr["disclaimer"] = DISCLAIMER
     return pr
@@ -299,10 +303,10 @@ def model_health(metrics_dir: Path | None = None) -> dict[str, Any]:
 
     findings = [
         f"Pre-match: Dixon-Coles 1X2 log loss {g('a_model_ll')} vs Pinnacle closing {g('a_market_ll')} on {g('a_n_matches')} matches (2024/25): the market is better.",
-        f"Pre-match: the model's weight in a log-linear pool with the market is {g('a_enc_weight')} [{g('a_enc_lo')}, {g('a_enc_hi')}]: no information beyond the market.",
+        f"Pre-match: the model's weight in a log-linear pool with the market is {g('a_enc_weight')} [{g('a_enc_lo')}, {g('a_enc_hi')}]: no detectable information beyond the market.",
         f"Pre-match: the closing line does not move toward the model (slope {g('a_move_slope')} [{g('a_move_lo')}, {g('a_move_hi')}]).",
         f"Props: {g('p4_props_better')} of 6 markets beat the rolling baseline (anytime scorer {g('p4_anytime_diff')} log loss); shots 1+ is a null ({g('p4_shots1_diff')}).",
-        f"SGAs: the simulated joint beats the naive product in {g('j_better')} of {g('j_n_tests')} pre-registered tests and loses in {g('j_worse')} (pooled log loss {g('j_sim_ll')} vs {g('j_naive_ll')}).",
+        f"SGAs: the simulated joint beats the naive product in {g('j_better')} of {g('j_n_tests')} pre-registered tests and loses in {g('j_worse')} (pooled log loss {g('j_sim_ll')} vs {g('j_naive_ll')}; both prices share the simulator's marginals, so this isolates dependence, and multi-player templates are still under-predicted: T10 {g('j_t10_sim')} predicted vs {g('j_t10_rate')} realised).",
         f"Lineup shock (UPPER BOUND): {g('c_shock_rot')} of rotation-risk prop prices move more than 25% in odds vs {g('c_shock_nailed')} for nailed starters.",
         f"In-play: the model beats the naive in-play baseline in {g('i_better')} of {g('i_n_tests')} tests and loses in {g('i_worse')}; no in-play market prices exist in the data, so no comparison with a market is possible.",
     ]

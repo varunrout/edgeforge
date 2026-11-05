@@ -18,15 +18,15 @@ The metrics files are committed. Re-running a phase needs the local data warehou
 | Question | Answer (from the metrics) | Command that regenerates it |
 |---|---|---|
 | Does the pre-match model beat the Pinnacle closing market? | **No.** 1X2 log loss 0.9853 against 0.9606 on 1752 matches (2024/25). | `uv run edgeforge team-model run`, `uv run edgeforge baselines team` |
-| Does the model add information beyond the market? | **No.** Pool weight -0.072 (95% CI -0.172 to 0.046). | `uv run edgeforge pillar-a run` |
-| Does the closing line move toward the model? | **No.** Slope -0.0035 (95% CI -0.0259 to 0.0184). | `uv run edgeforge pillar-a run` |
-| Is there a replicated market inefficiency? | **No.** 5 of 12 confirmatory survivors replicate, all model-versus-market gaps; the Bundesliga home bias does not (p = 0.81). | `uv run edgeforge pillar-a run` |
+| Does the model add information beyond the market? | **No detectable information.** Pool weight -0.072 (95% CI -0.172 to 0.046; the interval reaches 0.046). | `uv run edgeforge pillar-a run` |
+| Does the closing line move toward the model? | **No.** Slope -0.0035 (95% CI -0.0259 to 0.0184), measured against an early snapshot roughly one to three days before kick-off, not timestamped (D-024). | `uv run edgeforge pillar-a run` |
+| Is there a replicated market inefficiency? | **No.** 5 of 12 confirmatory survivors replicate (same sign, p below one in twenty, uncorrected; the replication season uses the market-average close, Pinnacle prices stop in early 2026), all model-versus-market gaps; the Bundesliga home bias does not (p = 0.81). | `uv run edgeforge pillar-a run` |
 | Are player props predictable beyond a rolling baseline? | **Partly.** 5 of six markets improve after multiple-testing control; shots 1+ does not (+0.0000). No prop odds exist to compare with. | `uv run edgeforge phase4 run` |
-| Is the joint probability of a same-game accumulator better than the product of its legs? | **Yes, on realised outcomes.** Better in 21 of 26 pre-registered tests, worse in 0; pooled log loss 0.3301 against 0.3572. Both use the same marginals, so this isolates dependence; multi-player templates are still under-predicted (T10 0.080 predicted, 0.102 realised). | `uv run edgeforge phase5 run` |
+| Is the joint probability of a same-game accumulator better than the product of its legs? | **Yes, on realised outcomes.** Better in 21 of 26 pre-registered tests, worse in 0; pooled log loss 0.3301 against 0.3572. Both use the same marginals, so this isolates dependence; the named players are mechanically chosen top scorers; multi-player templates are still under-predicted (T10 0.080 predicted, 0.102 realised). | `uv run edgeforge phase5 run` |
 | Does knowing the lineups change prop prices? | **Yes, a lot for rotation-risk players** (an upper bound): 81.7% move by more than a quarter, against 16.3% for nailed starters; the lineups price is the better predictor in 6 of six prop markets. | `uv run edgeforge phase6 run` |
-| What can a book do about informed lineup knowledge? | **Simulation only.** Informed expected profit per offered proposition 0.1015 (void on appearance) falls to 0.0147 (void if not starting) and 0.0007 with odds-ratio margin allocation, at a ten per cent overround. | `uv run edgeforge phase6b` |
-| Does an in-play model beat a naive in-play baseline? | **Yes in 14 of 42 tests, never worse** (largest after a dismissal: log-loss difference -0.0792, negative is better). Both under-predict remaining goals. **No in-play market prices exist, so no comparison with a market is possible.** | `uv run edgeforge phase7` |
-| What does the forward shadow log say? | 0 fixtures logged, 0 settled. inconclusive: no settled fixtures with closing prices yet. | `uv run edgeforge shadow predict`, `shadow settle` |
+| What can a book do about informed lineup knowledge? | **SIMULATION, UPPER BOUND.** On the Phase 6b basis (per offered proposition, void ones count zero) the informed expected profit 0.1015 (void on appearance) falls to 0.0147 (void if not starting) and 0.0007 with odds-ratio margin allocation, at a ten per cent overround. (The Pillar C figure of 0.151 at a five per cent margin is per settled proposition and not comparable.) | `uv run edgeforge phase6b` |
+| Does an in-play model beat a naive in-play baseline? | **Yes in 14 of 42 tests, never worse** (largest after a dismissal: log-loss difference -0.0792, 95% CI -0.1420 to -0.0244, 340 propositions, negative is better; the baseline is naive). Both under-predict remaining goals. **No in-play market prices exist, so no comparison with a market is possible.** | `uv run edgeforge phase7` |
+| What does the forward shadow log say? | 0 fixtures logged, 0 settled; the log is empty so far and its commit timestamps are external proof only once pushed; settlement will use the market-average close (D-059). inconclusive: no settled fixtures with closing prices yet. | `uv run edgeforge shadow predict`, `shadow settle` |
 
 ## 3. What is not claimed
 
@@ -37,15 +37,15 @@ The metrics files are committed. Re-running a phase needs the local data warehou
 
 ## 4. Controls against fooling ourselves
 
-- Splits by date; test windows are never used for tuning; every tuning grid is checked to end interior before any test metric exists (D-040); calibration adoption is decided inside the tuning window (D-043).
+- Splits by date. **From Phase 4 on** test windows are never used for tuning, every tuning grid is checked to end interior before any test metric exists (D-040) and calibration adoption is decided inside the tuning window (D-043). **Known violations before that, disclosed in D-039 and D-040:** the promoted-team prior grid and the player rolling-baseline grid were widened after their test numbers were seen and the Pillar A calibrators were first adopted on the test window; the rolling baseline is the comparison behind the prop results.
 - Templates, bands, margins and test families were committed before the corresponding results (D-037, D-047, D-051, D-055, D-056, D-058); `git log` shows the order.
 - Multiple-testing control (Benjamini-Hochberg, ten per cent false discovery) within each family; paired match-cluster bootstrap confidence intervals everywhere.
-- Null controls: an independent re-simulation stands in for the "informed" probabilities to size Monte Carlo noise; a calibrated market yields no survivors in the efficiency analysis; the SGA validation detects a planted dependence and finds none when prices coincide.
+- Null controls on the real data: an independent re-simulation stands in for the "informed" probabilities to size Monte Carlo noise. Null controls in unit tests on synthetic data: a calibrated market yields no survivors in the efficiency analysis; the SGA validation detects a planted dependence and finds none when prices coincide.
 - Errors found and disclosed in the gate reports, for example a prediction cache that was indexed by row position and attached minutes to the wrong players until a determinism check caught it; the affected runs were discarded.
 
 ## 5. Engineering evidence
 
-A scripted fresh-clone check last passed at commit `114429c3e8c59633b81e8ee829dfa8a88cbccead` with 134 tests. GitHub Actions is not used (account limitation, D-046).
+A scripted fresh-clone check last passed at commit `114429c3e8c59633b81e8ee829dfa8a88cbccead` with 134 tests; it covers the code at that commit and later commits change documents only. GitHub Actions is not used (account limitation, D-046). The container image was not built (no Docker engine); a fresh-clone run with production-only dependencies serving the API was checked instead.
 
 ## 6. Provenance of every metrics file used
 
@@ -79,20 +79,20 @@ A scripted fresh-clone check last passed at commit `114429c3e8c59633b81e8ee829df
 | Slope of (close - early) on (model - early) | -0.0035 | `pillar_a.json` | `blocks / F1_primary_2024_25 / claims / id=mvm.linemove.slope / estimate` |
 | Line-movement slope, 95% CI low | -0.0259 | `pillar_a.json` | `blocks / F1_primary_2024_25 / claims / id=mvm.linemove.slope / ci_low` |
 | Line-movement slope, 95% CI high | 0.0184 | `pillar_a.json` | `blocks / F1_primary_2024_25 / claims / id=mvm.linemove.slope / ci_high` |
-| Pre-registered efficiency claims surviving BH in 2024/25 | 12 | `pillar_a.json` | `(derived: count or sum over the file)` |
+| Pre-registered efficiency claims surviving BH in 2024/25 | 12 | `pillar_a.json` | `(derived: count of blocks / F1_primary_2024_25 / bh_survivors)` |
 | Claims in the 2024/25 BH family | 47 | `pillar_a.json` | `blocks / F1_primary_2024_25 / n_claims_in_bh_family` |
 | P(start) log loss, model | 0.5072 | `phase4_participation.json` | `starter_model / start_model / log_loss` |
 | P(start) log loss, 'started last match' baseline | 0.5840 | `phase4_participation.json` | `starter_model / started_last_match_baseline / log_loss` |
-| Prop markets (of six) beating the Phase 2 baseline after BH, lineups state | 5 | `phase4_markets.json` | `(derived: count or sum over the file)` |
+| Prop markets (of six) beating the Phase 2 baseline after BH, lineups state | 5 | `phase4_markets.json` | `(derived: count of lineups_state / comparison_E_full_distribution_vs_phase2_baseline / bh_family / survivors)` |
 | Shots 1+ log-loss difference vs baseline (null) | +0.0000 | `phase4_markets.json` | `lineups_state / comparison_E_full_distribution_vs_phase2_baseline / markets / shots_1plus / log_loss_diff_new_minus_baseline / estimate` |
 | Anytime scorer log-loss difference vs baseline | -0.0090 | `phase4_markets.json` | `lineups_state / comparison_E_full_distribution_vs_phase2_baseline / markets / anytime_scorer / log_loss_diff_new_minus_baseline / estimate` |
-| Simulator invariant violations over all match-states | 0 | `phase5_simulator.json` | `(derived: count or sum over the file)` |
+| Simulator invariant violations over all match-states | 0 | `phase5_simulator.json` | `(derived: computed of values in the file)` |
 | Simulated test matches per state | 758 | `phase5_simulator.json` | `states / lineups / n_matches` |
 | Simulations per match and state | 20000 | `phase5_simulator.json` | `n_sims` |
-| Markets where simulator marginals differ from the standalone models (lineups, BH) | 0 | `phase5_comparison_b.json` | `(derived: count or sum over the file)` |
+| Markets where simulator marginals differ from the standalone models (lineups, BH) | 0 | `phase5_comparison_b.json` | `(derived: count of states / lineups / bh_family / survivors)` |
 | SGA template x state tests | 26 | `phase5_sga.json` | `joint_validation / bh_family / n_tests` |
-| Tests where the simulated joint beats the naive product (BH 10%) | 21 | `phase5_sga.json` | `(derived: count or sum over the file)` |
-| Tests where the simulated joint is worse (BH 10%) | 0 | `phase5_sga.json` | `(derived: count or sum over the file)` |
+| Tests where the simulated joint beats the naive product (BH 10%) | 21 | `phase5_sga.json` | `(derived: count of joint_validation / bh_family / survivors_better)` |
+| Tests where the simulated joint is worse (BH 10%) | 0 | `phase5_sga.json` | `(derived: count of joint_validation / bh_family / survivors_worse)` |
 | Pooled joint log loss, simulated (lineups) | 0.3301 | `phase5_sga.json` | `joint_validation / pooled / lineups|all / simulated / log_loss` |
 | Pooled joint log loss, naive product (lineups) | 0.3572 | `phase5_sga.json` | `joint_validation / pooled / lineups|all / naive / log_loss` |
 | Pooled joint ECE, simulated (lineups) | 0.0152 | `phase5_sga.json` | `joint_validation / pooled / lineups|all / simulated / ece` |
@@ -101,14 +101,14 @@ A scripted fresh-clone check last passed at commit `114429c3e8c59633b81e8ee829df
 | Share of rotation-risk prop prices moving more than 25% in odds | 81.7% | `phase6_pillar_c.json` | `shock / props / by_band / rotation / share_abs_odds_change_gt_25pct` |
 | Share of nailed-starter prop prices moving more than 25% in odds | 16.3% | `phase6_pillar_c.json` | `shock / props / by_band / nailed / share_abs_odds_change_gt_25pct` |
 | Value of information, shots 1+ (log loss opening minus lineups) | +0.0242 | `phase6_pillar_c.json` | `value_of_information / family_V / markets / shots_1plus / opening_minus_lineups / estimate` |
-| Prop markets (of six) where the lineups price is better (BH) | 6 | `phase6_pillar_c.json` | `(derived: count or sum over the file)` |
-| SGA templates (of 13) where the lineups price is better (BH) | 3 | `phase6_pillar_c.json` | `(derived: count or sum over the file)` |
+| Prop markets (of six) where the lineups price is better (BH) | 6 | `phase6_pillar_c.json` | `(derived: computed of values in the file)` |
+| SGA templates (of 13) where the lineups price is better (BH) | 3 | `phase6_pillar_c.json` | `(derived: computed of values in the file)` |
 | Informed expected profit per offered prop, base settlement, 10% overround | 0.1015 | `phase6b_levers.json` | `test / base|0.1 / informed_expected_per_offered` |
 | Same, void if not starting | 0.0147 | `phase6b_levers.json` | `test / start|0.1 / informed_expected_per_offered` |
 | Same, void if not starting + odds-ratio allocation | 0.0007 | `phase6b_levers.json` | `test / start+odds_ratio|0.1 / informed_expected_per_offered` |
 | Checkpoint x market tests | 42 | `phase7_inplay.json` | `family_I_checkpoint_x_market / bh / n_tests` |
-| Tests where the in-play model beats the naive baseline (BH 10%) | 14 | `phase7_inplay.json` | `(derived: count or sum over the file)` |
-| Tests where it is worse (BH 10%) | 0 | `phase7_inplay.json` | `(derived: count or sum over the file)` |
+| Tests where the in-play model beats the naive baseline (BH 10%) | 14 | `phase7_inplay.json` | `(derived: count of family_I_checkpoint_x_market / bh / model_better)` |
+| Tests where it is worse (BH 10%) | 0 | `phase7_inplay.json` | `(derived: count of family_I_checkpoint_x_market / bh / model_worse)` |
 | 1X2 log-loss difference after a dismissal, model minus baseline | -0.0792 | `phase7_inplay.json` | `family_II_stratum_x_market / tests / after_dismissal|1x2 / log_loss_diff_model_minus_baseline / estimate` |
 | Observed mean remaining goals (all checkpoints) | 1.347 | `phase7_inplay.json` | `remaining_goals_calibration / pooled / observed` |
 | Model mean predicted remaining goals | 1.238 | `phase7_inplay.json` | `remaining_goals_calibration / pooled / model` |
@@ -124,9 +124,9 @@ A scripted fresh-clone check last passed at commit `114429c3e8c59633b81e8ee829df
 | Favourite-longshot slope, 95% CI high | 1.180 | `pillar_a.json` | `blocks / F1_primary_2024_25 / claims / id=eff.flb.close.slope / ci_high` |
 | Cold-start fix, promoted teams' first 10 matches, log-loss difference | -0.0245 | `pillar_a.json` | `blocks / F1_primary_2024_25 / claims / id=coldstart.fix_vs_none.first10 / estimate` |
 | Cold-start fix, 95% CI high (the interval reaches zero) | +0.0003 | `pillar_a.json` | `blocks / F1_primary_2024_25 / claims / id=coldstart.fix_vs_none.first10 / ci_high` |
-| Primary-block survivors that replicate in 2025/26 (same sign and p < 0.05) | 5 | `pillar_a.json` | `(derived: count or sum over the file)` |
-| Primary-block survivors tested for replication | 12 | `pillar_a.json` | `(derived: count or sum over the file)` |
-| Bundesliga home-bias replication p-value (2025/26) | 0.81 | `pillar_a.json` | `(derived: count or sum over the file)` |
+| Primary-block survivors that replicate in 2025/26 (same sign and p < 0.05) | 5 | `pillar_a.json` | `(derived: computed of values in the file)` |
+| Primary-block survivors tested for replication | 12 | `pillar_a.json` | `(derived: count of replication_of_primary_survivors)` |
+| Bundesliga home-bias replication p-value (2025/26) | 0.81 | `pillar_a.json` | `(derived: computed of values in the file)` |
 | P(start) paired log-loss difference vs baseline | -0.0768 | `phase4_participation.json` | `starter_model / paired_vs_baseline_log_loss / estimate` |
 | Bench appearance ECE before D-044 recalibration | 0.0383 | `phase4_participation.json` | `recalibration_d044 / bench_appearance_level / test_raw / ece` |
 | Bench appearance ECE after D-044 recalibration | 0.0223 | `phase4_participation.json` | `recalibration_d044 / bench_appearance_level / test_recalibrated / ece` |
@@ -137,8 +137,8 @@ A scripted fresh-clone check last passed at commit `114429c3e8c59633b81e8ee829df
 | Pooled log-loss difference simulated minus naive, 2 legs (lineups) | -0.0167 | `phase5_sga.json` | `joint_validation / pooled / lineups|2_legs / log_loss_diff_sim_minus_naive / estimate` |
 | Match-level frailty (D-049) adopted | False | `phase6_frailty.json` | `decision / adopted` |
 | Share of rotation-risk prop prices moving more than 50% in odds | 59.1% | `phase6_pillar_c.json` | `shock / props / by_band / rotation / share_abs_odds_change_gt_50pct` |
-| Informed expected profit per offered prop at a 5% margin (Pillar C) | 0.151 | `phase6_pillar_c.json` | `informed_bettor / cells / props|all / reference / 0.05 / informed_expected_per_offered` |
-| Same with the lineups probabilities replaced by an independent re-simulation (noise floor) | 0.019 | `phase6_pillar_c.json` | `null_control / cells / props|all / curve / 5 / informed_expected_per_offered` |
+| Informed expected profit per SETTLED prop at a 5% margin (Pillar C basis; not comparable with the Phase 6b per-offered figures) | 0.151 | `phase6_pillar_c.json` | `informed_bettor / cells / props|all / reference / 0.05 / informed_expected_per_offered` |
+| Same basis with the lineups probabilities replaced by an independent re-simulation (noise floor) | 0.019 | `phase6_pillar_c.json` | `null_control / cells / props|all / curve / 5 / informed_expected_per_offered` |
 | Settlement rule chosen on the tuning window (Phase 6b) | start | `phase6b_levers.json` | `tuning_window / chosen_settlement_rule` |
 | Recommended combination on the tuning window | start+odds_ratio | `phase6b_levers.json` | `tuning_window / recommended_combination` |
 | Odds cap, informed expected profit per offered prop (10% overround) | 0.0913 | `phase6b_levers.json` | `test / cap|0.1 / informed_expected_per_offered` |
@@ -152,6 +152,11 @@ A scripted fresh-clone check last passed at commit `114429c3e8c59633b81e8ee829df
 | Remaining goals after a dismissal at 75 minutes: observed | 0.75 | `phase7_inplay.json` | `remaining_goals_calibration / by_checkpoint_stratum / 75|after_dismissal / observed_remaining_goals` |
 | Remaining goals at 45 minutes with a two-goal lead: model | 1.48 | `phase7_inplay.json` | `remaining_goals_calibration / by_checkpoint_stratum / 45|two_plus / model_predicted` |
 | Remaining goals at 45 minutes with a two-goal lead: observed | 1.83 | `phase7_inplay.json` | `remaining_goals_calibration / by_checkpoint_stratum / 45|two_plus / observed_remaining_goals` |
+| Propositions in the after-dismissal 1X2 comparison | 340 | `phase7_inplay.json` | `family_II_stratum_x_market / tests / after_dismissal|1x2 / n` |
+| After-dismissal 1X2 difference, 95% CI low | -0.1420 | `phase7_inplay.json` | `family_II_stratum_x_market / tests / after_dismissal|1x2 / log_loss_diff_model_minus_baseline / ci_low` |
+| After-dismissal 1X2 difference, 95% CI high | -0.0244 | `phase7_inplay.json` | `family_II_stratum_x_market / tests / after_dismissal|1x2 / log_loss_diff_model_minus_baseline / ci_high` |
+| Phase 6b base informed expected profit per offered prop, 5% overround | 0.1229 | `phase6b_levers.json` | `test / base|0.05 / informed_expected_per_offered` |
+| Phase 6b recommended combination, 5% overround | 0.0036 | `phase6b_levers.json` | `test / start+odds_ratio|0.05 / informed_expected_per_offered` |
 | Shadow log: fixtures logged | 0 | `shadow_report.json` | `n_logged` |
 | Shadow log: fixtures settled | 0 | `shadow_report.json` | `n_settled` |
 | Shadow log verdict | inconclusive: no settled fixtures with closing prices yet | `shadow_report.json` | `verdict` |

@@ -17,7 +17,7 @@ TARGETS = {
     "evidence_pack.tmpl": "reports/evidence_pack.md",
     "cv_project_summary.tmpl": "reports/cv_project_summary.md",
 }
-PLACEHOLDER = re.compile(r"\{\{\s*([a-z0-9_]+)\s*\}\}")
+PLACEHOLDER = re.compile(r"\{\{\s*([A-Za-z0-9_]+)\s*\}\}")
 # numbers that may stay in prose: decision ids, years, short counts, version-like tokens
 BARE_NUMBER = re.compile(r"(?<![\w.-])(\d+\.\d+|\d+%|\d{3,})(?![\w-])")
 ALLOWED_YEARS = re.compile(r"^((19|20)\d{2}|95%)$")  # years and the confidence level
@@ -42,11 +42,12 @@ def provenance_table(metrics_dir: Path) -> str:
 def claims_table(metrics_dir: Path) -> str:
     rows = ["| claim | value | source file | path in the file |", "|---|---|---|---|"]
     for c in evidence.CLAIMS.values():
-        path = (
-            "(derived: count or sum over the file)"
-            if c.derive
-            else " / ".join(str(x) for x in c.path)
-        )
+        if c.derive:
+            src = getattr(c.derive, "path", None)
+            what = " / ".join(str(x) for x in src) if src else "values in the file"
+            path = f"(derived: {getattr(c.derive, 'kind', 'computed')} of {what})"
+        else:
+            path = " / ".join(str(x) for x in c.path)
         rows.append(
             f"| {c.label} | {evidence.fmt(evidence.value(c, metrics_dir), c.fmt)} | `{c.file}` | `{path}` |"
         )
@@ -64,7 +65,10 @@ def render_text(template: str, metrics_dir: Path = evidence.METRICS_DIR) -> str:
             raise KeyError(f"unknown claim {key!r} in a template")
         return evidence.render(key, metrics_dir)
 
-    return PLACEHOLDER.sub(sub, template)
+    out = PLACEHOLDER.sub(sub, template)
+    if "{{" in out or "}}" in out:
+        raise ValueError("unrendered placeholder left in the output")
+    return out
 
 
 def lint_template(template: str) -> list[str]:

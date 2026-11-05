@@ -165,7 +165,7 @@ def _logged(n: int, noise: float) -> tuple[list[dict], dict[str, pd.DataFrame]]:
             {
                 "Div": "E0", "Date": d.strftime("%d/%m/%Y"), "HomeTeam": f"a{i}", "AwayTeam": f"b{i}",
                 "FTHG": [2, 1, 0][res], "FTAG": [0, 1, 2][res],
-                "PPCH": odds[0], "PPCD": odds[1], "PPCA": odds[2], "AvgC>2.5": 1.9, "AvgC<2.5": 2.0,
+                "PSCH": odds[0], "PSCD": odds[1], "PSCA": odds[2], "AvgC>2.5": 1.9, "AvgC<2.5": 2.0,
             }
         )  # fmt: skip
     return log, {"E0": pd.DataFrame(rows)}
@@ -177,7 +177,7 @@ def test_settlement_uses_pinnacle_closing_waits_for_the_result() -> None:
     s = settle_records(log, res, set(), now)
     assert len(s) == 4  # kickoffs on 1-4 August are three hours past; the 5th at 15:00 is not
     assert (
-        s[0]["close_1x2_columns"] == ["PPCH", "PPCD", "PPCA"]
+        s[0]["close_1x2_columns"] == ["PSCH", "PSCD", "PSCA"]
         and s[0]["close_1x2_source"] == "Pinnacle closing"
     )
     assert s[0]["close_home"] + s[0]["close_draw"] + s[0]["close_away"] == pytest.approx(1.0)
@@ -198,3 +198,12 @@ def test_report_says_inconclusive_for_small_n_and_detects_a_worse_model_for_larg
     assert big["verdict"] == "model worse than the closing market"
     assert big["log_loss_model_1x2"] > big["log_loss_closing_1x2"]
     assert build_report(log, [], 1)["verdict"].startswith("inconclusive: no settled")
+
+
+def test_paddy_power_columns_are_never_mistaken_for_pinnacle() -> None:
+    log, res = _logged(3, 0.0)
+    df = res["E0"].rename(columns={"PSCH": "PPCH", "PSCD": "PPCD", "PSCA": "PPCA"})
+    df["AvgCH"], df["AvgCD"], df["AvgCA"] = 2.0, 3.5, 4.0
+    s = settle_records(log, {"E0": df}, set(), pd.Timestamp("2027-01-01"))
+    assert s[0]["close_1x2_source"].startswith("market-average closing")
+    assert s[0]["close_1x2_columns"] == ["AvgCH", "AvgCD", "AvgCA"]

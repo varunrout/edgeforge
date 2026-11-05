@@ -35,12 +35,23 @@ def _dig(obj: Any, path: tuple[str | int, ...]) -> Any:
     return obj
 
 
+class _Derived:
+    """A derived claim that remembers which part of the file it counts or sums."""
+
+    def __init__(self, kind: str, path: tuple[str | int, ...]) -> None:
+        self.kind, self.path = kind, path
+
+    def __call__(self, j: Any) -> int:
+        v = _dig(j, self.path)
+        return int(len(v) if self.kind == "count" else sum(v.values()))
+
+
 def _count(path: tuple[str | int, ...]) -> Callable[[Any], int]:
-    return lambda j: len(_dig(j, path))
+    return _Derived("count", path)
 
 
 def _sum_values(path: tuple[str | int, ...]) -> Callable[[Any], int]:
-    return lambda j: int(sum(_dig(j, path).values()))
+    return _Derived("sum", path)
 
 
 PA = ("blocks", "F1_primary_2024_25")

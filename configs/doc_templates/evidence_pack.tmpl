@@ -18,15 +18,15 @@ The metrics files are committed. Re-running a phase needs the local data warehou
 | Question | Answer (from the metrics) | Command that regenerates it |
 |---|---|---|
 | Does the pre-match model beat the Pinnacle closing market? | **No.** 1X2 log loss {{a_model_ll}} against {{a_market_ll}} on {{a_n_matches}} matches (2024/25). | `uv run edgeforge team-model run`, `uv run edgeforge baselines team` |
-| Does the model add information beyond the market? | **No.** Pool weight {{a_enc_weight}} (95% CI {{a_enc_lo}} to {{a_enc_hi}}). | `uv run edgeforge pillar-a run` |
-| Does the closing line move toward the model? | **No.** Slope {{a_move_slope}} (95% CI {{a_move_lo}} to {{a_move_hi}}). | `uv run edgeforge pillar-a run` |
-| Is there a replicated market inefficiency? | **No.** {{a_repl_n}} of {{a_repl_total}} confirmatory survivors replicate, all model-versus-market gaps; the Bundesliga home bias does not (p = {{a_d1_repl_p}}). | `uv run edgeforge pillar-a run` |
+| Does the model add information beyond the market? | **No detectable information.** Pool weight {{a_enc_weight}} (95% CI {{a_enc_lo}} to {{a_enc_hi}}; the interval reaches {{a_enc_hi}}). | `uv run edgeforge pillar-a run` |
+| Does the closing line move toward the model? | **No.** Slope {{a_move_slope}} (95% CI {{a_move_lo}} to {{a_move_hi}}), measured against an early snapshot roughly one to three days before kick-off, not timestamped (D-024). | `uv run edgeforge pillar-a run` |
+| Is there a replicated market inefficiency? | **No.** {{a_repl_n}} of {{a_repl_total}} confirmatory survivors replicate (same sign, p below one in twenty, uncorrected; the replication season uses the market-average close, Pinnacle prices stop in early 2026), all model-versus-market gaps; the Bundesliga home bias does not (p = {{a_d1_repl_p}}). | `uv run edgeforge pillar-a run` |
 | Are player props predictable beyond a rolling baseline? | **Partly.** {{p4_props_better}} of six markets improve after multiple-testing control; shots 1+ does not ({{p4_shots1_diff}}). No prop odds exist to compare with. | `uv run edgeforge phase4 run` |
-| Is the joint probability of a same-game accumulator better than the product of its legs? | **Yes, on realised outcomes.** Better in {{j_better}} of {{j_n_tests}} pre-registered tests, worse in {{j_worse}}; pooled log loss {{j_sim_ll}} against {{j_naive_ll}}. Both use the same marginals, so this isolates dependence; multi-player templates are still under-predicted (T10 {{j_t10_sim}} predicted, {{j_t10_rate}} realised). | `uv run edgeforge phase5 run` |
+| Is the joint probability of a same-game accumulator better than the product of its legs? | **Yes, on realised outcomes.** Better in {{j_better}} of {{j_n_tests}} pre-registered tests, worse in {{j_worse}}; pooled log loss {{j_sim_ll}} against {{j_naive_ll}}. Both use the same marginals, so this isolates dependence; the named players are mechanically chosen top scorers; multi-player templates are still under-predicted (T10 {{j_t10_sim}} predicted, {{j_t10_rate}} realised). | `uv run edgeforge phase5 run` |
 | Does knowing the lineups change prop prices? | **Yes, a lot for rotation-risk players** (an upper bound): {{c_shock_rot}} move by more than a quarter, against {{c_shock_nailed}} for nailed starters; the lineups price is the better predictor in {{c_voi_markets}} of six prop markets. | `uv run edgeforge phase6 run` |
-| What can a book do about informed lineup knowledge? | **Simulation only.** Informed expected profit per offered proposition {{b_base}} (void on appearance) falls to {{b_start}} (void if not starting) and {{b_reco}} with odds-ratio margin allocation, at a ten per cent overround. | `uv run edgeforge phase6b` |
-| Does an in-play model beat a naive in-play baseline? | **Yes in {{i_better}} of {{i_n_tests}} tests, never worse** (largest after a dismissal: log-loss difference {{i_dismiss}}, negative is better). Both under-predict remaining goals. **No in-play market prices exist, so no comparison with a market is possible.** | `uv run edgeforge phase7` |
-| What does the forward shadow log say? | {{sh_logged}} fixtures logged, {{sh_settled}} settled. {{sh_verdict}}. | `uv run edgeforge shadow predict`, `shadow settle` |
+| What can a book do about informed lineup knowledge? | **SIMULATION, UPPER BOUND.** On the Phase 6b basis (per offered proposition, void ones count zero) the informed expected profit {{b_base}} (void on appearance) falls to {{b_start}} (void if not starting) and {{b_reco}} with odds-ratio margin allocation, at a ten per cent overround. (The Pillar C figure of {{c_inf5}} at a five per cent margin is per settled proposition and not comparable.) | `uv run edgeforge phase6b` |
+| Does an in-play model beat a naive in-play baseline? | **Yes in {{i_better}} of {{i_n_tests}} tests, never worse** (largest after a dismissal: log-loss difference {{i_dismiss}}, 95% CI {{i_dismiss_lo}} to {{i_dismiss_hi}}, {{i_dismiss_n}} propositions, negative is better; the baseline is naive). Both under-predict remaining goals. **No in-play market prices exist, so no comparison with a market is possible.** | `uv run edgeforge phase7` |
+| What does the forward shadow log say? | {{sh_logged}} fixtures logged, {{sh_settled}} settled; the log is empty so far and its commit timestamps are external proof only once pushed; settlement will use the market-average close (D-059). {{sh_verdict}}. | `uv run edgeforge shadow predict`, `shadow settle` |
 
 ## 3. What is not claimed
 
@@ -37,15 +37,15 @@ The metrics files are committed. Re-running a phase needs the local data warehou
 
 ## 4. Controls against fooling ourselves
 
-- Splits by date; test windows are never used for tuning; every tuning grid is checked to end interior before any test metric exists (D-040); calibration adoption is decided inside the tuning window (D-043).
+- Splits by date. **From Phase 4 on** test windows are never used for tuning, every tuning grid is checked to end interior before any test metric exists (D-040) and calibration adoption is decided inside the tuning window (D-043). **Known violations before that, disclosed in D-039 and D-040:** the promoted-team prior grid and the player rolling-baseline grid were widened after their test numbers were seen and the Pillar A calibrators were first adopted on the test window; the rolling baseline is the comparison behind the prop results.
 - Templates, bands, margins and test families were committed before the corresponding results (D-037, D-047, D-051, D-055, D-056, D-058); `git log` shows the order.
 - Multiple-testing control (Benjamini-Hochberg, ten per cent false discovery) within each family; paired match-cluster bootstrap confidence intervals everywhere.
-- Null controls: an independent re-simulation stands in for the "informed" probabilities to size Monte Carlo noise; a calibrated market yields no survivors in the efficiency analysis; the SGA validation detects a planted dependence and finds none when prices coincide.
+- Null controls on the real data: an independent re-simulation stands in for the "informed" probabilities to size Monte Carlo noise. Null controls in unit tests on synthetic data: a calibrated market yields no survivors in the efficiency analysis; the SGA validation detects a planted dependence and finds none when prices coincide.
 - Errors found and disclosed in the gate reports, for example a prediction cache that was indexed by row position and attached minutes to the wrong players until a determinism check caught it; the affected runs were discarded.
 
 ## 5. Engineering evidence
 
-A scripted fresh-clone check last passed at commit `{{ci_sha}}` with {{ci_passed}} tests. GitHub Actions is not used (account limitation, D-046).
+A scripted fresh-clone check last passed at commit `{{ci_sha}}` with {{ci_passed}} tests; it covers the code at that commit and later commits change documents only. GitHub Actions is not used (account limitation, D-046). The container image was not built (no Docker engine); a fresh-clone run with production-only dependencies serving the API was checked instead.
 
 ## 6. Provenance of every metrics file used
 

@@ -43,8 +43,8 @@ WINDOW_DAYS = 1825
 MIN_TRAIN = 150
 MIN_SETTLED_FOR_VERDICT = 200
 BASE_URL = "https://www.football-data.co.uk"
-CLOSE_1X2 = (("PSCH", "PSCD", "PSCA"), ("PPCH", "PPCD", "PPCA"))
-CLOSE_OU = (("PSC>2.5", "PSC<2.5"), ("PC>2.5", "PC<2.5"))
+CLOSE_1X2 = (("PSCH", "PSCD", "PSCA"),)  # PP* is Paddy Power, not Pinnacle (D-059)
+CLOSE_OU = (("PC>2.5", "PC<2.5"), ("PSC>2.5", "PSC<2.5"))
 AVG_1X2, AVG_OU = ("AvgCH", "AvgCD", "AvgCA"), ("AvgC>2.5", "AvgC<2.5")
 
 

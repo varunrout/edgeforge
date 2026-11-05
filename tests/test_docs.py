@@ -60,3 +60,23 @@ def test_documents_state_the_nulls_and_do_not_claim_an_edge() -> None:
             assert bad not in low
     assert "neutralising" not in readme.lower() and "neutralising" not in pack.lower()
     assert all("player_name" not in d for d in (readme, pack, report))
+
+
+def test_mixed_case_claim_ids_render_and_leftover_placeholders_fail() -> None:
+    assert render_text("{{s_compB_survivors}}") == evidence.render("s_compB_survivors")
+    with pytest.raises(KeyError):
+        render_text("{{ Not_A_Claim }}")
+    rendered = (ROOT / "reports" / "technical_report.md").read_text(encoding="utf-8")
+    assert "{{" not in rendered and "}}" not in rendered
+
+
+def test_the_withdrawn_neutralising_margin_figures_are_not_in_the_documents() -> None:
+    for name in (
+        "README.md",
+        "reports/technical_report.md",
+        "reports/evidence_pack.md",
+        "reports/cv_project_summary.md",
+    ):
+        text = (ROOT / name).read_text(encoding="utf-8")
+        assert "260%" not in text and "330%" not in text and "485%" not in text
+    assert not (ROOT / "artifacts" / "figures" / "phase6_policy_heatmap.png").exists()

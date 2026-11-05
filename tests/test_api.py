@@ -121,7 +121,7 @@ def test_shock_and_path(client: TestClient) -> None:
 def test_model_health_reports_the_nulls_from_the_metrics_files(client: TestClient) -> None:
     h = client.get("/model-health").json()
     text = " ".join(h["findings"])
-    assert "the market is better" in text and "no information beyond the market" in text
+    assert "the market is better" in text and "no detectable information beyond the market" in text
     assert "no comparison with a market is possible" in text
     assert h["claims"]["a_market_ll"]["source"] == "baseline_team.json"
     assert h["ci_local"]["all_passed"] is True
