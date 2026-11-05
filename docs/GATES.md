@@ -509,3 +509,30 @@ Everything else in the efficiency map is **not distinguishable from zero**: no l
 - The pre-registered showcase rule picked an extreme match (0-9); the figure is kept as pre-registered.
 - Family II has 25 and Family III 21 estimable tests (cells with fewer than 30 propositions are not estimable), fewer than the 28 and 24 named in D-056.
 - Before the final in-play run the model code was checked on the matchweeks 1-19 fit window only (segment exposure equals match length exactly; goals counted equal the events); no test-window result was seen before the specification and code were fixed.
+
+## Gate 8: Pricing layer, API and trader app (2026-11-05; D-057, one session with Gates 9 and 10)
+
+**Report date:** 2026-11-05. The lead audits Gates 8, 9 and 10 afterwards (D-057). Evidence: tests and commands below; no new model result is produced in this phase, so no new metrics file. Every number the API and the app show comes from the models or from `artifacts/metrics/` through `edgeforge.evidence`.
+
+### What was built
+- `pricing/margin.py`: fair odds and margin application (proportional, power, odds ratio) with overround equal to the target; 52 invariant test cases in `tests/test_margin.py` (overround equals target, monotone in margin, zero margin returns fair probabilities, power and odds ratio load more margin on long shots than proportional, margin then de-vig round trip with the existing de-vig code).
+- `api/bundle.py` + `edgeforge serve build`: derived serving bundle in `data/serving/` (git-ignored; player ids only, no player names, no raw data); 16 demo matches from the 2015/16 test window (the first four with a dismissal plus evenly spaced others, chosen mechanically).
+- `api/service.py` (shared by API and app) and `api/app.py`: `GET /events`, `GET /events/{id}/markets?state=opening|lineups|inplay&minute=&overround=&method=&settlement=`, `GET /events/{id}/path`, `GET /events/{id}/shock`, `POST /sga/price`, `GET /model-health`, `GET /healthz`. Team markets: Dixon-Coles grid (opening, lineups) or the Pillar B model (in-play, state from events strictly before the minute). Props and SGAs: the seeded Phase 5 simulator (20,000 simulations, regenerated per request, cached). Margin on props: Phase 6b recommendation by default (void if not starting, odds-ratio allocation); the stake limits and offer rule of Phase 6b are not exposed in the API (illustrative levers, not product features).
+- `apps/trader/app.py` (`edgeforge serve app`): lifecycle app (match, information state opening / lineups / in-play minute, margin method and overround, prop settlement), four tabs: prices with the price path through the match, players and lineup shock (UPPER BOUND label), SGA builder (standalone, naive product, simulated joint with Monte Carlo SE, naive and adjusted fair odds, ratio, validation errors shown), evidence (the findings including the nulls, every claim with its source file and git sha, figures).
+- `evidence.py`: one registry of 49 claims, each a path into a metrics file; used by `/model-health`, the app and (Phase 10) the document renderer.
+
+### Gate criteria
+| # | Criterion | Result | Proving command | Observed |
+|---|---|---|---|---|
+| 1 | Fair odds, margin methods, invariant tests | **PASS** | `uv run pytest tests/test_margin.py` | 52 passed |
+| 2 | Uncertainty-driven margin from the Pillar C policy | **PASS (limited)** | `GET /events/{id}/markets?settlement=start` | the policy output is the Phase 6b settlement rule plus odds-ratio allocation, applied by default; offer rule, odds cap and stake limits are not applied (D-053: illustrative; the Pillar C neutralising-margin figures are withdrawn) |
+| 3 | FastAPI with the four planned routes | **PASS** | `uv run edgeforge serve api` then `/docs` | routes above; 9 integration tests through `TestClient` with a synthetic bundle (probabilities sum to one, quoted overround equals target, only events before the minute used, props absent in play, 404/400/422 errors, SGA validation, shock, model health with nulls) |
+| 4 | Streamlit app organised by lifecycle | **PASS** | `uv run edgeforge serve app` | Streamlit `AppTest` runs the app on the synthetic bundle in all three states and checks the disclaimer; also run against the real 16-match bundle in all states without exceptions |
+| 5 | Documented commands; real-data smoke | **PASS** | `uv run edgeforge serve build` | real bundle built (16 events); `GET .../markets` takes about 1.3 s (lineups) and 1.6 s (opening) per match-state including the 20,000-simulation run, cached afterwards |
+| 6 | Honest copy | **PASS** | `GET /model-health`, app tab 4 | the pre-match model is worse than the Pinnacle closing market, adds no information beyond it, the closing line does not move toward it, props and SGA results with their nulls, and a statement that no in-play market prices exist so the in-play model cannot be compared with a market |
+| 7 | Tests pass | **PASS** | `uv run pytest -q` | 197 passed in a full local run after the API and app tests were added; the scripted fresh-clone check at the final HEAD is recorded with Gate 10 |
+
+### Deviations and caveats
+- **In-play vs the market:** the owner brief says the in-play model "beats the naive baseline but not the market". The data contain no in-play market prices (D-017), so the metrics do not support any statement about the market in play; the app and API say that no comparison is possible. Only the pre-match model was compared with the market (Pillar A).
+- The serving bundle is built from the local StatsBomb-derived inputs and is git-ignored; a cloud image therefore contains derived probabilities for 16 matches and is kept private by default (see Gate 9).
+- Prop prices in the replay are for the 2015/16 test window; no prop odds exist to compare with (D-013).
