@@ -40,7 +40,7 @@ uv run edgeforge docs render && uv run edgeforge docs check
 uv run edgeforge ci-local        # fresh-clone lint, types and tests
 ```
 
-Tests and lint run via a scripted fresh-clone check (`uv run edgeforge ci-local`, evidence in `artifacts/metrics/ci_local.json`; last run at commit `114429c3e8c59633b81e8ee829dfa8a88cbccead`, 134 tests passed); the GitHub Actions workflow is included but not executed (account limitation). Container files and Cloud Run scripts are prepared in `Dockerfile` and `deploy/`; the image was not built here (the Docker engine was unavailable; a fresh-clone run with production-only dependencies was checked instead) and nothing is deployed.
+Tests and lint run via a scripted fresh-clone check (`uv run edgeforge ci-local`, evidence in `artifacts/metrics/ci_local.json`; last run at commit `fe53bcd626328b53813118fdcd996d8fb173123d`, 210 tests passed); the GitHub Actions workflow is included but not executed (account limitation). Container files and Cloud Run scripts are prepared in `Dockerfile` and `deploy/`; the image was not built here (the Docker engine was unavailable; a fresh-clone run with production-only dependencies was checked instead) and nothing is deployed.
 
 ## Where things are
 

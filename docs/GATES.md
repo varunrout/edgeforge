@@ -519,7 +519,7 @@ Everything else in the efficiency map is **not distinguishable from zero**: no l
 - `api/bundle.py` + `edgeforge serve build`: derived serving bundle in `data/serving/` (git-ignored; player ids only, no player names, no raw data); 16 demo matches from the 2015/16 test window (the first four with a dismissal plus evenly spaced others, chosen mechanically).
 - `api/service.py` (shared by API and app) and `api/app.py`: `GET /events`, `GET /events/{id}/markets?state=opening|lineups|inplay&minute=&overround=&method=&settlement=`, `GET /events/{id}/path`, `GET /events/{id}/shock`, `POST /sga/price`, `GET /model-health`, `GET /healthz`. Team markets: Dixon-Coles grid (opening, lineups) or the Pillar B model (in-play, state from events strictly before the minute). Props and SGAs: the seeded Phase 5 simulator (20,000 simulations, regenerated per request, cached). Margin on props: Phase 6b recommendation by default (void if not starting, odds-ratio allocation); the stake limits and offer rule of Phase 6b are not exposed in the API (illustrative levers, not product features).
 - `apps/trader/app.py` (`edgeforge serve app`): lifecycle app (match, information state opening / lineups / in-play minute, margin method and overround, prop settlement), four tabs: prices with the price path through the match, players and lineup shock (UPPER BOUND label), SGA builder (standalone, naive product, simulated joint with Monte Carlo SE, naive and adjusted fair odds, ratio, validation errors shown), evidence (the findings including the nulls, every claim with its source file and git sha, figures).
-- `evidence.py`: one registry of 85 claims (46 in `evidence.py`, 39 for the documents in `evidence_extra.py`), each a path into a metrics file; used by `/model-health`, the app and (Phase 10) the document renderer.
+- `evidence.py`: one registry of 90 claims (46 in `evidence.py`, 44 for the documents in `evidence_extra.py`), each a path into a metrics file; used by `/model-health`, the app and (Phase 10) the document renderer.
 
 ### Gate criteria
 | # | Criterion | Result | Proving command | Observed |
@@ -558,3 +558,54 @@ Everything else in the efficiency map is **not distinguishable from zero**: no l
 ### Open items for the owner
 - Run `docker build -t edgeforge .` once Docker Desktop is up; I could not verify the build.
 - To deploy: choose a GCP project and billing account, run the script without `EXECUTE` to review the commands, then with it; decide `PUBLIC`.
+
+## Gate 10: Documentation, hostile audit, definition of done (2026-11-05)
+
+**Report date:** 2026-11-05 (D-057: Gates 8, 9 and 10 in one session; the lead audits all three and keeps the veto). **CI for Gates 8, 9 and 10:** `artifacts/metrics/ci_local.json` is green at `fe53bcd` (ruff, ruff format, mypy and pytest all exit 0; 210 passed, 1 skipped). That commit contains all code of Gates 8 to 10; later commits change documents and the CI record only.
+
+### What was built
+- `edgeforge docs render` / `docs check` (`docs_render.py`, `evidence.py`, `evidence_extra.py`): README and `reports/technical_report.md`, `reports/evidence_pack.md`, `reports/cv_project_summary.md` are rendered from templates in `configs/doc_templates/` using a registry of 90 claims, each a path into a metrics file. A number typed outside a placeholder is a lint error; a document that differs from a fresh render fails `docs check` and the test suite; an unknown or unrendered placeholder is an error. The evidence pack ends with the full claims table (value, file, path or derivation) and the provenance of every metrics file.
+- The pre-match shadow log (D-058, corrected by D-059): `edgeforge shadow predict --fixtures <csv> [--commit]` and `shadow settle` (`shadow.py`, 7 tests). The log `artifacts/shadow/log.jsonl` is empty: football-data's `fixtures.csv` (fetched on 2026-11-05) contains only Belgian, English second to fourth tier fixtures for 3 to 4 November and no fixtures for the five covered leagues, so no Premier League fixture file was available. Supply one (columns `Div,Date,Time,HomeTeam,AwayTeam`) and run the command; commit and push before kick-off. A dry run on two historical Premier League matches in a temporary directory (not in the repository log) exercised fetch, prediction, settlement and the report end to end.
+- Errors found and fixed this session: (1) D-058 named `PPC*` as Pinnacle closing columns; `PP*` is Paddy Power (D-059, fixed before any record existed; the 2026/27 football-data files have no Pinnacle prices, so settlement will use the market-average close, labelled). (2) The renderer skipped claim ids with capital letters and shipped a raw `{{...}}` token (found by the independent audit; regex fixed, leftover placeholders are now an error, test added).
+
+### Hostile audit (independent reviewer agent, read-only) and what was done
+| # | Finding (severity) | Action |
+|---|---|---|
+| 1 | Raw placeholder token in the technical report (high) | fixed, test added |
+| 2 | "Test windows never used for tuning" contradicted D-039/D-040 history (high) | documents now say "from Phase 4 on" and list the known violations (cold-start grid, rolling-baseline grid, test-window calibrator adoption) in README, technical report and evidence pack |
+| 3 | CI evidence stale (high) | `ci-local` re-run at `fe53bcd`; this section exists; documents re-rendered |
+| 4 | Replication uses the market-average close (medium) | stated wherever replication is quoted, with "uncorrected p below one in twenty" |
+| 5 | Mixed per-offered and per-settled denominators (medium) | relabelled; both bases shown, marked not comparable |
+| 6 | Withdrawn neutralising-margin material still committed (medium) | policy heatmap removed from the repository; the `policy` block stays inside `phase6_pillar_c.json` as a record (editing a produced metrics file would break its provenance), and no document quotes it (test added); the figures remain only in D-053 and the lead's audit note |
+| 7 | SGA caveat missing in API, app, CV (medium) | caveat added to the API label and findings, the app (it prints the label), README and CV |
+| 8 | Shadow log described too strongly (medium) | documents say empty, unpushed, market-average settlement |
+| 9 | Early-snapshot caveat missing (medium) | added (D-024) to README, technical report, evidence pack |
+| 10 | StatsBomb logo placeholder (medium) | **not done: the logo file is not in the repository; owner action** |
+| 11 | In-play -0.0792 without n or CI (low) | n and CI added |
+| 12 | Disclaimer lacks simulated / upper-bound / no in-play market (low) | added to the API disclaimer and the evidence-pack label |
+| 13 | Docker build unverified but described neutrally (low) | documents say the image was not built |
+| 14 | Derived claims lack paths (low) | the claims table prints what each derived claim counts or sums |
+| 15 | "No information" too strong; synthetic null controls (low) | "no detectable information" with the interval upper bound; real-data and synthetic controls separated |
+
+### Definition of done (brief section 42, minus the NBA and Go items removed by D-001 and the no-Go override in CLAUDE.md)
+| Item | Status | Evidence |
+|---|---|---|
+| Team-level market priced | **done** | `GET /events/{id}/markets`, Pillar A |
+| Player props priced | **done** | Phase 4, simulator marginals |
+| Probabilities out of sample | **done** | walk-forward splits, test windows |
+| Calibration assessed | **done** | reliability, ECE, PIT in each phase |
+| Coherent simulation engine | **done** | invariants, 0 violations, `phase5_simulator.json` |
+| SGAs priced; dependence compared with naive independence | **done** | `phase5_sga.json` (headline, with caveats) |
+| Fair odds; margin | **done** | `pricing/margin.py`, 52 invariant cases |
+| Reproducible backtesting | **partly** | every metrics file has provenance and a command; re-running needs the local data warehouse because raw data are not redistributable |
+| Trader interface; pricing API | **done, not deployed** | `serve app`, `serve api`; integration tests |
+| Critical maths tested | **done** | 210 tests |
+| CI passes | **replaced (D-046)** | `ci_local.json` green at `fe53bcd` |
+| README reflects functionality; reports real; evidence pack verified; CV evidence-backed | **done** | rendered from metrics; `docs check` in the test suite |
+
+### Open issues and what the owner must do
+- Add the StatsBomb logo (`assets/statsbomb/logo.png`, then the README comment tells how).
+- Push the local commits; supply a Premier League fixtures CSV and run `shadow predict --commit`, then push before kick-off.
+- Docker image not built (engine unavailable); no deployment made.
+- The brief's phrase "in-play beats the naive baseline but not the market" is not supported by data: no in-play market prices exist; documents say no comparison is possible.
+- Multi-player SGA templates remain under-predicted in absolute terms (documented limitation).
