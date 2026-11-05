@@ -328,3 +328,35 @@ def serve_trader_app(port: int = 8501) -> None:
             [sys.executable, "-m", "streamlit", "run", str(target), "--server.port", str(port)]
         )
     )
+
+
+shadow_app = typer.Typer(help="Pre-match shadow log (D-058).", no_args_is_help=True)
+app.add_typer(shadow_app, name="shadow")
+
+
+@shadow_app.command("predict")
+def shadow_predict(
+    fixtures: str = typer.Option(
+        ..., help="football-data fixtures CSV (Div,Date,Time,HomeTeam,AwayTeam)"
+    ),
+    commit: bool = typer.Option(
+        False, help="commit the log to the local git repository (never pushes)"
+    ),
+) -> None:
+    """Append frozen Dixon-Coles predictions for upcoming fixtures to artifacts/shadow/log.jsonl."""
+    import json
+    from pathlib import Path
+
+    from edgeforge.shadow import run_predict
+
+    typer.echo(json.dumps(run_predict(Path(fixtures), commit=commit), indent=1))
+
+
+@shadow_app.command("settle")
+def shadow_settle() -> None:
+    """Settle finished fixtures against the Pinnacle closing market and write the report."""
+    import json
+
+    from edgeforge.shadow import run_settle
+
+    typer.echo(json.dumps(run_settle(), indent=1))
