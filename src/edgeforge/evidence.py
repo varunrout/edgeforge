@@ -438,3 +438,9 @@ def resolve_all(metrics_dir: Path = METRICS_DIR) -> dict[str, dict[str, Any]]:
             "provenance": provenance_of(c.file, metrics_dir),
         }
     return out
+
+
+from edgeforge.evidence_extra import EXTRA  # noqa: E402
+
+C.extend(EXTRA)
+CLAIMS.update({c.id: c for c in EXTRA})

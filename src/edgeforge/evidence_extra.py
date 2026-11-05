@@ -1,0 +1,286 @@
+"""Additional claims used by the rendered documents (same rules as `evidence.py`)."""
+
+from edgeforge.evidence import Claim, _count
+
+PA: tuple[str, ...] = ("blocks", "F1_primary_2024_25")
+
+TM = ("blocks", "pillar_a", "tests", "primary_2024_25", "comparison_A", "dc_vs_static_poisson", 0)
+IP = ("remaining_goals_calibration", "by_checkpoint_stratum")
+EXTRA: list[Claim] = [
+    Claim(
+        "a_dc_vs_static",
+        "Dixon-Coles minus static Poisson 1X2 log loss, 2024/25",
+        "team_model.json",
+        (*TM, "mean_diff"),
+        "+.4f",
+    ),
+    Claim("a_dc_vs_static_lo", "Same, 95% CI low", "team_model.json", (*TM, "ci_low"), "+.4f"),
+    Claim("a_dc_vs_static_hi", "Same, 95% CI high", "team_model.json", (*TM, "ci_high"), "+.4f"),
+    Claim(
+        "a_flb_slope",
+        "Favourite-longshot logit slope at the close (1 = calibrated)",
+        "pillar_a.json",
+        (*PA, "claims", "id=eff.flb.close.slope", "estimate"),
+        ".3f",
+    ),
+    Claim(
+        "a_flb_lo",
+        "Favourite-longshot slope, 95% CI low",
+        "pillar_a.json",
+        (*PA, "claims", "id=eff.flb.close.slope", "ci_low"),
+        ".3f",
+    ),
+    Claim(
+        "a_flb_hi",
+        "Favourite-longshot slope, 95% CI high",
+        "pillar_a.json",
+        (*PA, "claims", "id=eff.flb.close.slope", "ci_high"),
+        ".3f",
+    ),
+    Claim(
+        "a_cold_est",
+        "Cold-start fix, promoted teams' first 10 matches, log-loss difference",
+        "pillar_a.json",
+        (*PA, "claims", "id=coldstart.fix_vs_none.first10", "estimate"),
+        "+.4f",
+    ),
+    Claim(
+        "a_cold_hi",
+        "Cold-start fix, 95% CI high (the interval reaches zero)",
+        "pillar_a.json",
+        (*PA, "claims", "id=coldstart.fix_vs_none.first10", "ci_high"),
+        "+.4f",
+    ),
+    Claim(
+        "a_repl_n",
+        "Primary-block survivors that replicate in 2025/26 (same sign and p < 0.05)",
+        "pillar_a.json",
+        derive=lambda j: sum(
+            1
+            for r in j["replication_of_primary_survivors"]
+            if r["same_sign_and_secondary_p_lt_0.05"]
+        ),
+        fmt="d",
+    ),
+    Claim(
+        "a_repl_total",
+        "Primary-block survivors tested for replication",
+        "pillar_a.json",
+        derive=_count(("replication_of_primary_survivors",)),
+        fmt="d",
+    ),
+    Claim(
+        "a_d1_repl_p",
+        "Bundesliga home-bias replication p-value (2025/26)",
+        "pillar_a.json",
+        derive=lambda j: next(
+            r["secondary_p"]
+            for r in j["replication_of_primary_survivors"]
+            if r["id"] == "eff.league.D1.home_bias"
+        ),
+        fmt=".2f",
+    ),
+    Claim(
+        "p4_start_diff",
+        "P(start) paired log-loss difference vs baseline",
+        "phase4_participation.json",
+        ("starter_model", "paired_vs_baseline_log_loss", "estimate"),
+        "+.4f",
+    ),
+    Claim(
+        "p4_bench_ece_raw",
+        "Bench appearance ECE before D-044 recalibration",
+        "phase4_participation.json",
+        ("recalibration_d044", "bench_appearance_level", "test_raw", "ece"),
+        ".4f",
+    ),
+    Claim(
+        "p4_bench_ece_recal",
+        "Bench appearance ECE after D-044 recalibration",
+        "phase4_participation.json",
+        ("recalibration_d044", "bench_appearance_level", "test_recalibrated", "ece"),
+        ".4f",
+    ),
+    Claim(
+        "j_t10_sim",
+        "5-leg template T10: mean simulated joint probability (lineups)",
+        "phase5_sga.json",
+        ("joint_validation", "by_template_state", "T10|lineups", "mean_p_sim"),
+        ".3f",
+    ),
+    Claim(
+        "j_t10_rate",
+        "T10: realised rate",
+        "phase5_sga.json",
+        ("joint_validation", "by_template_state", "T10|lineups", "event_rate"),
+        ".3f",
+    ),
+    Claim(
+        "j_t10_naive",
+        "T10: mean naive-product probability",
+        "phase5_sga.json",
+        ("joint_validation", "by_template_state", "T10|lineups", "mean_p_naive"),
+        ".3f",
+    ),
+    Claim(
+        "j_3plus_diff",
+        "Pooled log-loss difference simulated minus naive, 3+ legs (lineups)",
+        "phase5_sga.json",
+        (
+            "joint_validation",
+            "pooled",
+            "lineups|3plus_legs",
+            "log_loss_diff_sim_minus_naive",
+            "estimate",
+        ),
+        "+.4f",
+    ),
+    Claim(
+        "j_2_diff",
+        "Pooled log-loss difference simulated minus naive, 2 legs (lineups)",
+        "phase5_sga.json",
+        (
+            "joint_validation",
+            "pooled",
+            "lineups|2_legs",
+            "log_loss_diff_sim_minus_naive",
+            "estimate",
+        ),
+        "+.4f",
+    ),
+    Claim(
+        "fr_adopted",
+        "Match-level frailty (D-049) adopted",
+        "phase6_frailty.json",
+        ("decision", "adopted"),
+        "s",
+    ),
+    Claim(
+        "c_shock_rot50",
+        "Share of rotation-risk prop prices moving more than 50% in odds",
+        "phase6_pillar_c.json",
+        ("shock", "props", "by_band", "rotation", "share_abs_odds_change_gt_50pct"),
+        ".1%",
+    ),
+    Claim(
+        "c_inf5",
+        "Informed expected profit per offered prop at a 5% margin (Pillar C)",
+        "phase6_pillar_c.json",
+        (
+            "informed_bettor",
+            "cells",
+            "props|all",
+            "reference",
+            "0.05",
+            "informed_expected_per_offered",
+        ),
+        ".3f",
+    ),
+    Claim(
+        "c_ctrl5",
+        "Same with the lineups probabilities replaced by an independent re-simulation (noise floor)",
+        "phase6_pillar_c.json",
+        ("null_control", "cells", "props|all", "curve", 5, "informed_expected_per_offered"),
+        ".3f",
+    ),
+    Claim(
+        "b_rule",
+        "Settlement rule chosen on the tuning window (Phase 6b)",
+        "phase6b_levers.json",
+        ("tuning_window", "chosen_settlement_rule"),
+        "s",
+    ),
+    Claim(
+        "b_reco_name",
+        "Recommended combination on the tuning window",
+        "phase6b_levers.json",
+        ("tuning_window", "recommended_combination"),
+        "s",
+    ),
+    Claim(
+        "b_cap",
+        "Odds cap, informed expected profit per offered prop (10% overround)",
+        "phase6b_levers.json",
+        ("test", "cap|0.1", "informed_expected_per_offered"),
+        ".4f",
+    ),
+    Claim(
+        "b_offer",
+        "Offer rule, informed expected profit per offered prop (10% overround)",
+        "phase6b_levers.json",
+        ("test", "offer|0.1", "informed_expected_per_offered"),
+        ".4f",
+    ),
+    Claim(
+        "b_offer_kept",
+        "Offer rule, share of the offer retained",
+        "phase6b_levers.json",
+        ("test", "offer|0.1", "offer_retained"),
+        ".1%",
+    ),
+    Claim(
+        "i_ece_model",
+        "In-play final 1X2 pooled ECE, model",
+        "phase7_inplay.json",
+        ("ece_pooled", "1x2", "model"),
+        ".4f",
+    ),
+    Claim(
+        "i_ece_base",
+        "In-play final 1X2 pooled ECE, naive baseline",
+        "phase7_inplay.json",
+        ("ece_pooled", "1x2", "baseline"),
+        ".4f",
+    ),
+    Claim(
+        "i_60_1x2",
+        "In-play 1X2 log-loss difference at 60 minutes, model minus baseline",
+        "phase7_inplay.json",
+        (
+            "family_I_checkpoint_x_market",
+            "tests",
+            "60|1x2",
+            "log_loss_diff_model_minus_baseline",
+            "estimate",
+        ),
+        "+.4f",
+    ),
+    Claim(
+        "i_75d_model",
+        "Remaining goals after a dismissal at 75 minutes: model",
+        "phase7_inplay.json",
+        (*IP, "75|after_dismissal", "model_predicted"),
+        ".2f",
+    ),
+    Claim(
+        "i_75d_base",
+        "Remaining goals after a dismissal at 75 minutes: baseline",
+        "phase7_inplay.json",
+        (*IP, "75|after_dismissal", "baseline_predicted"),
+        ".2f",
+    ),
+    Claim(
+        "i_75d_obs",
+        "Remaining goals after a dismissal at 75 minutes: observed",
+        "phase7_inplay.json",
+        (*IP, "75|after_dismissal", "observed_remaining_goals"),
+        ".2f",
+    ),
+    Claim(
+        "i_45t_model",
+        "Remaining goals at 45 minutes with a two-goal lead: model",
+        "phase7_inplay.json",
+        (*IP, "45|two_plus", "model_predicted"),
+        ".2f",
+    ),
+    Claim(
+        "i_45t_obs",
+        "Remaining goals at 45 minutes with a two-goal lead: observed",
+        "phase7_inplay.json",
+        (*IP, "45|two_plus", "observed_remaining_goals"),
+        ".2f",
+    ),
+    Claim("sh_logged", "Shadow log: fixtures logged", "shadow_report.json", ("n_logged",), "d"),
+    Claim("sh_settled", "Shadow log: fixtures settled", "shadow_report.json", ("n_settled",), "d"),
+    Claim("sh_verdict", "Shadow log verdict", "shadow_report.json", ("verdict",), "s"),
+]

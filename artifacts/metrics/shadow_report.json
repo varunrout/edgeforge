@@ -1,0 +1,16 @@
+{
+ "n_logged": 0,
+ "n_settled": 0,
+ "n_with_closing_1x2": 0,
+ "no_betting_no_pnl": true,
+ "pre_match_only": true,
+ "verdict": "inconclusive: no settled fixtures with closing prices yet",
+ "provenance": {
+  "git_sha": "44cacf2be801a1c10c75397e9a379f66276cbefa",
+  "data_version": "dc_opening_v1",
+  "command": "edgeforge shadow settle",
+  "config_hash": "39f96c7271994bec",
+  "created_at": "2026-11-05T11:08:28Z",
+  "seed": 20261004
+ }
+}
