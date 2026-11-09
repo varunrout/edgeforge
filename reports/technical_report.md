@@ -52,7 +52,7 @@
 
 - **API and app.** `uv run edgeforge serve api` and `serve app` replay 16 test matches through the lifecycle with margins (proportional, power, odds ratio) and SGA pricing; the evidence tab and `/model-health` show the findings above with their source files.
 - **Shadow log (D-058, pre-match only, no betting).** Frozen Dixon-Coles predictions are appended to `artifacts/shadow/log.jsonl` before kick-off and committed; `shadow settle` compares them with the closing market: Pinnacle where the file has it, otherwise the market average, which is what the current football-data files give (D-059), so the settled fixtures are measured against the market-average close, a weaker benchmark than the Pinnacle close of Pillar A. The first batch (the Premier League weekend of 6 to 8 November 2026) was committed and pushed before kick-off; the commit and push timestamps are the timing evidence. Status: 20 logged, 10 settled. Model 1X2 log loss 0.9630 against 0.9364 for the market-average closing line (model minus market +0.0265, bootstrap 95% CI -0.0481 to +0.1114); 2 of the settled fixtures involve a promoted team with little history and are reported as a separate segment. 10 matches show the process working, not an edge: nothing can be concluded. inconclusive: 10 settled fixtures, fewer than the 200 fixed in D-058; nothing can be concluded about the model. The expectation recorded in advance is that the market is better. The second batch (21 to 23 November 2026) also carries 10 records of a forward-only candidate model version that adds shots on target (D-065, D-066); it is never evaluated on any old window and nothing is settled yet.
-- **Engineering.** A scripted fresh-clone check (ruff, mypy, pytest) last passed at commit `c0feeb291841205d2d6fcd0fd9eb6091c07cb48f` with 212 tests (GitHub Actions is unavailable; D-046). A Dockerfile and Cloud Run scripts exist; the image was not built here (no Docker engine) and nothing is deployed.
+- **Engineering.** A scripted fresh-clone check (ruff, mypy, pytest) last passed at commit `2a861ad8852c070817534ac7f7ace68d90660b8a` with 229 tests (GitHub Actions is unavailable; D-046). A Dockerfile and Cloud Run scripts exist; the image was not built here (no Docker engine) and nothing is deployed.
 
 ## 7. Limitations
 
@@ -66,7 +66,7 @@
 | metrics file | produced by | git sha | created (UTC) | data version |
 |---|---|---|---|---|
 | `baseline_team.json` | `edgeforge baselines team` | `0e54107` | 2026-10-04T11:22:49Z | 4ff27cd91bb05d85 |
-| `ci_local.json` | `edgeforge ci-local` | `c0feeb2` | 2026-11-09T14:31:07Z |  |
+| `ci_local.json` | `edgeforge ci-local` | `2a861ad` | 2026-11-09T16:57:28Z |  |
 | `phase4_markets.json` | `edgeforge phase4 run` | `a75bef4` | 2026-10-07T06:17:14Z | 588d4619e62984b7 |
 | `phase4_participation.json` | `edgeforge phase4 run` | `a75bef4` | 2026-10-07T06:17:14Z | 588d4619e62984b7 |
 | `phase5_comparison_b.json` | `edgeforge phase5 run` | `811070b` | 2026-10-05T12:10:35Z | ab7850c097da4492 |
