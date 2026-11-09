@@ -426,7 +426,7 @@ def run_copula(cfg: dict[str, Any] | None = None) -> Path:
                     cfg,
                     ctx.version,
                     CMD,
-                    feature_set="legs of the naive product; equicorrelation per template (tune mw10-19)",
+                    feature_set="naive-product legs; equicorrelation per template (tune mw10-19)",
                     model="gaussian_copula_equicorrelation",
                     hyperparameters={"rho": rho[v["template"]]["rho"], "n_sims": n_sims},
                     validation_window="player_2015_16: rho on tune mw10-19, test mw20-38",
@@ -436,7 +436,7 @@ def run_copula(cfg: dict[str, Any] | None = None) -> Path:
                         "n": v["n_instances"],
                     },
                     calibration={},
-                    notes=f"D-063 family {fam_name}: {fam['bh_family']['name']}; verdict: {v['verdict']}",
+                    notes=f"D-063 family {fam_name}: verdict {v['verdict']}",
                     status="promoted"
                     if v["verdict"].endswith("better") and v["verdict"].startswith("simulated")
                     else "rejected",
