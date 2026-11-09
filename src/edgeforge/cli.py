@@ -371,6 +371,14 @@ def shadow_predict(
     typer.echo(json.dumps(run_predict(Path(fixtures), commit=commit), indent=1))
 
 
+@shadow_app.command("tune-v2")
+def shadow_tune_v2() -> None:
+    """D-065: tune the shots weight omega of dc_opening_v2 on matches before 2024/25 only."""
+    from edgeforge.evaluation.dc_v2_tuning import run_tune
+
+    typer.echo(str(run_tune()))
+
+
 @shadow_app.command("settle")
 def shadow_settle() -> None:
     """Settle finished fixtures against the Pinnacle closing market and write the report."""
