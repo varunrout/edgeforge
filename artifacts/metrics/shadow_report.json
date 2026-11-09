@@ -1,5 +1,5 @@
 {
- "n_logged": 10,
+ "n_logged": 20,
  "n_settled": 10,
  "n_with_closing_1x2": 10,
  "no_betting_no_pnl": true,
@@ -171,12 +171,19 @@
  },
  "verdict": "inconclusive: 10 settled fixtures, fewer than the 200 fixed in D-058; nothing can be concluded about the model",
  "expectation_recorded_before_results": "Pillar A found the closing market better than the model (D-058)",
+ "dc_opening_v2": {
+  "model_version": "dc_opening_v2",
+  "n_logged": 10,
+  "n_settled": 0,
+  "n_with_closing_1x2": 0,
+  "verdict": "inconclusive: no settled fixtures with closing prices yet"
+ },
  "provenance": {
-  "git_sha": "7394965b155d28fae0c9995adc29e0bfedd8d794",
+  "git_sha": "63a55a498b5756d29885c7cf580476b5d4e04ece",
   "data_version": "dc_opening_v1",
   "command": "edgeforge shadow settle",
   "config_hash": "39f96c7271994bec",
-  "created_at": "2026-11-09T14:23:50Z",
+  "created_at": "2026-11-09T16:49:36Z",
   "seed": 20261004
  }
 }
