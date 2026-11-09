@@ -1,36 +1,36 @@
 {
- "commit_sha": "f50f8b22dc3376bbeec2e0d3f63460903582a42f",
+ "commit_sha": "c0feeb291841205d2d6fcd0fd9eb6091c07cb48f",
  "tested_tree": "fresh git clone at HEAD",
  "uncommitted_code_changes_ignored": false,
- "created_at": "2026-11-05T16:46:31Z",
+ "created_at": "2026-11-09T14:31:07Z",
  "all_passed": true,
  "steps": [
   {
    "command": "uv sync --locked",
    "exit_code": 0,
-   "seconds": 56.7
+   "seconds": 18.5
   },
   {
    "command": "uv run ruff check .",
    "exit_code": 0,
-   "seconds": 3.4
+   "seconds": 2.8
   },
   {
    "command": "uv run ruff format --check .",
    "exit_code": 0,
-   "seconds": 2.1
+   "seconds": 1.1
   },
   {
    "command": "uv run mypy",
    "exit_code": 0,
-   "seconds": 179.7
+   "seconds": 28.4
   },
   {
    "command": "uv run pytest -q",
    "exit_code": 0,
-   "seconds": 645.8,
+   "seconds": 113.5,
    "test_counts": {
-    "passed": 211,
+    "passed": 212,
     "skipped": 1,
     "warning": 1
    }
