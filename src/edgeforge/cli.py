@@ -81,6 +81,14 @@ def fetch_statsbomb_match(match_id: int) -> None:
     typer.echo(f"{ev}\n{lu}")
 
 
+@data_app.command("statsbomb-coverage")
+def statsbomb_coverage() -> None:
+    """D-064: coverage of every league season in the StatsBomb open data (match lists only)."""
+    from edgeforge.data.statsbomb_coverage import run_coverage
+
+    typer.echo(str(run_coverage()))
+
+
 @data_app.command("audit-statsbomb")
 def audit_statsbomb() -> None:
     """Audit cached StatsBomb payloads and write artifacts/metrics/data_audit_statsbomb.json."""
