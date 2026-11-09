@@ -393,6 +393,183 @@ EXTRA: list[Claim] = [
         ),
         fmt=".3f",
     ),
+    # ---- D-063 stronger baselines (B1 in-play, B2 SGA copula), D-064 coverage, D-065 v2
+    Claim(
+        "b1_better",
+        "Family IV cells where Pillar B beats B1 (BH)",
+        "phase7_b1.json",
+        ("summary", "pillar_b_better_than_b1"),
+        "d",
+    ),
+    Claim(
+        "b1_worse",
+        "Family IV cells where Pillar B is worse than B1 (BH)",
+        "phase7_b1.json",
+        ("summary", "pillar_b_worse_than_b1"),
+        "d",
+    ),
+    Claim(
+        "b1_nd",
+        "Family IV cells not distinguishable",
+        "phase7_b1.json",
+        ("summary", "not_distinguishable"),
+        "d",
+    ),
+    Claim("b1_cells", "Family IV cells", "phase7_b1.json", ("summary", "n_cells"), "d"),
+    Claim(
+        "b1_ll_pb",
+        "Pooled final-1X2 log loss, Pillar B",
+        "phase7_b1.json",
+        ("pooled_log_loss", "1x2", "pillar_b"),
+        ".4f",
+    ),
+    Claim(
+        "b1_ll_b1",
+        "Pooled final-1X2 log loss, B1",
+        "phase7_b1.json",
+        ("pooled_log_loss", "1x2", "b1"),
+        ".4f",
+    ),
+    Claim(
+        "b1_ll_naive",
+        "Pooled final-1X2 log loss, naive baseline",
+        "phase7_b1.json",
+        ("pooled_log_loss", "1x2", "naive"),
+        ".4f",
+    ),
+    Claim(
+        "b1_vs_naive_cells",
+        "Cells where B1 beats the naive baseline with a 95% CI below zero (uncorrected, descriptive)",
+        "phase7_b1.json",
+        derive=lambda j: sum(
+            1
+            for v in j["descriptive_b1_vs_naive_by_cell"].values()
+            if v and v["log_loss_diff_model_minus_baseline"]["ci_high"] < 0
+        ),
+        fmt="d",
+    ),
+    Claim(
+        "cp_s_better",
+        "Family S: simulated joint better than the copula (BH)",
+        "phase5_copula.json",
+        ("summary", "simulated_better_than_copula"),
+        "d",
+    ),
+    Claim(
+        "cp_s_worse",
+        "Family S: copula better than the simulated joint (BH)",
+        "phase5_copula.json",
+        ("summary", "copula_better_than_simulated"),
+        "d",
+    ),
+    Claim("cp_s_cells", "Family S cells", "phase5_copula.json", ("summary", "family_S_cells"), "d"),
+    Claim(
+        "cp_c_better",
+        "Family C: copula better than the naive product (BH)",
+        "phase5_copula.json",
+        ("summary", "copula_better_than_naive"),
+        "d",
+    ),
+    Claim(
+        "cp_c_worse",
+        "Family C: naive product better than the copula (BH)",
+        "phase5_copula.json",
+        ("summary", "naive_better_than_copula"),
+        "d",
+    ),
+    Claim(
+        "cp_ll_sim",
+        "Pooled joint log loss (lineups), simulated",
+        "phase5_copula.json",
+        ("pooled", "lineups|all", "p_sim", "log_loss"),
+        ".4f",
+    ),
+    Claim(
+        "cp_ll_cop",
+        "Pooled joint log loss (lineups), copula",
+        "phase5_copula.json",
+        ("pooled", "lineups|all", "p_copula", "log_loss"),
+        ".4f",
+    ),
+    Claim(
+        "cp_ll_naive",
+        "Pooled joint log loss (lineups), naive product",
+        "phase5_copula.json",
+        ("pooled", "lineups|all", "p_naive", "log_loss"),
+        ".4f",
+    ),
+    Claim(
+        "cp_ece_sim",
+        "Joint calibration error (lineups), simulated",
+        "phase5_copula.json",
+        ("pooled", "lineups|all", "p_sim", "ece"),
+        ".4f",
+    ),
+    Claim(
+        "cp_ece_cop",
+        "Joint calibration error (lineups), copula",
+        "phase5_copula.json",
+        ("pooled", "lineups|all", "p_copula", "ece"),
+        ".4f",
+    ),
+    Claim(
+        "cp_diff",
+        "Simulated minus copula pooled log loss (lineups)",
+        "phase5_copula.json",
+        ("pooled", "lineups|all", "diff_sim_minus_copula", "estimate"),
+        "+.4f",
+    ),
+    Claim(
+        "cp_diff_lo",
+        "Same, 95% CI low",
+        "phase5_copula.json",
+        ("pooled", "lineups|all", "diff_sim_minus_copula", "ci_low"),
+        "+.4f",
+    ),
+    Claim(
+        "cp_diff_hi",
+        "Same, 95% CI high",
+        "phase5_copula.json",
+        ("pooled", "lineups|all", "diff_sim_minus_copula", "ci_high"),
+        "+.4f",
+    ),
+    Claim(
+        "cp_share",
+        "Share of the simulator's log-loss gain over the naive product that the copula achieves (lineups, pooled)",
+        "phase5_copula.json",
+        derive=lambda j: (
+            (
+                j["pooled"]["lineups|all"]["p_naive"]["log_loss"]
+                - j["pooled"]["lineups|all"]["p_copula"]["log_loss"]
+            )
+            / (
+                j["pooled"]["lineups|all"]["p_naive"]["log_loss"]
+                - j["pooled"]["lineups|all"]["p_sim"]["log_loss"]
+            )
+        ),
+        fmt=".0%",
+    ),
+    Claim(
+        "sb_cov_n",
+        "League seasons of the StatsBomb open data examined for a sealed holdout",
+        "statsbomb_candidates.json",
+        ("n_league_seasons_examined",),
+        "d",
+    ),
+    Claim(
+        "sb_cov_eligible",
+        "Of those, seasons meeting the 90% coverage rule",
+        "statsbomb_candidates.json",
+        ("n_eligible",),
+        "d",
+    ),
+    Claim(
+        "sh_v2_logged",
+        "Shadow log: dc_opening_v2 records logged",
+        "shadow_report.json",
+        ("dc_opening_v2", "n_logged"),
+        "d",
+    ),
     Claim("sh_logged", "Shadow log: fixtures logged", "shadow_report.json", ("n_logged",), "d"),
     Claim("sh_settled", "Shadow log: fixtures settled", "shadow_report.json", ("n_settled",), "d"),
     Claim("sh_verdict", "Shadow log verdict", "shadow_report.json", ("verdict",), "s"),

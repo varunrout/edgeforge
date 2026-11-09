@@ -98,3 +98,17 @@ def test_positioning_and_efficiency_wording() -> None:
         assert "confirmatory findings" in text and "did not" in text, n
     assert "## What this shows" in docs["README.md"]
     assert "not a proof that the market is efficient" in docs["README.md"]
+
+
+def test_stronger_baselines_second_season_and_forward_candidate_are_stated_plainly() -> None:
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    pack = (ROOT / "reports" / "evidence_pack.md").read_text(encoding="utf-8")
+    report = (ROOT / "reports" / "technical_report.md").read_text(encoding="utf-8")
+    cv = (ROOT / "reports" / "cv_project_summary.md").read_text(encoding="utf-8")
+    for doc in (readme, report):
+        assert "not distinguishable in 42 of 42" in doc
+        assert "rests on one season" in doc
+        assert "Gaussian copula" in doc
+    assert "It could not be tested" in pack and "Only slightly" in pack
+    assert "not distinguishable from a simpler time-and-score baseline" in cv
+    assert "never evaluated on any old window" in readme

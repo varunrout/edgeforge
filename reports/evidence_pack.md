@@ -26,8 +26,11 @@ The metrics files are committed. Re-running a phase needs the local data warehou
 | Is the joint probability of a same-game accumulator better than the product of its legs? | **Yes, on realised outcomes.** Better in 21 of 26 pre-registered tests, worse in 0; pooled log loss 0.3301 against 0.3572. Both use the same marginals, so this isolates dependence; the named players are mechanically chosen top scorers; multi-player templates are still under-predicted (T10 0.080 predicted, 0.102 realised). | `uv run edgeforge phase5 run` |
 | Does knowing the lineups change prop prices? | **Yes, a lot for rotation-risk players** (an upper bound): 81.7% move by more than a quarter, against 16.3% for nailed starters; the lineups price is the better predictor in 6 of six prop markets. | `uv run edgeforge phase6 run` |
 | What can a book do about informed lineup knowledge? | **SIMULATION, UPPER BOUND.** On the Phase 6b basis (per offered proposition, void ones count zero) the informed expected profit 0.1015 (void on appearance) falls to 0.0147 (void if not starting) and 0.0007 with odds-ratio margin allocation, at a ten per cent overround. (The Pillar C figure of 0.151 at a five per cent margin is per settled proposition and not comparable.) | `uv run edgeforge phase6b` |
-| Does an in-play model beat a naive in-play baseline? | **Yes in 14 of 42 tests, never worse** (largest after a dismissal: log-loss difference -0.0792, 95% CI -0.1420 to -0.0244, 340 propositions, negative is better; the baseline is naive). Both under-predict remaining goals. **No in-play market prices exist, so no comparison with a market is possible.** | `uv run edgeforge phase7` |
-| What does the forward shadow log say? | 10 logged, 10 settled; the first batch (Premier League, 6 to 8 November 2026) was committed and pushed before kick-off, and the push timestamp on the remote is the timing evidence; settlement uses the market-average close (D-059), a weaker benchmark than the Pinnacle close of Pillar A. Model 1X2 log loss 0.9630 against 0.9364 for the market-average closing line (model minus market +0.0265, bootstrap 95% CI -0.0481 to +0.1114); 2 of the settled fixtures involve a promoted team with little history and are reported as a separate segment. 10 matches show the process working, not an edge: nothing can be concluded. inconclusive: 10 settled fixtures, fewer than the 200 fixed in D-058; nothing can be concluded about the model. | `uv run edgeforge shadow predict`, `shadow settle` |
+| Does an in-play model beat a naive in-play baseline? | **Yes against the naive baseline, in 14 of 42 tests and never worse; not against the stronger baseline B1 (next rows)** (largest after a dismissal: log-loss difference -0.0792, 95% CI -0.1420 to -0.0244, 340 propositions, negative is better; the baseline is naive). Both under-predict remaining goals. **No in-play market prices exist, so no comparison with a market is possible.** | `uv run edgeforge phase7` |
+| What does the forward shadow log say? | 20 logged, 10 settled; the first batch (Premier League, 6 to 8 November 2026) was committed and pushed before kick-off, and the push timestamp on the remote is the timing evidence; settlement uses the market-average close (D-059), a weaker benchmark than the Pinnacle close of Pillar A. Model 1X2 log loss 0.9630 against 0.9364 for the market-average closing line (model minus market +0.0265, bootstrap 95% CI -0.0481 to +0.1114); 2 of the settled fixtures involve a promoted team with little history and are reported as a separate segment. 10 matches show the process working, not an edge: nothing can be concluded. inconclusive: 10 settled fixtures, fewer than the 200 fixed in D-058; nothing can be concluded about the model. The second batch (21 to 23 November 2026) also carries 10 records of a forward-only candidate model version that adds shots on target (D-065, D-066); it is never evaluated on any old window and nothing is settled yet. | `uv run edgeforge shadow predict`, `shadow settle` |
+| Does the in-play advantage survive a stronger baseline? | **No: it is not distinguishable.** Against B1 (time profile and score state, no dismissals, no Dixon-Coles input) the in-play model is better in 0, worse in 0 and not distinguishable in 42 of 42 cells (family IV, BH); pooled final-1X2 log loss 0.7043 against 0.7107 (naive baseline 0.7131). B1 beats the naive baseline with an uncorrected 95% interval below zero in 21 of 42 cells (descriptive). | `uv run edgeforge phase7 b1` |
+| Is the simulated joint better than a simple dependence model? | **Only slightly.** A Gaussian copula with the same marginals reaches 93% of the simulator's gain over the naive product (pooled lineups log loss 0.3301 simulated, 0.3320 copula, 0.3572 naive). The simulator is better in 11 of 26 tests and worse in 0 (difference -0.0019, 95% CI -0.0033 to -0.0007); the copula is better than the naive product in 19 and worse in 3 of 26; copula calibration error 0.0119 against 0.0152. | `uv run edgeforge phase5 copula` |
+| Was the in-play result replicated on a second season? | **It could not be tested.** 27 league seasons of the open data were examined for a sealed holdout; 0 meets the 90% coverage rule (D-064). The in-play result rests on one season. | `uv run edgeforge data statsbomb-coverage` |
 
 ## 3. What is not claimed
 
@@ -57,14 +60,17 @@ A scripted fresh-clone check last passed at commit `c0feeb291841205d2d6fcd0fd9eb
 | `phase4_markets.json` | `edgeforge phase4 run` | `a75bef4` | 2026-10-07T06:17:14Z | 588d4619e62984b7 |
 | `phase4_participation.json` | `edgeforge phase4 run` | `a75bef4` | 2026-10-07T06:17:14Z | 588d4619e62984b7 |
 | `phase5_comparison_b.json` | `edgeforge phase5 run` | `811070b` | 2026-10-05T12:10:35Z | ab7850c097da4492 |
+| `phase5_copula.json` | `edgeforge phase5 copula` | `4aa78b0` | 2026-11-09T16:30:10Z | 588d4619e62984b7 |
 | `phase5_sga.json` | `edgeforge phase5 run` | `811070b` | 2026-10-05T12:10:35Z | ab7850c097da4492 |
 | `phase5_simulator.json` | `edgeforge phase5 run` | `811070b` | 2026-10-05T12:10:35Z | ab7850c097da4492 |
 | `phase6_frailty.json` | `edgeforge phase6 frailty` | `7e13ae7` | 2026-10-07T05:26:31Z | ab7850c097da4492 |
 | `phase6_pillar_c.json` | `edgeforge phase6 run` | `ec1d218` | 2026-10-07T19:00:22Z | 588d4619e62984b7 |
 | `phase6b_levers.json` | `edgeforge phase6b run` | `7d80c2b` | 2026-10-07T23:46:23Z | 588d4619e62984b7 |
+| `phase7_b1.json` | `edgeforge phase7 b1` | `3827950` | 2026-11-09T15:08:55Z | 588d4619e62984b7 |
 | `phase7_inplay.json` | `edgeforge phase7 run` | `def7c9c` | 2026-10-08T02:55:05Z | 588d4619e62984b7 |
 | `pillar_a.json` | `edgeforge pillar-a run` | `42bf956` | 2026-10-04T20:41:08Z | 137781cbbd858114 |
-| `shadow_report.json` | `edgeforge shadow settle` | `7394965` | 2026-11-09T14:23:50Z | dc_opening_v1 |
+| `shadow_report.json` | `edgeforge shadow settle` | `63a55a4` | 2026-11-09T16:49:36Z | dc_opening_v1 |
+| `statsbomb_candidates.json` | `edgeforge data statsbomb-coverage` | `a17016f` | 2026-11-09T16:50:50Z | statsbomb-open-data |
 | `team_model.json` | `edgeforge team-model run` | `9de3d25` | 2026-10-05T09:40:49Z | 137781cbbd858114 |
 
 ## 7. Every claim and where it comes from
@@ -162,7 +168,32 @@ A scripted fresh-clone check last passed at commit `c0feeb291841205d2d6fcd0fd9eb
 | Half-width of the 95% CI of the model weight in the pool (derived from the existing CI) | 0.109 | `pillar_a.json` | `(derived: computed of values in the file)` |
 | Half-width of the 95% CI of the line-movement slope (derived from the existing CI) | 0.0222 | `pillar_a.json` | `(derived: computed of values in the file)` |
 | Half-width of the 95% CI of the favourite-longshot slope (derived from the existing CI) | 0.107 | `pillar_a.json` | `(derived: computed of values in the file)` |
-| Shadow log: fixtures logged | 10 | `shadow_report.json` | `n_logged` |
+| Family IV cells where Pillar B beats B1 (BH) | 0 | `phase7_b1.json` | `summary / pillar_b_better_than_b1` |
+| Family IV cells where Pillar B is worse than B1 (BH) | 0 | `phase7_b1.json` | `summary / pillar_b_worse_than_b1` |
+| Family IV cells not distinguishable | 42 | `phase7_b1.json` | `summary / not_distinguishable` |
+| Family IV cells | 42 | `phase7_b1.json` | `summary / n_cells` |
+| Pooled final-1X2 log loss, Pillar B | 0.7043 | `phase7_b1.json` | `pooled_log_loss / 1x2 / pillar_b` |
+| Pooled final-1X2 log loss, B1 | 0.7107 | `phase7_b1.json` | `pooled_log_loss / 1x2 / b1` |
+| Pooled final-1X2 log loss, naive baseline | 0.7131 | `phase7_b1.json` | `pooled_log_loss / 1x2 / naive` |
+| Cells where B1 beats the naive baseline with a 95% CI below zero (uncorrected, descriptive) | 21 | `phase7_b1.json` | `(derived: computed of values in the file)` |
+| Family S: simulated joint better than the copula (BH) | 11 | `phase5_copula.json` | `summary / simulated_better_than_copula` |
+| Family S: copula better than the simulated joint (BH) | 0 | `phase5_copula.json` | `summary / copula_better_than_simulated` |
+| Family S cells | 26 | `phase5_copula.json` | `summary / family_S_cells` |
+| Family C: copula better than the naive product (BH) | 19 | `phase5_copula.json` | `summary / copula_better_than_naive` |
+| Family C: naive product better than the copula (BH) | 3 | `phase5_copula.json` | `summary / naive_better_than_copula` |
+| Pooled joint log loss (lineups), simulated | 0.3301 | `phase5_copula.json` | `pooled / lineups|all / p_sim / log_loss` |
+| Pooled joint log loss (lineups), copula | 0.3320 | `phase5_copula.json` | `pooled / lineups|all / p_copula / log_loss` |
+| Pooled joint log loss (lineups), naive product | 0.3572 | `phase5_copula.json` | `pooled / lineups|all / p_naive / log_loss` |
+| Joint calibration error (lineups), simulated | 0.0152 | `phase5_copula.json` | `pooled / lineups|all / p_sim / ece` |
+| Joint calibration error (lineups), copula | 0.0119 | `phase5_copula.json` | `pooled / lineups|all / p_copula / ece` |
+| Simulated minus copula pooled log loss (lineups) | -0.0019 | `phase5_copula.json` | `pooled / lineups|all / diff_sim_minus_copula / estimate` |
+| Same, 95% CI low | -0.0033 | `phase5_copula.json` | `pooled / lineups|all / diff_sim_minus_copula / ci_low` |
+| Same, 95% CI high | -0.0007 | `phase5_copula.json` | `pooled / lineups|all / diff_sim_minus_copula / ci_high` |
+| Share of the simulator's log-loss gain over the naive product that the copula achieves (lineups, pooled) | 93% | `phase5_copula.json` | `(derived: computed of values in the file)` |
+| League seasons of the StatsBomb open data examined for a sealed holdout | 27 | `statsbomb_candidates.json` | `n_league_seasons_examined` |
+| Of those, seasons meeting the 90% coverage rule | 0 | `statsbomb_candidates.json` | `n_eligible` |
+| Shadow log: dc_opening_v2 records logged | 10 | `shadow_report.json` | `dc_opening_v2 / n_logged` |
+| Shadow log: fixtures logged | 20 | `shadow_report.json` | `n_logged` |
 | Shadow log: fixtures settled | 10 | `shadow_report.json` | `n_settled` |
 | Shadow log verdict | inconclusive: 10 settled fixtures, fewer than the 200 fixed in D-058; nothing can be concluded about the model | `shadow_report.json` | `verdict` |
 | Shadow log: model 1X2 log loss (market-average close benchmark) | 0.9630 | `shadow_report.json` | `log_loss_model_1x2` |

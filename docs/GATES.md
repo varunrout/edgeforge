@@ -609,3 +609,27 @@ Everything else in the efficiency map is **not distinguishable from zero**: no l
 - Docker image not built (engine unavailable); no deployment made.
 - The brief's phrase "in-play beats the naive baseline but not the market" is not supported by data: no in-play market prices exist; documents say no comparison is possible.
 - Multi-player SGA templates remain under-predicted in absolute terms (documented limitation).
+
+## Post-audit improvement plan (D-062): packages A to D, for the lead's audit
+
+**Built.** A: wording and presentation (efficiency headline restated as a statement about a results-only Dixon-Coles model, the 12 / 5 / 7 count, a rendered "What this shows" block, research-prototype positioning, a power note from existing intervals). B1: in-play baseline and family IV. B2: Gaussian-copula baseline for the SGA joint. C: selection rule and coverage check for a sealed second season. D: `dc_opening_v2` forward-only candidate in `shadow predict`.
+
+**Order of commits (decision before result):** D-062 `830800c`; A `a7c307f`; D-063 `9a26644` (B1 and B2 designs) then B1 code, then B1 result `2844b5f`; B2 code, then B2 result `6a34b85`; D-064 `4aa78b0` (rule and outcome) then the coverage command and `statsbomb_candidates.json` `baf5860`; D-065 `331fddb` (design and tuning procedure) then the model code `608d280`, tuning result and D-066 `e275dbf`, then the shadow extension `eef4514` and the first v2 batch `63a55a4`.
+
+| Criterion | Result | Command |
+|---|---|---|
+| B1: Pillar B against B1, family IV (BH 10%) | 0 better, 0 worse, 42 of 42 not distinguishable; pooled final-1X2 log loss 0.7043 (Pillar B), 0.7107 (B1), 0.7131 (naive) | `uv run edgeforge phase7 b1` |
+| B1: committed D-056 family I against the naive baseline | unchanged: 14 better, 0 worse of 42 | `uv run edgeforge phase7` |
+| B2: simulated joint against copula, family S | simulated better in 11 of 26, copula better in 0; pooled lineups log loss 0.3301 vs 0.3320 (naive 0.3572), difference -0.0019 (95% CI -0.0033 to -0.0007) | `uv run edgeforge phase5 copula` |
+| B2: copula against naive product, family C | copula better in 19 of 26, naive better in 3; the copula reaches 93% of the simulator's gain over the naive product; copula calibration error 0.0119 vs 0.0152 (simulated) | same |
+| B2: re-simulation reproduces Phase 5 | 34,868 instances, maximum absolute difference 0 in both prices | same (aborts otherwise) |
+| C: a season outside 2015/16 with at least 90% event coverage | none: 27 league seasons examined, 0 eligible (best real season about one tenth of its fixtures); package C not run | `uv run edgeforge data statsbomb-coverage` |
+| D: omega tuned on matches before 2024/25 | omega = 0.25, interior; in-sample gain 0.0020 log loss over goals-only | `uv run edgeforge shadow tune-v2` |
+| D: tests | first-batch log lines byte-identical (hash test); v2 never reads data after the as-of time; v1 records unchanged when v2 is added; omega 0 reproduces v1 | `uv run pytest tests/test_shadow_v2.py tests/test_dc_v2.py` |
+| D: forward batch | 10 fixtures of 21 to 23 November 2026, v1 and v2 records each, as of 2026-11-09T16:48:52Z, committed `63a55a4` | `uv run edgeforge shadow predict --fixtures <csv> --commit` |
+
+**What got worse or vanished.** The in-play advantage over the naive baseline does not survive the stronger B1 baseline (0 of 42). The simulator's advantage over the naive SGA product is mostly generic dependence: a one-parameter-per-template copula captures 93% of it. No second season exists to replicate the in-play result on.
+
+**Deviations and disclosures.** (1) The pre-registered command `phase7 b1` is implemented as an optional argument of `phase7`. (2) The copula's tuning-window prices are in-sample for the simulator's shot model (disclosed in D-063). (3) Five of the ten fixtures of the second batch have no kick-off time on the official page; 15:00 was used for them (the same assumption as the first batch); the official page also states that fixtures are subject to change. (4) D-064 was written after the candidate counts had been seen, as the owner asked for them to be verified; the coverage file was produced afterwards over every league season, not only the ones inspected. (5) The D-062 and D-063 commits lack the usual attribution trailer.
+
+**Open issues.** The v2 candidate and the v1 model can only be compared once at least 200 fixtures have settled. The StatsBomb logo file and the LICENSE file remain owner actions.
