@@ -28,6 +28,7 @@ from edgeforge.evaluation.common import load_fd_clock, write_json
 from edgeforge.evaluation.phase4 import cluster_diff_summary
 from edgeforge.features.pit import RESULT_DELAY, fd_clock
 from edgeforge.models.dixon_coles import dc_grid, fit_dixon_coles
+from edgeforge.models.dixon_coles_shots import fit_dixon_coles_shots
 from edgeforge.pricing.devig import proportional
 from edgeforge.pricing.markets import market_probs
 from edgeforge.provenance import config_hash, git_sha
@@ -37,6 +38,8 @@ SHADOW_DIR = PROJECT_ROOT / "artifacts" / "shadow"
 LOG_PATH = SHADOW_DIR / "log.jsonl"
 SETTLED_PATH = SHADOW_DIR / "settled.jsonl"
 MODEL_VERSION = "dc_opening_v1"
+MODEL_VERSION_V2 = "dc_opening_v2"  # D-065, forward only
+OMEGA_V2 = 0.25  # frozen in D-066
 LEAGUES = ("E0", "D1", "SP1", "I1", "F1")
 HALF_LIFE_DAYS = 365
 WINDOW_DAYS = 1825
@@ -48,6 +51,17 @@ BASE_URL = "https://www.football-data.co.uk"
 CLOSE_1X2 = (("PSCH", "PSCD", "PSCA"),)  # PP* is Paddy Power, not Pinnacle (D-059)
 CLOSE_OU = (("PC>2.5", "PC<2.5"), ("PSC>2.5", "PSC<2.5"))
 AVG_1X2, AVG_OU = ("AvgCH", "AvgCD", "AvgCA"), ("AvgC>2.5", "AvgC<2.5")
+
+
+def _ver(rec: dict[str, Any]) -> str:
+    """Model version of a log or settled record (records written before D-065 are v1)."""
+    return str(rec.get("model_version", MODEL_VERSION))
+
+
+def _key(rec: dict[str, Any]) -> str:
+    """One prediction per fixture and version: v1 keeps the plain fixture id."""
+    fid = str(rec["fixture_id"])
+    return fid if _ver(rec) == MODEL_VERSION else f"{fid}|{_ver(rec)}"
 
 
 def slug(s: str) -> str:
@@ -105,6 +119,8 @@ def history_from_results(res: pd.DataFrame, league: str) -> pd.DataFrame:
         "league": league, "season": season_code(date.iloc[0]) if len(date) else "", "season_start_year": 0,
         "date": date, "kickoff_local": date + t, "home": r["HomeTeam"].to_numpy(), "away": r["AwayTeam"].to_numpy(),
         "fthg": r["FTHG"].astype(int).to_numpy(), "ftag": r["FTAG"].astype(int).to_numpy(),
+        "hst": pd.to_numeric(r["HST"], errors="coerce").to_numpy(float) if "HST" in r else np.nan,
+        "ast": pd.to_numeric(r["AST"], errors="coerce").to_numpy(float) if "AST" in r else np.nan,
     })  # fmt: skip
     return fd_clock(out)
 
@@ -176,6 +192,95 @@ def predict_records(
     return recs, skipped
 
 
+def predict_records_v2(
+    fixtures: pd.DataFrame,
+    history: pd.DataFrame,
+    as_of: pd.Timestamp,
+    cfg: dict[str, Any],
+    existing: set[str],
+    omega: float = OMEGA_V2,
+) -> tuple[list[dict[str, Any]], list[str]]:
+    """Forward-only candidate dc_opening_v2 (D-065, D-066): v1 plus a shots-on-target likelihood.
+
+    Same window, completion rule and record fields as v1; trains only on matches complete by
+    `as_of`. `existing` holds the fixture ids that already have a v2 record."""
+    skipped: list[str] = []
+    recs: list[dict[str, Any]] = []
+    fx = fixtures.copy()
+    fx["ko_utc"] = kickoff_utc(fx)
+    hist = history.copy()
+    for col in ("hst", "ast"):
+        if col not in hist:
+            hist[col] = np.nan
+    for league, g in fx.groupby("Div"):
+        league = str(league)
+        if league not in LEAGUES:
+            skipped.append(f"{league}: league not covered by the model ({len(g)} fixtures)")
+            continue
+        h = hist[hist["league"] == league]
+        win = h[(h["done_ts"] <= as_of) & (h["ko_late"] >= as_of - pd.Timedelta(days=WINDOW_DAYS))]
+        if len(win) < MIN_TRAIN:
+            skipped.append(f"{league}: only {len(win)} training matches")
+            continue
+        names = sorted(
+            set(win["home"]) | set(win["away"]) | set(g["HomeTeam"]) | set(g["AwayTeam"])
+        )
+        idx = {t: i for i, t in enumerate(names)}
+        age = ((as_of - win["ko_late"]).dt.total_seconds() / 86400.0).to_numpy(float)
+        m = fit_dixon_coles_shots(
+            win["home"].map(idx).to_numpy(),
+            win["away"].map(idx).to_numpy(),
+            win["fthg"].to_numpy(np.int64),
+            win["ftag"].to_numpy(np.int64),
+            win["hst"].to_numpy(float),
+            win["ast"].to_numpy(float),
+            age,
+            names,
+            float(np.log(2.0) / HALF_LIFE_DAYS),
+            omega,
+            fit_rho=True,
+        )
+        fp = hashlib.sha256(
+            "\n".join(
+                sorted(
+                    f"{r.home}|{r.away}|{r.ko_late}|{r.fthg}|{r.ftag}|{r.hst}|{r.ast}"
+                    for r in win.itertuples()
+                )
+            ).encode()
+        ).hexdigest()[:16]
+        lam_h, lam_a = m.lambdas(g["HomeTeam"], g["AwayTeam"])
+        probs = market_probs(dc_grid(np.asarray(lam_h), np.asarray(lam_a), m.rho))
+        n_shots = int((win["hst"].notna() & win["ast"].notna()).sum())
+
+        def n_of(t: str, w: pd.DataFrame = win) -> int:
+            return int(((w["home"] == t) | (w["away"] == t)).sum())
+
+        for i, r in enumerate(g.itertuples()):
+            ko = pd.Timestamp(r.ko_utc)  # type: ignore[arg-type]
+            fid = f"{league}_{ko:%Y%m%d}_{slug(str(r.HomeTeam))}_{slug(str(r.AwayTeam))}"
+            if fid in existing:
+                skipped.append(f"{fid}: already has a v2 record (one prediction per fixture)")
+                continue
+            if pd.isna(ko) or ko.tz_localize(None) <= as_of:
+                skipped.append(f"{fid}: kickoff {ko} is not after the as-of time {as_of}")
+                continue
+            p1 = probs["1x2"][i]
+            po = float(probs["over_2.5"][i])
+            recs.append({
+                "fixture_id": fid, "league": league, "home": str(r.HomeTeam), "away": str(r.AwayTeam),
+                "kickoff_utc": ko.strftime("%Y-%m-%dT%H:%M:%SZ"), "as_of_utc": as_of.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                "model_version": MODEL_VERSION_V2, "git_sha": git_sha(), "config_hash": config_hash(cfg),
+                "data_fingerprint": fp, "n_train": int(len(win)), "n_train_with_shots": n_shots,
+                "omega": float(omega),
+                "home_n_matches": n_of(str(r.HomeTeam)), "away_n_matches": n_of(str(r.AwayTeam)),
+                "cold_start_teams": [t for t in (str(r.HomeTeam), str(r.AwayTeam)) if n_of(t) < COLD_START_MATCHES],
+                "lam_h": float(lam_h[i]), "lam_a": float(lam_a[i]), "rho": float(m.rho),
+                "p_home": float(p1[0]), "p_draw": float(p1[1]), "p_away": float(p1[2]),
+                "p_over_2_5": po, "p_under_2_5": 1.0 - po,
+            })  # fmt: skip
+    return recs, skipped
+
+
 def read_log(path: Path = LOG_PATH) -> list[dict[str, Any]]:
     if not path.exists():
         return []
@@ -229,6 +334,8 @@ def run_predict(
         )
     con = connect(cfg)
     history = load_fd_clock(con)
+    shots = con.execute("SELECT match_id, hst, ast FROM matches").df()
+    history = history.merge(shots, on="match_id", how="left")
     con.close()
     raw_dir = resolve_path(cfg, "raw_dir") / "shadow"
     fresh = []
@@ -243,24 +350,29 @@ def run_predict(
         add = add.merge(history[key], on=key, how="left", indicator=True)
         add = add[add["_merge"] == "left_only"].drop(columns="_merge")
         history = pd.concat([history, add], ignore_index=True)
-    existing = {r["fixture_id"] for r in read_log(log_path)}
+    prior = read_log(log_path)
+    existing = {r["fixture_id"] for r in prior if _ver(r) == MODEL_VERSION}
+    existing_v2 = {r["fixture_id"] for r in prior if _ver(r) == MODEL_VERSION_V2}
     recs, skipped = predict_records(fx, history, pd.Timestamp(now), cfg, existing)
+    recs2, skipped2 = predict_records_v2(fx, history, pd.Timestamp(now), cfg, existing_v2)
     out: dict[str, Any] = {
         "as_of_utc": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "logged": len(recs),
+        "logged_v2": len(recs2),
         "skipped": skipped,
+        "skipped_v2": skipped2,
         "commit": None,
     }
     if git_sha().endswith("-dirty"):
         out["warning"] = (
             "uncommitted code changes: the logged git_sha ends in -dirty; commit the code first"
         )
-    if recs:
-        append_jsonl(log_path, recs)
+    if recs or recs2:
+        append_jsonl(log_path, recs + recs2)
         if commit:
             out["commit"] = commit_log(
                 [log_path],
-                f"shadow: {len(recs)} pre-match predictions as of {out['as_of_utc']} ({', '.join(sorted({r['league'] for r in recs}))})",
+                f"shadow: {len(recs)} pre-match predictions (v1) and {len(recs2)} (v2) as of {out['as_of_utc']} ({', '.join(sorted({r['league'] for r in recs + recs2}))})",
             )
     return out
 
@@ -285,7 +397,7 @@ def settle_records(
 ) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
     for r in log_records:
-        if r["fixture_id"] in settled_ids:
+        if _key(r) in settled_ids:
             continue
         ko = pd.Timestamp(r["kickoff_utc"]).tz_localize(None)
         if ko + RESULT_DELAY > now or r["league"] not in results:
@@ -302,7 +414,7 @@ def settle_records(
         row = m.iloc[0]
         hg, ag = int(row["FTHG"]), int(row["FTAG"])
         rec: dict[str, Any] = {
-            "fixture_id": r["fixture_id"], "settled_at_utc": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "fixture_id": r["fixture_id"], "model_version": _ver(r), "settled_at_utc": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
             "fthg": hg, "ftag": ag, "result": "home" if hg > ag else "draw" if hg == ag else "away", "over_2_5": int(hg + ag > 2),
         }  # fmt: skip
         pick = _pick(row, CLOSE_1X2)
@@ -339,7 +451,7 @@ def settle_records(
     return out
 
 
-def build_report(
+def _build_report_v1(
     log_records: list[dict[str, Any]], settled: list[dict[str, Any]], seed: int, n_boot: int = 1000
 ) -> dict[str, Any]:
     by_id = {r["fixture_id"]: r for r in log_records}
@@ -444,6 +556,86 @@ def build_report(
     return rep
 
 
+def _rows_of(
+    log_records: list[dict[str, Any]], settled: list[dict[str, Any]]
+) -> list[tuple[dict[str, Any], dict[str, Any]]]:
+    by_id = {r["fixture_id"]: r for r in log_records}
+    return [
+        (by_id[s["fixture_id"]], s)
+        for s in settled
+        if s["fixture_id"] in by_id and "close_home" in s
+    ]
+
+
+def _ll_rows(
+    rows: list[tuple[dict[str, Any], dict[str, Any]]],
+) -> tuple[Any, Any, Any]:
+    y = np.array([{"home": 0, "draw": 1, "away": 2}[s["result"]] for _, s in rows])
+    pm = np.array([[r["p_home"], r["p_draw"], r["p_away"]] for r, _ in rows])
+    pk = np.array([[s["close_home"], s["close_draw"], s["close_away"]] for _, s in rows])
+    return (
+        M.log_loss_multiclass(pm, y),
+        M.log_loss_multiclass(pk, y),
+        np.array([r["fixture_id"] for r, _ in rows]),
+    )
+
+
+def _version_block(
+    log_records: list[dict[str, Any]],
+    settled: list[dict[str, Any]],
+    v1_rows: list[tuple[dict[str, Any], dict[str, Any]]],
+    version: str,
+    seed: int,
+) -> dict[str, Any]:
+    """Report block for a forward-only candidate version (D-065), next to v1."""
+    recs = [r for r in log_records if _ver(r) == version]
+    sett = [s for s in settled if _ver(s) == version]
+    rows = _rows_of(recs, sett)
+    blk: dict[str, Any] = {
+        "model_version": version,
+        "n_logged": len(recs),
+        "n_settled": len(sett),
+        "n_with_closing_1x2": len(rows),
+    }
+    if rows:
+        lm, lk, ids = _ll_rows(rows)
+        blk["log_loss_model_1x2"] = float(lm.mean())
+        blk["log_loss_closing_1x2"] = float(lk.mean())
+        blk["log_loss_diff_model_minus_market_1x2"] = cluster_diff_summary(lm - lk, ids, seed)
+        v1_by_id = {r["fixture_id"]: (r, s) for r, s in v1_rows}
+        both = [(r, s) for r, s in rows if r["fixture_id"] in v1_by_id]
+        if both:
+            l2, _, ids2 = _ll_rows(both)
+            l1, _, _ = _ll_rows([v1_by_id[r["fixture_id"]] for r, _ in both])
+            blk["paired_with_v1"] = {
+                "n": len(both),
+                "log_loss_diff_v2_minus_v1_1x2": cluster_diff_summary(l2 - l1, ids2, seed),
+            }
+    n = len(rows)
+    blk["verdict"] = (
+        "inconclusive: no settled fixtures with closing prices yet"
+        if n == 0
+        else f"inconclusive: {n} settled fixtures, fewer than the {MIN_SETTLED_FOR_VERDICT} fixed in D-058; nothing can be concluded about the model"
+        if n < MIN_SETTLED_FOR_VERDICT
+        else "inconclusive: the verdict for a second version needs the paired interval to exclude zero"
+    )
+    return blk
+
+
+def build_report(
+    log_records: list[dict[str, Any]], settled: list[dict[str, Any]], seed: int, n_boot: int = 1000
+) -> dict[str, Any]:
+    """v1 numbers exactly as before (records without a version are v1); v2 next to them."""
+    v1_log = [r for r in log_records if _ver(r) == MODEL_VERSION]
+    v1_set = [s for s in settled if _ver(s) == MODEL_VERSION]
+    rep = _build_report_v1(v1_log, v1_set, seed, n_boot)
+    if any(_ver(r) == MODEL_VERSION_V2 for r in log_records):
+        rep[MODEL_VERSION_V2] = _version_block(
+            log_records, settled, _rows_of(v1_log, v1_set), MODEL_VERSION_V2, seed
+        )
+    return rep
+
+
 def run_settle(
     cfg: dict[str, Any] | None = None,
     now: datetime | None = None,
@@ -458,11 +650,11 @@ def run_settle(
     n = pd.Timestamp((now or datetime.now(UTC)).astimezone(UTC).replace(tzinfo=None))
     recs = read_log(log_path)
     settled = read_log(settled_path)
-    done = {s["fixture_id"] for s in settled}
+    done = {_key(s) for s in settled}
     pending = [
         r
         for r in recs
-        if r["fixture_id"] not in done
+        if _key(r) not in done
         and pd.Timestamp(r["kickoff_utc"]).tz_localize(None) + RESULT_DELAY <= n
     ]
     results: dict[str, pd.DataFrame] = {}
