@@ -287,8 +287,19 @@ def phase6b_run(
 
 
 @app.command("phase7")
-def phase7_run() -> None:
-    """Pillar B: in-play team markets vs the Phase 2 naive baseline at the checkpoints."""
+def phase7_run(
+    variant: str = typer.Argument(
+        "", help="empty: Pillar B run; 'b1': D-063 baseline and family IV"
+    ),
+) -> None:
+    """Pillar B: in-play team markets vs the Phase 2 naive baseline; `phase7 b1` adds D-063."""
+    if variant == "b1":
+        from edgeforge.evaluation.phase7_b1 import run_b1
+
+        typer.echo(str(run_b1()))
+        return
+    if variant:
+        raise typer.BadParameter("variant must be empty or 'b1'")
     from edgeforge.evaluation.phase7_run import run_phase7
 
     typer.echo(str(run_phase7()))
