@@ -1,6 +1,6 @@
 # EdgeForge technical report
 
-> Interim until the final audit. Rendered from `artifacts/metrics/` by `uv run edgeforge docs render`; every number below comes from a metrics file listed in the provenance table at the end. Each result carries one of three labels: **Measured** (realised outcomes of a held-out window), **Simulated** (a model-generated quantity, or a simulation of a bettor), **Assumed** (an assumption stated in a decision record).
+> Audited research prototype, not a product. Interim until the final audit. Rendered from `artifacts/metrics/` by `uv run edgeforge docs render`; every number below comes from a metrics file listed in the provenance table at the end. Each result carries one of three labels: **Measured** (realised outcomes of a held-out window), **Simulated** (a model-generated quantity, or a simulation of a bettor), **Assumed** (an assumption stated in a decision record).
 
 ## 0. Scope, data and discipline
 
@@ -17,7 +17,7 @@
 - **Does the line move toward the model?** The slope of the move (close minus an early snapshot taken roughly one to three days before kick-off and not timestamped, D-024) on the disagreement (model minus early) is -0.0035 (95% CI -0.0259 to 0.0184). No.
 - **Efficiency map.** 47 pre-registered claims were tested in the confirmatory season. Of the 12 that survived the multiple-testing control, 5 reproduce in the replication season (same sign, p below one in twenty, uncorrected; the replication season is measured against the market-average close because Pinnacle prices stop in early 2026); they are model-versus-market gaps. The Bundesliga home-win bias does not replicate (p = 0.81). The favourite-longshot slope at the close is 1.069 (95% CI 0.965 to 1.180).
 - **Cold start.** A promoted-team prior lowers log loss on promoted teams' first matches by -0.0245 (95% CI upper bound +0.0003); the interval reaches zero, so it is not adopted as a default.
-- **Honest summary.** The model is a structural source of probabilities for markets without prices (totals, BTTS, props); it is not an edge against the 1X2 close.
+- **Honest summary.** The model is a structural source of probabilities for markets without prices (totals, BTTS, props); it is not an edge against the 1X2 close. Of the 12 confirmatory findings, 5 replicated and 7 did not. These statements concern a results-only Dixon-Coles model compared with the Pinnacle closing line; they are not a proof that the market is efficient. Power, taken only from the intervals already reported: the 95% interval of the pool weight has a half-width of 0.109, that of the line-movement slope 0.0222 and that of the favourite-longshot slope 0.107, so effects of about that size or smaller cannot be excluded on this sample.
 
 ## 2. Participation and player props, 2015/16 (Measured)
 
@@ -45,7 +45,7 @@
 - **Remaining goals.** Observed 1.347, model 1.238, baseline 1.194: both under-predict. After a dismissal at 75 minutes: observed 0.75, model 0.73, baseline 0.54. With a two-goal lead at 45 minutes the model still under-predicts: observed 1.83, model 1.48.
 - **No market.** The data contain no in-play market prices (D-017); nothing here compares the in-play model with a market.
 
-## 6. Product, shadow log and engineering evidence
+## 6. Prototype, shadow log and engineering evidence
 
 - **API and app.** `uv run edgeforge serve api` and `serve app` replay 16 test matches through the lifecycle with margins (proportional, power, odds ratio) and SGA pricing; the evidence tab and `/model-health` show the findings above with their source files.
 - **Shadow log (D-058, pre-match only, no betting).** Frozen Dixon-Coles predictions are appended to `artifacts/shadow/log.jsonl` before kick-off and committed; `shadow settle` compares them with the closing market: Pinnacle where the file has it, otherwise the market average, which is what the current football-data files give (D-059), so the settled fixtures are measured against the market-average close, a weaker benchmark than the Pinnacle close of Pillar A. The first batch (the Premier League weekend of 6 to 8 November 2026) was committed and pushed before kick-off; the commit and push timestamps are the timing evidence. Status: 10 logged, 10 settled. Model 1X2 log loss 0.9630 against 0.9364 for the market-average closing line (model minus market +0.0265, bootstrap 95% CI -0.0481 to +0.1114); 2 of the settled fixtures involve a promoted team with little history and are reported as a separate segment. 10 matches show the process working, not an edge: nothing can be concluded. inconclusive: 10 settled fixtures, fewer than the 200 fixed in D-058; nothing can be concluded about the model. The expectation recorded in advance is that the market is better.

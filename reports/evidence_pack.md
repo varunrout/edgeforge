@@ -1,6 +1,6 @@
 # EdgeForge evidence pack
 
-For a sceptical betting-analytics reader. Every claim below is read from a metrics file produced by code and can be re-derived from a command; none is typed by hand (this file is rendered by `uv run edgeforge docs render` and `uv run edgeforge docs check` fails if it drifts). Interim until the final audit.
+An audited research prototype, not a product. For a sceptical betting-analytics reader. Every claim below is read from a metrics file produced by code and can be re-derived from a command; none is typed by hand (this file is rendered by `uv run edgeforge docs render` and `uv run edgeforge docs check` fails if it drifts). Interim until the final audit.
 
 ## 1. How to verify
 
@@ -20,7 +20,8 @@ The metrics files are committed. Re-running a phase needs the local data warehou
 | Does the pre-match model beat the Pinnacle closing market? | **No.** 1X2 log loss 0.9853 against 0.9606 on 1752 matches (2024/25). | `uv run edgeforge team-model run`, `uv run edgeforge baselines team` |
 | Does the model add information beyond the market? | **No detectable information.** Pool weight -0.072 (95% CI -0.172 to 0.046; the interval reaches 0.046). | `uv run edgeforge pillar-a run` |
 | Does the closing line move toward the model? | **No.** Slope -0.0035 (95% CI -0.0259 to 0.0184), measured against an early snapshot roughly one to three days before kick-off, not timestamped (D-024). | `uv run edgeforge pillar-a run` |
-| Is there a replicated market inefficiency? | **No.** 5 of 12 confirmatory survivors replicate (same sign, p below one in twenty, uncorrected; the replication season uses the market-average close, Pinnacle prices stop in early 2026), all model-versus-market gaps; the Bundesliga home bias does not (p = 0.81). | `uv run edgeforge pillar-a run` |
+| What does "no detectable information" mean here? | A statement about a results-only Dixon-Coles model compared with the Pinnacle close, not a proof that the market is efficient. Power from the existing intervals only: half-width of the 95% interval 0.109 for the pool weight, 0.0222 for the line-movement slope, 0.107 for the favourite-longshot slope; effects of about that size or smaller cannot be excluded. | `uv run edgeforge pillar-a run` |
+| Is there a replicated market inefficiency? | **No replicated inefficiency:** 12 confirmatory findings, 5 replicated, 7 did not; replication (same sign, p below one in twenty, uncorrected; the replication season uses the market-average close, Pinnacle prices stop in early 2026), all model-versus-market gaps; the Bundesliga home bias does not (p = 0.81). | `uv run edgeforge pillar-a run` |
 | Are player props predictable beyond a rolling baseline? | **Partly.** 5 of six markets improve after multiple-testing control; shots 1+ does not (+0.0000). No prop odds exist to compare with. | `uv run edgeforge phase4 run` |
 | Is the joint probability of a same-game accumulator better than the product of its legs? | **Yes, on realised outcomes.** Better in 21 of 26 pre-registered tests, worse in 0; pooled log loss 0.3301 against 0.3572. Both use the same marginals, so this isolates dependence; the named players are mechanically chosen top scorers; multi-player templates are still under-predicted (T10 0.080 predicted, 0.102 realised). | `uv run edgeforge phase5 run` |
 | Does knowing the lineups change prop prices? | **Yes, a lot for rotation-risk players** (an upper bound): 81.7% move by more than a quarter, against 16.3% for nailed starters; the lineups price is the better predictor in 6 of six prop markets. | `uv run edgeforge phase6 run` |
@@ -157,6 +158,10 @@ A scripted fresh-clone check last passed at commit `c0feeb291841205d2d6fcd0fd9eb
 | After-dismissal 1X2 difference, 95% CI high | -0.0244 | `phase7_inplay.json` | `family_II_stratum_x_market / tests / after_dismissal|1x2 / log_loss_diff_model_minus_baseline / ci_high` |
 | Phase 6b base informed expected profit per offered prop, 5% overround | 0.1229 | `phase6b_levers.json` | `test / base|0.05 / informed_expected_per_offered` |
 | Phase 6b recommended combination, 5% overround | 0.0036 | `phase6b_levers.json` | `test / start+odds_ratio|0.05 / informed_expected_per_offered` |
+| Primary-block survivors that do not replicate in 2025/26 (tested minus replicated) | 7 | `pillar_a.json` | `(derived: computed of values in the file)` |
+| Half-width of the 95% CI of the model weight in the pool (derived from the existing CI) | 0.109 | `pillar_a.json` | `(derived: computed of values in the file)` |
+| Half-width of the 95% CI of the line-movement slope (derived from the existing CI) | 0.0222 | `pillar_a.json` | `(derived: computed of values in the file)` |
+| Half-width of the 95% CI of the favourite-longshot slope (derived from the existing CI) | 0.107 | `pillar_a.json` | `(derived: computed of values in the file)` |
 | Shadow log: fixtures logged | 10 | `shadow_report.json` | `n_logged` |
 | Shadow log: fixtures settled | 10 | `shadow_report.json` | `n_settled` |
 | Shadow log verdict | inconclusive: 10 settled fixtures, fewer than the 200 fixed in D-058; nothing can be concluded about the model | `shadow_report.json` | `verdict` |

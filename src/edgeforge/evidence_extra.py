@@ -327,6 +327,72 @@ EXTRA: list[Claim] = [
         ("test", "start+odds_ratio|0.05", "informed_expected_per_offered"),
         ".4f",
     ),
+    Claim(
+        "a_repl_not",
+        "Primary-block survivors that do not replicate in 2025/26 (tested minus replicated)",
+        "pillar_a.json",
+        derive=lambda j: sum(
+            1
+            for r in j["replication_of_primary_survivors"]
+            if not r["same_sign_and_secondary_p_lt_0.05"]
+        ),
+        fmt="d",
+    ),
+    Claim(
+        "a_enc_half",
+        "Half-width of the 95% CI of the model weight in the pool (derived from the existing CI)",
+        "pillar_a.json",
+        derive=lambda j: (
+            (
+                j["blocks"]["F1_primary_2024_25"]["encompassing_fit"]["model_weight_ci95"][1]
+                - j["blocks"]["F1_primary_2024_25"]["encompassing_fit"]["model_weight_ci95"][0]
+            )
+            / 2
+        ),
+        fmt=".3f",
+    ),
+    Claim(
+        "a_move_half",
+        "Half-width of the 95% CI of the line-movement slope (derived from the existing CI)",
+        "pillar_a.json",
+        derive=lambda j: (
+            (
+                next(
+                    c
+                    for c in j["blocks"]["F1_primary_2024_25"]["claims"]
+                    if c.get("id") == "mvm.linemove.slope"
+                )["ci_high"]
+                - next(
+                    c
+                    for c in j["blocks"]["F1_primary_2024_25"]["claims"]
+                    if c.get("id") == "mvm.linemove.slope"
+                )["ci_low"]
+            )
+            / 2
+        ),
+        fmt=".4f",
+    ),
+    Claim(
+        "a_flb_half",
+        "Half-width of the 95% CI of the favourite-longshot slope (derived from the existing CI)",
+        "pillar_a.json",
+        derive=lambda j: (
+            (
+                next(
+                    c
+                    for c in j["blocks"]["F1_primary_2024_25"]["claims"]
+                    if c.get("id") == "eff.flb.close.slope"
+                )["ci_high"]
+                - next(
+                    c
+                    for c in j["blocks"]["F1_primary_2024_25"]["claims"]
+                    if c.get("id") == "eff.flb.close.slope"
+                )["ci_low"]
+            )
+            / 2
+        ),
+        fmt=".3f",
+    ),
     Claim("sh_logged", "Shadow log: fixtures logged", "shadow_report.json", ("n_logged",), "d"),
     Claim("sh_settled", "Shadow log: fixtures settled", "shadow_report.json", ("n_settled",), "d"),
     Claim("sh_verdict", "Shadow log verdict", "shadow_report.json", ("verdict",), "s"),

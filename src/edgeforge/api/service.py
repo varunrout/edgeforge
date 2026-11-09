@@ -30,7 +30,7 @@ from edgeforge.sga.engine import (
 from edgeforge.simulation.engine import SimResult, simulate
 
 DISCLAIMER = (
-    "Historical replay of 2015/16 test matches, not a live feed. Fair prices are model "
+    "Audited research prototype, not a product. Historical replay of 2015/16 test matches, not a live feed. Fair prices are model "
     "probabilities; quoted prices add a margin. Nothing here claims an edge or commercial use: "
     "the pre-match model does not beat the Pinnacle closing market (see /model-health). Props and "
     "SGAs are simulated and validated on realised outcomes only; lineup shock and informed-bettor "

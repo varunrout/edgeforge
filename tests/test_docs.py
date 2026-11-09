@@ -80,3 +80,21 @@ def test_the_withdrawn_neutralising_margin_figures_are_not_in_the_documents() ->
         text = (ROOT / name).read_text(encoding="utf-8")
         assert "260%" not in text and "330%" not in text and "485%" not in text
     assert not (ROOT / "artifacts" / "figures" / "phase6_policy_heatmap.png").exists()
+
+
+def test_positioning_and_efficiency_wording() -> None:
+    docs = {
+        n: (ROOT / n).read_text(encoding="utf-8")
+        for n in (
+            "README.md",
+            "reports/technical_report.md",
+            "reports/evidence_pack.md",
+            "reports/cv_project_summary.md",
+        )
+    }
+    for n, text in docs.items():
+        assert "audited research prototype" in text.lower(), n
+        assert "no market inefficiency replicates" not in text.lower(), n
+        assert "confirmatory findings" in text and "did not" in text, n
+    assert "## What this shows" in docs["README.md"]
+    assert "not a proof that the market is efficient" in docs["README.md"]
