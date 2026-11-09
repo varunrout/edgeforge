@@ -237,6 +237,14 @@ def phase5_run() -> None:
     typer.echo(str(run_phase5()))
 
 
+@phase5_app.command("copula")
+def phase5_copula() -> None:
+    """D-063 B2: Gaussian-copula baseline for the SGA joint (rho from the tuning window only)."""
+    from edgeforge.evaluation.phase5_copula import run_copula
+
+    typer.echo(str(run_copula()))
+
+
 @phase5_app.command("example")
 def phase5_example(
     match_id: int = typer.Option(..., help="StatsBomb match id"), state: str = "lineups"
