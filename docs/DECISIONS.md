@@ -420,3 +420,8 @@ Format: ID | Decision | Why | Rejected alternatives | Status. Locked entries are
 ### D-060 Shadow log: cold-start flag (metadata only)
 - **Decision (owner request, 2026-11-05):** each shadow record also carries `home_n_matches`, `away_n_matches` (matches of the team in the training window) and `cold_start_teams` (teams with fewer than 20 matches in the window). Teams with little or no history are **not skipped**: they are fitted with the same ridge as every team (zero history gives average attack and defence) and flagged. The model, window, half-life, probabilities and verdict rule of D-058 are unchanged; the fields add no information to any prediction.
 - **Status:** Locked (owner request; implementer)
+
+### D-061 Shadow report: cold-start segment, per-fixture rows and a caveat (reporting only)
+- **Decision (owner request, 2026-11-09):** `shadow_report.json` also reports the fixtures that involve a cold-start team (D-060) as a separate segment next to the rest, with the per-fixture log losses; no fixture is selected, dropped or reweighted. A segment with fewer than 30 fixtures gets no bootstrap interval, only point values. The "model-implied value against the closing line" statistic carries a note that it is non-negative by construction (the largest of three gaps between two probability vectors that each sum to one) and is not evidence of an edge. Settlement keeps using the market-average close for the 2026/27 files (D-059).
+- **Unchanged:** the model, every logged prediction, the settlement rule, the metrics of D-058 and the verdict rule.
+- **Status:** Locked (owner request; implementer)

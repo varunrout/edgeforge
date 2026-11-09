@@ -43,6 +43,7 @@ WINDOW_DAYS = 1825
 MIN_TRAIN = 150
 COLD_START_MATCHES = 20  # fewer matches than this in the window: flagged, still predicted (D-060)
 MIN_SETTLED_FOR_VERDICT = 200
+MIN_SEGMENT_FOR_INTERVAL = 30
 BASE_URL = "https://www.football-data.co.uk"
 CLOSE_1X2 = (("PSCH", "PSCD", "PSCA"),)  # PP* is Paddy Power, not Pinnacle (D-059)
 CLOSE_OU = (("PC>2.5", "PC<2.5"), ("PSC>2.5", "PSC<2.5"))
@@ -372,6 +373,44 @@ def build_report(
             "mean": float(value.mean()), "ci": cluster_diff_summary(value, ids, seed),
         },
     })  # fmt: skip
+    rep["model_implied_value_vs_close"]["note"] = (
+        "non-negative by construction: both probability vectors sum to one, so the largest "
+        "gap is never below zero; it measures how far the model disagrees with the close, "
+        "not whether the disagreement is right, and its interval is not evidence of an edge"
+    )
+    cold = np.array([bool(r.get("cold_start_teams")) for r, _ in rows])
+    segments: dict[str, Any] = {}
+    for name, mask in (("cold_start", cold), ("established", ~cold)):
+        k = int(mask.sum())
+        seg: dict[str, Any] = {"n": k, "fixtures": [str(i) for i in ids[mask]]}
+        if k:
+            seg["log_loss_model_1x2"] = float(lm[mask].mean())
+            seg["log_loss_closing_1x2"] = float(lk[mask].mean())
+            seg["log_loss_diff_model_minus_market_1x2"] = float((lm - lk)[mask].mean())
+        seg["interval"] = (
+            "none: too few fixtures for a bootstrap interval to mean anything"
+            if k < MIN_SEGMENT_FOR_INTERVAL
+            else cluster_diff_summary((lm - lk)[mask], ids[mask], seed)
+        )
+        segments[name] = seg
+    rep["segments"] = segments
+    rep["segment_definition"] = (
+        "cold_start: a fixture with a team that has fewer than "
+        f"{COLD_START_MATCHES} matches in the training window (D-060); reported, never removed"
+    )
+    pick_idx = np.arange(len(rows))
+    rep["per_fixture"] = [
+        {
+            "fixture_id": str(ids[i]),
+            "result": rows[i][1]["result"],
+            "cold_start": bool(cold[i]),
+            "model_p_of_result": float(pm[i, y[i]]),
+            "close_p_of_result": float(pk[i, y[i]]),
+            "log_loss_model": float(lm[i]),
+            "log_loss_closing": float(lk[i]),
+        }
+        for i in pick_idx
+    ]
     ou_rows = [(r, s) for r, s in rows if "close_over_2_5" in s]
     if ou_rows:
         yo = np.array([s["over_2_5"] for _, s in ou_rows], dtype=float)

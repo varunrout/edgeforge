@@ -200,6 +200,21 @@ def test_report_says_inconclusive_for_small_n_and_detects_a_worse_model_for_larg
     assert build_report(log, [], 1)["verdict"].startswith("inconclusive: no settled")
 
 
+def test_cold_start_segment_is_reported_separately_and_nothing_is_dropped() -> None:
+    log, res = _logged(40, 0.05)
+    for i, rec in enumerate(log):
+        rec["cold_start_teams"] = [rec["home"]] if i < 3 else []
+    s = settle_records(log, res, set(), pd.Timestamp("2027-12-31"))
+    rep = build_report(log, s, 1, 100)
+    seg = rep["segments"]
+    assert seg["cold_start"]["n"] == 3 and seg["established"]["n"] == 37
+    assert seg["cold_start"]["n"] + seg["established"]["n"] == rep["n_settled"] == 40
+    assert isinstance(seg["cold_start"]["interval"], str)  # three fixtures: no interval
+    assert isinstance(seg["established"]["interval"], dict)
+    assert len(rep["per_fixture"]) == 40
+    assert "non-negative by construction" in rep["model_implied_value_vs_close"]["note"]
+
+
 def test_paddy_power_columns_are_never_mistaken_for_pinnacle() -> None:
     log, res = _logged(3, 0.0)
     df = res["E0"].rename(columns={"PSCH": "PPCH", "PSCD": "PPCD", "PSCA": "PPCA"})
