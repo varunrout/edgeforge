@@ -48,7 +48,7 @@
 ## 6. Product, shadow log and engineering evidence
 
 - **API and app.** `uv run edgeforge serve api` and `serve app` replay 16 test matches through the lifecycle with margins (proportional, power, odds ratio) and SGA pricing; the evidence tab and `/model-health` show the findings above with their source files.
-- **Shadow log (D-058, pre-match only, no betting).** Frozen Dixon-Coles predictions are appended to `artifacts/shadow/log.jsonl` before kick-off and committed; `shadow settle` compares them with the closing market: Pinnacle where the file has it, otherwise the market average, which is what the current football-data files will give (D-059). The first batch (the Premier League weekend of 6 to 8 November 2026) was committed and pushed before kick-off; the commit and push timestamps are the timing evidence. Status: 10 logged, 0 settled. inconclusive: no settled fixtures with closing prices yet. The expectation recorded in advance is that the market is better.
+- **Shadow log (D-058, pre-match only, no betting).** Frozen Dixon-Coles predictions are appended to `artifacts/shadow/log.jsonl` before kick-off and committed; `shadow settle` compares them with the closing market: Pinnacle where the file has it, otherwise the market average, which is what the current football-data files give (D-059), so the settled fixtures are measured against the market-average close, a weaker benchmark than the Pinnacle close of Pillar A. The first batch (the Premier League weekend of 6 to 8 November 2026) was committed and pushed before kick-off; the commit and push timestamps are the timing evidence. Status: 10 logged, 10 settled. Model 1X2 log loss 0.9630 against 0.9364 for the market-average closing line (model minus market +0.0265, bootstrap 95% CI -0.0481 to +0.1114); 2 of the settled fixtures involve a promoted team with little history and are reported as a separate segment. 10 matches show the process working, not an edge: nothing can be concluded. inconclusive: 10 settled fixtures, fewer than the 200 fixed in D-058; nothing can be concluded about the model. The expectation recorded in advance is that the market is better.
 - **Engineering.** A scripted fresh-clone check (ruff, mypy, pytest) last passed at commit `f50f8b22dc3376bbeec2e0d3f63460903582a42f` with 211 tests (GitHub Actions is unavailable; D-046). A Dockerfile and Cloud Run scripts exist; the image was not built here (no Docker engine) and nothing is deployed.
 
 ## 7. Limitations
@@ -74,5 +74,5 @@
 | `phase6b_levers.json` | `edgeforge phase6b run` | `7d80c2b` | 2026-10-07T23:46:23Z | 588d4619e62984b7 |
 | `phase7_inplay.json` | `edgeforge phase7 run` | `def7c9c` | 2026-10-08T02:55:05Z | 588d4619e62984b7 |
 | `pillar_a.json` | `edgeforge pillar-a run` | `42bf956` | 2026-10-04T20:41:08Z | 137781cbbd858114 |
-| `shadow_report.json` | `edgeforge shadow settle` | `c14d2da` | 2026-11-05T16:29:54Z | dc_opening_v1 |
+| `shadow_report.json` | `edgeforge shadow settle` | `7394965` | 2026-11-09T14:23:50Z | dc_opening_v1 |
 | `team_model.json` | `edgeforge team-model run` | `9de3d25` | 2026-10-05T09:40:49Z | 137781cbbd858114 |

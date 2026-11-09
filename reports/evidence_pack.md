@@ -26,7 +26,7 @@ The metrics files are committed. Re-running a phase needs the local data warehou
 | Does knowing the lineups change prop prices? | **Yes, a lot for rotation-risk players** (an upper bound): 81.7% move by more than a quarter, against 16.3% for nailed starters; the lineups price is the better predictor in 6 of six prop markets. | `uv run edgeforge phase6 run` |
 | What can a book do about informed lineup knowledge? | **SIMULATION, UPPER BOUND.** On the Phase 6b basis (per offered proposition, void ones count zero) the informed expected profit 0.1015 (void on appearance) falls to 0.0147 (void if not starting) and 0.0007 with odds-ratio margin allocation, at a ten per cent overround. (The Pillar C figure of 0.151 at a five per cent margin is per settled proposition and not comparable.) | `uv run edgeforge phase6b` |
 | Does an in-play model beat a naive in-play baseline? | **Yes in 14 of 42 tests, never worse** (largest after a dismissal: log-loss difference -0.0792, 95% CI -0.1420 to -0.0244, 340 propositions, negative is better; the baseline is naive). Both under-predict remaining goals. **No in-play market prices exist, so no comparison with a market is possible.** | `uv run edgeforge phase7` |
-| What does the forward shadow log say? | 10 fixtures logged, 0 settled; the first batch (Premier League, 6 to 8 November 2026) was committed and pushed before kick-off, and the push timestamp on the remote is the timing evidence; settlement will use the market-average close (D-059). inconclusive: no settled fixtures with closing prices yet. | `uv run edgeforge shadow predict`, `shadow settle` |
+| What does the forward shadow log say? | 10 logged, 10 settled; the first batch (Premier League, 6 to 8 November 2026) was committed and pushed before kick-off, and the push timestamp on the remote is the timing evidence; settlement uses the market-average close (D-059), a weaker benchmark than the Pinnacle close of Pillar A. Model 1X2 log loss 0.9630 against 0.9364 for the market-average closing line (model minus market +0.0265, bootstrap 95% CI -0.0481 to +0.1114); 2 of the settled fixtures involve a promoted team with little history and are reported as a separate segment. 10 matches show the process working, not an edge: nothing can be concluded. inconclusive: 10 settled fixtures, fewer than the 200 fixed in D-058; nothing can be concluded about the model. | `uv run edgeforge shadow predict`, `shadow settle` |
 
 ## 3. What is not claimed
 
@@ -63,7 +63,7 @@ A scripted fresh-clone check last passed at commit `f50f8b22dc3376bbeec2e0d3f634
 | `phase6b_levers.json` | `edgeforge phase6b run` | `7d80c2b` | 2026-10-07T23:46:23Z | 588d4619e62984b7 |
 | `phase7_inplay.json` | `edgeforge phase7 run` | `def7c9c` | 2026-10-08T02:55:05Z | 588d4619e62984b7 |
 | `pillar_a.json` | `edgeforge pillar-a run` | `42bf956` | 2026-10-04T20:41:08Z | 137781cbbd858114 |
-| `shadow_report.json` | `edgeforge shadow settle` | `c14d2da` | 2026-11-05T16:29:54Z | dc_opening_v1 |
+| `shadow_report.json` | `edgeforge shadow settle` | `7394965` | 2026-11-09T14:23:50Z | dc_opening_v1 |
 | `team_model.json` | `edgeforge team-model run` | `9de3d25` | 2026-10-05T09:40:49Z | 137781cbbd858114 |
 
 ## 7. Every claim and where it comes from
@@ -158,5 +158,11 @@ A scripted fresh-clone check last passed at commit `f50f8b22dc3376bbeec2e0d3f634
 | Phase 6b base informed expected profit per offered prop, 5% overround | 0.1229 | `phase6b_levers.json` | `test / base|0.05 / informed_expected_per_offered` |
 | Phase 6b recommended combination, 5% overround | 0.0036 | `phase6b_levers.json` | `test / start+odds_ratio|0.05 / informed_expected_per_offered` |
 | Shadow log: fixtures logged | 10 | `shadow_report.json` | `n_logged` |
-| Shadow log: fixtures settled | 0 | `shadow_report.json` | `n_settled` |
-| Shadow log verdict | inconclusive: no settled fixtures with closing prices yet | `shadow_report.json` | `verdict` |
+| Shadow log: fixtures settled | 10 | `shadow_report.json` | `n_settled` |
+| Shadow log verdict | inconclusive: 10 settled fixtures, fewer than the 200 fixed in D-058; nothing can be concluded about the model | `shadow_report.json` | `verdict` |
+| Shadow log: model 1X2 log loss (market-average close benchmark) | 0.9630 | `shadow_report.json` | `log_loss_model_1x2` |
+| Shadow log: market-average closing 1X2 log loss | 0.9364 | `shadow_report.json` | `log_loss_closing_1x2` |
+| Shadow log: model minus market 1X2 log loss | +0.0265 | `shadow_report.json` | `log_loss_diff_model_minus_market_1x2 / estimate` |
+| Shadow log: same, bootstrap 95% CI low | -0.0481 | `shadow_report.json` | `log_loss_diff_model_minus_market_1x2 / ci_low` |
+| Shadow log: same, bootstrap 95% CI high | +0.1114 | `shadow_report.json` | `log_loss_diff_model_minus_market_1x2 / ci_high` |
+| Shadow log: settled fixtures involving a cold-start team | 2 | `shadow_report.json` | `segments / cold_start / n` |
