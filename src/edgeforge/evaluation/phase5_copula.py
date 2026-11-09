@@ -430,12 +430,18 @@ def run_copula(cfg: dict[str, Any] | None = None) -> Path:
                     model="gaussian_copula_equicorrelation",
                     hyperparameters={"rho": rho[v["template"]]["rho"], "n_sims": n_sims},
                     validation_window="player_2015_16: rho on tune mw10-19, test mw20-38",
-                    metrics={"log_loss_diff_a_minus_b": v["log_loss_diff_a_minus_b"], "q_bh": v["q_bh"], "n": v["n_instances"]},
+                    metrics={
+                        "log_loss_diff_a_minus_b": v["log_loss_diff_a_minus_b"],
+                        "q_bh": v["q_bh"],
+                        "n": v["n_instances"],
+                    },
                     calibration={},
                     notes=f"D-063 family {fam_name}: {fam['bh_family']['name']}; verdict: {v['verdict']}",
-                    status="promoted" if v["verdict"].endswith("better") and v["verdict"].startswith("simulated") else "rejected",
+                    status="promoted"
+                    if v["verdict"].endswith("better") and v["verdict"].startswith("simulated")
+                    else "rejected",
                 )
-            )  # fmt: skip
+            )
     append_records(recs)
     log.info("copula summary: %s", out["summary"])
     return metrics_dir / "phase5_copula.json"
