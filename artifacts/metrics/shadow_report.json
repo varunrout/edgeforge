@@ -1,16 +1,182 @@
 {
  "n_logged": 10,
- "n_settled": 0,
- "n_with_closing_1x2": 0,
+ "n_settled": 10,
+ "n_with_closing_1x2": 10,
  "no_betting_no_pnl": true,
  "pre_match_only": true,
- "verdict": "inconclusive: no settled fixtures with closing prices yet",
+ "closing_sources": [
+  "market-average closing (no Pinnacle closing in the file)"
+ ],
+ "log_loss_model_1x2": 0.9629644786742422,
+ "log_loss_closing_1x2": 0.9364152512056727,
+ "log_loss_diff_model_minus_market_1x2": {
+  "estimate": 0.02654922746856937,
+  "ci_low": -0.04812443790041946,
+  "ci_high": 0.11135833731484032,
+  "p": 0.5374625374625375,
+  "n_rows": 10.0,
+  "n_clusters": 10.0
+ },
+ "model_implied_value_vs_close": {
+  "definition": "for each fixture the outcome with the largest model-minus-closing probability gap: model probability divided by closing probability minus one; NOT a realised CLV, no price was taken",
+  "mean": 0.28870720362235874,
+  "ci": {
+   "estimate": 0.28870720362235874,
+   "ci_low": 0.14464902934528343,
+   "ci_high": 0.5055503752109098,
+   "p": 0.001998001998001998,
+   "n_rows": 10.0,
+   "n_clusters": 10.0
+  },
+  "note": "non-negative by construction: both probability vectors sum to one, so the largest gap is never below zero; it measures how far the model disagrees with the close, not whether the disagreement is right, and its interval is not evidence of an edge"
+ },
+ "segments": {
+  "cold_start": {
+   "n": 2,
+   "fixtures": [
+    "E0_20261106_everton_coventry",
+    "E0_20261107_arsenal_hull"
+   ],
+   "log_loss_model_1x2": 0.5770217226379305,
+   "log_loss_closing_1x2": 0.3759891913457244,
+   "log_loss_diff_model_minus_market_1x2": 0.20103253129220605,
+   "interval": "none: too few fixtures for a bootstrap interval to mean anything"
+  },
+  "established": {
+   "n": 8,
+   "fixtures": [
+    "E0_20261107_leeds_tottenham",
+    "E0_20261107_fulham_newcastle",
+    "E0_20261107_nott_m_forest_man_city",
+    "E0_20261108_brighton_brentford",
+    "E0_20261108_crystal_palace_liverpool",
+    "E0_20261108_ipswich_bournemouth",
+    "E0_20261108_sunderland_chelsea",
+    "E0_20261108_man_united_aston_villa"
+   ],
+   "log_loss_model_1x2": 1.0594501676833201,
+   "log_loss_closing_1x2": 1.0765217661706599,
+   "log_loss_diff_model_minus_market_1x2": -0.0170715984873398,
+   "interval": "none: too few fixtures for a bootstrap interval to mean anything"
+  }
+ },
+ "segment_definition": "cold_start: a fixture with a team that has fewer than 20 matches in the training window (D-060); reported, never removed",
+ "per_fixture": [
+  {
+   "fixture_id": "E0_20261106_everton_coventry",
+   "result": "home",
+   "cold_start": true,
+   "model_p_of_result": 0.497945646231257,
+   "close_p_of_result": 0.5689413589403896,
+   "log_loss_model": 0.6972643520280781,
+   "log_loss_closing": 0.5639779100255561
+  },
+  {
+   "fixture_id": "E0_20261107_leeds_tottenham",
+   "result": "home",
+   "cold_start": false,
+   "model_p_of_result": 0.41506156477800743,
+   "close_p_of_result": 0.3417838448116597,
+   "log_loss_model": 0.8793284208913746,
+   "log_loss_closing": 1.0735767744508515
+  },
+  {
+   "fixture_id": "E0_20261107_arsenal_hull",
+   "result": "home",
+   "cold_start": true,
+   "model_p_of_result": 0.6333202293259234,
+   "close_p_of_result": 0.8286143155748629,
+   "log_loss_model": 0.4567790932477828,
+   "log_loss_closing": 0.18800047266589273
+  },
+  {
+   "fixture_id": "E0_20261107_fulham_newcastle",
+   "result": "draw",
+   "cold_start": false,
+   "model_p_of_result": 0.27053542506038486,
+   "close_p_of_result": 0.24788416949614878,
+   "log_loss_model": 1.3073522278640686,
+   "log_loss_closing": 1.3947937004062132
+  },
+  {
+   "fixture_id": "E0_20261107_nott_m_forest_man_city",
+   "result": "home",
+   "cold_start": false,
+   "model_p_of_result": 0.19085513335391552,
+   "close_p_of_result": 0.18785849238044597,
+   "log_loss_model": 1.656240602830563,
+   "log_loss_closing": 1.6720662996771516
+  },
+  {
+   "fixture_id": "E0_20261108_brighton_brentford",
+   "result": "home",
+   "cold_start": false,
+   "model_p_of_result": 0.48727073642671276,
+   "close_p_of_result": 0.5242105964012851,
+   "log_loss_model": 0.718935383415454,
+   "log_loss_closing": 0.6458617738727119
+  },
+  {
+   "fixture_id": "E0_20261108_crystal_palace_liverpool",
+   "result": "away",
+   "cold_start": false,
+   "model_p_of_result": 0.5200913192825526,
+   "close_p_of_result": 0.6187316600953927,
+   "log_loss_model": 0.6537508688200895,
+   "log_loss_closing": 0.48008360578838827
+  },
+  {
+   "fixture_id": "E0_20261108_ipswich_bournemouth",
+   "result": "away",
+   "cold_start": false,
+   "model_p_of_result": 0.5279013426185704,
+   "close_p_of_result": 0.47278615389745854,
+   "log_loss_model": 0.6388458638359099,
+   "log_loss_closing": 0.7491120986459365
+  },
+  {
+   "fixture_id": "E0_20261108_sunderland_chelsea",
+   "result": "home",
+   "cold_start": false,
+   "model_p_of_result": 0.2772087238278099,
+   "close_p_of_result": 0.3128694331373738,
+   "log_loss_model": 1.2829845409213025,
+   "log_loss_closing": 1.1619693219977618
+  },
+  {
+   "fixture_id": "E0_20261108_man_united_aston_villa",
+   "result": "draw",
+   "cold_start": false,
+   "model_p_of_result": 0.2623270075941189,
+   "close_p_of_result": 0.23818429540448627,
+   "log_loss_model": 1.338163432887798,
+   "log_loss_closing": 1.4347105545262637
+  }
+ ],
+ "over_2_5": {
+  "n": 10,
+  "closing_sources": [
+   "market-average closing"
+  ],
+  "log_loss_model": 0.6655279347355794,
+  "log_loss_closing": 0.6693917735336947,
+  "log_loss_diff_model_minus_market": {
+   "estimate": -0.0038638387981155264,
+   "ci_low": -0.16273792098508708,
+   "ci_high": 0.12781814969032712,
+   "p": 0.993006993006993,
+   "n_rows": 10.0,
+   "n_clusters": 10.0
+  }
+ },
+ "verdict": "inconclusive: 10 settled fixtures, fewer than the 200 fixed in D-058; nothing can be concluded about the model",
+ "expectation_recorded_before_results": "Pillar A found the closing market better than the model (D-058)",
  "provenance": {
-  "git_sha": "c14d2da76fd8f5a273aa8fb885223306bf5ccf50",
+  "git_sha": "7394965b155d28fae0c9995adc29e0bfedd8d794",
   "data_version": "dc_opening_v1",
   "command": "edgeforge shadow settle",
   "config_hash": "39f96c7271994bec",
-  "created_at": "2026-11-05T16:29:54Z",
+  "created_at": "2026-11-09T14:23:50Z",
   "seed": 20261004
  }
 }
