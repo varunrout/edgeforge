@@ -1,7 +1,8 @@
 """D-064: how much of each league season the StatsBomb Open Data actually covers.
 
-Reads the competitions list and the match list of every men's season of the five leagues football-data
-covers (match lists only, never event files) and writes `artifacts/metrics/statsbomb_candidates.json`.
+Reads the competitions list and the match list of every men's season of the five leagues
+football-data covers (match lists only, never event files) and writes
+`artifacts/metrics/statsbomb_candidates.json`.
 """
 
 import logging
@@ -49,8 +50,8 @@ def run_coverage(cfg: dict[str, Any] | None = None) -> Path:
     out = {
         "provenance": provenance("edgeforge data statsbomb-coverage", cfg, "statsbomb-open-data"),
         "decision": "D-064",
-        "rule": f"coverage of at least {MIN_COVERAGE:.0%} of teams x (teams - 1), season other than "
-        f"{EXCLUDED_SEASON}",
+        "rule": f"coverage of at least {MIN_COVERAGE:.0%} of teams x (teams - 1), "
+        f"season other than {EXCLUDED_SEASON}",
         "n_league_seasons_examined": len(rows),
         "n_eligible": len(eligible),
         "eligible": eligible,

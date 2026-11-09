@@ -1,0 +1,261 @@
+{
+ "provenance": {
+  "git_sha": "a17016ff1cfcb335c74fbfba7a1b82543d83cec4",
+  "data_version": "statsbomb-open-data",
+  "command": "edgeforge data statsbomb-coverage",
+  "config_hash": "39f96c7271994bec",
+  "created_at": "2026-11-09T16:50:50Z",
+  "seed": 20261004
+ },
+ "decision": "D-064",
+ "rule": "coverage of at least 90% of teams x (teams - 1), season other than 2015/2016",
+ "n_league_seasons_examined": 27,
+ "n_eligible": 0,
+ "eligible": [],
+ "max_coverage_outside_2015_16": 0.5,
+ "rows": [
+  {
+   "competition": "1. Bundesliga",
+   "season": "2015/2016",
+   "matches_listed": 34,
+   "teams_seen": 18,
+   "fixtures_expected": 306,
+   "coverage": 0.1111111111111111,
+   "eligible": false
+  },
+  {
+   "competition": "1. Bundesliga",
+   "season": "2023/2024",
+   "matches_listed": 34,
+   "teams_seen": 18,
+   "fixtures_expected": 306,
+   "coverage": 0.1111111111111111,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "1973/1974",
+   "matches_listed": 1,
+   "teams_seen": 2,
+   "fixtures_expected": 2,
+   "coverage": 0.5,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2004/2005",
+   "matches_listed": 7,
+   "teams_seen": 7,
+   "fixtures_expected": 42,
+   "coverage": 0.16666666666666666,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2005/2006",
+   "matches_listed": 17,
+   "teams_seen": 17,
+   "fixtures_expected": 272,
+   "coverage": 0.0625,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2006/2007",
+   "matches_listed": 26,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 0.06842105263157895,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2007/2008",
+   "matches_listed": 27,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 0.07105263157894737,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2008/2009",
+   "matches_listed": 31,
+   "teams_seen": 19,
+   "fixtures_expected": 342,
+   "coverage": 0.09064327485380116,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2009/2010",
+   "matches_listed": 35,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 0.09210526315789473,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2010/2011",
+   "matches_listed": 33,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 0.0868421052631579,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2011/2012",
+   "matches_listed": 37,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 0.09736842105263158,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2012/2013",
+   "matches_listed": 32,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 0.08421052631578947,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2013/2014",
+   "matches_listed": 31,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 0.08157894736842106,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2014/2015",
+   "matches_listed": 38,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 0.1,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2015/2016",
+   "matches_listed": 380,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 1.0,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2016/2017",
+   "matches_listed": 34,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 0.08947368421052632,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2017/2018",
+   "matches_listed": 36,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 0.09473684210526316,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2018/2019",
+   "matches_listed": 34,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 0.08947368421052632,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2019/2020",
+   "matches_listed": 33,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 0.0868421052631579,
+   "eligible": false
+  },
+  {
+   "competition": "La Liga",
+   "season": "2020/2021",
+   "matches_listed": 35,
+   "teams_seen": 19,
+   "fixtures_expected": 342,
+   "coverage": 0.1023391812865497,
+   "eligible": false
+  },
+  {
+   "competition": "Ligue 1",
+   "season": "2015/2016",
+   "matches_listed": 377,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 0.9921052631578947,
+   "eligible": false
+  },
+  {
+   "competition": "Ligue 1",
+   "season": "2021/2022",
+   "matches_listed": 26,
+   "teams_seen": 18,
+   "fixtures_expected": 306,
+   "coverage": 0.08496732026143791,
+   "eligible": false
+  },
+  {
+   "competition": "Ligue 1",
+   "season": "2022/2023",
+   "matches_listed": 32,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 0.08421052631578947,
+   "eligible": false
+  },
+  {
+   "competition": "Premier League",
+   "season": "2003/2004",
+   "matches_listed": 38,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 0.1,
+   "eligible": false
+  },
+  {
+   "competition": "Premier League",
+   "season": "2015/2016",
+   "matches_listed": 380,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 1.0,
+   "eligible": false
+  },
+  {
+   "competition": "Serie A",
+   "season": "1986/1987",
+   "matches_listed": 1,
+   "teams_seen": 2,
+   "fixtures_expected": 2,
+   "coverage": 0.5,
+   "eligible": false
+  },
+  {
+   "competition": "Serie A",
+   "season": "2015/2016",
+   "matches_listed": 380,
+   "teams_seen": 20,
+   "fixtures_expected": 380,
+   "coverage": 1.0,
+   "eligible": false
+  }
+ ]
+}
